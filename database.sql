@@ -12,18 +12,16 @@ CREATE TABLE "user" (
 
 CREATE TABLE 'node' (
 	"id" SERIAL PRIMARY KEY,
-	"user_id" INT NOT NULL,
-	"node_name" varchar(200) NOT NULL,
-	"catagory" varchar(200) NOT NULL,
-	PRIMARY KEY ("id")
+	"user_id" INT,
+	"node_name" varchar(200),
+	"catagory" varchar(200),
 );
 
 CREATE TABLE 'node_association' (
 	"id" SERIAL PRIMARY KEY,
-	"node_id" INT NOT NULL,
-	"user_id" INT NOT NULL,
+	"node_id" INT,
+	"user_id" INT,
 	"auth_code" varchar(8) NOT NULL,
-	PRIMARY KEY ("id")
 );
 
 CREATE TABLE "posts" (
