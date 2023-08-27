@@ -44,6 +44,42 @@ nodeRouter.post('/', rejectUnauthenticated, (req, res) => {
     })
 })
 
+// PUT route to database to update node name
+nodeRouter.put('/:id', rejectUnauthenticated, (req, res) => {
+    let sqlId = req.params.id;
+    let sqlName = req.params.name;
+    let sqlUser = req.user.id;
+    let sqlQuery = `
+    UPDATE "node"
+    SET "node_name"=$3
+    WHERE "id"=$1 AND "user_id"=$2;
+    `;
+    pool.query(sqlQuery, [sqlId, sqlUser, sqlName])
+    .then(result => {
+        console.log('Updated node name in database: ', result);
+        res.sendStatus(201);
+    })
+})
+
+// DELETE route to database to remove a node
+nodeRouter.delete('/:id', rejectUnauthenticated, (req, res) => {
+    let sqlId = req.params.id
+    let sqlUser = req.user.id
+    let sqlQuery = `
+    DELETE FROM "node"
+    WHERE "id"=$1 AND "user_id"=$2;
+    `;
+    pool.query(sqlQuery, [sqlId, sqlUser])
+    .then( result => {
+        console.log('Delete node from database: ', result);
+        res.sendStatus(201);
+    })
+    .catch(error => {
+        console.log('Error in DELETE to node query: ', error);
+        res.sendStatus(500)
+    })
+})
+
 
 
 module.exports = nodeRouter;
