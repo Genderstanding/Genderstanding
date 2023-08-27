@@ -21,6 +21,26 @@ function* fetchPost(action) {
     }
 }
 
+// saga to PUT on a post to edit post information
+function* editPost(action) {
+    try {
+        yield axios.put(`/post/${action.payload}`)
+        yield put({ type: 'FETCH_POST' })
+    } catch (error) {
+        console.log('Error in SAGA PUT post request: ', error)
+    }
+}
+
+// saga to DELETE a post
+function* deletePost(action) {
+    try {
+        yield axios.delete(`/node/${action.payload}`)
+        yield put({ type: 'FETCH_POST' })
+    } catch (error) {
+        console.log('Error in SAGA DELETE post request: ', error)
+    }
+}
+
 // call listener for different routes
 function* postSaga() {
     yield takeLatest('CREATE_POST', createPost);
