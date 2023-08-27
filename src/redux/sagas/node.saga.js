@@ -31,6 +31,16 @@ function* updateNode(action) {
     }
 }
 
+// function to DELETE a node from database
+function* deleteNode(action) {
+    try {
+        yield axios.delete(`/node/${action.payload}`)
+        yield put({ type: 'FETCH_NODE'})
+    } catch (error) {
+        console.log('Error in SAGA DELETE node request: ', error)
+    }
+}
+
 // functions to listen for calls from page
 function* nodeSaga() {
     yield takeLatest('CREATE_NODE', createNode)
