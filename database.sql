@@ -14,14 +14,14 @@ CREATE TABLE 'node' (
 	"id" SERIAL PRIMARY KEY,
 	"user_id" INT,
 	"node_name" varchar(200),
-	"catagory" varchar(200),
+	"category" varchar(200)
 );
 
 CREATE TABLE 'node_association' (
 	"id" SERIAL PRIMARY KEY,
 	"node_id" INT,
 	"user_id" INT,
-	"auth_code" varchar(8) NOT NULL,
+	"auth_code" varchar(8) NOT NULL
 );
 
 CREATE TABLE "posts" (
@@ -35,6 +35,5 @@ CREATE TABLE "posts" (
 	"edit" BOOLEAN DEFAULT false,
 	"public" BOOLEAN DEFAULT false,
 	"reported" BOOLEAN DEFAULT false,
-	"votes" INT,
-	PRIMARY KEY ("id")
+	"votes" INT
 );
