@@ -9,11 +9,17 @@ const nodeRouter = express.Router();
 // GET route to obtain all currently created nodes
 nodeRouter.get('/', rejectUnauthenticated, (req, res) => {
     // Currently researching SQL query terms needed
+    let sqlValue = req.user.id;
     let sqlQuery = `
-    SELECT`;
-    pool.query(sqlQuery)
+    SELECT "node"."id", "node"."node_name", "node_association"."user_id"
+    FROM "node"
+    JOIN "node_association" ON "node_association"."node_id" = "node"."id"
+    JOIN "user" ON "user"."id" = "node_association"."user_id"
+    WHERE "node_association"."user_id" = $1
+    GROUP BY "node"."id", "node"."node_name", "node_association"."user_id";`;
+    pool.query(sqlQuery, [sqlValue])
         .then(result => {
-            console.log('Obtaining all nodes from database: ', result);
+            console.log('Obtaining all nodes from database: ', result.rows);
             res.send(result.rows);
         })
         .catch(error => {
