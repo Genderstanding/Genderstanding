@@ -62,6 +62,16 @@ function* reportPost(action) {
     }
 }
 
+// saga to PUT on a post to report a post to admin
+function* promotePost(action) {
+    try {
+        yield axios.put(`/post/promote/${action.payload}`)
+        yield put({ type: 'FETCH_POST' })
+    } catch (error) {
+        console.log('Error in SAGA PUT post request: ', error)
+    }
+}
+
 
 // call listener for different routes
 function* postSaga() {
