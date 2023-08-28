@@ -21,10 +21,32 @@ function* fetchNode(action) {
     }
 }
 
+// function to PUT new node name into database
+function* updateNode(action) {
+    try {
+        yield axios.put(`/node/${action.payload}`)
+        yield put({ type:'FETCH_NODE'})
+    } catch (error) {
+        console.log('Error in SAGA PUT node request: ', error)
+    }
+}
+
+// function to DELETE a node from database
+function* deleteNode(action) {
+    try {
+        yield axios.delete(`/node/${action.payload}`)
+        yield put({ type: 'FETCH_NODE'})
+    } catch (error) {
+        console.log('Error in SAGA DELETE node request: ', error)
+    }
+}
+
 // functions to listen for calls from page
 function* nodeSaga() {
     yield takeLatest('CREATE_NODE', createNode)
     yield takeLatest('FETCH_NODE', fetchNode)
+    yield takeLatest('UPDATE_NODE', updateNode)
+    yield takeLatest('DELETE_NODE', deleteNode)
 }
 
 export default nodeSaga;
