@@ -80,7 +80,7 @@ postRouter.put('/:id', rejectUnauthenticated, (req, res) => {
 })
 
 // PUT route if the user likes a post
-postRouter('/like/:id', rejectUnauthenticated, (req, res) => {
+postRouter.put('/like/:id', rejectUnauthenticated, (req, res) => {
     let sqlValues = req.params.id;
     let sqlQuery =`
     UPDATE "posts"
@@ -99,7 +99,7 @@ postRouter('/like/:id', rejectUnauthenticated, (req, res) => {
 }) 
 
 // PUT route if the moderator flags a post as reported
-postRouter('/reported/:id', rejectUnauthenticated, (req, res) => {
+postRouter.put('/reported/:id', rejectUnauthenticated, (req, res) => {
     let sqlValues = req.params.id;
     let sqlQuery =`
     UPDATE "posts"
@@ -118,7 +118,7 @@ postRouter('/reported/:id', rejectUnauthenticated, (req, res) => {
 })
 
 // PUT route if the moderator flags a post as reported
-postRouter('/promote/:id', rejectUnauthenticated, (req, res) => {
+postRouter.put('/promote/:id', rejectUnauthenticated, (req, res) => {
     let sqlValues = req.params.id;
     let sqlQuery =`
     UPDATE "posts"
