@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import AddNodeModal from '../AddNodeModal/AddNodeModal';
 import SettingsModal from '../SettingsModal/SettingsModal';
+import './UserPage.css'
 
 
 function UserPage() {
@@ -28,7 +29,7 @@ function UserPage() {
     setSettingsOpen(false);
   }
   return (
-    <div className="user-container flex flex-col h-screen">
+    <div className="userpage-container flex flex-col h-screen">
       <div className='header-container flex items-center '>
         <MdChevronLeft size={25} className='ml-2' />
         {/* this flex-grow div is tailwind way to spread out the back and add buttons*/}
@@ -36,17 +37,20 @@ function UserPage() {
         <button className="mr-4 text-2xl" onClick={openAddUser}>+</button>
       </div>
 
-      <h2>Communities you created:</h2>
+      <h2 className='text-red-500'>Communities you created:</h2>
       {/* map communities you moderate iside this div*/}
       <div className='moderator-container'>
-
       </div>
+
+      
 
       <h2>Communities you're a part of:</h2>
       {/* map communities you particpate in in this div*/}
       <div className='user-container'>
 
       </div>
+
+      
 
       <AddNodeModal addUserOpen={addUserOpen} closeAddUser={closeAddUser} />
       <SettingsModal settingsOpen={settingsOpen} closeSettings={closeSettings} />
