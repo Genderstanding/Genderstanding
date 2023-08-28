@@ -85,7 +85,26 @@ postRouter('/like/:id', rejectUnauthenticated, (req, res) => {
     let sqlQuery =`
     UPDATE "posts"
     SET "votes" = "votes" + 1
-    WHERE "id"=2;
+    WHERE "id"=$1;
+    `;
+    pool.query(sqlQuery, [sqlValues])
+        .then(result => {
+            console.log('Updated post like information in database: ', result);
+            res.sendStatus(201);
+        })
+        .catch(error => {
+            console.log('Error in route PUT to like post: ', error);
+            res.sendStatus(500);
+        })
+}) 
+
+// PUT route if the moderator flags a post as reported
+postRouter('/reported/:id', rejectUnauthenticated, (req, res) => {
+    let sqlValues = req.params.id;
+    let sqlQuery =`
+    UPDATE "posts"
+    SET "reported" = true
+    WHERE "id"=$1;
     `;
     pool.query(sqlQuery, [sqlValues])
         .then(result => {
