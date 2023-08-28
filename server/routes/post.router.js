@@ -28,6 +28,57 @@ postRouter.get('/', rejectUnauthenticated, (req, res) => {
         })
 })
 
+// POST route to database when making new question or response
+postRouter.post('/', rejectUnauthenticated, (req, res) => {
+    let sqlUserId = req.user.id;
+    let sqlParams = req.body;
+    let sqlValues = [
+        sqlUserId,
+        sqlParams.content,
+        sqlParams.node_id,
+        sqlParams.orig_post,
+        sqlParams.reply_id
+    ]
+    let sqlQuery = `
+    INSERT INTO "posts" ("user_id", "content", "node_id", "orig_post", "reply_id", "post_time")
+    VALUES ($1, $2, $3, $4, $5, current_date);
+    `;
+    pool.query(sqlQuery, [sqlValues])
+        .then(result => {
+            console.log('Created a new post in database: ', result);
+            res.sendStatus(201);
+        })
+        .catch( error => {
+            console.log('Error in router POST to posts: ', error);
+            res.sendStatus(500);
+        })
+})
+
+// PUT route if user updates content information
+postRouter.put('/:id', rejectUnauthenticated, (req, res) => {
+    let sqlUserId = req.params.id;
+    let sqlParams = req.params;
+    let sqlValues = [
+        sqlUserId,
+        sqlParams.id,
+        sqlParams.content,
+    ]
+    let sqlQuery = `
+    UPDATE "posts"
+    SET "content"=$3, "edit"=true
+    WHERE "id"=$2 AND "user_id"=$1;
+    `
+    pool.query(sqlQuery, [sqlValues])
+        .then(result => {
+            console.log('Updated post content information in database: ', result);
+            res.sendStatus(201)
+        })
+        .catch(error => {
+            console.log('Error in router PUT to posts: ', error);
+            res.sendStatus(500);
+        })
+})
+
 
 
 
