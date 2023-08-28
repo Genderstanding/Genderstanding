@@ -61,15 +61,10 @@ export default function Nav() {
 
 
    {/* Link this to UserPage */}
-   
-   
    <Link className="navLink" to="/info">
-   
-    <button className="flex flex-col items-center justify-center px-4 py-2 flex-grow">
-           
+    <button className="flex flex-col items-center justify-center px-4 py-2 flex-grow">  
             <FaUser size={22} />
-            <span>Me</span>
-         
+            <span>Me</span>       
             </button>
             </Link>
 
@@ -87,7 +82,7 @@ export default function Nav() {
     </button>
 
     
-  </div>
+
   <SettingsModal settingsOpen={settingsOpen} closeSettings={closeSettings} />
 
             <LogOutButton className="navLink" />
@@ -115,7 +110,7 @@ export default function Nav() {
   
 
 
-</div>
+
 </>
   );
 }
