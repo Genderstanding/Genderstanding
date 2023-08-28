@@ -28,17 +28,21 @@ function UserPage() {
     setSettingsOpen(false);
   }
   return (
-    <div className="user-header flex flex-col h-screen">
+    <div className="user-container flex flex-col h-screen">
       <div className='header-container flex items-center '>
         <MdChevronLeft size={25} className='ml-2' />
         {/* this flex-grow div is tailwind way to spread out the back and add buttons*/}
         <div className="flex-grow"></div>
         <button className="mr-4 text-2xl" onClick={openAddUser}>+</button>
       </div>
+
+      <h2>Communities you created:</h2>
       {/* map communities you moderate iside this div*/}
       <div className='moderator-container'>
 
       </div>
+
+      <h2>Communities you're a part of:</h2>
       {/* map communities you particpate in in this div*/}
       <div className='user-container'>
 
