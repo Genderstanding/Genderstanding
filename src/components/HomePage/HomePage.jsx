@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { data } from './mockData';
 import './HomePage.css';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import { IoMdHome } from 'react-icons/io';
@@ -10,8 +9,8 @@ import { FiSettings } from 'react-icons/fi';
 
 
 
-import AddNodeModal from './AddNodeModal';
-import SettingsModal from './SettingsModal';
+import AddNodeModal from '../AddNodeModal';
+import SettingsModal from '../SettingsModal';
 
 
 function HomePage() {
