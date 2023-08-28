@@ -79,6 +79,63 @@ postRouter.put('/:id', rejectUnauthenticated, (req, res) => {
         })
 })
 
+// PUT route if the user likes a post
+postRouter.put('/like/:id', rejectUnauthenticated, (req, res) => {
+    let sqlValues = req.params.id;
+    let sqlQuery =`
+    UPDATE "posts"
+    SET "votes" = "votes" + 1
+    WHERE "id"=$1;
+    `;
+    pool.query(sqlQuery, [sqlValues])
+        .then(result => {
+            console.log('Updated post like information in database: ', result);
+            res.sendStatus(201);
+        })
+        .catch(error => {
+            console.log('Error in route PUT to like post: ', error);
+            res.sendStatus(500);
+        })
+}) 
+
+// PUT route if the moderator flags a post as reported
+postRouter.put('/reported/:id', rejectUnauthenticated, (req, res) => {
+    let sqlValues = req.params.id;
+    let sqlQuery =`
+    UPDATE "posts"
+    SET "reported" = true
+    WHERE "id"=$1;
+    `;
+    pool.query(sqlQuery, [sqlValues])
+        .then(result => {
+            console.log('Updated post like information in database: ', result);
+            res.sendStatus(201);
+        })
+        .catch(error => {
+            console.log('Error in route PUT to like post: ', error);
+            res.sendStatus(500);
+        })
+})
+
+// PUT route if the moderator flags a post as reported
+postRouter.put('/promote/:id', rejectUnauthenticated, (req, res) => {
+    let sqlValues = req.params.id;
+    let sqlQuery =`
+    UPDATE "posts"
+    SET "public" = true
+    WHERE "id"=$1;
+    `;
+    pool.query(sqlQuery, [sqlValues])
+        .then(result => {
+            console.log('Updated post like information in database: ', result);
+            res.sendStatus(201);
+        })
+        .catch(error => {
+            console.log('Error in route PUT to like post: ', error);
+            res.sendStatus(500);
+        })
+})
+
 // DELETE route if the user, moderator, or admin delete a post
 postRouter.delete('/:id', rejectUnauthenticated, (req, res) => {
     let sqlId = req.params.id;

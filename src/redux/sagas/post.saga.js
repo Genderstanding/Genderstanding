@@ -31,15 +31,47 @@ function* editPost(action) {
     }
 }
 
+
 // saga to DELETE a post
 function* deletePost(action) {
     try {
-        yield axios.delete(`/node/${action.payload}`)
+        yield axios.delete(`/post/${action.payload}`)
         yield put({ type: 'FETCH_POST' })
     } catch (error) {
         console.log('Error in SAGA DELETE post request: ', error)
     }
 }
+
+// saga to PUT a like on a post
+function* likePost(action) {
+    try {
+        yield axios.put(`/post/like/${action.payload}`)
+        yield put({ type: 'FETCH_POST' })
+    } catch (error) {
+        console.log('Error in SAGA PUT like post request: ', error)
+    }
+}
+
+// saga to PUT on a post to report a post to admin
+function* reportPost(action) {
+    try {
+        yield axios.put(`/post/reported/${action.payload}`)
+        yield put({ type: 'FETCH_POST' })
+    } catch (error) {
+        console.log('Error in SAGA PUT post request: ', error)
+    }
+}
+
+// saga to PUT on a post to report a post to admin
+function* promotePost(action) {
+    try {
+        yield axios.put(`/post/promote/${action.payload}`)
+        yield put({ type: 'FETCH_POST' })
+    } catch (error) {
+        console.log('Error in SAGA PUT post request: ', error)
+    }
+}
+
 
 // call listener for different routes
 function* postSaga() {
@@ -47,6 +79,9 @@ function* postSaga() {
     yield takeLatest('FETCH_POST', fetchPost);
     yield takeLatest('EDIT_POST', editPost);
     yield takeLatest('DELETE_POST', deletePost);
+    yield takeLatest('LIKE_POST', likePost)
+    yield takeLatest('REPORT_POST', reportPost);
+    yield takeLatest('PROMOTE_POST', promotePost);
 }
 
 export default postSaga;
