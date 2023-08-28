@@ -1,13 +1,15 @@
 const express = require("express");
 const pool = require("../modules/pool");
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 const router = express.Router();
 const Chance = require("chance");
 const chance = new Chance();
 
+
 /******************
  * POST invite code
  *****************/
-router.post("/", rejectUnauthenticated, async (req, res) => {
+router.post("/invite", rejectUnauthenticated, async (req, res) => {
   const connection = await pool.connect();
   try {
     const { auth_code } = req.body;
