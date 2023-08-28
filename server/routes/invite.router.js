@@ -35,13 +35,13 @@ router.post("/invite", rejectUnauthenticated, async (req, res) => {
     if (node_id) {
     // Insert generated invite code, user ID, and node ID into "node_association" table
         const insertQuery = `
-        INSERT INTO "node_association" ("auth_code", "user_id", "node_id")
-        VALUES ($1, $2, $3);
+        INSERT INTO "node_association" ("auth_code", "node_id")
+        VALUES ($1, $2);
         `;
         }
 
     // Values to insert
-    const insertValues = [inviteCodeGenerator, user_id, node_id];
+    const insertValues = [inviteCodeGenerator, node_id];
 
     /***** Execute POST QUERY *****/
     await connection.query(insertQuery, insertValues);

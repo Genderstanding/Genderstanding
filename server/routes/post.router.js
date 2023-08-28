@@ -79,6 +79,25 @@ postRouter.put('/:id', rejectUnauthenticated, (req, res) => {
         })
 })
 
+// PUT route if the user likes a post
+postRouter('/like/:id', rejectUnauthenticated, (req, res) => {
+    let sqlValues = req.params.id;
+    let sqlQuery =`
+    UPDATE "posts"
+    SET "votes" = "votes" + 1
+    WHERE "id"=2;
+    `;
+    pool.query(sqlQuery, [sqlValues])
+        .then(result => {
+            console.log('Updated post like information in database: ', result);
+            res.sendStatus(201);
+        })
+        .catch(error => {
+            console.log('Error in route PUT to like post: ', error);
+            res.sendStatus(500);
+        })
+})
+
 // DELETE route if the user, moderator, or admin delete a post
 postRouter.delete('/:id', rejectUnauthenticated, (req, res) => {
     let sqlId = req.params.id;
