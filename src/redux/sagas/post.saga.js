@@ -14,7 +14,7 @@ function* createPost(action) {
 // saga to GET all posts
 function* fetchPost(action) {
     try {
-        const postResponse = yield('/post')
+        const postResponse = yield axios.get('/post')
         yield put({ type: 'SET_POSTS', payload: postResponse.data })
     } catch (error) {
         console.log('Error in SAGA GET request for posts: ', error)
