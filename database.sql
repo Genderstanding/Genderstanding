@@ -7,33 +7,38 @@ CREATE TABLE "user" (
     "id" SERIAL PRIMARY KEY,
     "username" VARCHAR (80) UNIQUE NOT NULL,
     "password" VARCHAR (1000) NOT NULL,
-    "admin_level" INT
+    "admin_level" INTEGER DEFAULT 1
 );
 
-CREATE TABLE 'node' (
+CREATE TABLE "node" (
 	"id" SERIAL PRIMARY KEY,
-	"user_id" INT,
-	"node_name" varchar(200),
-	"category" varchar(200)
+	"user_id" INTEGER REFERENCES "user" (id),
+	"node_name" VARCHAR(200),
+	"category" VARCHAR(200)
 );
 
-CREATE TABLE 'node_association' (
+CREATE TABLE "node_association" (
 	"id" SERIAL PRIMARY KEY,
-	"node_id" INT,
-	"user_id" INT,
-	"auth_code" varchar(8) NOT NULL
+	"node_id" INTEGER REFERENCES "node" (id),
+	"user_id" INTEGER REFERENCES "user" (id),
+	"auth_code" VARCHAR(8) 
 );
 
 CREATE TABLE "posts" (
 	"id" SERIAL PRIMARY KEY,
-	"user_id" INT,
-	"content" varchar(10000),
-	"node_id" INT,
+	"user_id" INTEGER REFERENCES "user" (id),
+	"content" VARCHAR(10000),
+	"node_id" INTEGER REFERENCES "node" (id),
 	"orig_post" BOOLEAN DEFAULT false,
-	"reply_id" INT,
+	"reply_id" INTEGER,
 	"post_time" TIMESTAMP,
 	"edit" BOOLEAN DEFAULT false,
 	"public" BOOLEAN DEFAULT false,
 	"reported" BOOLEAN DEFAULT false,
-	"votes" INT
+	"votes" INTEGER
 );
+
+
+
+
+
