@@ -67,11 +67,11 @@ export default function Nav() {
             </button>
             </Link>
 
-    {/* Link this to the Community page */}
-    <Link className="navLink" to="/community">
+    {/* Link this to the Featured page */}
+    <Link className="navLink" to="/featured">
     <button className="flex flex-col items-center justify-center px-4 py-2 flex-grow">
       <BiGroup size={32} />
-      <span>Community</span>
+      <span>Featured</span>
     </button>
 </Link>
 
