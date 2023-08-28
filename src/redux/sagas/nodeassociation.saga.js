@@ -10,9 +10,20 @@ function* createNodeAssociation(action){
     }
 }
 
+function* fetchNodeAssociation(action) {
+    try {
+        const nodeAssociationResponse = yield axios.get('/nodeassociation')
+        yield put({ type: 'SET_NODE_ASSOCIATION'})
+  
+    } catch (error) {
+        console.log('ERror in SAGA GET request for node association: ', error)
+    }
+}
+
 // call listener for different dispatches
 function* nodeAssociationSaga() {
-    yield takeLatest('CREATE_NODE_ASSOCIATION', createNodeAssociation)
+    yield takeLatest('CREATE_NODE_ASSOCIATION', createNodeAssociation);
+    yield takeLatest('FETCH_NODE_ASSOCIATION', fetchNodeAssociation)
 }
 
 export default nodeAssociationSaga;
