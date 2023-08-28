@@ -79,6 +79,24 @@ postRouter.put('/:id', rejectUnauthenticated, (req, res) => {
         })
 })
 
+// DELETE route if the user, moderator, or admin delete a post
+postRouter.delete('/:id', rejectUnauthenticated, (req, res) => {
+    let sqlId = req.params.id;
+    let sqlQuery = `
+    DELETE FROM "posts"
+    WHERE "id"=$1;
+    `;
+    pool.query(sqlQuery, [sqlId])
+        .then( result => {
+            console.log('Delete post from database: ', result);
+            res.sendStatus(201);
+        })
+        .catch(error => {
+            console.log('Error in DELETE to post query: ', error);
+            res.sendStatus(500);
+        })
+})
+
 
 
 
