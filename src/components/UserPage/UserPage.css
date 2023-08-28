@@ -1,0 +1,5 @@
+.community-container, .moderator-container {
+    width: 90vw;
+    border: black solid 1px;
+    border-radius: 10px;
+}
