@@ -31,6 +31,16 @@ function* userNodeAssociation(action){
     }
 }
 
+// Saga to remove a user ID from a node association (if kicked from community)
+function* removeNodeAssociation(action) {
+    try {
+        yield axios.put(`/nodeassociation/${action.payload}`)
+        yield put({ type: 'FETCH_NODE_ASSOCIATION'})
+    } catch (error) {
+        console.log('Error in SAGA DELETE to remove a user from a node association: ', error)
+    }
+}
+
 // call listener for different dispatches
 function* nodeAssociationSaga() {
     yield takeLatest('CREATE_NODE_ASSOCIATION', createNodeAssociation);
