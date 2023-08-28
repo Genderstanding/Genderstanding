@@ -21,6 +21,8 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 
 import './App.css';
 import HomePage from '../HomePage/HomePage';
+import FeaturedPage from '../FeaturedPage/FeaturedPage';
+import SettingsModal from '../SettingsModal/SettingsModal';
 
 function App() {
   const dispatch = useDispatch();
@@ -72,6 +74,21 @@ function App() {
           >
             <HomePage />
           </ProtectedRoute>
+          <ProtectedRoute
+            // logged in shows FeaturedPage else shows LoginPage
+            exact
+            path="/featured"
+          >
+            <FeaturedPage />
+          </ProtectedRoute>
+          <ProtectedRoute
+            // logged in shows Setting else shows LoginPage
+            exact
+            path="/setting"
+          >
+            <SettingsModal />
+</ProtectedRoute>
+
 
           <Route
             exact
