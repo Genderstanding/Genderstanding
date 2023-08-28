@@ -1,0 +1,11 @@
+.user-container, .moderator-container {
+    width: 90vw;
+    border: solid 1px black;
+    border-radius: 10px;
+}
+
+.dummy-div {
+    width: 90vw;
+    border:  solid 1px black;
+    border-radius: 10px;
+}
