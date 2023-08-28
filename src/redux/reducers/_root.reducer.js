@@ -3,6 +3,7 @@ import errors from './errors.reducer';
 import user from './user.reducer';
 import nodeReducer from './node.reducer';
 import postReducer from './post.reducer';
+import nodeAssociationReducer from './nodeassociation.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   user, // will have an id and username if someone is logged in
   nodeReducer, // holds all of currently available nodes
   postReducer, // holds all posts in all nodes
+  nodeAssociationReducer, // holds all of the node association information
 });
 
 export default rootReducer;
