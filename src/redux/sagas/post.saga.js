@@ -31,6 +31,7 @@ function* editPost(action) {
     }
 }
 
+
 // saga to DELETE a post
 function* deletePost(action) {
     try {
@@ -51,6 +52,17 @@ function* likePost(action) {
     }
 }
 
+// saga to PUT on a post to report a post to admin
+function* reportPost(action) {
+    try {
+        yield axios.put(`/post/reported/${action.payload}`)
+        yield put({ type: 'FETCH_POST' })
+    } catch (error) {
+        console.log('Error in SAGA PUT post request: ', error)
+    }
+}
+
+
 // call listener for different routes
 function* postSaga() {
     yield takeLatest('CREATE_POST', createPost);
@@ -58,6 +70,8 @@ function* postSaga() {
     yield takeLatest('EDIT_POST', editPost);
     yield takeLatest('DELETE_POST', deletePost);
     yield takeLatest('LIKE_POST', likePost)
+    yield takeLatest('REPORT_POST', reportPost);
+    yield takeLatest('PROMOTE_POST', promotePost);
 }
 
 export default postSaga;
