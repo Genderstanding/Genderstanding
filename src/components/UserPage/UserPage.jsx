@@ -29,6 +29,7 @@ function UserPage() {
     setSettingsOpen(false);
   }
   return (
+
     <div className="userpage-container flex flex-col h-screen">
       <div className='header-container flex items-center '>
         <MdChevronLeft size={25} className='ml-2' />

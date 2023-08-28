@@ -9,18 +9,18 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 
 import Nav from '../Nav/Nav';
-import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
-import InfoPage from '../InfoPage/InfoPage';
-import LandingPage from '../LandingPage/LandingPage';
+import WelcomePage from '../WelcomePage/WelcomePage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 
+
 import './App.css';
+import HomePage from '../HomePage/HomePage';
 
 function App() {
   const dispatch = useDispatch();
@@ -42,7 +42,7 @@ function App() {
         <Nav />
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-          <Redirect exact from="/" to="/home" />
+          <Redirect exact from="/" to="/welcome" />
 
           {/* Visiting localhost:3000/about will show the about page. */}
           <Route
@@ -66,11 +66,11 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
+            // logged in shows HomePage else shows LoginPage
             exact
-            path="/info"
+            path="/home"
           >
-            <InfoPage />
+            <HomePage />
           </ProtectedRoute>
 
           <Route
@@ -103,15 +103,15 @@ function App() {
 
           <Route
             exact
-            path="/home"
+            path="/welcome"
           >
             {user.id ?
               // If the user is already logged in, 
               // redirect them to the /user page
-              <Redirect to="/user" />
+              <Redirect to="/home" />
               :
-              // Otherwise, show the Landing page
-              <LandingPage />
+              // Otherwise, show the WelcomePage
+              <WelcomePage />
             }
           </Route>
 
@@ -120,7 +120,7 @@ function App() {
             <h1>404</h1>
           </Route>
         </Switch>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </Router>
   );
