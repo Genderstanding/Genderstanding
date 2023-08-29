@@ -1,8 +1,4 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Custom Tailwind CSS classes here */
-.custom-button {
-    /* Your custom button styling */
-  }
+/* src/input.css */
