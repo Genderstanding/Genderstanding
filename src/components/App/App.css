@@ -1,6 +1,13 @@
 .header-container {
   height: 10vh;
-  border-bottom: 1px solid gray;
+  border-bottom: .5px solid gray;
+}
+
+.logo-container {
+  height: 10vh;
+  border-bottom: .5px solid gray;
+  background-color: #CF6F5A;
+margin-bottom: 32px;
 }
 
 .centered-container {
@@ -8,11 +15,15 @@
   justify-content: center;
   align-items: center;
   text-align: center;
+  margin-bottom: 32px;
 }
 
+.login-container, .register-container{
+
+}
 /* FORM */
 .Field {
-  width: 100%;
+  width: 80%;
   height: 100%;
   padding-left: 16px;
   padding-right: 16px;
@@ -25,6 +36,8 @@
   align-items: center;
   gap: 8px;
   display: inline-flex;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .Text {
@@ -32,6 +45,6 @@
   background-color: #FAF1EF;
   font-size: 16px;
   font-family: 'mulish';
-  font-weight: 700;
+  font-weight: 800;
   color:#CF6F5A;
 }

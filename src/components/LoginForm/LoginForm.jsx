@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import CustomIcon from "../Icon/CustomIcon";
+import {Box, Typography} from '@mui/material';
 
 function LoginForm() {
   const [username, setUsername] = useState("");
@@ -28,40 +29,47 @@ function LoginForm() {
   }; // end login
 
   return (
+    <Box sx={{justifyContent:"flex-end"}}>
     <form className="formPanel" onSubmit={login}>
-      <div>
-        <CustomIcon />
-      </div>
       {errors.loginMessage && (
         <h3 className="alert" role="alert">
           {errors.loginMessage}
         </h3>
       )}
-      <div>
+       <CustomIcon/>
+      {/* INPUT */}
+    <div className="username">
         <label htmlFor="username">
-          Username:
-          <input
-            type="text"
-            name="username"
-            required
-            value={username}
-            onChange={(event) => setUsername(event.target.value)}
-          />
+        <Typography variant="h6" sx={{fontFamily:"mulish", fontWeight:600,  color:"#CF6F5A"}}>Username</Typography>
+          <div className="Field">
+            <input
+              className="Text"
+              type="text"
+              name="username"
+              value={username}
+              required
+              onChange={(event) => setUsername(event.target.value)}
+            />
+          </div>
         </label>
       </div>
-      <div>
+      <div className="password">
         <label htmlFor="password">
-          Password:
-          <input
-            type="password"
-            name="password"
-            required
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-          />
+        <Typography variant="h6" sx={{fontFamily:"mulish", fontWeight:600,  color:"#CF6F5A"}}>Password</Typography>
+          <div className="Field">
+            <input
+              className="Text"
+              type="password"
+              name="password"
+              value={password}
+              required
+              onChange={(event) => setPassword(event.target.value)}
+            />
+          </div>
         </label>
       </div>
       <div>
+        {/* REGISTER */}
         <div
           className="not-registered"
           style={{
@@ -72,15 +80,19 @@ function LoginForm() {
             fontFamily: "Mulish",
             fontWeight: "700",
             wordWrap: "break-word",
+            paddingTop: "16px",
+            paddingBottom: "16px",
           }}
         >
           <Link exact to="/registration">
             Not Registered?
           </Link>
         </div>
+        {/* LOG IN */}
         <input className="btn" type="submit" name="submit" value="Log In" />
       </div>
     </form>
+    </Box>
   );
 }
 

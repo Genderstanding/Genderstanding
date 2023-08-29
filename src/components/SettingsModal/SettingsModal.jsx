@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './SettingsModal.css'
-import LogOutButton from '../LogOutButton/LogOutButton';
 
 const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
 
