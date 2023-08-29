@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import {useSelector} from 'react-redux';
+import { Icon } from "@mui/material";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import CustomIcon from "../Icon/CustomIcon";
 
 function LoginForm() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const errors = useSelector(store => store.errors);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const errors = useSelector((store) => store.errors);
   const dispatch = useDispatch();
 
   const login = (event) => {
@@ -13,20 +16,22 @@ function LoginForm() {
 
     if (username && password) {
       dispatch({
-        type: 'LOGIN',
+        type: "LOGIN",
         payload: {
           username: username,
           password: password,
         },
       });
     } else {
-      dispatch({ type: 'LOGIN_INPUT_ERROR' });
+      dispatch({ type: "LOGIN_INPUT_ERROR" });
     }
   }; // end login
 
   return (
     <form className="formPanel" onSubmit={login}>
-      <h2>Login</h2>
+      <div>
+        <CustomIcon />
+      </div>
       {errors.loginMessage && (
         <h3 className="alert" role="alert">
           {errors.loginMessage}
@@ -57,6 +62,22 @@ function LoginForm() {
         </label>
       </div>
       <div>
+        <div
+          className="not-registered"
+          style={{
+            width: "100%",
+            height: "100%",
+            color: "#CF6F5A",
+            fontSize: "20px",
+            fontFamily: "Mulish",
+            fontWeight: "700",
+            wordWrap: "break-word",
+          }}
+        >
+          <Link exact to="/registration">
+            Not Registered?
+          </Link>
+        </div>
         <input className="btn" type="submit" name="submit" value="Log In" />
       </div>
     </form>

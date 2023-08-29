@@ -1,0 +1,70 @@
+:root {
+  --primary: #fff;
+}
+
+.btn {
+  padding: 8px 24px;
+  border-radius: 2px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'mulish';
+  font-weight: 800;
+  font-size: 25px;
+  border-radius: 16px;
+  background: #CF6F5A;
+  border: 1px solid #bc6551;
+  transition: 1s ease-in-out;
+  color: #FFFFFF;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.50);
+  min-width: 25px;
+  min-height: 25px;
+}
+
+
+.btn--primary {
+  background-color: var(--primary);
+  border: 1px solid var(--primary);
+}
+
+.btn--outline {
+  border: 1px solid var(--primary);
+  transition: all 0.3s ease-out;
+}
+
+.btn--medium {
+  padding: 8px 24px;
+  font-size: 30px;
+}
+
+.btn--large {
+  padding: 10px 26px;
+  font-size: 35px;
+}
+
+.btn--large:hover,
+.btn--medium:hover {
+  transition: all 0.3s ease-out;
+  transition: 250ms;
+}
+
+
+svg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  fill: none;
+  stroke: #fff;
+  stroke-dasharray: 150 480;
+  stroke-dashoffset: 150;
+  transition: 1s ease-in-out;
+}
+
+.btn:hover {
+  transition: 1s ease-in-out;
+  background: rgb(214, 119, 98);
+}
+
+.hero-btns:hover svg {
+  stroke-dashoffset: -480;
+}
