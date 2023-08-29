@@ -7,9 +7,22 @@ import SVG from "../SVG/SVG";
 
 export default function HomePage() {
   const [addUserOpen, setAddUserOpen] = useState(false);
-  const [settingsOpen, setSettingsOpen] = useState(false);
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
+
+  // store that holds all of nodes
+  let listOfNodes = useSelector(store => store.nodeReducer.nodeDatabaseResponse)
+
+  let yourContent 
+  const checkUserId = (node) => {
+    if(node?.user_id == user.id) {
+      yourContent ="Your node";
+    }
+    return yourContent;
+  }
+
+
+  console.log('the current list of nodes: ', listOfNodes)
 
   const openAddUser = () => {
     setAddUserOpen(true);
@@ -17,14 +30,6 @@ export default function HomePage() {
 
   const closeAddUser = () => {
     setAddUserOpen(false);
-  };
-
-  const openSettings = () => {
-    setSettingsOpen(true);
-  };
-
-  const closeSettings = () => {
-    setSettingsOpen(false);
   };
 
   const svgPathData = [
@@ -36,15 +41,13 @@ export default function HomePage() {
 
   return (
     <>
-      <div className="flex flex-col h-screen userpage-container">
-        <div className="flex items-center header-container ">
-          <MdChevronLeft size={25} className="ml-2" />
-
+      <div className="App flex flex-col h-screen">
+        <div className='header-container flex items-center '>
+          <MdChevronLeft size={25} className='ml-2' />
           {/* this flex-grow div is tailwind way to spread out the back and add buttons*/}
-          <div className="flex-grow">
-            <button className="mr-4 text-2xl" onClick={openAddUser}>
-             
-                <SVG
+          <div className="flex-grow"></div>
+          <button className="mr-4 text-2xl" onClick={openAddUser}>
+                 <SVG
                   width={24}
                   height={24}
                   viewBox="0 0 24 24"
@@ -52,18 +55,53 @@ export default function HomePage() {
                   fill="#CF6F5A"
                 />
             </button>
-          </div>
-
-          <AddNodeModal addUserOpen={addUserOpen} closeAddUser={closeAddUser} />
         </div>
 
-        <h2 className="text-red-500">Your Communities:</h2>
-        {/* map communities you moderate inside this div*/}
-        <div className="communities-container"></div>
 
-        <h2>Featured:</h2>
-        {/* map featured in this div*/}
-        <div className="featured-container"></div>
+
+        <div className='content-container flex-grow'>
+          <div className='communities-container mt-4'>
+            <h2>Communities</h2>
+            <h4>View your nodes</h4>
+            <div className='relative flex items-center'>
+              {/* useHistory back button */}
+              <MdChevronLeft size={35} />
+              <div id='slider' className='w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth'>
+                {/* Here is the div where we MAP ya'll */}
+                {listOfNodes.map(node => {
+                  return(
+                    <div className="side-scroll-box hover:scale-105 ease-in-out duration 300" key={node?.id}>
+                      {checkUserId(node)}
+                      {node?.node_name}
+                    </div>
+
+                  )
+                })}
+
+              </div>
+              <MdChevronRight size={35} />
+            </div>
+          </div>
+
+          <div className='featured-container mt-4'>
+            <h2>Featured</h2>
+            <h4>View community nodes</h4>
+            <div className='featured-buttons ml-8 mt-2'>
+              <button className='underline mr-4'>Trending</button>
+              <button className='underline mr-4'>Latest</button>
+              <button className='underline mr-4'>Popular</button>
+            </div>
+            <div className='featured-nodes-homepage flex flex-col items-center'>
+              <div className='featured-top'>
+                  Featured Spotlight text 1
+              </div>
+              <div className='featured-bottom'>
+                  Featured Spotlight text 2
+              </div>
+            </div>
+          </div>
+        </div>
+        <AddNodeModal addUserOpen={addUserOpen} closeAddUser={closeAddUser} />
       </div>
     </>
   );

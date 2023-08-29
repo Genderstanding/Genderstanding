@@ -10,7 +10,6 @@ const chance = new Chance();
  * POST invite code
  *****************/
 router.post("/invite", rejectUnauthenticated, async (req, res) => {
-  const connection = await pool.connect();
   try {
     const { auth_code } = req.body;
     const user_id = req.user.id;
