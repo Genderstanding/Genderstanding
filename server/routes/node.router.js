@@ -39,7 +39,7 @@ nodeRouter.post('/', rejectUnauthenticated, (req, res) => {
     
     pool.query(sqlQuery, [sqlUserId, sqlParams])
     .then(result => {
-        console.log('Created a new node in database: ', result);
+        console.log('Created a new node in database: ', result.rows);
         res.sendStatus(201);
     })
     .catch(error => {

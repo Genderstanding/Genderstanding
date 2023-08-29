@@ -15,6 +15,7 @@ function* createNode(action) {
 function* fetchNode(action) {
     try {
         const nodeResponse = yield axios.get('/node')
+        yield put({ type: 'USER_CREATE_NEW_NODE', payload: nodeResponse.data })
         yield put({ type: 'SET_NODE', payload: nodeResponse.data })
     } catch (error) {
         console.log('Error in SAGA GET request to nodes: ', error)
