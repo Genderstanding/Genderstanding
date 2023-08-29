@@ -33,7 +33,7 @@ const AddNodeModal = ({ addUserOpen, closeAddUser, children }) => {
             {name: nodeInput}
         })
         closeAddUser();
-        history.push('/')
+        history.push('/home')
     }
 
     return (
