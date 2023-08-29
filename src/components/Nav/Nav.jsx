@@ -44,7 +44,7 @@ export default function Nav() {
 
       {/* If a user is logged in, show these links */}
       {user.id && (
-        <>
+        <div className="toolbar-container flex items-center">
           <Link className="navLink" to="/home">
             {/* Link this to home page */}
             <button className="flex flex-col items-center justify-center flex-grow px-4 py-2">
@@ -70,8 +70,7 @@ export default function Nav() {
             </button>
           </Link>
 
-          {/* Link this to the Setting page */}
-          <Link className="navLink" to="/setting">
+          {/* Settings Modal */}
             <button
               className="flex flex-col items-center justify-center flex-grow px-4 py-2"
               onClick={openSettings}
@@ -83,10 +82,9 @@ export default function Nav() {
               settingsOpen={settingsOpen}
               closeSettings={closeSettings}
             />
-          </Link>
 
           {/* <LogOutButton className="navLink" /> */}
-        </>
+        </div>
       )}
 
       {/* <Link className="navLink" to="/about">
