@@ -8,10 +8,10 @@ const AddQuestionModal = ({ addQuestionOpen, closeAddQuestion, children }) => {
 
     return (
         <div className='modal-overlay flex justify-center items-center'>
-            <div className='add-node-modal flex flex-col justify-center items-center'>
+            <div className='ask-question-box flex flex-col justify-center items-center'>
                 {children}
                 <h2 className='text-xl font-bold mb-4 mr-4'>Ask a Question</h2>
-                    <textarea></textarea>
+                    <textarea placeholder='enter question' className='question-textarea'></textarea>
                     <div className='buttons-containter mt-6'>
                     <button className='underline mr-6'>Confirm</button>
                     
