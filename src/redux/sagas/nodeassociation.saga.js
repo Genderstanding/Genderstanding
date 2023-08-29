@@ -11,13 +11,23 @@ function* createNodeAssociation(action){
     }
 }
 
+// Saga to create association upon creation of a node
+function* newNodeAssociation(action){
+    try {
+        yield axios.post('/nodeassociation', action.payload)
+        yield put({ type: 'FETCH_NODE_ASSOCIATION'})
+    } catch (error) {
+        console.log('Error in SAGA creating a new node association: ', error)
+    }
+}
+
 // Saga to fetch all current node associations
 function* fetchNodeAssociation(action) {
     try {
         const nodeAssociationResponse = yield axios.get('/nodeassociation')
         yield put({ type: 'SET_NODE_ASSOCIATION', payload: nodeAssociationResponse.data })
     } catch (error) {
-        console.log('ERror in SAGA GET request for node association: ', error)
+        console.log('Error in SAGA GET request for node association: ', error)
     }
 }
 
@@ -47,6 +57,7 @@ function* nodeAssociationSaga() {
     yield takeLatest('FETCH_NODE_ASSOCIATION', fetchNodeAssociation);
     yield takeLatest('REMOVE_NODE_ASSOCIATION', removeNodeAssociation);
     yield takeLatest('USER_NODE_ASSOCIATION', userNodeAssociation);
+    yield takeLatest('USER_CREATE_NEW_NODE', newNodeAssociation)
 }
 
 export default nodeAssociationSaga;

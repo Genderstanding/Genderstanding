@@ -38,6 +38,7 @@ function App() {
   useEffect(()=> {
     dispatch({ type: 'FETCH_NODE' })
     dispatch({ type: 'FETCH_POST' })
+    dispatch({ type: 'FETCH_NODE_ASSOCIATION'})
   }, []);
 
   return (

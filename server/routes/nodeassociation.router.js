@@ -21,6 +21,19 @@ nodeAssocRouter.get('/', rejectUnauthenticated, (req, res) => {
         })
 })
 
+nodeAssocRouter.post('/', rejectUnauthenticated, (req, res) => {
+    let sqlUserId = req.user.id;
+    let sqlNodeId = req.params.id;
+    let sqlQuery = `
+    INSERT INTO "node_association" ("node_id", "user_id")
+    VALUES ($1, $2)`
+    pool.query(sqlQuery, [sqlNodeId, sqlUserId])
+    .then(result => {
+        console.log('Added new node association into database: ', result.rows);
+        res.send(result.rows)
+    })
+})
+
 nodeAssocRouter.put('/:id', rejectUnauthenticated, (req, res) => {
     let sqlId = req.user.id;
     let sqlParams = req.params.auth_code;
@@ -36,6 +49,22 @@ nodeAssocRouter.put('/:id', rejectUnauthenticated, (req, res) => {
         })
         .catch(error => {
             console.log('Error in router PUT adding user to node association: ', error);
+            res.sendStatus(500);
+        })
+})
+
+nodeAssocRouter.delete('/:id', rejectUnauthenticated, (req, res) => {
+    let sqlParams = req.params.id;
+    let sqlQuery = `
+    DELETE "node_association"
+    WHERE "id"=$1;`;
+    pool.query(sqlQuery, [sqlParams])
+        .then( result => {
+            console.log('Delete node association from database: ', result);
+            res.sendStatus(201);
+        })
+        .catch(error => {
+            console.log('Error in DELETE node association in database: ', error);
             res.sendStatus(500);
         })
 })
