@@ -10,6 +10,20 @@ export default function HomePage() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
 
+  // store that holds all of nodes
+  let listOfNodes = useSelector(store => store.nodeReducer.nodeDatabaseResponse)
+
+  let yourContent 
+  const checkUserId = (node) => {
+    if(node?.user_id == user.id) {
+      yourContent ="Your node";
+    }
+    return yourContent;
+  }
+
+
+  console.log('the current list of nodes: ', listOfNodes)
+
   const openAddUser = () => {
     setAddUserOpen(true);
   };
@@ -54,7 +68,16 @@ export default function HomePage() {
               <MdChevronLeft size={35} />
               <div id='slider' className='w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth'>
                 {/* Here is the div where we MAP ya'll */}
-                <div className="side-scroll-box hover:scale-105 ease-in-out duration 300"></div>
+                {listOfNodes.map(node => {
+                  return(
+                    <div className="side-scroll-box hover:scale-105 ease-in-out duration 300" key={node?.id}>
+                      {checkUserId(node)}
+                      {node?.node_name}
+                    </div>
+
+                  )
+                })}
+
               </div>
               <MdChevronRight size={35} />
             </div>
@@ -70,10 +93,10 @@ export default function HomePage() {
             </div>
             <div className='featured-nodes-homepage flex flex-col items-center'>
               <div className='featured-top'>
-
+                  Featured Spotlight text 1
               </div>
               <div className='featured-bottom'>
-
+                  Featured Spotlight text 2
               </div>
             </div>
           </div>
