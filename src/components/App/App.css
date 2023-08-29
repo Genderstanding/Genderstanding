@@ -31,7 +31,7 @@ margin-bottom: 32px;
   padding-bottom: 12px;
   background-color: #FAF1EF;
   border-radius: 12px;
-  border-bottom: 0.5px solid #CF6F5A;
+  border-bottom: 1px solid #CF6F5A;
   justify-content: flex-start;
   align-items: center;
   gap: 8px;
@@ -45,6 +45,6 @@ margin-bottom: 32px;
   background-color: #FAF1EF;
   font-size: 16px;
   font-family: 'mulish';
-  font-weight: 800;
+  font-weight: 700;
   color:#CF6F5A;
 }

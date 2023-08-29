@@ -1,10 +1,10 @@
-import { Icon } from "@mui/material";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import CustomIcon from "../Icon/CustomIcon";
 import {Box, Typography} from '@mui/material';
+import '../App/App.css'
 
 function LoginForm() {
   const [username, setUsername] = useState("");
@@ -40,7 +40,7 @@ function LoginForm() {
       {/* INPUT */}
     <div className="username">
         <label htmlFor="username">
-        <Typography variant="h6" sx={{fontFamily:"mulish", fontWeight:600,  color:"#CF6F5A"}}>Username</Typography>
+        <Typography variant="h6" sx={{fontFamily:"mulish", fontWeight:700,  color:"#CF6F5A"}}>Username</Typography>
           <div className="Field">
             <input
               className="Text"
@@ -55,7 +55,7 @@ function LoginForm() {
       </div>
       <div className="password">
         <label htmlFor="password">
-        <Typography variant="h6" sx={{fontFamily:"mulish", fontWeight:600,  color:"#CF6F5A"}}>Password</Typography>
+        <Typography variant="h6" sx={{fontFamily:"mulish", fontWeight:700,  color:"#CF6F5A"}}>Password</Typography>
           <div className="Field">
             <input
               className="Text"
@@ -82,6 +82,7 @@ function LoginForm() {
             wordWrap: "break-word",
             paddingTop: "16px",
             paddingBottom: "16px",
+            textShadow: '0px 2px 4px rgba(0, 0, 0, 0.3)',
           }}
         >
           <Link exact to="/registration">

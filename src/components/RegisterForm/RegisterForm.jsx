@@ -37,7 +37,7 @@ function RegisterForm() {
           <label htmlFor="username">
             <Typography
               variant="h6"
-              sx={{ fontFamily: "mulish", fontWeight: 600, color: "#CF6F5A" }}
+              sx={{ fontFamily: "mulish", fontWeight: 700, color: "#CF6F5A" }}
             >
               Username
             </Typography>
@@ -57,7 +57,7 @@ function RegisterForm() {
           <label htmlFor="password">
             <Typography
               variant="h6"
-              sx={{ fontFamily: "mulish", fontWeight: 600, color: "#CF6F5A" }}
+              sx={{ fontFamily: "mulish", fontWeight: 700, color: "#CF6F5A" }}
             >
               Password
             </Typography>
@@ -86,6 +86,7 @@ function RegisterForm() {
               wordWrap: "break-word",
               paddingTop: "16px",
               paddingBottom: "16px",
+              textShadow: '0px 2px 4px rgba(0, 0, 0, 0.3)',
             }}
           >
             <Link exact to="/login">
