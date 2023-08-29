@@ -1,6 +1,6 @@
-:root {
+/* :root {
   --primary: #fff;
-}
+} */
 
 .btn {
   padding: 8px 24px;
@@ -49,22 +49,8 @@
 }
 
 
-svg {
-  position: absolute;
-  left: 0;
-  top: 0;
-  fill: none;
-  stroke: #fff;
-  stroke-dasharray: 150 480;
-  stroke-dashoffset: 150;
-  transition: 1s ease-in-out;
-}
-
 .btn:hover {
   transition: 1s ease-in-out;
   background: rgb(214, 119, 98);
 }
 
-.hero-btns:hover svg {
-  stroke-dashoffset: -480;
-}
