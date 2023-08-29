@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import AddNodeModal from '../AddNodeModal/AddNodeModal';
 import SettingsModal from '../SettingsModal/SettingsModal';
@@ -14,6 +14,10 @@ function UserPage() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
   const history = useHistory();
+  // sourcing dispatch to use calls
+  const dispatch = useDispatch();
+  // sourcing use selector to hold store information
+  let newNode = useSelector(store => store.newNodeReducer.newNodeDatabaseResponse)
 
 
   const openAddNode = () => {
