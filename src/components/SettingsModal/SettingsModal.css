@@ -19,7 +19,9 @@
     text-align: center;
     width: 70vw;
     color: #242424;
-    min-height: 60vh;
+    min-height: 45vh;
+  font-weight: 700;
+  font-family: "mulish";
   }
 
   .delete-box {
