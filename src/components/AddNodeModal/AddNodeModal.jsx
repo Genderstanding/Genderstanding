@@ -6,8 +6,8 @@ import { useHistory } from 'react-router-dom';
 
 
 
-const AddNodeModal = ({ addUserOpen, closeAddUser, children }) => {
-    if (!addUserOpen) {
+const AddNodeModal = ({ addNodeOpen, addNodeClose, children }) => {
+    if (!addNodeOpen) {
         return null;
     }
     // sourcing dispatch to use calls
@@ -49,7 +49,7 @@ const AddNodeModal = ({ addUserOpen, closeAddUser, children }) => {
                 <div className='buttons-containter mt-6'>
                     <button className='underline mr-6' onClick={handleAddNode}>Confirm</button>
                     
-                    <button className='underline ' onClick={closeAddUser}>
+                    <button className='underline ' onClick={addNodeClose}>
                         Close
                     </button>
                 </div>

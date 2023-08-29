@@ -23,6 +23,8 @@ import './App.css';
 import HomePage from '../HomePage/HomePage';
 import FeaturedPage from '../FeaturedPage/FeaturedPage';
 import SettingsModal from '../SettingsModal/SettingsModal';
+import OwnerNodes from '../OwnerNodes/OwnerNodes';
+import UserNodes from '../UserNodes/UserNodes';
 
 function App() {
   const dispatch = useDispatch();
@@ -132,6 +134,20 @@ function App() {
               <WelcomePage />
             }
           </Route>
+
+          <Route
+          exact
+          path="/owner"
+          >
+            <OwnerNodes />
+           </Route>
+
+           <Route
+          exact
+          path="/usernodes"
+          >
+            <UserNodes />
+           </Route>
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
