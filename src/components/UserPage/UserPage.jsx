@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import AddNodeModal from '../AddNodeModal/AddNodeModal';
 import SettingsModal from '../SettingsModal/SettingsModal';
+import { useHistory } from 'react-router-dom'; 
 import './UserPage.css'
 
 
@@ -12,6 +13,8 @@ function UserPage() {
   const [settingsOpen, setSettingsOpen] = useState(false);
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
+  const history = useHistory(); 
+
 
   const openAddUser = () => {
     setAddUserOpen(true);
@@ -28,6 +31,11 @@ function UserPage() {
   const closeSettings = () => {
     setSettingsOpen(false);
   }
+
+  const goToOwnerPage = () => {
+    history.push('/owner'); // Use push to navigate to /owner
+  };
+
   return (
 
     <div className="userpage-container flex flex-col h-screen">
@@ -38,10 +46,10 @@ function UserPage() {
         <button className="mr-4 text-2xl" onClick={openAddUser}>+</button>
       </div>
 
-      <h2 className='text-red-500'>Communities you created:</h2>
-      {/* map communities you moderate iside this div*/}
-      <div className='moderator-container'>
-      </div>
+      <h2>Communities you created:</h2>
+      {/* map communities you moderate iside these Links*/}
+      <div className="moderator-container" onClick={goToOwnerPage}></div>
+      
 
       
 
