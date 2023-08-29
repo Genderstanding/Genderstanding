@@ -1,7 +1,8 @@
 import React from 'react';
 import './AddNodeModal.css';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 
 
@@ -11,9 +12,15 @@ const AddNodeModal = ({ addUserOpen, closeAddUser, children }) => {
     }
     // sourcing dispatch to use calls
     const dispatch = useDispatch();
+    // sourcing use history to push to new page
+    const history = useHistory();
+    // sourcing use selector to hold store information
+    let listOfNodes = useSelector(store => store.nodeReducer.nodeDatabaseResponse)
 
     // state to hold text input
     const [nodeInput, setNodeInput ] = useState('');
+
+
 
 
     // function to handle adding a node to database
@@ -26,6 +33,7 @@ const AddNodeModal = ({ addUserOpen, closeAddUser, children }) => {
             {name: nodeInput}
         })
         closeAddUser();
+        history.push('/')
     }
 
     return (
