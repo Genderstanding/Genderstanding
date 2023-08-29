@@ -1,32 +1,15 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import './WelcomePage.css';
-
+import React from "react";
+import "./WelcomePage.css";
+import { CustomButton } from "../CustomButton/CustomButton";
+import "../CustomButton/CustomButton.css"
 
 export default function WelcomePage() {
-  const [heading, setHeading] = useState('Welcome');
-  const history = useHistory();
-
-  const onLogin = (event) => {
-    history.push('/login');
-  };
-
   return (
-    <div className="container">
-      <h2>{heading}</h2>
-
-      <div className="grid">
-        <div className="grid-col grid-col_8">
-          <p>
-           Welcome Page
-          </p>
-
-
-     
-        </div>
-      </div>
+    <div className="flex flex-col h-screen welcomepage-container">
+      <div className="flex items-center header-container ">GENDERSTANDING</div>
+      <CustomButton className="btn"
+          buttonStyle="btn--primary"
+          buttonSize="btn--large" path="/registration">Get Started</CustomButton>
     </div>
   );
 }
-
-
