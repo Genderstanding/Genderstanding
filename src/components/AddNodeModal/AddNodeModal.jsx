@@ -33,9 +33,10 @@ const AddNodeModal = ({ addNodeOpen, addNodeClose, children }) => {
                 name: nodeInput
             }
         })
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    console.log('And the newest node is: ', newNode)
-    history.push(`/node/${newNode.id}`)
+    await new Promise((resolve) => setTimeout(resolve, 2000))
+
+    history.push(`/node/${newNode[0]?.id}`)
+
  } catch (error) {
     console.log('Error in button click to create new node: ', error)
  }
