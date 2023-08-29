@@ -29,7 +29,7 @@ function LoginForm() {
   }; // end login
 
   return (
-    <Box sx={{justifyContent:"flex-end"}}>
+  
     <form className="formPanel" onSubmit={login}>
       {errors.loginMessage && (
         <h3 className="alert" role="alert">
@@ -93,7 +93,7 @@ function LoginForm() {
         <input className="btn" type="submit" name="submit" value="Log In" />
       </div>
     </form>
-    </Box>
+  
   );
 }
 

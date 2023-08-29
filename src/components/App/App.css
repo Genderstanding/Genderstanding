@@ -7,7 +7,7 @@
   height: 10vh;
   border-bottom: .5px solid gray;
   background-color: #CF6F5A;
-margin-bottom: 32px;
+  margin-bottom: 32px;
 }
 
 .centered-container {
@@ -18,9 +18,11 @@ margin-bottom: 32px;
   margin-bottom: 32px;
 }
 
-.login-container, .register-container{
+.login-container,
+.register-container, .welcome-container {
 
 }
+
 /* FORM */
 .Field {
   width: 80%;
@@ -46,5 +48,5 @@ margin-bottom: 32px;
   font-size: 16px;
   font-family: 'mulish';
   font-weight: 700;
-  color:#CF6F5A;
+  color: #CF6F5A;
 }

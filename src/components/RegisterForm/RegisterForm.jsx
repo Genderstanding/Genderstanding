@@ -25,7 +25,6 @@ function RegisterForm() {
   }; // end registerUser
 
   return (
-    <Box>
       <form className="formPanel" onSubmit={registerUser}>
         {errors.registrationMessage && (
           <h3 className="alert" role="alert">
@@ -96,7 +95,6 @@ function RegisterForm() {
           <input className="btn" type="submit" name="submit" value="Register" />
         </div>
       </form>
-    </Box>
   );
 }
 
