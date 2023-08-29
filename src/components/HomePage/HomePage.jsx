@@ -25,17 +25,6 @@ export default function HomePage() {
     "M9.375 13.875C9.375 13.4608 9.71079 13.125 10.125 13.125H17.625C18.0392 13.125 18.375 13.4608 18.375 13.875C18.375 14.2892 18.0392 14.625 17.625 14.625H10.125C9.71079 14.625 9.375 14.2892 9.375 13.875Z",
   ];
 
-  <button className="mr-4 text-2xl" onClick={openAddUser}>
-
-                <SVG
-                  width={24}
-                  height={24}
-                  viewBox="0 0 24 24"
-                  pathData={svgPathData}
-                  fill="#CF6F5A"
-                />
-            </button>
-
   return (
     <>
       <div className="App flex flex-col h-screen">
@@ -64,10 +53,8 @@ export default function HomePage() {
               {/* useHistory back button */}
               <MdChevronLeft size={35} />
               <div id='slider' className='w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth'>
-                {/* this will map links to the nodes instead */}
-                {data.map(item => (
-                  <div key={item.id} className={item.className}></div>
-                ))}
+                {/* Here is the div where we MAP ya'll */}
+                <div className="side-scroll-box hover:scale-105 ease-in-out duration 300"></div>
               </div>
               <MdChevronRight size={35} />
             </div>
