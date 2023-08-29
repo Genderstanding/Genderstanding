@@ -31,15 +31,13 @@ nodeRouter.get('/', rejectUnauthenticated, (req, res) => {
 // POST route to database to create a new node
 nodeRouter.post('/', rejectUnauthenticated, (req, res) => {
     let sqlUserId = req.user.id;
-    let sqlParams = req.body;
-    let sqlValues = [
-        sqlUserId,
-        sqlParams.name
-    ];
+    let sqlParams = req.body.name;
+    console.log('sqlParams is a: ', req.body)
     let sqlQuery = `
     INSERT INTO "node" ("user_id", "node_name")
     VALUES ($1, $2);`;
-    pool.query(sqlQuery, [sqlValues])
+    
+    pool.query(sqlQuery, [sqlUserId, sqlParams])
     .then(result => {
         console.log('Created a new node in database: ', result);
         res.sendStatus(201);
