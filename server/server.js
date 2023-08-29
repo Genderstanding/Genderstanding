@@ -13,6 +13,7 @@ const userRouter = require('./routes/user.router');
 const nodeRouter = require('./routes/node.router');
 const postRouter = require('./routes/post.router');
 const inviteRouter = require('./routes/invite.router');
+const nodeAssocRouter = require('./routes/nodeassociation.router')
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -32,6 +33,7 @@ app.use('/api/user', userRouter);
 app.use('/node', nodeRouter);
 app.use('/post', postRouter);
 app.use('/invite', inviteRouter);
+app.use('/nodeassociation', nodeAssocRouter)
 
 // Serve static files
 app.use(express.static('build'));
