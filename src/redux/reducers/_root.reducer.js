@@ -18,7 +18,7 @@ const rootReducer = combineReducers({
   nodeReducer, // holds all of currently available nodes
   postReducer, // holds all posts in all nodes
   nodeAssociationReducer, // holds all of the node association information
-  newNodeReducer
+  newNodeReducer, // holds the newest node created
 });
 
 export default rootReducer;

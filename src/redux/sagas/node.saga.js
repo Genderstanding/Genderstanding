@@ -4,10 +4,11 @@ import {put, takeLatest} from 'redux-saga/effects';
 //function to POST new node post to database
 function* createNode(action) {
     try {
-        
-        yield axios.post('/node', action.payload)
 
+        const nodePostResponse = axios.post('/node', action.payload)
+        yield put({ type: 'FETCH_NEW_NODE', payload: nodePostResponse })
         yield put({ type: 'FETCH_NODE' })
+    
 
     } catch (error) {
 

@@ -15,7 +15,7 @@ const AddNodeModal = ({ addUserOpen, closeAddUser, children }) => {
     // sourcing use history to push to new page
     const history = useHistory();
     // sourcing use selector to hold store information
-    let listOfNodes = useSelector(store => store.nodeReducer.nodeDatabaseResponse)
+    let newNode = useSelector(store => store.newNodeReducer.newNodeDatabaseResponse)
 
     // state to hold text input
     const [nodeInput, setNodeInput ] = useState('');
@@ -26,14 +26,16 @@ const AddNodeModal = ({ addUserOpen, closeAddUser, children }) => {
     // function to handle adding a node to database
     const handleAddNode = async (event) => {
         event.preventDefault();
- try{
-    dispatch({
-        type: 'CREATE_NODE',
-        payload: 
-        {name: nodeInput}
-    })
+    try {
+        dispatch({
+            type: 'CREATE_NODE',
+            payload: {
+                name: nodeInput
+            }
+        })
     await new Promise((resolve) => setTimeout(resolve, 2000));
-    history.push('/home')
+    console.log('And the newest node is: ', newNode)
+    history.push(`/node/${newNode.id}`)
  } catch (error) {
     console.log('Error in button click to create new node: ', error)
  }
