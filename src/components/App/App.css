@@ -1,5 +1,50 @@
 .header-container {
   height: 10vh;
-  border-bottom: 1px solid gray;
+  border-bottom: .5px solid gray;
 }
 
+.logo-container {
+  height: 10vh;
+  border-bottom: .5px solid gray;
+  background-color: #CF6F5A;
+margin-bottom: 32px;
+}
+
+.centered-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.login-container, .register-container{
+
+}
+/* FORM */
+.Field {
+  width: 80%;
+  height: 100%;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color: #FAF1EF;
+  border-radius: 12px;
+  border-bottom: 1px solid #CF6F5A;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+  display: inline-flex;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.Text {
+  flex: 10 0 0;
+  background-color: #FAF1EF;
+  font-size: 16px;
+  font-family: 'mulish';
+  font-weight: 700;
+  color:#CF6F5A;
+}
