@@ -1,14 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import './WelcomePage.css';
 
-// This is one of our simplest components
-// It doesn't have local state
-// It doesn't dispatch any redux actions or display any part of redux state
-// or even care what the redux state is
 
 export default function WelcomePage() {
+  const [heading, setHeading] = useState('Welcome');
+  const history = useHistory();
+
+  const onLogin = (event) => {
+    history.push('/login');
+  };
+
   return (
     <div className="container">
-      <p>Welcome Page</p>
+      <h2>{heading}</h2>
+
+      <div className="grid">
+        <div className="grid-col grid-col_8">
+          <p>
+           Welcome Page
+          </p>
+
+
+     
+        </div>
+      </div>
     </div>
   );
 }
+
+

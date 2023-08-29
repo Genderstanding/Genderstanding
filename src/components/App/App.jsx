@@ -15,11 +15,14 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import WelcomePage from '../WelcomePage/WelcomePage';
-import HomePage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 
+
 import './App.css';
+import HomePage from '../HomePage/HomePage';
+import FeaturedPage from '../FeaturedPage/FeaturedPage';
+import SettingsModal from '../SettingsModal/SettingsModal';
 
 function App() {
   const dispatch = useDispatch();
@@ -41,7 +44,7 @@ function App() {
         <Nav />
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-          <Redirect exact from="/" to="/home" />
+          <Redirect exact from="/" to="/welcome" />
 
           {/* Visiting localhost:3000/about will show the about page. */}
           <Route
@@ -65,12 +68,27 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows WelcomePage else shows LoginPage
+            // logged in shows HomePage else shows LoginPage
             exact
-            path="/welcome"
+            path="/home"
           >
-            <WelcomePage />
+            <HomePage />
           </ProtectedRoute>
+          <ProtectedRoute
+            // logged in shows FeaturedPage else shows LoginPage
+            exact
+            path="/featured"
+          >
+            <FeaturedPage />
+          </ProtectedRoute>
+          <ProtectedRoute
+            // logged in shows Setting else shows LoginPage
+            exact
+            path="/setting"
+          >
+            <SettingsModal />
+</ProtectedRoute>
+
 
           <Route
             exact
@@ -102,15 +120,15 @@ function App() {
 
           <Route
             exact
-            path="/home"
+            path="/welcome"
           >
             {user.id ?
               // If the user is already logged in, 
               // redirect them to the /user page
               <Redirect to="/home" />
               :
-              // Otherwise, show the UserPage
-              <HomePage />
+              // Otherwise, show the WelcomePage
+              <WelcomePage />
             }
           </Route>
 
