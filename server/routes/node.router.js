@@ -29,23 +29,33 @@ nodeRouter.get('/', rejectUnauthenticated, (req, res) => {
 })
 
 // POST route to database to create a new node
-nodeRouter.post('/', rejectUnauthenticated, (req, res) => {
-    let sqlUserId = req.user.id;
-    let sqlParams = req.body.name;
-    console.log('sqlParams is a: ', req.body)
-    let sqlQuery = `
-    INSERT INTO "node" ("user_id", "node_name")
-    VALUES ($1, $2);`;
+nodeRouter.post('/', rejectUnauthenticated, async (req, res) => {
+    try {
+        let sqlUserId = req.user.id;
+        let sqlParams = req.body.name;
     
-    pool.query(sqlQuery, [sqlUserId, sqlParams])
-    .then(result => {
-        console.log('Created a new node in database: ', result.rows);
-        res.sendStatus(201);
-    })
-    .catch(error => {
-        console.log('Error in router POST to node: ', error);
-        res.sendStatus(500);
-    })
+        let sqlQuery = `
+        INSERT INTO "node" ("user_id", "node_name")
+        VALUES ($1, $2)
+        RETURNING "id";
+        `;
+        
+    
+        const nodeResult = await pool.query(sqlQuery, [sqlUserId, sqlParams])
+        let sqlQuery2 = `
+        INSERT INTO "node_association" ("node_id", "user_id")
+        VALUES ($1, $2);`;
+        const nodeId = nodeResult.rows[0]?.id
+        await pool.query(sqlQuery2, [nodeId, sqlUserId])
+
+        res.status(200)
+       
+    } catch (error) {
+        console.log('Error in node adding to database: ', error)
+        res.sendStatus(500)
+    }
+  
+
 })
 
 // PUT route to database to update node name

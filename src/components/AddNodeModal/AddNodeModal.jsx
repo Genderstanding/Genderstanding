@@ -25,6 +25,7 @@ const AddNodeModal = ({ addUserOpen, closeAddUser, children }) => {
             payload: 
             {name: nodeInput}
         })
+        closeAddUser();
     }
 
     return (
