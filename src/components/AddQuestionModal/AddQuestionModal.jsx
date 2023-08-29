@@ -1,8 +1,8 @@
 import React from 'react';
-import './AddNodeModal.css'
+import './AddQuestionModal.css'
 
-const AddNodeModal = ({ addNodeOpen, addNodeClose, children }) => {
-    if (!addNodeOpen) {
+const AddQuestionModal = ({ addQuestionOpen, closeAddQuestion, children }) => {
+    if (!addQuestionOpen) {
         return null;
     }
 
@@ -10,12 +10,12 @@ const AddNodeModal = ({ addNodeOpen, addNodeClose, children }) => {
         <div className='modal-overlay flex justify-center items-center'>
             <div className='add-node-modal flex flex-col justify-center items-center'>
                 {children}
-                <h2 className='text-xl font-bold mb-4 mr-4'>Create Community</h2>
-                <input type='text' placeholder='add name' className='border-b border-black'/>
-                <div className='buttons-containter mt-6'>
+                <h2 className='text-xl font-bold mb-4 mr-4'>Ask a Question</h2>
+                    <textarea></textarea>
+                    <div className='buttons-containter mt-6'>
                     <button className='underline mr-6'>Confirm</button>
                     
-                    <button className='underline ' onClick={addNodeClose}>
+                    <button className='underline ' onClick={closeAddQuestion}>
                         Close
                     </button>
                 </div>
@@ -24,4 +24,4 @@ const AddNodeModal = ({ addNodeOpen, addNodeClose, children }) => {
     );
 };
 
-export default AddNodeModal;
+export default AddQuestionModal;
