@@ -15,7 +15,7 @@ const AddNodeModal = ({ addNodeOpen, addNodeClose, children }) => {
     // sourcing use history to push to new page
     const history = useHistory();
     // sourcing use selector to hold store information
-    let listOfNodes = useSelector(store => store.nodeReducer.nodeDatabaseResponse)
+    let newNode = useSelector(store => store.newNodeReducer.newNodeDatabaseResponse)
 
     // state to hold text input
     const [nodeInput, setNodeInput ] = useState('');
@@ -24,17 +24,24 @@ const AddNodeModal = ({ addNodeOpen, addNodeClose, children }) => {
 
 
     // function to handle adding a node to database
-    const handleAddNode = (event) => {
+    const handleAddNode = async (event) => {
         event.preventDefault();
-
+    try {
         dispatch({
             type: 'CREATE_NODE',
-            payload: 
-            {name: nodeInput}
+            payload: {
+                name: nodeInput
+            }
         })
-        closeAddUser();
-        history.push('/home')
-    }
+    await new Promise((resolve) => setTimeout(resolve, 2000))
+
+    history.push(`/node/${newNode[0]?.id}`)
+
+ } catch (error) {
+    console.log('Error in button click to create new node: ', error)
+ }
+    
+}
 
     return (
         <div className='modal-overlay flex justify-center items-center'>
