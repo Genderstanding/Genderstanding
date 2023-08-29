@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import LogOutButton from '../LogOutButton/LogOutButton';
 import './SettingsModal.css'
 
 const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
@@ -29,7 +30,8 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
                 {children}
                 <div className="flex flex-col">
                     {/* onClick Link to login */}
-                    <button className="text-sm underline self-end mr-2 mt-2 mb-6">Log Out</button>
+                    {/* <button className="text-sm underline self-end mr-2 mt-2 mb-6">Log Out</button> */}
+                    <LogOutButton />
                 </div>
                 <div className='flex flex-col'>
                     <span className='mb-2'>Join Node</span>
