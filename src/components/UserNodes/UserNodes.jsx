@@ -28,7 +28,7 @@ const UserNodes = () => {
             question: "Rainbows are nightmares, as real as death. Rainbows will eat you alive.",
             count: 0,
         },
-    ]);
+    ];
 
     const increaseCount = (nodeId) => {
         const updatedQuestionsArray = questionsArray.map((content) =>
