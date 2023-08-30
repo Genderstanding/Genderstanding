@@ -11,43 +11,108 @@ function UserPage() {
   const history = useHistory();
   // sourcing dispatch to use calls
   const dispatch = useDispatch();
-  // sourcing use selector to hold store information
+  // sourcing use selector to hold newest node store information
   let newNode = useSelector(
     (store) => store.newNodeReducer.newNodeDatabaseResponse
   );
+  // sourcing use selector to hold all node store information
+  let allNodes = useSelector((store) => store.nodeReducer.nodeDatabaseResponse);
 
-  const goToOwnerNodes = () => {
-    history.push("/owner");
+  console.log("nodes are in: ", allNodes);
+
+  const openAddNode = () => {
+    setaddNodeOpen(true);
   };
 
-  const goToUserNodes = () => {
-    history.push("/usernodes");
+  const closeAddNode = () => {
+    setaddNodeOpen(false);
+  };
+
+  const openSettings = () => {
+    setSettingsOpen(true);
+  };
+
+  const closeSettings = () => {
+    setSettingsOpen(false);
+  };
+
+  const goToOwnerNodes = async (event, node) => {
+    event.preventDefault();
+    try {
+      dispatch({
+        type: "SET_NEW_NODE",
+        payload: node,
+      });
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      history.push("/owner");
+    } catch (error) {
+      console.log("Error in obtaining node information on userPage: ", error);
+    }
+  };
+
+  const goToUserNodes = async (event, node) => {
+    event.preventDefault();
+    try {
+      dispatch({
+        type: "SET_NEW_NODE",
+        payload: node,
+      });
+      history.push("/usernodes");
+    } catch (error) {
+      console.log("Error in going to user node page: ", error);
+    }
   };
 
   return (
     <div className="flex flex-col h-screen userpage-container">
-      <HeaderBar />
+    <HeaderBar/>
 
-      <div className="flex flex-col justify-center userpage-boxes">
+      <div className="flex flex-col items-center justify-center userpage-boxes">
         <h2 className="mt-4 mb-1 ml-5">Communities you created:</h2>
-        <div className="flex items-center justify-center mb-4 moderator-box">
+        <div className="flex flex-col items-center justify-center mb-4 moderator-box">
           {/* map communities you moderate inside these divs*/}
-          <div className="moderator-container" onClick={goToOwnerNodes}>
+          {allNodes.map((node) => {
+            if (user.id == node?.user_id) {
+              return (
+                <div
+                  className="m-4 moderator-container"
+                  onClick={(event) => goToOwnerNodes(event, node)}
+                >
+                  <div className="m-4 owned-community-names" key={node?.id}>
+                    {node?.node_name}
+                    {node?.id}
+                  </div>
+                </div>
+              );
+            }
+          })}
+          <div className="m-4 moderator-container" onClick={goToOwnerNodes}>
             <div className="m-4 owned-community-names">What's New?</div>
           </div>
         </div>
 
         <h2 className="mt-4 mb-1 ml-5">Communities you're a part of:</h2>
-        <div className="flex items-center justify-center mb-4 part-of-box">
+        <div className="flex flex-col items-center justify-center mb-4 part-of-box">
           {/* map communities you particpate in in this div*/}
-          <div className="user-container" onClick={goToUserNodes}>
-            <div className="m-4 user-community-names">Why not cheese?</div>
-          </div>
+          {allNodes.map((node) => {
+            if (user?.id !== node?.user_id) {
+              return (
+                <div
+                  className="m-4 moderator-container"
+                  onClick={(event) => goToUserNodes(event, node)}
+                >
+                  <div className="m-4 owned-community-names" key={node?.id}>
+                    {node?.node_name}
+                    {node?.id}
+                  </div>
+                </div>
+              );
+            }
+          })}
         </div>
       </div>
     </div>
   );
 }
 
-// this allows us to use <App /> in index.js
 export default UserPage;

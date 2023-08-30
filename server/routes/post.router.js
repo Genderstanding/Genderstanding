@@ -19,7 +19,6 @@ postRouter.get('/', rejectUnauthenticated, (req, res) => {
     GROUP BY "posts"."id", "posts"."user_id", "posts"."content", "posts"."node_id", "node"."node_name", "posts"."orig_post", "posts"."reply_id", "posts"."post_time", "posts"."edit", "posts"."public", "posts"."reported", "posts"."votes";`;
     pool.query(sqlQuery, [sqlValue])
         .then( result => {
-            console.log('Obtaining all posts from database: ', result.rows);
             res.send(result.rows);
         })
         .catch(error => {

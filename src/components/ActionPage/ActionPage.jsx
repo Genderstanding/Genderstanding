@@ -10,12 +10,12 @@ export default function ActionPage() {
   const dispatch = useDispatch();
 
   return (
-    <div className="flex flex-col h-screen action-container">
+    <div className="action-container">
       <div className="flex items-center logo-container ">
         <LogoButton />
       </div>
       <div className="centered-container">
-      <div className="text-container" style={{}}>
+
         <Typography
           variant="h3"
           sx={{
@@ -23,7 +23,8 @@ export default function ActionPage() {
             fontWeight: 900,
             fontFamily: "mulish",
             color: "#CF6F5A",
-            margin: "auto",
+            marginTop: "50px",
+        
           }}
         >
           Why Are You Here?
@@ -44,7 +45,6 @@ export default function ActionPage() {
             Just Browsing
           </CustomButton>
         </div>
-      </div>
     </div>
   );
 }

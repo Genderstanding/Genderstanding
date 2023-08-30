@@ -47,14 +47,15 @@ function App() {
   return (
     <Router>
       <div>
-        <Nav/>
-
+       
+  <Nav/>
 
 
           {/* Conditional rendering of the Nav component */}
           {/* {currentPath !== "/action" && <Nav />} */}
 
-        <Switch>
+        <Switch> 
+        
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/welcome" />
 
@@ -158,7 +159,7 @@ function App() {
             {user.id ? (
               // If the user is already logged in,
               // redirect them to the /home page
-              <Redirect to="/action" />
+              <Redirect to="/newcode" />
             ) : (
               // Otherwise, show the ActionPage
               <ActionPage />
@@ -168,7 +169,7 @@ function App() {
             {user.id ? (
               // If the user is already logged in,
               // redirect them to the /home page
-              <Redirect to="/action" />
+              <Redirect to="/newnode" />
             ) : (
               // Otherwise, show the ActionPage
               <ActionPage />
