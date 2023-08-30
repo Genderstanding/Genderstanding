@@ -20,4 +20,13 @@
     height: 40vh;
 
   }
-  
+
+  .ask-question-box {
+    width: 90vw;
+    min-height: 50vh;
+    background-color: white;
+  }
+  .question-textarea {
+    border: 1px solid black;
+    border-radius: 10px;
+  }

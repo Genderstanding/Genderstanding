@@ -6,7 +6,8 @@ import { useSelector } from "react-redux";
 import SVG from "../SVG/SVG";
 
 export default function HomePage() {
-  const [addUserOpen, setAddUserOpen] = useState(false);
+  const [addNodeOpen, setaddNodeOpen] = useState(false);
+
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
 
@@ -24,12 +25,12 @@ export default function HomePage() {
 
   console.log('the current list of nodes: ', listOfNodes)
 
-  const openAddUser = () => {
-    setAddUserOpen(true);
+  const openAddNode = () => {
+    setaddNodeOpen(true);
   };
 
-  const closeAddUser = () => {
-    setAddUserOpen(false);
+  const closeAddNode = () => {
+    setaddNodeOpen(false);
   };
 
   const svgPathData = [
@@ -46,7 +47,7 @@ export default function HomePage() {
           <MdChevronLeft size={25} className='ml-2' />
           {/* this flex-grow div is tailwind way to spread out the back and add buttons*/}
           <div className="flex-grow"></div>
-          <button className="mr-4 text-2xl" onClick={openAddUser}>
+          <button className="mr-4 text-2xl" onClick={openAddNode}>
                  <SVG
                   width={24}
                   height={24}
@@ -101,7 +102,7 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-        <AddNodeModal addUserOpen={addUserOpen} closeAddUser={closeAddUser} />
+        <AddNodeModal addNodeOpen={addNodeOpen} addNodeClose={closeAddNode} />
       </div>
     </>
   );
