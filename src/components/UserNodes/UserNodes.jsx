@@ -28,10 +28,15 @@ const UserNodes = () => {
             question: "Rainbows are nightmares, as real as death. Rainbows will eat you alive.",
             count: 0,
         },
-    ];
+    ]);
 
-    const increaseCount = () => {
-        count + 1;
+    const increaseCount = (nodeId) => {
+        const updatedQuestionsArray = questionsArray.map((content) =>
+        content.node_id === nodeId
+        ? { ...content, count: content.count + 1 }
+        : content
+        );
+        setQuestionsArray(updatedQuestionsArray);
     };
 
     const openAddQuestion = () => {

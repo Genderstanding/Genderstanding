@@ -26,7 +26,7 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
 
     return (
         <div className='modal-overlay'>
-            <div className='settings-modal'>
+            <div className='settings-modal mt-24'>
                 {children}
                 <div className="flex flex-col">
                     {/* onClick Link to login */}
