@@ -25,7 +25,6 @@
   font-weight: 700;
 }
 
-
 .navLink {
   display: inline-block;
   color: #7C7C7C;
@@ -40,13 +39,18 @@
   border: none;
   cursor: pointer;
   outline:none;
-
 }
 
-.navLink:hover {
+ .navLinkSetting:hover, .navLink:hover {
   color: #CE6E59;
 font-weight: 900;
 }
+
+.navLinkSetting:hover > span {
+  color: #CE6E59;
+  font-weight: 700;
+}
+
 .toolbar-container{
   height: 10vh;
 }

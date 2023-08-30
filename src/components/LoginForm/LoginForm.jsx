@@ -3,8 +3,8 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import CustomIcon from "../Icon/CustomIcon";
-import {Box, Typography} from '@mui/material';
-import '../App/App.css'
+import { Typography } from "@mui/material";
+import "../App/App.css";
 
 function LoginForm() {
   const [username, setUsername] = useState("");
@@ -29,18 +29,29 @@ function LoginForm() {
   }; // end login
 
   return (
-    <Box sx={{justifyContent:"flex-end"}}>
     <form className="formPanel" onSubmit={login}>
       {errors.loginMessage && (
         <h3 className="alert" role="alert">
           {errors.loginMessage}
         </h3>
       )}
-       <CustomIcon/>
+      <CustomIcon />
       {/* INPUT */}
-    <div className="username">
-        <label htmlFor="username">
-        <Typography variant="h6" sx={{fontFamily:"mulish", fontWeight:700,  color:"#CF6F5A"}}>Username</Typography>
+      <div className="label-container">
+        <label htmlFor="username" className="label">
+          <Typography
+            variant="h6"
+            sx={{
+              marginLeft: "35px",
+              fontSize: "16px",
+              fontFamily: "mulish",
+              fontWeight: 500,
+              color: "#CF6F5A",
+              marginTop:"12px"
+            }}
+          >
+            Username
+          </Typography>
           <div className="Field">
             <input
               className="Text"
@@ -53,9 +64,21 @@ function LoginForm() {
           </div>
         </label>
       </div>
-      <div className="password">
-        <label htmlFor="password">
-        <Typography variant="h6" sx={{fontFamily:"mulish", fontWeight:700,  color:"#CF6F5A"}}>Password</Typography>
+      <div className="label-container">
+        <label htmlFor="password" className="label">
+          <Typography
+            variant="h6"
+            sx={{
+              marginLeft: "35px",
+              fontSize: "16px",
+              fontFamily: "mulish",
+              fontWeight: 500,
+              color: "#CF6F5A",
+              marginTop:"12px"
+            }}
+          >
+            Password
+          </Typography>
           <div className="Field">
             <input
               className="Text"
@@ -82,7 +105,7 @@ function LoginForm() {
             wordWrap: "break-word",
             paddingTop: "16px",
             paddingBottom: "16px",
-            textShadow: '0px 2px 4px rgba(0, 0, 0, 0.3)',
+            textShadow: "0px 2px 4px rgba(0, 0, 0, 0.3)",
           }}
         >
           <Link exact to="/registration">
@@ -93,7 +116,6 @@ function LoginForm() {
         <input className="btn" type="submit" name="submit" value="Log In" />
       </div>
     </form>
-    </Box>
   );
 }
 

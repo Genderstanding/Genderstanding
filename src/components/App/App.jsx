@@ -1,44 +1,43 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import {
   HashRouter as Router,
   Redirect,
   Route,
   Switch,
-} from 'react-router-dom';
+} from "react-router-dom";
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 
-import Nav from '../Nav/Nav';
+import Nav from "../Nav/Nav";
 
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
-import AboutPage from '../AboutPage/AboutPage';
-import UserPage from '../UserPage/UserPage';
-import WelcomePage from '../WelcomePage/WelcomePage';
-import LoginPage from '../LoginPage/LoginPage';
-import RegisterPage from '../RegisterPage/RegisterPage';
-
-
-import './App.css';
-import HomePage from '../HomePage/HomePage';
-import FeaturedPage from '../FeaturedPage/FeaturedPage';
-import SettingsModal from '../SettingsModal/SettingsModal';
-import OwnerNodes from '../OwnerNodes/OwnerNodes';
-import UserNodes from '../UserNodes/UserNodes';
+import AboutPage from "../AboutPage/AboutPage";
+import UserPage from "../UserPage/UserPage";
+import WelcomePage from "../WelcomePage/WelcomePage";
+import LoginPage from "../LoginPage/LoginPage";
+import RegisterPage from "../RegisterPage/RegisterPage";
+import ActionPage from "../ActionPage/ActionPage";
+import "./App.css";
+import HomePage from "../HomePage/HomePage";
+import FeaturedPage from "../FeaturedPage/FeaturedPage";
+import SettingsModal from "../SettingsModal/SettingsModal";
+import OwnerNodes from "../OwnerNodes/OwnerNodes";
+import UserNodes from "../UserNodes/UserNodes";
 
 function App() {
   const dispatch = useDispatch();
 
-  const user = useSelector(store => store.user);
+  const user = useSelector((store) => store.user);
 
   useEffect(() => {
-    dispatch({ type: 'FETCH_USER' });
+    dispatch({ type: "FETCH_USER" });
   }, [dispatch]);
 
-  useEffect(()=> {
-    dispatch({ type: 'FETCH_NODE' })
-    dispatch({ type: 'FETCH_POST' })
-    dispatch({ type: 'FETCH_NODE_ASSOCIATION'})
+  useEffect(() => {
+    dispatch({ type: "FETCH_NODE" });
+    dispatch({ type: "FETCH_POST" });
+    dispatch({ type: "FETCH_NODE_ASSOCIATION" });
   }, []);
 
   return (
@@ -71,6 +70,14 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
+            // logged in shows ActionPage else shows LoginPage
+            exact
+            path="/action"
+          >
+            <ActionPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
             // logged in shows HomePage else shows LoginPage
             exact
             path="/home"
@@ -90,64 +97,80 @@ function App() {
             path="/setting"
           >
             <SettingsModal />
-</ProtectedRoute>
+          </ProtectedRoute>
 
-
-          <Route
-            exact
-            path="/login"
-          >
-            {user.id ?
-              // If the user is already logged in, 
+          <Route exact path="/login">
+            {user.id ? (
+              // If the user is already logged in,
               // redirect to the /user page
               <Redirect to="/user" />
-              :
+            ) : (
               // Otherwise, show the login page
               <LoginPage />
-            }
+            )}
           </Route>
 
-          <Route
-            exact
-            path="/registration"
-          >
-            {user.id ?
-              // If the user is already logged in, 
-              // redirect them to the /user page
-              <Redirect to="/user" />
-              :
+          <Route exact path="/registration">
+            {user.id ? (
+              // If the user is already logged in,
+              // redirect them to the /home page
+              <Redirect to="/action" />
+            ) : (
               // Otherwise, show the registration page
               <RegisterPage />
-            }
+            )}
           </Route>
 
-          <Route
-            exact
-            path="/welcome"
-          >
-            {user.id ?
-              // If the user is already logged in, 
-              // redirect them to the /user page
+          <Route exact path="/welcome">
+            {user.id ? (
+              // If the user is already logged in,
+              // redirect them to the /home page
               <Redirect to="/home" />
-              :
+            ) : (
               // Otherwise, show the WelcomePage
               <WelcomePage />
-            }
+            )}
           </Route>
 
-          <Route
-          exact
-          path="/owner"
-          >
-            <OwnerNodes />
-           </Route>
+          <Route exact path="/action">
+            {user.id ? (
+              // If the user is already logged in,
+              // redirect them to the /home page
+              <Redirect to="/home" />
+            ) : (
+              // Otherwise, show the ActionPage
+              <ActionPage />
+            )}
+          </Route>
 
-           <Route
-          exact
-          path="/usernodes"
-          >
+          <Route exact path="/newcode">
+            {user.id ? (
+              // If the user is already logged in,
+              // redirect them to the /home page
+              <Redirect to="/home" />
+            ) : (
+              // Otherwise, show the ActionPage
+              <ActionPage />
+            )}
+          </Route>
+          <Route exact path="/newnode">
+            {user.id ? (
+              // If the user is already logged in,
+              // redirect them to the /home page
+              <Redirect to="/home" />
+            ) : (
+              // Otherwise, show the ActionPage
+              <ActionPage />
+            )}
+          </Route>
+
+          <Route exact path="/owner">
+            <OwnerNodes />
+          </Route>
+
+          <Route exact path="/usernodes">
             <UserNodes />
-           </Route>
+          </Route>
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>

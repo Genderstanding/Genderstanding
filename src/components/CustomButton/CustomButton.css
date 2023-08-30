@@ -1,6 +1,6 @@
-/* :root {
-  --primary: #fff;
-} */
+:root {
+  --primary: #CF6F5A;
+}
 
 .btn {
   padding: 8px 24px;
@@ -10,7 +10,7 @@
   cursor: pointer;
   font-family: 'mulish';
   font-weight: 800;
-  font-size: 25px;
+  font-size: 24px;
   border-radius: 16px;
   background: #CF6F5A;
   border: 1px solid #bc6551;
@@ -35,12 +35,12 @@
 
 .btn--medium {
   padding: 8px 24px;
-  font-size: 30px;
-}
+  font-size: 24px;
+} 
 
 .btn--large {
   padding: 10px 26px;
-  font-size: 35px;
+  font-size: 24px;
 }
 
 .btn--large:hover,
