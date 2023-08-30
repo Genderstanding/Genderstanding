@@ -40,13 +40,19 @@ function UserPage() {
     setSettingsOpen(false);
   }
 
-  const goToOwnerNodes = (event, nodeId) => {
+  const goToOwnerNodes = async (event, node) => {
     event.preventDefault();
-    dispatch({
-      type: "FETCH_NEW_NODE",
-      payload: nodeId
+    try {
+          dispatch({
+      type: "SET_NEW_NODE",
+      payload: node
     })
+    await new Promise((resolve) => setTimeout(resolve, 2000))
     history.push('/owner');
+    } catch(error) {
+      console.log('Error in obtaining node information on userPage: ', error)
+    }
+
   };
 
   const goToUserNodes = () => {
@@ -70,7 +76,7 @@ function UserPage() {
           {/* map communities you moderate inside these divs*/}
           {allNodes.map(node => {
             return (
-              <div className="moderator-container" onClick={(event)=>goToOwnerNodes(event, node?.id)}>
+              <div className="moderator-container" onClick={(event)=>goToOwnerNodes(event, node)}>
                 <div className='owned-community-names m-4' key={node?.id}>
                   {node?.node_name}
                   {node?.id}

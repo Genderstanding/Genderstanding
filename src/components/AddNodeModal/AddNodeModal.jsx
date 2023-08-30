@@ -24,11 +24,10 @@ const AddNodeModal = ({ addNodeOpen, addNodeClose, children }) => {
 
 
     // function to handle adding a node to database
-    const handleAddNode = async (event) => {
+    const handleAddNode = (event) => {
         event.preventDefault();
     try {
         dispatch({type: 'CREATE_NODE', payload: {name: nodeInput}})
-        await new Promise((resolve) => setTimeout(resolve, 2000))
         history.push(`/owner`)
  } catch (error) {
     console.log('Error in button click to create new node: ', error)
