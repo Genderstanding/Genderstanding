@@ -11,12 +11,12 @@ nodeRouter.get('/', rejectUnauthenticated, (req, res) => {
     // Currently researching SQL query terms needed
     let sqlValue = req.user.id;
     let sqlQuery = `
-    SELECT "node"."id", "node"."node_name", "node_association"."user_id"
+    SELECT "node"."id", "node"."node_name", "node_association"."user_id" AS "node_association_id", "node"."user_id" AS "user_id"
     FROM "node"
     JOIN "node_association" ON "node_association"."node_id" = "node"."id"
     JOIN "user" ON "user"."id" = "node_association"."user_id"
     WHERE "node_association"."user_id" = $1
-    GROUP BY "node"."id", "node"."node_name", "node_association"."user_id"
+    GROUP BY "node"."id", "node"."node_name", "node_association"."user_id", "node"."user_id"
     ORDER BY "id" DESC;`;
     pool.query(sqlQuery, [sqlValue])
         .then(result => {

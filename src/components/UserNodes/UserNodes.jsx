@@ -1,15 +1,21 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import AddQuestionModal from "../AddQuestionModal/AddQuestionModal";
 import './UserNodes.css'
 import ReplyModal from "../ReplyModal/ReplyModal";
+import { useSelector } from "react-redux";
 
 const UserNodes = () => {
     const [addQuestionOpen, setAddQuestionOpen] = useState(false);
     const [addReplyOpen, setAddReplyOpen] = useState(false);
     const [clickedReplyContent, setClickedReplyContent] = useState('');
 
-    const [questionsArray, setQuestionsArray] = useState([
+    // Posts being held in store
+    let nodePosts = useSelector(store => store.postReducer.postDatabaseResponse)
+    let newNode = useSelector(store => store.newNodeReducer.newNodeDatabaseResponse)
+
+
+    const questionsArray = [
         {
             node_id: 1,
             user_id: 123,
@@ -22,7 +28,7 @@ const UserNodes = () => {
             question: "Rainbows are nightmares, as real as death. Rainbows will eat you alive.",
             count: 0,
         },
-    ]);
+    ];
 
     const increaseCount = (nodeId) => {
         const updatedQuestionsArray = questionsArray.map((content) =>
@@ -54,7 +60,7 @@ const UserNodes = () => {
     return (
         <>
             <div className="App flex flex-col h-screen">
-                
+
                 <div className='header-container flex items-center '>
                     <MdChevronLeft size={25} className='ml-2' />
                     <div className="flex-grow"></div>
@@ -63,25 +69,31 @@ const UserNodes = () => {
 
 
                 <div className="thread-container flex flex-col justify-center items-center">
-                {questionsArray.map((content) => (
-                    <div className="question-box mt-4" key={content.node_id}>
-                        <div className="flex justify-between items-end px-4 py-2">
-                            <span className="text-sm">5 minutes ago</span>
-                            
-                        </div>
-                        {/* this should display the latest question/reply in this thread */}
-                        <div className="question-text m-4" >
-                            {content.question}
-                        </div>
-                        <div className="flex justify-between items-end px-4 py-2">
-                            <button className="text-sm" onClick={() => openAddReply(content)}>Reply</button>
-                            <button className="text-sm" onClick={() => increaseCount(content.node_id)}>🖤<span>{content.count || 0}</span></button>
-                       </div>
-                    </div>
-                    ))}
+                    {nodePosts.map(post => {
+                        if (post?.node_id == newNode.id) {
+                            if (post?.reply_id == null) {
+                                return (
+                                    <div className="question-box mt-4" key={post?.id}>
+                                        <div className="flex justify-between items-end px-4 py-2">
+                                            <span className="text-sm">5 minutes ago</span>
+
+                                        </div>
+                                        {/* this should display the latest question/reply in this thread */}
+                                        <div className="question-text m-4" >
+                                            {post?.content}
+                                        </div>
+                                        <div className="flex justify-between items-end px-4 py-2">
+                                            <button className="text-sm" onClick={() => openAddReply(post)}>Reply</button>
+                                            <button className="text-sm" onClick={() => increaseCount(post.id)}>🖤<span>{post.votes || 0}</span></button>
+                                        </div>
+                                    </div>
+                                )
+                            }
+                        }
+                    })}
                 </div>
-            <AddQuestionModal addQuestionOpen={addQuestionOpen} closeAddQuestion={closeAddQuestion}/>
-            <ReplyModal addReplyOpen={addReplyOpen} closeAddReply={closeAddReply} questionObject={clickedReplyContent}/>
+                <AddQuestionModal addQuestionOpen={addQuestionOpen} closeAddQuestion={closeAddQuestion} />
+                <ReplyModal addReplyOpen={addReplyOpen} closeAddReply={closeAddReply} questionObject={clickedReplyContent} />
             </div>
         </>
     );
