@@ -55,8 +55,18 @@ function UserPage() {
 
   };
 
-  const goToUserNodes = () => {
-    history.push('/usernodes');
+  const goToUserNodes = async(event, node) => {
+    event.preventDefault();
+    try {
+      dispatch({
+        type: "SET_NEW_NODE",
+        payload: node
+      })
+      history.push('/usernodes');
+    } catch(error) {
+      console.log('Error in going to user node page: ', error)
+    }
+
   };
 
   return (
@@ -69,20 +79,24 @@ function UserPage() {
         <button className="mr-4 text-2xl" onClick={openAddNode}>+</button>
       </div>
 
-      <div className='userpage-boxes flex flex-col justify-center'>
+      <div className='userpage-boxes flex flex-col justify-center items-center'>
 
         <h2 className='ml-5 mt-4 mb-1'>Communities you created:</h2>
         <div className='moderator-box flex items-center justify-center mb-4'>
           {/* map communities you moderate inside these divs*/}
           {allNodes.map(node => {
-            return (
-              <div className="moderator-container" onClick={(event)=>goToOwnerNodes(event, node)}>
-                <div className='owned-community-names m-4' key={node?.id}>
-                  {node?.node_name}
-                  {node?.id}
+            if(user.id == node?.user_id) {
+              return (
+                <div className="moderator-container" onClick={(event)=>goToOwnerNodes(event, node)}>
+                  <div className='owned-community-names m-4' key={node?.id}>
+                    {node?.node_name}
+                    {node?.id}
+                  </div>
                 </div>
-              </div>
-            )
+              )
+
+            }
+            
           })}
           <div className="moderator-container" onClick={goToOwnerNodes}>
             <div className='owned-community-names m-4'>
@@ -94,11 +108,18 @@ function UserPage() {
         <h2 className='ml-5 mt-4 mb-1'>Communities you're a part of:</h2>
         <div className='part-of-box flex items-center justify-center mb-4'>
           {/* map communities you particpate in in this div*/}
-          <div className='user-container' onClick={goToUserNodes}>
-            <div className='user-community-names m-4'>
-              Why not cheese?
-            </div>
-          </div>
+          {allNodes.map(node => {
+            if(user?.id !== node?.user_id) {
+              return(
+                <div className="moderator-container" onClick={(event)=>goToUserNodes(event, node)}>
+                  <div className='owned-community-names m-4' key={node?.id}>
+                    {node?.node_name}
+                    {node?.id}
+                  </div>
+                </div>
+              )
+            }
+          })}
         </div>
       </div>
 

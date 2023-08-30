@@ -10,9 +10,6 @@ const OwnerNodes = () => {
     let newNode = useSelector(store => store.newNodeReducer.newNodeDatabaseResponse)
     let nodePosts = useSelector(store => store.postReducer.postDatabaseResponse)
 
-console.log('New node set to: ', newNode)
-console.log('the contents of node posts is: ', nodePosts)
-
 
     return (
         <>
