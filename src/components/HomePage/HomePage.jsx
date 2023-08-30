@@ -69,7 +69,7 @@ export default function HomePage() {
               <MdChevronLeft size={35} />
               <div id='slider' className='w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth'>
                 {/* Here is the div where we MAP ya'll */}
-                {listOfNodes.map(node => {
+                {/* {listOfNodes.map(node => {
                   return(
                     <div className="side-scroll-box hover:scale-105 ease-in-out duration 300" key={node?.id}>
                       {checkUserId(node)}
@@ -77,7 +77,14 @@ export default function HomePage() {
                     </div>
 
                   )
-                })}
+                })} */}
+
+                    <div className="side-scroll-box hover:scale-105 ease-in-out duration 300">
+                      
+                    </div>
+                    <div className="side-scroll-box hover:scale-105 ease-in-out duration 300">
+                      
+                    </div>
 
               </div>
               <MdChevronRight size={35} />
