@@ -11,15 +11,6 @@ function* createPost(action) {
     }
 }
 
-// saga to CREATE a reply
-function* createReply(action) {
-    try {
-        yield axios.post('/post/reply', action.payload)
-        yield put({ type: 'FETCH_POST' })
-    } catch (error) {
-        console.log('Error in SAGA POST to posts reply: ', error);
-    }
-}
 
 // saga to GET all posts
 function* fetchPost(action) {

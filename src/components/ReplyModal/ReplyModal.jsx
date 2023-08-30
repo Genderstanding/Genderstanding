@@ -20,7 +20,8 @@ const ReplyModal = ({ addReplyOpen, closeAddReply, questionObject }) => {
                 type: 'CREATE_REPLY', 
                 payload: {
                     content: replyInput,
-                    reply_id: questionObject.id
+                    reply_id: questionObject.id,
+                    orig_post: false
                 }
                 })
         } catch (error) {
