@@ -9,18 +9,25 @@ const UserNodes = () => {
     const [addReplyOpen, setAddReplyOpen] = useState(false);
     const [clickedReplyContent, setClickedReplyContent] = useState('');
 
+
     const questionsArray = [
         {
             node_id: 1,
             user_id: 123,
             question: "Rainbows are visions, but only illusions. Rainbows have nothing to hide.",
+            count: 0,
         },
         {
             node_id: 2,
             user_id: 234,
             question: "Rainbows are nightmares, as real as death. Rainbows will eat you alive.",
+            count: 0,
         },
     ];
+
+    const increaseCount = () => {
+        count + 1;
+    };
 
     const openAddQuestion = () => {
         setAddQuestionOpen(true);
@@ -64,7 +71,7 @@ const UserNodes = () => {
                         </div>
                         <div className="flex justify-between items-end px-4 py-2">
                             <button className="text-sm" onClick={() => openAddReply(content)}>Reply</button>
-                            <button className="text-sm">🖤<span>5</span></button>
+                            <button className="text-sm" onClick={() => increaseCount(content.node_id)}>🖤<span>{content.count || 0}</span></button>
                        </div>
                     </div>
                     ))}
