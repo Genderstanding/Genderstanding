@@ -35,7 +35,8 @@ CREATE TABLE "posts" (
 	"edit" BOOLEAN DEFAULT false,
 	"public" BOOLEAN DEFAULT false,
 	"reported" BOOLEAN DEFAULT false,
-	"votes" INTEGER
+	"votes" INTEGER,
+	"replied" BOOLEAN DEFAULT false
 );
 
 
