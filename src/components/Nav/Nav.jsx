@@ -44,7 +44,7 @@ export default function Nav() {
 
       {/* If a user is logged in, show these links */}
       {user.id && (
-        <div className="toolbar-container flex items-center">
+        <div className="flex items-center toolbar-container">
           <Link className="navLink" to="/home">
             {/* Link this to home page */}
             <button className="flex flex-col items-center justify-center flex-grow px-4 py-2">
@@ -72,10 +72,11 @@ export default function Nav() {
 
           {/* Settings Modal */}
             <button
-              className="flex flex-col items-center justify-center flex-grow px-4 py-2"
+           style={{color: "#7C7C7C"}}
+              className="flex flex-col items-center justify-center flex-grow px-4 py-2 navLinkSetting"
               onClick={openSettings}
             >
-              <FiSettings size={32} />
+              <FiSettings className="navLinkSetting"  size={32} />
               <span>Settings</span>
             </button>
             <SettingsModal
