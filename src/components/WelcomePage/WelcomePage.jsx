@@ -11,16 +11,16 @@ export default function WelcomePage() {
     <div className="flex items-center logo-container "> <Typography
           variant="h3"
           sx={{
-            fontSize: "34px",
+            fontSize: "40px",
             fontWeight: 900,
-            fontFamily:"mulish",
+            fontFamily:"ADLaM Display",
             color: "#fff",
             margin: "auto",
             textShadow: "0px 2px 4px rgba(0, 0, 0, 1)",
             letterSpacing:"3px"
           }}
         >
-          Genderstanding
+          GenderStanding
         </Typography></div>
    
       <div
