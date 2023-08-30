@@ -27,16 +27,9 @@ const AddNodeModal = ({ addNodeOpen, addNodeClose, children }) => {
     const handleAddNode = async (event) => {
         event.preventDefault();
     try {
-        dispatch({
-            type: 'CREATE_NODE',
-            payload: {
-                name: nodeInput
-            }
-        })
-    await new Promise((resolve) => setTimeout(resolve, 2000))
-
-    history.push(`/owner`)
-
+        dispatch({type: 'CREATE_NODE', payload: {name: nodeInput}})
+        await new Promise((resolve) => setTimeout(resolve, 2000))
+        history.push(`/owner`)
  } catch (error) {
     console.log('Error in button click to create new node: ', error)
  }

@@ -16,8 +16,12 @@ function UserPage() {
   const history = useHistory();
   // sourcing dispatch to use calls
   const dispatch = useDispatch();
-  // sourcing use selector to hold store information
+  // sourcing use selector to hold newest node store information
   let newNode = useSelector(store => store.newNodeReducer.newNodeDatabaseResponse)
+  // sourcing use selector to hold all node store information
+  let allNodes = useSelector(store => store.nodeReducer.nodeDatabaseResponse)
+
+  console.log('nodes are in: ', allNodes);
 
 
   const openAddNode = () => {
@@ -36,7 +40,12 @@ function UserPage() {
     setSettingsOpen(false);
   }
 
-  const goToOwnerNodes = () => {
+  const goToOwnerNodes = (event, nodeId) => {
+    event.preventDefault();
+    dispatch({
+      type: "FETCH_NEW_NODE",
+      payload: nodeId
+    })
     history.push('/owner');
   };
 
@@ -59,6 +68,16 @@ function UserPage() {
         <h2 className='ml-5 mt-4 mb-1'>Communities you created:</h2>
         <div className='moderator-box flex items-center justify-center mb-4'>
           {/* map communities you moderate inside these divs*/}
+          {allNodes.map(node => {
+            return (
+              <div className="moderator-container" onClick={(event)=>goToOwnerNodes(event, node?.id)}>
+                <div className='owned-community-names m-4' key={node?.id}>
+                  {node?.node_name}
+                  {node?.id}
+                </div>
+              </div>
+            )
+          })}
           <div className="moderator-container" onClick={goToOwnerNodes}>
             <div className='owned-community-names m-4'>
               What's New?
