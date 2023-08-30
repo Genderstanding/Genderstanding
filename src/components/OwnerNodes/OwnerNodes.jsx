@@ -10,7 +10,7 @@ const OwnerNodes = () => {
     let newNode = useSelector(store => store.newNodeReducer.newNodeDatabaseResponse)
     let nodePosts = useSelector(store => store.postReducer.postDatabaseResponse)
 
-
+console.log('New node set to: ', newNode)
 console.log('the contents of node posts is: ', nodePosts)
 
 
@@ -20,14 +20,14 @@ console.log('the contents of node posts is: ', nodePosts)
                 <div className='header-container flex items-center '>
                     <MdChevronLeft size={25} className='ml-2' />
                     {/* this flex-grow div is tailwind way to spread out the back and add buttons*/}
-                    <div className="flex-grow">{newNode?.[0].node_name}</div>
+                    <div className="flex-grow">{newNode?.[0]?.node_name}</div>
                     <button className="mr-4 text-2xl">🙋‍♀️</button>
                 </div>
 
 
                 <div className="thread-container flex justify-center">
-                    {/* {nodePosts.map(post => {
-                        if (post?.node_id == newNode?.[0]?.node_id) {
+                    {nodePosts.map(post => {
+                        if (post?.node_id == 2) {
                             return (
                                 <div className="question-box mt-4">
                                     <div className="flex justify-between items-end px-4 py-2">
@@ -44,7 +44,7 @@ console.log('the contents of node posts is: ', nodePosts)
                                 </div>
                             )
                         }
-                    })} */}
+                    })}
                     <div className="question-box mt-4">
                         <div className="flex justify-between items-end px-4 py-2">
                             <span className="text-sm">5 minutes ago</span>
