@@ -82,12 +82,12 @@ function UserPage() {
       <div className='userpage-boxes flex flex-col justify-center items-center'>
 
         <h2 className='ml-5 mt-4 mb-1'>Communities you created:</h2>
-        <div className='moderator-box flex items-center justify-center mb-4'>
+        <div className='moderator-box flex flex-col items-center justify-center mb-4'>
           {/* map communities you moderate inside these divs*/}
           {allNodes.map(node => {
             if(user.id == node?.user_id) {
               return (
-                <div className="moderator-container" onClick={(event)=>goToOwnerNodes(event, node)}>
+                <div className="moderator-container m-4" onClick={(event)=>goToOwnerNodes(event, node)}>
                   <div className='owned-community-names m-4' key={node?.id}>
                     {node?.node_name}
                     {node?.id}
@@ -98,7 +98,7 @@ function UserPage() {
             }
             
           })}
-          <div className="moderator-container" onClick={goToOwnerNodes}>
+          <div className="moderator-container m-4" onClick={goToOwnerNodes}>
             <div className='owned-community-names m-4'>
               What's New?
             </div>
@@ -106,12 +106,12 @@ function UserPage() {
         </div>
 
         <h2 className='ml-5 mt-4 mb-1'>Communities you're a part of:</h2>
-        <div className='part-of-box flex items-center justify-center mb-4'>
+        <div className='part-of-box flex flex-col items-center justify-center mb-4'>
           {/* map communities you particpate in in this div*/}
           {allNodes.map(node => {
             if(user?.id !== node?.user_id) {
               return(
-                <div className="moderator-container" onClick={(event)=>goToUserNodes(event, node)}>
+                <div className="moderator-container m-4" onClick={(event)=>goToUserNodes(event, node)}>
                   <div className='owned-community-names m-4' key={node?.id}>
                     {node?.node_name}
                     {node?.id}
@@ -120,6 +120,7 @@ function UserPage() {
               )
             }
           })}
+          
         </div>
       </div>
 
