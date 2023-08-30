@@ -1,4 +1,4 @@
-/* addQuestionModal.css */
+/* ReplyModal.css */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -11,15 +11,15 @@
     align-items: center;
   }
 
-  .ask-question-box {
+  .reply-box {
     border-radius: 10px;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
     text-align: center;
     width: 90vw;
-    min-height: 50vh;
+    min-height: 90vh;
     background-color: white;
   }
-  .question-textarea {
+  .reply-textarea {
     border-radius: 10px;
     width: 80vw;
     border: 1px solid black;
