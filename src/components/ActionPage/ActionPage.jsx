@@ -39,7 +39,7 @@ export default function ActionPage() {
           </CustomButton>
           <CustomButton
             className="btn"
-            path="/"
+            path="/home"
           >
             Just Browsing
           </CustomButton>

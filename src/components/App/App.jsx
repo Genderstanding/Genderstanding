@@ -70,6 +70,14 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
+            // logged in shows ActionPage else shows LoginPage
+            exact
+            path="/action"
+          >
+            <ActionPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
             // logged in shows HomePage else shows LoginPage
             exact
             path="/home"
@@ -128,7 +136,7 @@ function App() {
             {user.id ? (
               // If the user is already logged in,
               // redirect them to the /home page
-              <Redirect to="/action" />
+              <Redirect to="/home" />
             ) : (
               // Otherwise, show the ActionPage
               <ActionPage />

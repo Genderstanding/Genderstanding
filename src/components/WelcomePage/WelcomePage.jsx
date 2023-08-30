@@ -20,7 +20,7 @@ export default function WelcomePage() {
             letterSpacing:"3px"
           }}
         >
-          GENDERSTANDING
+          Genderstanding
         </Typography></div>
    
       <div

@@ -10,6 +10,7 @@ function RegisterForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const errors = useSelector((store) => store.errors);
+  const user = useSelector(store => store.user)
   const dispatch = useDispatch();
   const history = useHistory()
 
