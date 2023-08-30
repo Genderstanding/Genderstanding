@@ -1,10 +1,13 @@
 import React from "react";
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
+import { useSelector } from "react-redux";
 
 import './OwnerNodes.css'
 
 const OwnerNodes = () => {
 
+    // sourcing use selector to hold store information
+    let newNode = useSelector(store => store.newNodeReducer.newNodeDatabaseResponse)
 
 
     return (
@@ -13,7 +16,7 @@ const OwnerNodes = () => {
                 <div className='header-container flex items-center '>
                     <MdChevronLeft size={25} className='ml-2' />
                     {/* this flex-grow div is tailwind way to spread out the back and add buttons*/}
-                    <div className="flex-grow"></div>
+                    <div className="flex-grow">{newNode?.[0].node_name}</div>
                     <button className="mr-4 text-2xl">🙋‍♀️</button>
                 </div>
 

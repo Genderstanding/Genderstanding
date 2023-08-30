@@ -35,7 +35,7 @@ const AddNodeModal = ({ addNodeOpen, addNodeClose, children }) => {
         })
     await new Promise((resolve) => setTimeout(resolve, 2000))
 
-    history.push(`/owner/${newNode?.[0]?.id}`)
+    history.push(`/owner`)
 
  } catch (error) {
     console.log('Error in button click to create new node: ', error)
