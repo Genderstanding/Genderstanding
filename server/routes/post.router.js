@@ -40,7 +40,7 @@ postRouter.post('/', rejectUnauthenticated, (req, res) => {
     ]
     let sqlQuery = `
     INSERT INTO "posts" ("user_id", "content", "node_id", "orig_post", "reply_id", "post_time")
-    VALUES ($1, $2, $3, $4, $5, current_date);
+    VALUES ($1, $2, $3, $4, $5, current_timestamp);
     `;
     pool.query(sqlQuery, [sqlValues])
         .then(result => {
@@ -52,6 +52,7 @@ postRouter.post('/', rejectUnauthenticated, (req, res) => {
             res.sendStatus(500);
         })
 })
+
 
 // PUT route if user updates content information
 postRouter.put('/:id', rejectUnauthenticated, (req, res) => {
