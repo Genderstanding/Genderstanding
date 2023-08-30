@@ -9,8 +9,7 @@ const UserNodes = () => {
     const [addReplyOpen, setAddReplyOpen] = useState(false);
     const [clickedReplyContent, setClickedReplyContent] = useState('');
 
-
-    const questionsArray = [
+    const [questionsArray, setQuestionsArray] = useState([
         {
             node_id: 1,
             user_id: 123,
@@ -23,10 +22,15 @@ const UserNodes = () => {
             question: "Rainbows are nightmares, as real as death. Rainbows will eat you alive.",
             count: 0,
         },
-    ];
+    ]);
 
-    const increaseCount = () => {
-        count + 1;
+    const increaseCount = (nodeId) => {
+        const updatedQuestionsArray = questionsArray.map((content) =>
+        content.node_id === nodeId
+        ? { ...content, count: content.count + 1 }
+        : content
+        );
+        setQuestionsArray(updatedQuestionsArray);
     };
 
     const openAddQuestion = () => {
