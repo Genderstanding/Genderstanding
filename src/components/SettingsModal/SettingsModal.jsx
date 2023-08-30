@@ -26,7 +26,7 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
 
     return (
         <div className='modal-overlay'>
-            <div className='settings-modal mt-24'>
+            <div className='mt-15 settings-modal'>
                 {children}
                 <div className="flex flex-col">
                     {/* onClick Link to login */}
@@ -36,19 +36,19 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
                 <div className='flex flex-col'>
                     <span className='mb-2'>Join Node</span>
                     <div>
-                        <input type='text' placeholder='enter code' className='mr-2' />
+                        <input style={{textAlign:"center"}} type='text' placeholder='enter code' className='ml-4' />
                         <button>☑️</button>
                     </div><br />
                     <span className='mb-2'>Theme</span>
                     <div className="flex justify-between">
-                        <button className='ml-10'>☼</button>
-                        <button className='mr-10'>☾</button>
+                        <button className='ml-20'>☼</button>
+                        <button className='mr-20'>☾</button>
                     </div><br />
                     <div className="flex flex-col gap-2">
-                        <button className="underline">Remove Node</button>
-                        <button className="underline" onClick={openDeleteConfirmation}>Delete Account</button>
+                        <button className="mt-2 underline ">Remove Node</button>
+                        <button className="mt-2 underline" onClick={openDeleteConfirmation}>Delete Account</button>
                     </div><br />
-                    <button className='mt-6 underline' onClick={closeSettings}>
+                    <button className='mt-4 underline' onClick={closeSettings}>
                         Close
                     </button>
 
