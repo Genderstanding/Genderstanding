@@ -1,3 +1,12 @@
+.nav {
+  /* flex box layout */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 0;
+  overflow: hidden; 
+}
+
 .nav-container {
   position: fixed;
   bottom: 0; /* Make this at the bottom */
@@ -8,16 +17,10 @@
   overflow: hidden;
   border: .5px solid #7C7C7C;
   width: 100%;
+ 
 }
 
-.nav {
-  /* flex box layout */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0 0 0;
-  overflow: hidden;
-}
+
 
 .nav a {
   text-decoration: none;
