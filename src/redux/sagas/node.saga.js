@@ -6,10 +6,11 @@ function* createNode(action) {
     try {
 
         const nodePostResponse = axios.post('/node', action.payload)
-        yield put({ type: 'FETCH_NEW_NODE', payload: nodePostResponse })
+      
         yield put({ type: 'FETCH_NODE' })
-    
 
+        yield put({ type: 'FETCH_NEW_NODE', payload: nodePostResponse })
+    
     } catch (error) {
 
         console.log('Error in SAGA POST to nodes: ', error)
