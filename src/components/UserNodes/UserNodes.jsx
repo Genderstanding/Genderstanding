@@ -64,7 +64,7 @@ const UserNodes = () => {
                 <div className='header-container flex items-center '>
                     <MdChevronLeft size={25} className='ml-2' />
                     <div className="flex-grow"></div>
-                    <button className="mr-4 text-2xl" onClick={openAddQuestion}>?</button>
+                    <button className="mr-4 text-2xl" onClick={()=>openAddQuestion(newNode?.id)}>?</button>
                 </div>
 
 

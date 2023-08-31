@@ -83,7 +83,6 @@ function* postSaga() {
     yield takeLatest('LIKE_POST', likePost)
     yield takeLatest('REPORT_POST', reportPost);
     yield takeLatest('PROMOTE_POST', promotePost);
-    yield takeLatest('CREATE_REPLY', createReply);
 }
 
 export default postSaga;
