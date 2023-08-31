@@ -31,6 +31,7 @@ postRouter.get('/', rejectUnauthenticated, (req, res) => {
 postRouter.post('/', rejectUnauthenticated, (req, res) => {
     let sqlUserId = req.user.id;
     let sqlParams = req.body;
+    console.log('sqlParams are: ', sqlParams)
     let sqlValues = [
         sqlUserId,
         sqlParams.content,
@@ -42,7 +43,7 @@ postRouter.post('/', rejectUnauthenticated, (req, res) => {
     INSERT INTO "posts" ("user_id", "content", "node_id", "orig_post", "reply_id", "post_time")
     VALUES ($1, $2, $3, $4, $5, current_timestamp);
     `;
-    pool.query(sqlQuery, [sqlValues])
+    pool.query(sqlQuery, [sqlUserId, sqlParams.content, sqlParams.node_id, sqlParams.orig_post, sqlParams.reply_id])
         .then(result => {
             console.log('Created a new post in database: ', result);
             res.sendStatus(201);
