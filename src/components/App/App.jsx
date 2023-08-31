@@ -4,6 +4,7 @@ import {
   Redirect,
   Route,
   Switch,
+
 } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -24,10 +25,11 @@ import FeaturedPage from "../FeaturedPage/FeaturedPage";
 import SettingsModal from "../SettingsModal/SettingsModal";
 import OwnerNodes from "../OwnerNodes/OwnerNodes";
 import UserNodes from "../UserNodes/UserNodes";
+import HeaderBar from "../HeaderBar/HeaderBar";
 
 function App() {
   const dispatch = useDispatch();
-
+  // const location = useLocation();
   const user = useSelector((store) => store.user);
 
   useEffect(() => {
@@ -40,11 +42,20 @@ function App() {
     dispatch({ type: "FETCH_NODE_ASSOCIATION" });
   }, []);
 
+  // const currentPath = window.location.pathname; // Get the current path
+
   return (
     <Router>
       <div>
-        <Nav />
-        <Switch>
+       
+  <Nav/>
+
+
+          {/* Conditional rendering of the Nav component */}
+          {/* {currentPath !== "/action" && <Nav />} */}
+
+        <Switch> 
+        
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/welcome" />
 
@@ -62,6 +73,13 @@ function App() {
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
           <ProtectedRoute
+            // logged in shows HomePage else shows LoginPage
+            exact
+            path="/home"
+          >
+            <HomePage />
+          </ProtectedRoute>
+          <ProtectedRoute
             // logged in shows UserPage else shows LoginPage
             exact
             path="/user"
@@ -78,32 +96,26 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows HomePage else shows LoginPage
-            exact
-            path="/home"
-          >
-            <HomePage />
-          </ProtectedRoute>
-          <ProtectedRoute
             // logged in shows FeaturedPage else shows LoginPage
             exact
             path="/featured"
           >
             <FeaturedPage />
           </ProtectedRoute>
-          <ProtectedRoute
+
+          {/* <ProtectedRoute
             // logged in shows Setting else shows LoginPage
             exact
             path="/setting"
           >
             <SettingsModal />
-          </ProtectedRoute>
+          </ProtectedRoute> */}
 
           <Route exact path="/login">
             {user.id ? (
               // If the user is already logged in,
-              // redirect to the /user page
-              <Redirect to="/user" />
+              // redirect to the /home page
+              <Redirect to="/home" />
             ) : (
               // Otherwise, show the login page
               <LoginPage />
@@ -147,7 +159,7 @@ function App() {
             {user.id ? (
               // If the user is already logged in,
               // redirect them to the /home page
-              <Redirect to="/home" />
+              <Redirect to="/user" />
             ) : (
               // Otherwise, show the ActionPage
               <ActionPage />
@@ -157,7 +169,7 @@ function App() {
             {user.id ? (
               // If the user is already logged in,
               // redirect them to the /home page
-              <Redirect to="/home" />
+              <Redirect to="/owner" />
             ) : (
               // Otherwise, show the ActionPage
               <ActionPage />
@@ -177,7 +189,7 @@ function App() {
             <h1>404</h1>
           </Route>
         </Switch>
-        {/* <Footer /> */}
+
       </div>
     </Router>
   );

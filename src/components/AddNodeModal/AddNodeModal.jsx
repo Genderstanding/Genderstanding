@@ -36,17 +36,17 @@ const AddNodeModal = ({ addNodeOpen, addNodeClose, children }) => {
 }
 
     return (
-        <div className='modal-overlay flex justify-center items-center'>
-            <div className='add-node-modal flex flex-col justify-center items-center'>
+        <div className='flex items-center justify-center modal-overlay'>
+            <div className='flex flex-col items-center justify-center add-node-modal'>
                 {children}
-                <h2 className='text-xl font-bold mb-4 mr-4'>Create Community</h2>
+                <h2 className='mb-4 mr-4 text-xl font-bold'>Create Community</h2>
                 <input type='text' 
                 placeholder='add name' 
                 className='border-b border-black'
                 onChange={(event) => setNodeInput(event.target.value)}
                 />
-                <div className='buttons-containter mt-6'>
-                    <button className='underline mr-6' onClick={handleAddNode}>Confirm</button>
+                <div className='mt-6 buttons-container'>
+                    <button className='mr-6 underline' onClick={handleAddNode}>Confirm</button>
                     
                     <button className='underline ' onClick={addNodeClose}>
                         Close

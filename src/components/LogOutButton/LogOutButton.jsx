@@ -12,6 +12,8 @@ const history = useHistory();
     dispatch({ type: 'LOGOUT' })
     // direct to login page
     history.push('/login')
+    // close setting modal
+    props.onCloseSettings();
   }
   return (
     <button
