@@ -1,29 +1,41 @@
 import React from "react";
-import '../InviteNodeModal/InviteNodeModal.css'
-import { useState } from "react";
+import "../InviteNodeModal/InviteNodeModal.css";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-export const InviteNodeModal = ({
-  InviteCodeOpen,
-  InviteCodeClose,
-  children,
-}) => {
+const InviteNodeModal = ({ InviteCodeOpen, InviteCodeClose, children }) => {
+  const dispatch = useDispatch();
+  const [nodeId, setNodeId] = useState();
+  // store invite code
+  let inviteCode = useSelector((store) => store.inviteCodeReducer);
+  // store owner's node information
+  let ownerNode = useSelector(
+    (store) => store.newNodeReducer.newNodeDatabaseResponse
+  );
+
+  // modal setting
   if (!InviteCodeOpen) {
     return null;
   }
-  // sourcing dispatch to use calls
-  const dispatch = useDispatch();
-  // sourcing use selector to hold store information
-  let newCode = useSelector((store) => store.newCodeReducer);
 
-  // function to handle posting and getting code from database
-  const handleGenerateCode = () => {
+  console.log(inviteCode, "invite code in CLIENT");
+
+  // function to handle posting code to database
+  const handleGenerateCode = (ownerNodeId) => {
     try {
-      dispatch({ type: "GENERATE_CODE" });
+      // set and send ownerNodeId to database
+      dispatch({ type: "GENERATE_INVITE_CODE", payload: ownerNodeId });
+      setNodeId(ownerNodeId);
+      console.log('nodeid', ownerNodeId)
     } catch (error) {
       console.log("Error in button click to generate new node: ", error);
     }
   };
+
+    // // display code from database
+    // useEffect(() => {
+    //  dispatch({type:"FETCH_INVITE_CODE"})
+    // }, [])
 
   return (
     <div className="flex items-center justify-center modal-overlay">
@@ -31,10 +43,14 @@ export const InviteNodeModal = ({
         {children}
         <h2 className="mb-4 mr-4 text-xl font-bold">Generate Invite Code</h2>
         <div className="mt-6 buttons-container">
-          <button className="mr-6 underline" onClick={handleGenerateCode}>
+          <button
+            className="mr-6 underline"
+            onClick={() => handleGenerateCode(ownerNode.id)}
+          >
             Generate
           </button>
-          <div>{newCode}</div>
+          <p>{ownerNode.id}</p>
+          <p>{inviteCode?.[0]}</p>
           <button className="underline " onClick={InviteCodeClose}>
             Close
           </button>
@@ -43,3 +59,5 @@ export const InviteNodeModal = ({
     </div>
   );
 };
+
+export default InviteNodeModal;
