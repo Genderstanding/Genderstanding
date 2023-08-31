@@ -7,20 +7,20 @@ const ReplyModal = ({ addReplyOpen, closeAddReply, questionObject }) => {
     }
 
     return (
-        <div className='modal-overlay flex justify-center items-center'>
-            <div className='reply-box flex flex-col justify-center items-center'>
+        <div className='flex items-center justify-center modal-overlay'>
+            <div className='flex flex-col items-center justify-center reply-box'>
                 {/* {children} */}
-                <h2 className='text-xl font-bold mb-4 mr-4'>Thread</h2>
-                <div className="question-text m-4">
+                <h2 className='mb-4 mr-4 text-xl font-bold'>Thread</h2>
+                <div className="m-4 question-text">
                     {questionObject.question}
                 </div>
                 <textarea
                     rows="4"
-                    className='reply-textarea w-full px-4 py-2 text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400'
+                    className='w-full px-4 py-2 text-sm text-gray-900 bg-white border-0 reply-textarea dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400'
                     placeholder="Write a Reply..." required>
                  </textarea>
-                <div className='buttons-containter mt-6'>
-                    <button className='underline mr-6'>Confirm</button>
+                <div className='mt-6 buttons-container'>
+                    <button className='mr-6 underline'>Confirm</button>
 
                     <button className='underline ' onClick={closeAddReply}>
                         Close

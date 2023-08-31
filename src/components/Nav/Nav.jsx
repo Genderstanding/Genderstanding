@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import LogOutButton from "../LogOutButton/LogOutButton";
 import "./Nav.css";
 import { useSelector } from "react-redux";
 import { useState } from "react";
@@ -64,7 +63,7 @@ export default function Nav() {
 
           {/* Link this to the Featured page */}
           <Link className="navLink" to="/featured">
-            <button className="flex flex-col items-center justify-center flex-grow px-4 py-2">
+            <button className="flex flex-col items-center justify-center flex-grow px-4 py-2 ">
             <PeopleOutlineSharpIcon sx={{fontSize:"32px"}}/>
               <span>Featured</span>
             </button>

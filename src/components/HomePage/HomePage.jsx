@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./HomePage.css";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
-import { useSelector } from "react-redux";
-import SVG from "../SVG/SVG";
+import { useDispatch, useSelector } from "react-redux";
+
 import HeaderBar from "../HeaderBar/HeaderBar";
 
 export default function HomePage() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
-
+const dispatch = useDispatch()
   // store that holds all of nodes
   let listOfNodes = useSelector(
     (store) => store.nodeReducer.nodeDatabaseResponse
@@ -17,13 +17,17 @@ export default function HomePage() {
   let yourContent;
   const checkUserId = (node) => {
     if (node?.user_id == user.id) {
-      yourContent = "Your node";
+      yourContent = "Your node: ";
     }
     return yourContent;
   };
 
   console.log("the current list of nodes: ", listOfNodes);
 
+  useEffect(() => {
+    dispatch({ type: "FETCH_NODE" });
+  }, [])
+  
   return (
     <>
       <div className="flex flex-col h-screen App">
@@ -41,17 +45,16 @@ export default function HomePage() {
                 className="w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth"
               >
                 {/* Here is the div where we MAP ya'll */}
-                {/* {listOfNodes.map(node => {
+                {listOfNodes.map(node => {
                   return(
                     <div className="ease-in-out side-scroll-box hover:scale-105 duration 300" key={node?.id}>
                       {checkUserId(node)}
+                      <br/>
                       {node?.node_name}
                     </div>
                   )
-                })} */}
+                })}
 
-                <div className="ease-in-out side-scroll-box hover:scale-105 duration 300"></div>
-                <div className="ease-in-out side-scroll-box hover:scale-105 duration 300"></div>
               </div>
               <MdChevronRight size={35} />
             </div>

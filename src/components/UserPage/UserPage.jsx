@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import "./UserPage.css";
 import HeaderBar from "../HeaderBar/HeaderBar";
 
+
 function UserPage() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
@@ -64,18 +65,19 @@ function UserPage() {
   };
 
   return (
-    <div className="flex flex-col h-screen userpage-container">
-    <HeaderBar/>
+    <>
+   <div className="flex flex-col h-screen userpage-container">
+<HeaderBar/>
 
-      <div className="flex flex-col items-center justify-center userpage-boxes">
-        <h2 className="mt-4 mb-1 ml-5">Communities you created:</h2>
-        <div className="flex flex-col items-center justify-center mb-4 moderator-box">
+      <div className="flex flex-col items-center justify-center userpage-boxes ">
+        <h2 className="mt-4 mb-1 ml-5 ">Communities you created:</h2>
+        <div className="flex flex-col items-center justify-center mb-4 owner-box ">
           {/* map communities you moderate inside these divs*/}
           {allNodes.map((node) => {
             if (user.id == node?.user_id) {
               return (
                 <div
-                  className="m-4 moderator-container"
+                  className="m-4 owner-container"
                   onClick={(event) => goToOwnerNodes(event, node)}
                 >
                   <div className="m-4 owned-community-names" key={node?.id}>
@@ -86,19 +88,24 @@ function UserPage() {
               );
             }
           })}
-          <div className="m-4 moderator-container" onClick={goToOwnerNodes}>
-            <div className="m-4 owned-community-names">What's New?</div>
+          <div className="m-4 owner-container" onClick={goToOwnerNodes}>
+            <div className="m-4 owned-community-names">(test data) What's New?</div>
           </div>
         </div>
 
         <h2 className="mt-4 mb-1 ml-5">Communities you're a part of:</h2>
         <div className="flex flex-col items-center justify-center mb-4 part-of-box">
+          {/* TEST DATA */}
+        <div className="m-4 user-container" onClick={goToOwnerNodes}>
+        <div className="m-4 notowned-community-names">(test data) Not Much, You?</div> </div>    
+    
+        
           {/* map communities you particpate in in this div*/}
           {allNodes.map((node) => {
             if (user?.id !== node?.user_id) {
               return (
                 <div
-                  className="m-4 moderator-container"
+                  className="m-4 user-container overflow-y-scroll ..."
                   onClick={(event) => goToUserNodes(event, node)}
                 >
                   <div className="m-4 owned-community-names" key={node?.id}>
@@ -112,6 +119,7 @@ function UserPage() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 
