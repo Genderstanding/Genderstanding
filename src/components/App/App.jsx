@@ -159,7 +159,7 @@ function App() {
             {user.id ? (
               // If the user is already logged in,
               // redirect them to the /home page
-              <Redirect to="/newcode" />
+              <Redirect to="/user" />
             ) : (
               // Otherwise, show the ActionPage
               <ActionPage />
@@ -169,7 +169,7 @@ function App() {
             {user.id ? (
               // If the user is already logged in,
               // redirect them to the /home page
-              <Redirect to="/newnode" />
+              <Redirect to="/owner" />
             ) : (
               // Otherwise, show the ActionPage
               <ActionPage />

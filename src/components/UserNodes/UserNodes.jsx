@@ -59,30 +59,30 @@ const UserNodes = () => {
 
     return (
         <>
-            <div className="App flex flex-col h-screen">
+            <div className="flex flex-col h-screen">
 
-                <div className='header-container flex items-center '>
+                <div className='flex items-center header-container '>
                     <MdChevronLeft size={25} className='ml-2' />
                     <div className="flex-grow"></div>
                     <button className="mr-4 text-2xl" onClick={openAddQuestion}>?</button>
                 </div>
 
 
-                <div className="thread-container flex flex-col justify-center items-center">
+                <div className="flex flex-col items-center justify-center thread-container">
                     {nodePosts.map(post => {
                         if (post?.node_id == newNode.id) {
                             if (post?.reply_id == null) {
                                 return (
-                                    <div className="question-box mt-4" key={post?.id}>
-                                        <div className="flex justify-between items-end px-4 py-2">
+                                    <div className="mt-4 question-box" key={post?.id}>
+                                        <div className="flex items-end justify-between px-4 py-2">
                                             <span className="text-sm">5 minutes ago</span>
 
                                         </div>
                                         {/* this should display the latest question/reply in this thread */}
-                                        <div className="question-text m-4" >
+                                        <div className="m-4 question-text" >
                                             {post?.content}
                                         </div>
-                                        <div className="flex justify-between items-end px-4 py-2">
+                                        <div className="flex items-end justify-between px-4 py-2">
                                             <button className="text-sm" onClick={() => openAddReply(post)}>Reply</button>
                                             <button className="text-sm" onClick={() => increaseCount(post.id)}>🖤<span>{post.votes || 0}</span></button>
                                         </div>
