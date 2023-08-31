@@ -16,7 +16,8 @@ postRouter.get('/', rejectUnauthenticated, (req, res) => {
     JOIN "node_association" ON "node_association"."node_id" = "node"."id"
     JOIN "user" ON "user"."id" = "node_association"."user_id"
     WHERE "node_association"."user_id" = $1
-    GROUP BY "posts"."id", "posts"."user_id", "posts"."content", "posts"."node_id", "node"."node_name", "posts"."orig_post", "posts"."reply_id", "posts"."post_time", "posts"."edit", "posts"."public", "posts"."reported", "posts"."votes";`;
+    GROUP BY "posts"."id", "posts"."user_id", "posts"."content", "posts"."node_id", "node"."node_name", "posts"."orig_post", "posts"."reply_id", "posts"."post_time", "posts"."edit", "posts"."public", "posts"."reported", "posts"."votes"
+    ORDER BY "posts"."id" DESC;`;
     pool.query(sqlQuery, [sqlValue])
         .then( result => {
             res.send(result.rows);
