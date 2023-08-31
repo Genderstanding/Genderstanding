@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../HomePage/HomePage.css";
-import InviteNodeModal from "../InviteNodeModal/InviteNodeModal";
+import { InviteNodeModal } from "../InviteNodeModal/InviteNodeModal";
 import SettingsModal from "../SettingsModal/SettingsModal";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import { useSelector } from "react-redux";
