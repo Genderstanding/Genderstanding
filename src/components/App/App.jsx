@@ -43,7 +43,7 @@ function App() {
     dispatch({ type: 'FETCH_CURRENT_NODE'});
   }, []);
 
-  // const currentPath = window.location.pathname; // Get the current path
+  // TO DO: PROTECTEDROUTE 
 
   return (
     <Router>
@@ -102,6 +102,34 @@ function App() {
             path="/featured"
           >
             <FeaturedPage />
+          </ProtectedRoute>
+          <ProtectedRoute
+            // logged in shows OnwerNode else shows LoginPage
+            exact
+            path="/owner"
+          >
+            <OwnerNodes />
+          </ProtectedRoute>
+          <ProtectedRoute
+            // logged in shows HomePage else shows LoginPage
+            exact
+            path="/usernodes"
+          >
+            <UserNodes />
+          </ProtectedRoute>
+          <ProtectedRoute
+            // logged in shows HomePage else shows LoginPage
+            exact
+            path="/newcode"
+          >
+            <ActionPage />
+          </ProtectedRoute>
+          <ProtectedRoute
+            // logged in shows HomePage else shows LoginPage
+            exact
+            path="/newnode"
+          >
+            <ActionPage />
           </ProtectedRoute>
 
           {/* <ProtectedRoute

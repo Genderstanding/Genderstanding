@@ -11,12 +11,11 @@ export const InviteNodeModal = ({
   if (!InviteCodeOpen) {
     return null;
   }
-
+  const [nodeId, setNodeId] = useState();
   const dispatch = useDispatch();
   const [isCodeCopied, setIsCodeCopied] = useState(false);
-
   // store invite code
-  let inviteCode = useSelector((store) => store.inviteCodeReducer);
+  let inviteCode = useSelector((store) => store.invitecodeReducer);
   // store owner's node information
   let ownerNode = useSelector(
     (store) => store.newNodeReducer.newNodeDatabaseResponse
@@ -32,10 +31,12 @@ export const InviteNodeModal = ({
   };
 
   // function to handle posting and getting code from database
-  const handleGenerateCode = () => {
+  const handleGenerateCode = (e, nodeID) => {
+    e.preventDefault()
     try { 
+      setNodeId(nodeID)
       setIsCodeCopied(false);
-      dispatch({type: "FETCH_INVITE_CODE"})
+      dispatch({type: "GENERATE_INVITE_CODE", payload: nodeID})
     } catch (error) {
       console.log("Error in button click to generate new node: ", error);
     }
@@ -48,7 +49,7 @@ export const InviteNodeModal = ({
         {children}
         <h2 className="mb-4 mr-4 text-xl font-bold">Generate Invite Code</h2>
         <div className="code-container">
-          <span className="code-text">{inviteCode}</span>
+          <span className="code-text">{!inviteCode.length > 0 ? "" : inviteCode}</span>
           <button className="ml-4 copy-code-button" onClick={copyCode}>
             {isCodeCopied ? "Code Copied!" : "Copy Code"}
           </button>
@@ -56,7 +57,7 @@ export const InviteNodeModal = ({
         <div className="flex mt-6 buttons-container">
           <button
             className="mr-6 underline"
-            onClick={handleGenerateCode}
+            onClick={(e) => handleGenerateCode(e, ownerNode.id)}
           >
             Generate
           </button>
