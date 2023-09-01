@@ -34,6 +34,7 @@ const AddQuestionModal = ({ addQuestionOpen, closeAddQuestion, children }) => {
         } catch(error) {
             console.log('Error in creating a question: ', error)
         }
+        setQuestionInput('')
     }
 
     return (
