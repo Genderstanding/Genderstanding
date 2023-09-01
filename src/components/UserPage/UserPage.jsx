@@ -76,10 +76,11 @@ function UserPage() {
                 if (user.id == node?.user_id) {
                   return (
                     <div
+                    key={node?.id}
                       className="m-4 owner-container"
                       onClick={(event) => goToOwnerNodes(event, node)}
                     >
-                      <div className="m-4 owned-community-names" key={node?.id}>
+                      <div className="m-4 owned-community-names" >
                         {node?.node_name}
                         {node?.id}
                       </div>
@@ -96,10 +97,11 @@ function UserPage() {
                 if (user?.id !== node?.user_id) {
                   return (
                     <div
+                    key={node?.id}
                       className="m-4 user-container overflow-y-scroll ..."
                       onClick={(event) => goToUserNodes(event, node)}
                     >
-                      <div className="m-4 owned-community-names" key={node?.id}>
+                      <div className="m-4 owned-community-names">
                         {node?.node_name}
                         {node?.id}
                       </div>
