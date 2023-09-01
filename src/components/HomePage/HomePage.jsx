@@ -4,6 +4,7 @@ import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { CardActionArea } from "@mui/material";
 
+
 import HeaderBar from "../HeaderBar/HeaderBar";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
@@ -46,6 +47,13 @@ export default function HomePage() {
       history.push("/usernodes");
     }
   };
+
+  useEffect(() => {
+    dispatch({ type: "FETCH_NODE" });
+    dispatch({ type: "FETCH_POST" });
+    dispatch({ type: "FETCH_NODE_ASSOCIATION" })
+    dispatch({ type: 'FETCH_CURRENT_NODE'});
+  }, []);
 
   return (
     <>
