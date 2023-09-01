@@ -3,3 +3,13 @@
     border: solid 1px black;
     border-radius: 10px;
 }
+
+.reply-container {
+    width: 85vw;
+    border: solid 1px black;
+    border-radius: 10px;
+}
+
+.reply-text {
+    width: 75vw;
+}
