@@ -28,29 +28,14 @@ const ElipsisModal = ({ elipsisOpen, elipsisClose, contentToEdit, handleSaveEdit
             <div className='flex flex-col items-center justify-center add-node-modal'>
                 {/* {children} */}
                 <div className=' flex flex-col justify-start buttons-container'>
-
-                    {/* <button className='underline m-2'>
-                                Edit
-                            </button>
-                            <button className='underline m-2'>
-                                Delete
-                            </button>
-                            <button className='underline m-2'>
-                                Remove User
-                            </button>
-                            <button className='underline m-2'>
-                                Report User
-                            </button> */}
-
                     {isEditing ? (
                         <textarea
                             value={editedContent}
                             onChange={(e) => setEditedContent(e.target.value)}
                             className='edit-textarea'
                         />
-                    ) : (
-                        <div className='m-4 question-text'>{editedContent}</div>
-                    )}
+                    ) : null}
+
                     <div className='flex flex-col justify-start buttons-container'>
                         {isEditing ? (
                             <button className='underline m-2' onClick={handleSave}>
@@ -66,7 +51,6 @@ const ElipsisModal = ({ elipsisOpen, elipsisClose, contentToEdit, handleSaveEdit
                                 <button className='underline m-2'>Report User</button>
                             </>
                         )}
-
                         <button className='underline m-2' onClick={elipsisClose}>
                             Close
                         </button>
