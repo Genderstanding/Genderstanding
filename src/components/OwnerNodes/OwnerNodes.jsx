@@ -9,6 +9,17 @@ const OwnerNodes = () => {
   const [elipsisOpen, setElipsisOpen] = useState(false);
   const [contentToEdit, setContentToEdit] = useState('(test data) Why are there so so many songs about rainbows and whats on the other side?');
   const [addReplys, setAddReplys] = useState(0);
+  const [replyTexts, setReplyTexts] = useState([]);
+  const [activeReplyText, setActiveReplyText] = useState("");
+
+
+  const handleAddReply = (index, replyText) => {
+    const newReplyTexts = [...replyTexts];
+    newReplyTexts.push(activeReplyText);
+    setReplyTexts(newReplyTexts);
+    setActiveReplyText('');
+    setAddReplys(prev => (prev - 1))
+  }
 
   const openElipsis = (content) => {
     console.log('openElipsis clicked!')
@@ -21,8 +32,8 @@ const OwnerNodes = () => {
   };
 
   const handleSaveEdit = (editedContent) => {
-    // Update the content in the state or dispatch an action to update it in the Redux store
-    // For now, let's update the content directly in the state
+    // dispatch an action to update for reals
+    // updating content directly in the state
     setContentToEdit(editedContent);
   };
 
@@ -57,18 +68,29 @@ const OwnerNodes = () => {
                   </div>
                   <div className="m-4 question-text">{post?.content}</div>
                   <div className="flex items-end justify-between px-4 py-2">
-                    <button className="text-sm">Reply</button>
+                    <button className="text-sm" onClick={() => setAddReplys(prev => (prev + 1))}>Reply</button>
                     <button className="text-sm">Reject</button>
                   </div>
                   {[...Array(addReplys).keys()].map((addReply, i) => (
-                    <div key={i} className="mt-4 reply-container">
-                      <textarea className="reply-textarea m-4" placeholder="Enter Reply..." />
+                    <div key={i} className="mt-4 ml-5 reply-container flex flex-col items-center">
+                      <textarea
+                        className="reply-text m-4 p-2 min h-20 w-1/2"
+                        placeholder="Enter Reply..."
+                        value={activeReplyText}
+                        onChange={(e) => setActiveReplyText(e.target.value)} />
+                      <div className="flex items-end justify-between px-4 py-2">
+                        {/* could not get these buttons apart without adding the margin??? */}
+                        <button className="add-reply text-sm mr-20" onClick={handleAddReply}>Add Reply</button>
+                        <button className="cancel-reply text-sm ml-24" onClick={() => setAddReplys(prev => (prev - 1))}>Cancel</button>
+                      </div>
                     </div>
                   ))}
                 </div>
               );
             }
           })}
+
+          {/* dummy data for display and tinkering*/}
           <div className="question-box mt-4 ">
             <div className="flex items-end justify-between px-4 py-2">
               <span className="text-sm">5 minutes ago</span>
@@ -84,11 +106,33 @@ const OwnerNodes = () => {
           </div>
           {[...Array(addReplys).keys()].map((addReply, i) => (
             <div key={i} className="mt-4 ml-5 reply-container flex flex-col items-center">
-              <textarea className="reply-text m-4 p-2 min h-20 w-1/2" placeholder="Enter Reply..." />
+              <textarea
+                className="reply-text m-4 p-2 min h-20 w-1/2"
+                placeholder="Enter Reply..."
+                value={activeReplyText}
+                onChange={(e) => setActiveReplyText(e.target.value)} />
               <div className="flex items-end justify-between px-4 py-2">
                 {/* could not get these buttons apart without adding the margin??? */}
-                <button className="text-sm mr-20">Add Reply</button>
-                <button className="text-sm ml-24">Cancel</button>
+                <button className="add-reply text-sm mr-20" onClick={handleAddReply}>Add Reply</button>
+                <button className="cancel-reply text-sm ml-24" onClick={() => setAddReplys(prev => (prev - 1))}>Cancel</button>
+              </div>
+            </div>
+          ))}
+          {/* end of dummy */}
+
+          {/* this is where the reply maps to, not a dummy... a smarty */}
+          {replyTexts.map((text, i) => (
+            <div key={i} className="mt-4 ml-5 reply-container ">
+              <div className="flex items-end justify-between px-4 py-2">
+                <span className="text-sm">5 minutes ago</span>
+                <button onClick={() => openElipsis(contentToEdit)}>. . .</button>
+              </div>
+              <div className="rendered-reply m-4">
+                {text}
+              </div>
+              <div className="flex items-end justify-between px-4 py-2">
+                <button className="text-sm" onClick={() => setAddReplys(prev => (prev + 1))}>Reply</button>
+                <button className="text-sm">🖤<span>0</span></button>
               </div>
             </div>
           ))}
