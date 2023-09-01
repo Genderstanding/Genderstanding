@@ -46,6 +46,7 @@ const AddQuestionModal = ({ addQuestionOpen, closeAddQuestion, children }) => {
                     className='w-full px-4 py-2 text-sm text-gray-900 bg-white border-0 question-textarea dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400' 
                     placeholder="Write a question..." 
                     onChange={(event)=>setQuestionInput(event.target.value)}
+                    value={questionInput}
                     required
                     ></textarea>
                     <div className='mt-6 buttons-container'>
