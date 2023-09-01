@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import { MdChevronLeft, MdChevronRight } from "react-icons/md";
-import AddQuestionModal from "../AddQuestionModal/AddQuestionModal";
 import "./UserNodes.css";
 import ReplyModal from "../ReplyModal/ReplyModal";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import HeaderUserBar from "../HeaderBar/HeaderUserBar";
 
 const UserNodes = () => {
-  const [addQuestionOpen, setAddQuestionOpen] = useState(false);
+//   const [addQuestionOpen, setAddQuestionOpen] = useState(false);
   const [addReplyOpen, setAddReplyOpen] = useState(false);
   const [clickedReplyContent, setClickedReplyContent] = useState("");
-
+  
   // Posts being held in store
   let nodePosts = useSelector(
     (store) => store.postReducer.postDatabaseResponse
@@ -36,21 +36,21 @@ const UserNodes = () => {
   ];
 
   const increaseCount = (nodeId) => {
-    const updatedQuestionsArray = questionsArray.map((content) =>
+    const updatedPostArray = nodePosts.map((content) =>
       content.node_id === nodeId
         ? { ...content, count: content.count + 1 }
         : content
     );
-    setQuestionsArray(updatedQuestionsArray);
+    setNodeArray(updatedPostArray);
   };
 
-  const openAddQuestion = () => {
-    setAddQuestionOpen(true);
-  };
+//   const openAddQuestion = () => {
+//     setAddQuestionOpen(true);
+//   };
 
-  const closeAddQuestion = () => {
-    setAddQuestionOpen(false);
-  };
+//   const closeAddQuestion = () => {
+//     setAddQuestionOpen(false);
+//   };
 
   const openAddReply = (questionObject) => {
     setClickedReplyContent(questionObject);
@@ -63,15 +63,8 @@ const UserNodes = () => {
 
   return (
     <>
-      <div className="flex flex-col h-screen">
-        <div className="flex items-center header-container ">
-          <MdChevronLeft size={25} className="ml-2" />
-          <div className="flex-grow"></div>
-          <button className="mr-4 text-2xl" onClick={openAddQuestion}>
-            ?
-          </button>
-        </div>
-
+      <div className="flex flex-col h-screen App">
+        <HeaderUserBar/>
         <div className="flex flex-col items-center justify-center thread-container">
           {nodePosts.map((post) => {
             if (post?.node_id == newNode.id) {
@@ -103,10 +96,6 @@ const UserNodes = () => {
             }
           })}
         </div>
-        <AddQuestionModal
-          addQuestionOpen={addQuestionOpen}
-          closeAddQuestion={closeAddQuestion}
-        />
         <ReplyModal
           addReplyOpen={addReplyOpen}
           closeAddReply={closeAddReply}

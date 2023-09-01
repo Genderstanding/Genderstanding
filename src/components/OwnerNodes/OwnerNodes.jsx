@@ -17,7 +17,7 @@ const OwnerNodes = () => {
     <>
       <div className="flex flex-col h-screen App">
         <HeaderOwnerBar />
-        <div className="flex justify-center thread-container ">
+        <div className="flex flex-col items-center justify-center thread-container">
           {nodePosts.map((post) => {
             if (post?.node_id == newNode.id) {
               return (

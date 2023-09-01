@@ -8,7 +8,7 @@ import SVG from "../SVG/SVG";
 import { useHistory } from "react-router-dom";
 import { Typography } from "@mui/material";
 
-export default function HeaderOwnerBar({ newNodeData }) {
+export default function HeaderOwnerBar() {
   let newNode = useSelector(
     (store) => store.newNodeReducer.newNodeDatabaseResponse
   );
@@ -38,7 +38,7 @@ export default function HeaderOwnerBar({ newNodeData }) {
   ];
 
   return (
-    <div className="flex items-center header-container ">
+    <div className="fixed top-0 left-0 right-0 flex items-center header-container">
       <button onClick={() => history.goBack()}>
         <MdChevronLeft size={25} className="ml-2" />
       </button>

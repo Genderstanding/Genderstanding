@@ -2,37 +2,55 @@ import React, { useEffect, useState } from "react";
 import "./HomePage.css";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
+import { CardActionArea } from "@mui/material";
 
 import HeaderBar from "../HeaderBar/HeaderBar";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function HomePage() {
-  // this component doesn't do much to start, just renders some user reducer info to the DOM
+// holds user infos
   const user = useSelector((store) => store.user);
-const dispatch = useDispatch()
+
   // store that holds all of nodes
   let listOfNodes = useSelector(
     (store) => store.nodeReducer.nodeDatabaseResponse
   );
 
+  const [nodeId, setNodeId] = useState();
+  const dispatch = useDispatch();
+  const history = useHistory();
+
   let yourContent;
   const checkUserId = (node) => {
-    if (node?.user_id == user.id) {
-      yourContent = "Your node: ";
+    if (node.user_id == user.id) {
+      yourContent = "Created node: ";
+    } else if (node.user_id !== user.id)  {
+      yourContent = "Joined node: ";
     }
     return yourContent;
   };
 
-  console.log("the current list of nodes: ", listOfNodes);
+  const handleGoToNode = (node) => {
+    setNodeId(node.id);
+    if (node.user_id === user.id) {
+      dispatch({
+        type: "SET_NEW_NODE",
+        payload: node,
+      });
+      history.push("/owner");
+    } else {
+      dispatch({
+        type: "SET_NEW_NODE",
+        payload: node,
+      });
+      history.push("/usernodes");
+    }
+  };
 
-  useEffect(() => {
-    dispatch({ type: "FETCH_NODE" });
-  }, [])
-  
   return (
     <>
       <div className="flex flex-col h-screen App">
         <HeaderBar />
-
         <div className="flex-grow content-container">
           <div className="mt-4 communities-container">
             <h2>Communities</h2>
@@ -45,16 +63,19 @@ const dispatch = useDispatch()
                 className="w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth"
               >
                 {/* Here is the div where we MAP ya'll */}
-                {listOfNodes.map(node => {
-                  return(
-                    <div className="ease-in-out side-scroll-box hover:scale-105 duration 300" key={node?.id}>
+                {listOfNodes.map((node) => {
+                  return (
+                    <div
+                    onClick={() => handleGoToNode(node)}
+                    className="duration-300 ease-in-out side-scroll-box hover:scale-105"
+                    key={node.id}
+                    >
                       {checkUserId(node)}
-                      <br/>
-                      {node?.node_name}
+                      <br />
+                      {node.node_name}
                     </div>
-                  )
+                  );
                 })}
-
               </div>
               <MdChevronRight size={35} />
             </div>
