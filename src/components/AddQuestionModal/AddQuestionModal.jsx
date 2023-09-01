@@ -15,8 +15,7 @@ const AddQuestionModal = ({ addQuestionOpen, closeAddQuestion, children }) => {
     const dispatch = useDispatch();
 
     let currentNode = useSelector(store => store.newNodeReducer.newNodeDatabaseResponse)
-    let orig_post = false;
-    let reply_id = false;
+
 
     console.log('Current node contents is: ', currentNode)
 

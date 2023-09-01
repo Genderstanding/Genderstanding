@@ -4,6 +4,7 @@ import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import { useHistory } from "react-router-dom";
 import "./UserPage.css";
 import HeaderBar from "../HeaderBar/HeaderBar";
+import { useEffect } from "react";
 
 
 function UserPage() {
@@ -18,6 +19,7 @@ function UserPage() {
   );
   // sourcing use selector to hold all node store information
   let allNodes = useSelector((store) => store.nodeReducer.nodeDatabaseResponse);
+
 
   console.log("nodes are in: ", allNodes);
 

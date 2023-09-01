@@ -51,7 +51,9 @@ const ReplyModal = ({ addReplyOpen, closeAddReply, questionObject }) => {
                 <textarea
                     rows="4"
                     className='w-full px-4 py-2 text-sm text-gray-900 bg-white border-0 reply-textarea dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400'
-                    placeholder="Write a Reply..." required>
+                    placeholder="Write a Reply..." 
+                    onChange={(event)=>setReplyInput(event.target.input)}
+                    required>
                  </textarea>
                 <div className='mt-6 buttons-container'>
                     <button className='mr-6 underline'>Confirm</button>

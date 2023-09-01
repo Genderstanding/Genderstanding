@@ -53,6 +53,30 @@ nodeRouter.get('/new', rejectUnauthenticated, (req, res) => {
         })
 })
 
+nodeRouter.get('/new/:id', rejectUnauthenticated, (req, res) => {
+    // Currently researching SQL query terms needed
+    let sqlValue = req.params.id;
+    console.log('req params are: ', req.params)
+    let sqlQuery = `
+    SELECT "node"."id", "node"."node_name", "node_association"."user_id" AS "node_association_id", "node"."user_id" AS "user_id"
+    FROM "node"
+    JOIN "node_association" ON "node_association"."node_id" = "node"."id"
+    JOIN "user" ON "user"."id" = "node_association"."user_id"
+    WHERE "node_association"."node_id" = $1
+    GROUP BY "node"."id", "node"."node_name", "node_association"."user_id", "node"."user_id"
+    ORDER BY "id" DESC;`;
+    pool.query(sqlQuery, [sqlValue])
+        .then(result => {
+            console.log('Obtaining all nodes from database: ', result.rows);
+            res.send(result.rows);
+        })
+        .catch(error => {
+            console.log('Error in router GET of nodes: ', error);
+            res.sendStatus(500);
+        })
+})
+
+
 // POST route to database to create a new node
 nodeRouter.post('/', rejectUnauthenticated, async (req, res) => {
     try {

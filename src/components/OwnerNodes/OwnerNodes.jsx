@@ -1,17 +1,24 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import HeaderOwnerBar from "../HeaderBar/HeaderOwnerBar";
+
 
 import "./OwnerNodes.css";
 
 const OwnerNodes = () => {
   // sourcing use selector to hold store information
-  let newNode = useSelector(
+  let currentNode = useSelector(
     (store) => store.newNodeReducer.newNodeDatabaseResponse
   );
   let nodePosts = useSelector(
     (store) => store.postReducer.postDatabaseResponse
   );
+
+  console.log('new node is: ', currentNode)
+
+  // sourcing use dispatch to set new node
+  const dispatch = useDispatch();
+
 
   return (
     <>
@@ -19,7 +26,7 @@ const OwnerNodes = () => {
         <HeaderOwnerBar />
         <div className="flex justify-center thread-container ">
           {nodePosts.map((post) => {
-            if (post?.node_id == newNode.id) {
+            if (post?.node_id == currentNode.id) {
               return (
                 <div className="mt-4 question-box">
                   <div className="flex items-end justify-between px-4 py-2">
