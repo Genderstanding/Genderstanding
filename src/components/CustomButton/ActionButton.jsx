@@ -1,16 +1,15 @@
-import { Link } from 'react-router-dom';
 import '../CustomButton/CustomButton.css'
 
 const STYLES = ['btn--primary'];
 
 const SIZES = ['btn--medium'];
 
-export const CustomButton = ({
+export const ActionButton = ({
   children,
   type,
   onClick,
   buttonStyle,
-  buttonSize, path
+  buttonSize,
 }) => {
   const checkButtonStyle = STYLES.includes(buttonStyle)
     ? buttonStyle
@@ -19,15 +18,12 @@ export const CustomButton = ({
   const checkButtonSize = SIZES.includes(buttonSize) ? buttonSize : SIZES[0];
 
   return (
-    
-    <Link to={path}>
-      <button
+       <button
         className={`btn ${checkButtonStyle} ${checkButtonSize}`}
         onClick={onClick}
         type={type}
       >
         {children}
       </button>
-    </Link>
   );
 };
