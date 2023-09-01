@@ -1,6 +1,7 @@
 import axios from "axios";
 import {put, takeLatest} from 'redux-saga/effects';
 
+// TO DO: ALERT 
 function* fetchNewNode(action) {
     try {
         const nodeResponse = yield axios.get(`/node/new`)

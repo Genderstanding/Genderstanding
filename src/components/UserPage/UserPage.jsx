@@ -57,6 +57,7 @@ function UserPage() {
         type: "SET_NEW_NODE",
         payload: node,
       });
+      await new Promise((resolve) => setTimeout(resolve, 2000));
       history.push("/usernodes");
     } catch (error) {
       console.log("Error in going to user node page: ", error);

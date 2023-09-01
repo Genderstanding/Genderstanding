@@ -1,3 +1,4 @@
+
 const inviteCode = (state = {}, action) => {
     switch(action.type) {
         case 'SET_INVITE_CODE':
@@ -8,4 +9,4 @@ const inviteCode = (state = {}, action) => {
 }
 
 export default 
-    inviteCode
+    inviteCode;
