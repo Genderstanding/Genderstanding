@@ -4,9 +4,12 @@ import ReplyModal from "../ReplyModal/ReplyModal";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import HeaderUserBar from "../HeaderBar/HeaderUserBar";
+import { MdChevronLeft, MdChevronRight } from "react-icons/md";
+import AddQuestionModal from "../AddQuestionModal/AddQuestionModal";
+
 
 const UserNodes = () => {
-//   const [addQuestionOpen, setAddQuestionOpen] = useState(false);
+  const [addQuestionOpen, setAddQuestionOpen] = useState(false);
   const [addReplyOpen, setAddReplyOpen] = useState(false);
   const [clickedReplyContent, setClickedReplyContent] = useState("");
   

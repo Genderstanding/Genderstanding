@@ -28,7 +28,7 @@ const ReplyModal = ({ addReplyOpen, closeAddReply, questionObject }) => {
         }
 
     }
-
+console.log('question object is: ', questionObject)
 
     return (
         <div className='flex items-center justify-center modal-overlay'>
@@ -36,8 +36,9 @@ const ReplyModal = ({ addReplyOpen, closeAddReply, questionObject }) => {
                 {/* {children} */}
                 <h2 className='mb-4 mr-4 text-xl font-bold'>Thread</h2>
                 <div className="m-4 question-text">
-                    {questionObject.question}
+                    {questionObject.content}
                 </div>
+
                 {nodePosts.map(post => {
                     if (post.reply_id == questionObject.id) {
                         return (
@@ -56,7 +57,7 @@ const ReplyModal = ({ addReplyOpen, closeAddReply, questionObject }) => {
                     required>
                  </textarea>
                 <div className='mt-6 buttons-container'>
-                    <button className='mr-6 underline'>Confirm</button>
+                    <button className='mr-6 underline' onClick={handleReply}>Confirm</button>
 
                     <button className='underline ' onClick={closeAddReply}>
                         Close
