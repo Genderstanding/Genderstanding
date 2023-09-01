@@ -16,7 +16,8 @@ postRouter.get('/', rejectUnauthenticated, (req, res) => {
     JOIN "node_association" ON "node_association"."node_id" = "node"."id"
     JOIN "user" ON "user"."id" = "node_association"."user_id"
     WHERE "node_association"."user_id" = $1
-    GROUP BY "posts"."id", "posts"."user_id", "posts"."content", "posts"."node_id", "node"."node_name", "posts"."orig_post", "posts"."reply_id", "posts"."post_time", "posts"."edit", "posts"."public", "posts"."reported", "posts"."votes";`;
+    GROUP BY "posts"."id", "posts"."user_id", "posts"."content", "posts"."node_id", "node"."node_name", "posts"."orig_post", "posts"."reply_id", "posts"."post_time", "posts"."edit", "posts"."public", "posts"."reported", "posts"."votes"
+    ORDER BY "posts"."id" DESC;`;
     pool.query(sqlQuery, [sqlValue])
         .then( result => {
             res.send(result.rows);
@@ -31,6 +32,7 @@ postRouter.get('/', rejectUnauthenticated, (req, res) => {
 postRouter.post('/', rejectUnauthenticated, (req, res) => {
     let sqlUserId = req.user.id;
     let sqlParams = req.body;
+    console.log('sqlParams are: ', sqlParams)
     let sqlValues = [
         sqlUserId,
         sqlParams.content,
@@ -40,9 +42,9 @@ postRouter.post('/', rejectUnauthenticated, (req, res) => {
     ]
     let sqlQuery = `
     INSERT INTO "posts" ("user_id", "content", "node_id", "orig_post", "reply_id", "post_time")
-    VALUES ($1, $2, $3, $4, $5, current_date);
+    VALUES ($1, $2, $3, $4, $5, current_timestamp);
     `;
-    pool.query(sqlQuery, [sqlValues])
+    pool.query(sqlQuery, [sqlUserId, sqlParams.content, sqlParams.node_id, sqlParams.orig_post, sqlParams.reply_id])
         .then(result => {
             console.log('Created a new post in database: ', result);
             res.sendStatus(201);
@@ -52,6 +54,7 @@ postRouter.post('/', rejectUnauthenticated, (req, res) => {
             res.sendStatus(500);
         })
 })
+
 
 // PUT route if user updates content information
 postRouter.put('/:id', rejectUnauthenticated, (req, res) => {

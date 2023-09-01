@@ -4,6 +4,7 @@ import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import { useHistory } from "react-router-dom";
 import "./UserPage.css";
 import HeaderBar from "../HeaderBar/HeaderBar";
+import { useEffect } from "react";
 
 function UserPage() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
@@ -17,6 +18,7 @@ function UserPage() {
   );
   // sourcing use selector to hold all node store information
   let allNodes = useSelector((store) => store.nodeReducer.nodeDatabaseResponse);
+
 
   console.log("nodes are in: ", allNodes);
 
@@ -43,7 +45,7 @@ function UserPage() {
         type: "SET_NEW_NODE",
         payload: node,
       });
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       history.push("/owner");
     } catch (error) {
       console.log("Error in obtaining node information on userPage: ", error);

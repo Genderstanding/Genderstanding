@@ -12,6 +12,7 @@ function* createPost(action) {
     }
 }
 
+
 // saga to GET all posts
 function* fetchPost(action) {
     try {
