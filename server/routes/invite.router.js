@@ -5,7 +5,6 @@ const {
 } = require("../modules/authentication-middleware");
 const router = express.Router();
 const Chance = require("chance");
-const { node } = require("prop-types");
 const chance = new Chance();
 
 /******************
@@ -13,7 +12,7 @@ const chance = new Chance();
 /*****************/
 router.post("/code", rejectUnauthenticated, async (req, res) => {
   try {
-    const { node_id } = req.body; 
+    const node_id = req.body.node_id;
     const user_id = req.user.id;
 
     // Generate a random invite code
@@ -21,37 +20,51 @@ router.post("/code", rejectUnauthenticated, async (req, res) => {
 
     // Insert code and node_id into "node_association" table
     const insertQuery = `
-      INSERT INTO "node_association" ("auth_code", "node_id")
-      VALUES ($1, $2)
-      WHERE "user_id" = $3; 
+      INSERT INTO "node_association" ("user_id", "auth_code", "node_id")
+      VALUES ($1, $2, $3)";
     `;
 
-    // Values to insert
-    const insertValues = [inviteCodeGenerator, node_id, user_id];
-
     // Execute POST QUERY
-    const insertResult = await pool.query(insertQuery, insertValues);
-
-    // Retrieve the ID of the newly inserted row
-    const insertedRowId = insertResult.rows[0]?.id;
-
-    /***** Execute SEARCH QUERY *****/
-    // Retrieve the newly generated code from the database
-    const inviteCodeResponse = await pool.query(
-      `SELECT auth_code FROM node_association WHERE "id" = $1`,
-      [insertedRowId]
-    );
+    const insertResult = await pool.query(insertQuery, [
+      user_id,
+      inviteCodeGenerator,
+      node_id,
+    ]);
 
     /***** SUCCESS *****/
     console.log("POST invite code in '/code' to database successful");
-    // Send the generated invite code as a response
-    res.status(200).send(inviteCodeResponse);
-    console.log(inviteCodeResponse, "INVITECODERESPONSE HERE")
+    res.sendStatus(201);
 
     /***** ERROR *****/
   } catch (error) {
     console.log(`POST invite code in '/code' to database error: `, error);
-    res.status(500).send(error.message);
+    res.sendStatus(500)
+  }
+});
+
+router.get("/code",rejectUnauthenticated, async (req, res) => {
+  try {
+    const user_id = req.user.id;
+
+    // Retrieve the newly generated code from the database
+    const result = await pool.query(
+      `SELECT auth_code
+      FROM node_association
+      WHERE user_id = $1
+      ORDER BY id DESC
+      LIMIT 1;`,
+      [user_id]
+    );
+
+    /***** SUCCESS *****/
+    console.log("GET invite code from database successful",   result.rows);
+    // Send the generated invite code as a response
+    res.send(result.rows);
+
+    /***** ERROR *****/
+  } catch (error) {
+    console.log(`GET invite code from database error: `, error);
+    res.sendStatus(500)
   }
 });
 

@@ -7,4 +7,5 @@ const inviteCode = (state = {}, action) => {
     }
 }
 
-export default inviteCode;
+export default 
+    inviteCode
