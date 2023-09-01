@@ -68,16 +68,20 @@ const OwnerNodes = () => {
                   </div>
                   <div className="m-4 question-text">{post?.content}</div>
                   <div className="flex items-end justify-between px-4 py-2">
-                    <button className="text-sm">Reply</button>
+                    <button className="text-sm" onClick={() => setAddReplys(prev => (prev + 1))}>Reply</button>
                     <button className="text-sm">Reject</button>
                   </div>
                   {[...Array(addReplys).keys()].map((addReply, i) => (
                     <div key={i} className="mt-4 ml-5 reply-container flex flex-col items-center">
-                      <textarea className="reply-text m-4 p-2 min h-20 w-1/2" placeholder="Enter Reply..." />
+                      <textarea
+                        className="reply-text m-4 p-2 min h-20 w-1/2"
+                        placeholder="Enter Reply..."
+                        value={activeReplyText}
+                        onChange={(e) => setActiveReplyText(e.target.value)} />
                       <div className="flex items-end justify-between px-4 py-2">
                         {/* could not get these buttons apart without adding the margin??? */}
-                        <button className="text-sm mr-20">Add Reply</button>
-                        <button className="text-sm ml-24">Cancel</button>
+                        <button className="add-reply text-sm mr-20" onClick={handleAddReply}>Add Reply</button>
+                        <button className="cancel-reply text-sm ml-24" onClick={() => setAddReplys(prev => (prev - 1))}>Cancel</button>
                       </div>
                     </div>
                   ))}
@@ -85,6 +89,8 @@ const OwnerNodes = () => {
               );
             }
           })}
+
+          {/* dummy data for display and tinkering*/}
           <div className="question-box mt-4 ">
             <div className="flex items-end justify-between px-4 py-2">
               <span className="text-sm">5 minutes ago</span>
@@ -100,11 +106,11 @@ const OwnerNodes = () => {
           </div>
           {[...Array(addReplys).keys()].map((addReply, i) => (
             <div key={i} className="mt-4 ml-5 reply-container flex flex-col items-center">
-              <textarea 
-                className="reply-text m-4 p-2 min h-20 w-1/2" 
+              <textarea
+                className="reply-text m-4 p-2 min h-20 w-1/2"
                 placeholder="Enter Reply..."
                 value={activeReplyText}
-                onChange={(e) => setActiveReplyText(e.target.value)} /> 
+                onChange={(e) => setActiveReplyText(e.target.value)} />
               <div className="flex items-end justify-between px-4 py-2">
                 {/* could not get these buttons apart without adding the margin??? */}
                 <button className="add-reply text-sm mr-20" onClick={handleAddReply}>Add Reply</button>
@@ -112,20 +118,23 @@ const OwnerNodes = () => {
               </div>
             </div>
           ))}
+          {/* end of dummy */}
+
+          {/* this is where the reply maps to, not a dummy... a smarty */}
           {replyTexts.map((text, i) => (
-          <div key={i} className="mt-4 ml-5 reply-container ">
-            <div className="flex items-end justify-between px-4 py-2">
-              <span className="text-sm">5 minutes ago</span>
-              <button onClick={() => openElipsis(contentToEdit)}>. . .</button>
+            <div key={i} className="mt-4 ml-5 reply-container ">
+              <div className="flex items-end justify-between px-4 py-2">
+                <span className="text-sm">5 minutes ago</span>
+                <button onClick={() => openElipsis(contentToEdit)}>. . .</button>
+              </div>
+              <div className="rendered-reply m-4">
+                {text}
+              </div>
+              <div className="flex items-end justify-between px-4 py-2">
+                <button className="text-sm" onClick={() => setAddReplys(prev => (prev + 1))}>Reply</button>
+                <button className="text-sm">🖤<span>0</span></button>
+              </div>
             </div>
-            <div className="rendered-reply m-4">
-              {text}
-            </div>
-            <div className="flex items-end justify-between px-4 py-2">
-              <button className="text-sm">🔔</button>
-              <button className="text-sm">🖤<span>0</span></button>
-            </div>
-          </div>
           ))}
         </div>
         <ElipsisModal
