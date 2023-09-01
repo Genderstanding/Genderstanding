@@ -16,8 +16,13 @@
     border-radius: 10px;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
     text-align: center;
-    width: 70vw;
-    height: 30vh;
+    width: 90vw;
+    min-height: 50vh;
 
+  }
+
+  .edit-textarea{
+    width: 80vw;
+    min-height: 30vh;
   }
   
