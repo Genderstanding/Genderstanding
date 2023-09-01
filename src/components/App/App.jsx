@@ -39,7 +39,8 @@ function App() {
   useEffect(() => {
     dispatch({ type: "FETCH_NODE" });
     dispatch({ type: "FETCH_POST" });
-    dispatch({ type: "FETCH_NODE_ASSOCIATION" });
+    dispatch({ type: "FETCH_NODE_ASSOCIATION" })
+    dispatch({ type: 'FETCH_CURRENT_NODE'});
   }, []);
 
   // const currentPath = window.location.pathname; // Get the current path
