@@ -45,7 +45,7 @@ function UserPage() {
         type: "SET_NEW_NODE",
         payload: node,
       });
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       history.push("/owner");
     } catch (error) {
       console.log("Error in obtaining node information on userPage: ", error);
