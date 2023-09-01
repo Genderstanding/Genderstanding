@@ -49,7 +49,7 @@ export const InviteNodeModal = ({
         {children}
         <h2 className="mb-4 mr-4 text-xl font-bold">Generate Invite Code</h2>
         <div className="code-container">
-          <span className="code-text">{inviteCode}</span>
+          <span className="code-text">{!inviteCode.length > 0 ? "" : inviteCode}</span>
           <button className="ml-4 copy-code-button" onClick={copyCode}>
             {isCodeCopied ? "Code Copied!" : "Copy Code"}
           </button>

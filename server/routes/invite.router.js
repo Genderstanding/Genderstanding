@@ -13,7 +13,6 @@ const chance = new Chance();
 router.post("/", rejectUnauthenticated, async (req, res) => {
   try {
     let node_id = req.body.node_id;
-    let auth_code = req.body.auth_code;
     const user_id = req.user.id;
 
     // Generate a random invite code
