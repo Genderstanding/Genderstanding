@@ -35,7 +35,7 @@ export default function HeaderBar() {
   ];
 
   return (
-    <div className="flex items-center header-container ">
+    <div className="fixed top-0 left-0 right-0 flex items-center header-container">
       <button onClick={() => history.goBack()}>
         <MdChevronLeft size={25} className="ml-2" />
       </button>

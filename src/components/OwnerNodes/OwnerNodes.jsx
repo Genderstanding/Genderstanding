@@ -1,11 +1,32 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import HeaderOwnerBar from "../HeaderBar/HeaderOwnerBar";
-
-
 import "./OwnerNodes.css";
+import ElipsisModal from "../ElipsisModal/ElipsisModal";
 
 const OwnerNodes = () => {
+  const [elipsisOpen, setElipsisOpen] = useState(false);
+  const [contentToEdit, setContentToEdit] = useState('(test data) Why are there so so many songs about rainbows and whats on the other side?');
+
+  const openElipsis = (content) => {
+    console.log('openElipsis clicked!')
+    setElipsisOpen(true);
+    setContentToEdit(content);
+  };
+
+  const closeElipsis = () => {
+    setElipsisOpen(false);
+  };
+
+  const handleSaveEdit = (editedContent) => {
+    // Update the content in the state or dispatch an action to update it in the Redux store
+    // For now, let's update the content directly in the state
+    setContentToEdit(editedContent);
+  };
+
+ 
+
   // sourcing use selector to hold store information
   let currentNode = useSelector(
     (store) => store.newNodeReducer.newNodeDatabaseResponse
@@ -31,7 +52,7 @@ const OwnerNodes = () => {
                 <div className="mt-4 question-box">
                   <div className="flex items-end justify-between px-4 py-2">
                     <span className="text-sm">5 minutes ago</span>
-                    <button>. . .</button> 
+                    <button onClick={openElipsis}>. . .</button> 
                   </div>
                   <div className="m-4 question-text">{post?.content}</div>
                   <div className="flex items-end justify-between px-4 py-2">
@@ -45,11 +66,10 @@ const OwnerNodes = () => {
           <div className="mt-4 question-box">
             <div className="flex items-end justify-between px-4 py-2">
               <span className="text-sm">5 minutes ago</span>
-              <button>. . .</button>
+              <button onClick={() => openElipsis(contentToEdit)}>. . .</button>
             </div>
             <div className="m-4 question-text">
-              (test data) Why are there so many songs about rainbows? Also,
-              what's on the other side?
+              {contentToEdit}
             </div>
             <div className="flex items-end justify-between px-4 py-2">
               <button className="text-sm">Reply</button>
@@ -57,6 +77,12 @@ const OwnerNodes = () => {
             </div>
           </div>
         </div>
+        <ElipsisModal 
+        elipsisOpen={elipsisOpen} 
+        elipsisClose={closeElipsis} 
+        contentToEdit={contentToEdit} 
+        handleSaveEdit={handleSaveEdit}/>
+
       </div>
     </>
   );

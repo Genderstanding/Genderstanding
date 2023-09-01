@@ -1,8 +1,7 @@
 import React from "react";
-import './InviteNodeModal.css'
-import { useState } from "react";
+import "../InviteNodeModal/InviteNodeModal.css";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 
 export const InviteNodeModal = ({
   InviteCodeOpen,
@@ -12,18 +11,21 @@ export const InviteNodeModal = ({
   if (!InviteCodeOpen) {
     return null;
   }
-  // sourcing dispatch to use calls
-  const dispatch = useDispatch();
-  // sourcing use selector to hold store information
-  let newCode = useSelector((store) => store.newCodeReducer);
 
-  const [codeText, setCodeText] = useState('1a2b3c4d');
+  const dispatch = useDispatch();
   const [isCodeCopied, setIsCodeCopied] = useState(false);
+
+  // store invite code
+  let inviteCode = useSelector((store) => store.inviteCodeReducer);
+  // store owner's node information
+  let ownerNode = useSelector(
+    (store) => store.newNodeReducer.newNodeDatabaseResponse
+  );
 
   const copyCode = async () => {
     try {
-      await navigator.clipboard.writeText(codeText);
-      setIsCodeCopied(true); 
+      await navigator.clipboard.writeText(inviteCode);
+      setIsCodeCopied(true);
     } catch (error) {
       console.error("Error copying code:", error);
     }
@@ -31,14 +33,14 @@ export const InviteNodeModal = ({
 
   // function to handle posting and getting code from database
   const handleGenerateCode = () => {
-    try {
-      dispatch({ type: "GENERATE_CODE" });
+    try { 
       setIsCodeCopied(false);
+      dispatch({type: "FETCH_INVITE_CODE"})
     } catch (error) {
       console.log("Error in button click to generate new node: ", error);
     }
   };
-  
+
 
   return (
     <div className="flex items-center justify-center modal-overlay">
@@ -46,16 +48,18 @@ export const InviteNodeModal = ({
         {children}
         <h2 className="mb-4 mr-4 text-xl font-bold">Generate Invite Code</h2>
         <div className="code-container">
-          <span className="code-text">{codeText}</span>
-          <button className="copy-code-button ml-4" onClick={copyCode}>
-          {isCodeCopied ? "Code Copied!" : "Copy Code"}
+          <span className="code-text">{inviteCode}</span>
+          <button className="ml-4 copy-code-button" onClick={copyCode}>
+            {isCodeCopied ? "Code Copied!" : "Copy Code"}
           </button>
         </div>
-        <div className="buttons-container flex mt-6">
-          <button className="mr-6 underline" onClick={handleGenerateCode}>
+        <div className="flex mt-6 buttons-container">
+          <button
+            className="mr-6 underline"
+            onClick={handleGenerateCode}
+          >
             Generate
           </button>
-          <div>{newCode}</div>
           <button className="underline " onClick={InviteCodeClose}>
             Close
           </button>
@@ -64,3 +68,5 @@ export const InviteNodeModal = ({
     </div>
   );
 };
+
+export default InviteNodeModal;
