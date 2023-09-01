@@ -95,13 +95,8 @@ function UserPage() {
 
         <h2 className="mt-4 mb-1 ml-5">Communities you're a part of:</h2>
         <div className="flex flex-col items-center justify-center mb-4 part-of-box">
-          {/* TEST DATA */}
-        <div className="m-4 user-container" onClick={goToOwnerNodes}>
-        <div className="m-4 notowned-community-names">(test data) Not Much, You?</div> </div>    
-    
-        
-          {/* map communities you particpate in in this div*/}
-          {allNodes.map((node) => {
+           {/* map communities you particpate in in this div*/}
+           {allNodes.map((node) => {
             if (user?.id !== node?.user_id) {
               return (
                 <div
@@ -116,6 +111,9 @@ function UserPage() {
               );
             }
           })}
+          {/* TEST DATA */}
+        <div className="m-4 user-container" onClick={goToUserNodes}>
+        <div className="m-4 notowned-community-names">(test data) Not Much, You?</div> </div>    
         </div>
       </div>
     </div>

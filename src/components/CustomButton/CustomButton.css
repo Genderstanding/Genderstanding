@@ -28,24 +28,12 @@
   border: 1px solid var(--primary);
 }
 
-.btn--outline {
-  border: 1px solid var(--primary);
-  transition: all 0.3s ease-out;
-}
-
 .btn--medium {
   padding: 8px 24px;
   font-size: 24px;
   margin: 50px;
-
 } 
 
-.btn--large {
-  padding: 10px 26px;
-  font-size: 24px;
-}
-
-.btn--large:hover,
 .btn--medium:hover {
   transition: all 0.3s ease-out;
   transition: 250ms;
