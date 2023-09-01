@@ -122,6 +122,10 @@ nodeRouter.put('/:id', rejectUnauthenticated, (req, res) => {
         console.log('Updated node name in database: ', result);
         res.sendStatus(201);
     })
+    .catch(result => {
+        console.log('Error in PUT to node query: ', error);
+        res.sendStatus(500)
+    })
 })
 
 // DELETE route to database to remove a node
