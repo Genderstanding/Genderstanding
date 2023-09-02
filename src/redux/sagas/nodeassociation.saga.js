@@ -37,6 +37,7 @@ function* userNodeAssociation(action){
     try {
         yield axios.put(`/nodeassociation/${action.payload}`)
         yield put({ type: 'FETCH_NODE_ASSOCIATION'})
+        yield put({ type: 'FETCH_NODE'})
     } catch (error) {
         console.log('Error in SAGA PUT to add user to node association: ', error)
     }
@@ -47,6 +48,7 @@ function* removeNodeAssociation(action) {
     try {
         yield axios.put(`/nodeassociation/${action.payload}`)
         yield put({ type: 'FETCH_NODE_ASSOCIATION'})
+        yield put({ type: 'FETCH_NODE'})
     } catch (error) {
         console.log('Error in SAGA DELETE to remove a user from a node association: ', error)
     }
