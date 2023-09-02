@@ -14,6 +14,7 @@ router.post("/", rejectUnauthenticated, async (req, res) => {
   try {
     let node_id = req.body.node_id;
     const user_id = req.user.id;
+    console.log('req.body is: ', req.body)
 
     // Generate a random invite code
     const inviteCodeGenerator = chance.string({
