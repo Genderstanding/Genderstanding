@@ -132,13 +132,13 @@ function App() {
             <ActionPage />
           </ProtectedRoute>
 
-          {/* <ProtectedRoute
+          <ProtectedRoute
             // logged in shows Setting else shows LoginPage
             exact
             path="/setting"
           >
             <SettingsModal />
-          </ProtectedRoute> */}
+          </ProtectedRoute>
 
           <Route exact path="/login">
             {user.id ? (
@@ -205,13 +205,13 @@ function App() {
             )}
           </Route>
 
-          <Route exact path="/owner">
+          {/* <Route exact path="/owner">
             <OwnerNodes />
           </Route>
 
           <Route exact path="/usernodes">
             <UserNodes />
-          </Route>
+          </Route> */}
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>

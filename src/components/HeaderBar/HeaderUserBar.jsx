@@ -22,7 +22,10 @@ export default function HeaderUserBar() {
   let newNode = useSelector(
     (store) => store.newNodeReducer.newNodeDatabaseResponse
   );
-
+  let user = useSelector(
+    (store) => store.user
+  );
+  
   //  SETTING MODAL
   const openSettings = () => {
     setSettingsOpen(true);
@@ -55,19 +58,21 @@ export default function HeaderUserBar() {
       {/* Display new node name */}
       <div style={{ margin: "25px" }}>
         <Typography>{newNode?.[0]?.node_name || newNode?.node_name}</Typography>
+        <Typography>Created by {newNode?.[0]?.user_id || newNode?.user_id}</Typography>
+        <Typography>Logged in as {user.id}</Typography>
       </div>
       {/* this flex-grow div is tailwind way to spread out the back and add buttons*/}
       <div className="flex-grow"></div>
-      <button className="mr-4 text-2xl" onClick={openAddQuestion}>
+      <button className="mr-4 text-2xl" onClick={()=>openAddQuestion(newNode?.id)}>
         <SVG
           width={24}
           height={24}
           viewBox="0 0 24 24"
           pathData={svgQuestion}
           stroke="#CF6F5A"
-          stroke-width="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </button>
       {/* ADD QUESTION */}

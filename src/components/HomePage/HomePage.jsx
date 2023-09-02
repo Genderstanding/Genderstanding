@@ -80,7 +80,7 @@ export default function HomePage() {
                     >
                       {checkUserId(node)}
                       <br />
-                      {node.node_name}
+                      {node.node_name}{'  '}{node.id}
                     </div>
                   );
                 })}

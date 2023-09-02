@@ -13,16 +13,18 @@ export default function HeaderOwnerBar() {
   const history = useHistory();
   const [InviteCodeOpen, setOpenInviteCode] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [nodeId, setNodeId]= useState()
   let nodePosts = useSelector(
     (store) => store.postReducer.postDatabaseResponse
   );
   let newNode = useSelector(
     (store) => store.newNodeReducer.newNodeDatabaseResponse
   );
+
   //  INVITE CODE MODAL
-  const openInviteCode = (e) => {
-    e.preventDefault();
+  const openInviteCode = (nodeID) => {
     setOpenInviteCode(true);
+    setNodeId(nodeID)
   };
   const closeInviteCode = () => {
     setOpenInviteCode(false);
@@ -54,7 +56,7 @@ export default function HeaderOwnerBar() {
       <div className="flex-grow"></div>
       <button
         className="mr-4 text-2xl"
-        onClick={(e) => openInviteCode(e, newNode.id)}
+        onClick={() => openInviteCode(newNode.id)}
       >
         <SVG
           width={24}

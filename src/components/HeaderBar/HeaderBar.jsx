@@ -11,6 +11,7 @@ export default function HeaderBar() {
   const history = useHistory();
   const [addNodeOpen, setaddNodeOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const user = useSelector(store => store.user)
 
   const openAddNode = () => {
     setaddNodeOpen(true);
@@ -41,7 +42,7 @@ export default function HeaderBar() {
       </button>
 
       {/* this flex-grow div is tailwind way to spread out the back and add buttons*/}
-      <div className="flex-grow"></div>
+      <div className="flex-grow"> username : {user.username} user_id : {user.id}</div>
       <button className="mr-4 text-2xl" onClick={openAddNode}>
         <SVG
           width={24}

@@ -13,13 +13,13 @@ export const InviteInputModal = ({ InviteCodeOpen, children }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [codeInput, setCodeInput] = useState();
-
+  
   // function to handle posting and getting code from database
   const handleInputCode = (event) => {
     event.preventDefault();
     try {
       // UPDATE the INVITE CODE
-      dispatch({ type: "SUBMIT_INVITE_CODE", payload: codeInput });
+      dispatch({ type:"ENTER_INVITE_CODE", payload: codeInput });
       // DIRECT user to node
       history.push(`/user`);
     } catch (error) {

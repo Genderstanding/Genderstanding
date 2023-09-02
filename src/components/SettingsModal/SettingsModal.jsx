@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './SettingsModal.css'
+import { useSelector, useDispatch } from "react-redux";
 
 const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
-
+const dispatch = useDispatch();
+    const [codeInput, setCodeInput] = useState('')
     const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+    const enterInviteCode = useSelector(store => store.enterInviteCodeReducer)
 
     if (!settingsOpen) {
         return null;
@@ -18,12 +21,26 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
         setShowDeleteConfirmation(false);
     };
 
-
     //Delete logic...
     const handleDeleteAccount = () => {
         closeSettings();
     };
 
+    // handle code input
+    const handleInviteCode = (e, codeInput) => {
+        e.preventDefault()
+        try {
+             dispatch({type:"ENTER_INVITE_CODE", payload: codeInput})
+        } catch (error) {
+            dispatch({
+                type: "ENTER_INVITE_CODE_ERROR",
+                payload: "Invalid invite code input",
+              });
+        }
+       
+    }
+    
+      
     return (
         <div className='modal-overlay'>
             <div className='mt-15 settings-modal'>
@@ -36,8 +53,8 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
                 <div className='flex flex-col'>
                     <span className='mb-2'>Join Node</span>
                     <div>
-                        <input style={{textAlign:"center"}} type='text' placeholder='enter code' className='ml-4' />
-                        <button>☑️</button>
+                        <input style={{textAlign:"center"}} type='text' placeholder='enter code' className='ml-4' value={codeInput} onChange={(e) => setCodeInput(e.target.value)} />
+                        <button onClick={handleInviteCode}>☑️</button>
                     </div><br />
                     <span className='mb-2'>Theme</span>
                     <div className="flex justify-between">
