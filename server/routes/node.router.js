@@ -89,7 +89,6 @@ nodeRouter.post('/', rejectUnauthenticated, async (req, res) => {
         RETURNING "id";
         `;
         
-    
         const nodeResult = await pool.query(sqlQuery, [sqlUserId, sqlParams])
         let sqlQuery2 = `
         INSERT INTO "node_association" ("node_id", "user_id")
@@ -103,8 +102,6 @@ nodeRouter.post('/', rejectUnauthenticated, async (req, res) => {
         console.log('Error in node adding to database: ', error)
         res.sendStatus(500)
     }
-  
-
 })
 
 // PUT route to database to update node name

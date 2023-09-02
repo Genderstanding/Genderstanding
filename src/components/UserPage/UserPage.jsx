@@ -59,6 +59,7 @@ function UserPage() {
         type: "SET_NEW_NODE",
         payload: node,
       });
+      await new Promise((resolve) => setTimeout(resolve, 2000));
       history.push("/usernodes");
     } catch (error) {
       console.log("Error in going to user node page: ", error);
@@ -78,10 +79,11 @@ function UserPage() {
                 if (user.id == node?.user_id) {
                   return (
                     <div
+                    key={node?.id}
                       className="m-4 owner-container"
                       onClick={(event) => goToOwnerNodes(event, node)}
                     >
-                      <div className="m-4 owned-community-names" key={node?.id}>
+                      <div className="m-4 owned-community-names" >
                         {node?.node_name}
                         {node?.id}
                       </div>
@@ -98,10 +100,11 @@ function UserPage() {
                 if (user?.id !== node?.user_id) {
                   return (
                     <div
+                    key={node?.id}
                       className="m-4 user-container overflow-y-scroll ..."
                       onClick={(event) => goToUserNodes(event, node)}
                     >
-                      <div className="m-4 owned-community-names" key={node?.id}>
+                      <div className="m-4 owned-community-names">
                         {node?.node_name}
                         {node?.id}
                       </div>

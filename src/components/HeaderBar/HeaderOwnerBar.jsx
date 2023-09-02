@@ -11,7 +11,6 @@ import { Typography } from "@mui/material";
 export default function HeaderOwnerBar() {
   const dispatch = useDispatch();
   const history = useHistory();
-  const [nodeId, setNodeId] = useState();
   const [InviteCodeOpen, setOpenInviteCode] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
   let nodePosts = useSelector(
@@ -21,12 +20,9 @@ export default function HeaderOwnerBar() {
     (store) => store.newNodeReducer.newNodeDatabaseResponse
   );
   //  INVITE CODE MODAL
-  const openInviteCode = (e, nodeID) => {
+  const openInviteCode = (e) => {
     e.preventDefault();
     setOpenInviteCode(true);
-    setNodeId(nodeID);
-    dispatch({ type: "GENERATE_INVITE_CODE", payload: nodeID });
-    console.log("node_id in client", nodeID);
   };
   const closeInviteCode = () => {
     setOpenInviteCode(false);
@@ -58,7 +54,7 @@ export default function HeaderOwnerBar() {
       <div className="flex-grow"></div>
       <button
         className="mr-4 text-2xl"
-        onClick={(e) => openInviteCode(e, newNode)}
+        onClick={(e) => openInviteCode(e, newNode.id)}
       >
         <SVG
           width={24}
