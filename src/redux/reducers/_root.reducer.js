@@ -6,7 +6,6 @@ import postReducer from './post.reducer';
 import nodeAssociationReducer from './nodeassociation.reducer';
 import newNodeReducer from './newnode.reducer';
 import inviteCodeReducer from './invitecode.reducer';
-import enterInviteCodeReducer from './enterinvitecode.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -22,7 +21,6 @@ const rootReducer = combineReducers({
   nodeAssociationReducer, // holds all of the node association information
   newNodeReducer, // holds the newest node created
   inviteCodeReducer,
-  enterInviteCodeReducer
 });
 
 export default rootReducer;
