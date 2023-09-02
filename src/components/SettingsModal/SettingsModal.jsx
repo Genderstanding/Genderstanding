@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import { useSelector, useDispatch } from 'react-redux';
 import './SettingsModal.css'
-import { useSelector, useDispatch } from "react-redux";
 
 const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
     const [codeInput, setCodeInput] = useState('')

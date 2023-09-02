@@ -28,7 +28,8 @@ const AddNodeModal = ({ addNodeOpen, addNodeClose, children }) => {
         event.preventDefault();
     try {
         dispatch({type: 'CREATE_NODE', payload: {name: nodeInput}})
-        history.push(`/owner`)
+        // go user page 
+        history.push(`/user`)
  } catch (error) {
     console.log('Error in button click to create new node: ', error)
  }

@@ -120,14 +120,14 @@ function App() {
           <ProtectedRoute
             // logged in shows HomePage else shows LoginPage
             exact
-            path="/newcode"
+            path="/inputcode"
           >
             <ActionPage />
           </ProtectedRoute>
           <ProtectedRoute
             // logged in shows HomePage else shows LoginPage
             exact
-            path="/newnode"
+            path="/createnode"
           >
             <ActionPage />
           </ProtectedRoute>
@@ -184,34 +184,26 @@ function App() {
             )}
           </Route>
 
-          <Route exact path="/newcode">
+          <Route exact path="/inputcode">
             {user.id ? (
               // If the user is already logged in,
               // redirect them to the /home page
-              <Redirect to="/newcode" />
+              <Redirect to="/inputcode" />
             ) : (
               // Otherwise, show the ActionPage
               <ActionPage />
             )}
           </Route>
-          <Route exact path="/newnode">
+          <Route exact path="createnode">
             {user.id ? (
               // If the user is already logged in,
               // redirect them to the /home page
-              <Redirect to="/newnode" />
+              <Redirect to="/createnode" />
             ) : (
               // Otherwise, show the ActionPage
               <ActionPage />
             )}
           </Route>
-
-          {/* <Route exact path="/owner">
-            <OwnerNodes />
-          </Route>
-
-          <Route exact path="/usernodes">
-            <UserNodes />
-          </Route> */}
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
