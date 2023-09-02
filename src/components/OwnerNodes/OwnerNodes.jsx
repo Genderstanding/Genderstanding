@@ -10,14 +10,24 @@ const OwnerNodes = () => {
   const [addReplys, setAddReplys] = useState(0);
   const [replyTexts, setReplyTexts] = useState([]);
   const [activeReplyText, setActiveReplyText] = useState("");
+  const [showButton, setShowButton] = useState(true);
+  const [showRejectButton, setShowRejectButton] = useState(true);
 
+  const toggleShowButton = () => {
+    setShowButton(!showButton);
+  }
 
+  const handleShowReject = () => {
+    setShowRejectButton(false);
+  }
   const handleAddReply = (index, replyText) => {
     const newReplyTexts = [...replyTexts];
     newReplyTexts.push(activeReplyText);
     setReplyTexts(newReplyTexts);
     setActiveReplyText('');
     setAddReplys(prev => (prev - 1))
+    toggleShowButton();
+    handleShowReject();
   }
 
   const openElipsis = (content) => {
@@ -93,8 +103,14 @@ const OwnerNodes = () => {
               {contentToEdit}
             </div>
             <div className="flex items-end justify-between px-4 py-2">
+              {showButton && 
               <button className="text-sm" onClick={() => setAddReplys(prev => (prev + 1))}>Reply</button>
+              }
+              {showRejectButton ? (
               <button className="text-sm">Reject</button>
+               ) : (
+                <button className="text-sm ml-72">🖤<span>0</span></button>
+              )}
             </div>
           </div>
           {[...Array(addReplys).keys()].map((addReply, i) => (
@@ -125,7 +141,7 @@ const OwnerNodes = () => {
               </div>
               <div className="flex items-end justify-between px-4 py-2">
                 <button className="text-sm" onClick={() => setAddReplys(prev => (prev + 1))}>Reply</button>
-                <button className="text-sm">🖤<span>0</span></button>
+                <button className="text-sm" >🖤<span>0</span></button>
               </div>
             </div>
           ))}
