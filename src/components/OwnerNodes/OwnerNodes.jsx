@@ -14,9 +14,20 @@ const OwnerNodes = () => {
   const [addQuestionOpen, setAddQuestionOpen] = useState(false);
   const [addReplyOpen, setAddReplyOpen] = useState(false);
   const [clickedReplyContent, setClickedReplyContent] = useState("");
+  const [showButton, setShowButton] = useState(true);
+  const [toggleButtom, setToggleButton] = useState(true);
 
-  // useDispatch
+  // inputing dispatch
   const dispatch = useDispatch();
+
+  // const toggleShowButton = () => {
+  //   setShowButton(!showButton);
+  // }
+
+  const handleAcceptButton = () => {
+    setShowButton(false);
+    setToggleButton(false);
+  }
   
   // Posts being held in store
   let nodePosts = useSelector(
@@ -78,16 +89,9 @@ const OwnerNodes = () => {
 
     return (
         <>
-        <HeaderOwnerBar />
-            <div className="flex flex-col h-screen">
-
-                {/* <div className='flex items-center header-container '>
-                    <MdChevronLeft size={25} className='ml-2' />
-                    <div className="flex-grow"></div>
-                    <button className="mr-4 text-2xl" onClick={()=>openAddQuestion(newNode?.id)}>?</button>
-                </div> */}
-
-
+        
+            <div className="flex flex-col h-screen App">
+              <HeaderOwnerBar />
                 <div className="flex flex-col items-center justify-center thread-container">
                     {nodePosts.map(post => {
                         if (post?.node_id == newNode.id) {
@@ -103,8 +107,22 @@ const OwnerNodes = () => {
                                             {post?.content}
                                         </div>
                                         <div className="flex items-end justify-between px-4 py-2">
-                                            <button className="text-sm" onClick={() => openAddReply(post)}>Reply</button>
+                                          {toggleButtom ? (
+                                          <button className="underline text-sm"onClick={handleAcceptButton}>Accept</button>
+                                          ) : (
+                                          <button className="text-sm">Reply</button>
+                                          )}
+                                          {showButton && 
+                                          <button className="underline text-sm">Reject</button>
+                                          }
+                                          {toggleButtom ? (
+                                            <button className="underline text-sm">Report</button>
+                                          ) : (
                                             <button className="text-sm" onClick={() => increaseCount(post.id)}>🖤<span>{post.votes || 0}</span></button>
+                                          )}
+                                          
+                                            {/* <button className="text-sm" onClick={() => openAddReply(post)}>Reply</button>
+                                            <button className="text-sm" onClick={() => increaseCount(post.id)}>🖤<span>{post.votes || 0}</span></button> */}
                                         </div>
                                     </div>
                                 )
