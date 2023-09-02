@@ -1,13 +1,19 @@
 import React, { useState } from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
+import { useSelector, useDispatch } from 'react-redux';
 import './SettingsModal.css'
 import { useSelector, useDispatch } from "react-redux";
 
 const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
-const dispatch = useDispatch();
     const [codeInput, setCodeInput] = useState('')
     const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
-    const enterInviteCode = useSelector(store => store.enterInviteCodeReducer)
+    const [nodeCodeInput, setNodeCodeInput] = useState('')
+
+    // Store to match against currently available codes
+    const nodeAssociation = useSelector(store => store.nodeAssociationReducer.nodeAssociationDatabase)
+    
+    // importing dispatch
+    const dispatch = useDispatch();
 
     if (!settingsOpen) {
         return null;
@@ -26,21 +32,25 @@ const dispatch = useDispatch();
         closeSettings();
     };
 
-    // handle code input
-    const handleInviteCode = (e, codeInput) => {
-        e.preventDefault()
-        try {
-             dispatch({type:"ENTER_INVITE_CODE", payload: codeInput})
-        } catch (error) {
-            dispatch({
-                type: "ENTER_INVITE_CODE_ERROR",
-                payload: "Invalid invite code input",
-              });
+    const handleNodeCodeInput = (event, nodeCodeInput, nodeAssociation) => {
+        event.preventDefault();
+        // loop through all of the current nodeAssociations
+        for(let node of nodeAssociation) {
+            // look for the auth_code in the database and match it to the inputed code
+            if(node?.auth_code == nodeCodeInput){
+                // If there are no users already associated to the node with the inputed code, 
+                // dispatch a database update to PUT the user's ID into the database as a user
+                // who can view the node
+                if(node?.user_id == null) {
+                    dispatch({
+                        type: 'USER_NODE_ASSOCIATION',
+                        payload: nodeCodeInput
+                    })
+                }
+            }
         }
-       
     }
-    
-      
+
     return (
         <div className='modal-overlay'>
             <div className='mt-15 settings-modal'>
@@ -53,8 +63,16 @@ const dispatch = useDispatch();
                 <div className='flex flex-col'>
                     <span className='mb-2'>Join Node</span>
                     <div>
-                        <input style={{textAlign:"center"}} type='text' placeholder='enter code' className='ml-4' value={codeInput} onChange={(e) => setCodeInput(e.target.value)} />
-                        <button onClick={handleInviteCode}>☑️</button>
+                        <input 
+                        style={{textAlign:"center"}} 
+                        type='text' 
+                        placeholder='enter code' 
+                        className='ml-4' 
+                        onChange={(event)=>setNodeCodeInput(event.target.value)}
+                        />
+                        <button
+                        onClick={(event)=>handleNodeCodeInput(event, nodeCodeInput, nodeAssociation)}
+                        >☑️</button>
                     </div><br />
                     <span className='mb-2'>Theme</span>
                     <div className="flex justify-between">

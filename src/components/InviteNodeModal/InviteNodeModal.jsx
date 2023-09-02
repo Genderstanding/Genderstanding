@@ -36,7 +36,7 @@ export const InviteNodeModal = ({
     try { 
       setNodeId(nodeID)
       setIsCodeCopied(false);
-      dispatch({type: "SET_INVITE_CODE", payload: nodeID})
+      dispatch({type: "GENERATE_INVITE_CODE", payload: {node_id: nodeID} })
     } catch (error) {
       dispatch({
         type: "GENERATE_INVITE_CODE_ERROR",

@@ -38,12 +38,13 @@ nodeAssocRouter.post('/', rejectUnauthenticated, (req, res) => {
 
 nodeAssocRouter.put('/:id', rejectUnauthenticated, (req, res) => {
     let sqlId = req.user.id;
-    let sqlParams = req.params.auth_code;
+    let sqlParams = req.params.id;
+    console.log('req.params: ', req.params)
     let sqlQuery = `
-    UPDATE "node_association
+    UPDATE "node_association"
     SET "user_id" = $1
-    WHERE "auth_code" = $2;
-    `
+    WHERE "auth_code" = $2
+    `;
     pool.query(sqlQuery, [sqlId, sqlParams])
         .then(result => {
             console.log('Added a new user to the node: ', result);

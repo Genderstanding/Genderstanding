@@ -14,11 +14,10 @@ const ReplyModal = ({ addReplyOpen, closeAddReply, questionObject }) => {
     // Creating a state to hold text inputed
     const [replyInput, setReplyInput] = useState('');
 
-    console.log('reply input is: ', reversePosts)
-
 
     const handleReply = (event, questionObject) => {
         event.preventDefault();
+        setReplyInput('')
         try {
             dispatch({
                 type: 'CREATE_POST',
@@ -32,9 +31,9 @@ const ReplyModal = ({ addReplyOpen, closeAddReply, questionObject }) => {
         } catch (error) {
             console.log('Error in button click to create new reply: ', error)
         }
-
+ 
     }
-    console.log('question object is: ', questionObject)
+
 
     return (
         <div className='flex items-center justify-center modal-overlay'>
@@ -59,6 +58,7 @@ const ReplyModal = ({ addReplyOpen, closeAddReply, questionObject }) => {
                     className='w-full px-4 py-2 text-sm text-gray-900 bg-white border-0 reply-textarea dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400'
                     placeholder="Write a Reply..."
                     onChange={(event) => setReplyInput(event.target.value)}
+                    value={replyInput}
                     required>
                 </textarea>
                 <div className='mt-6 buttons-container'>
