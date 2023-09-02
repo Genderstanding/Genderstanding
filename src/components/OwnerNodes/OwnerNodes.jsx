@@ -78,8 +78,14 @@ const OwnerNodes = () => {
                   </div>
                   <div className="m-4 question-text">{post?.content}</div>
                   <div className="flex items-end justify-between px-4 py-2">
-                    <button className="text-sm" onClick={() => setAddReplys(prev => (prev + 1))}>Reply</button>
-                    <button className="text-sm">Reject</button>
+                    {showButton &&
+                      <button className="text-sm" onClick={() => setAddReplys(prev => (prev + 1))}>Reply</button>
+                    }
+                    {showRejectButton ? (
+                      <button className="text-sm">Reject</button>
+                    ) : (
+                      <button className="text-sm ml-72">🖤<span>0</span></button>
+                    )}
                   </div>
                   {[...Array(addReplys).keys()].map((addReply, i) => (
                     <div key={i} className="mt-4 ml-5 reply-container flex flex-col items-center">
@@ -110,12 +116,12 @@ const OwnerNodes = () => {
               {contentToEdit}
             </div>
             <div className="flex items-end justify-between px-4 py-2">
-              {showButton && 
-              <button className="text-sm" onClick={() => setAddReplys(prev => (prev + 1))}>Reply</button>
+              {showButton &&
+                <button className="text-sm" onClick={() => setAddReplys(prev => (prev + 1))}>Reply</button>
               }
               {showRejectButton ? (
-              <button className="text-sm">Reject</button>
-               ) : (
+                <button className="text-sm">Reject</button>
+              ) : (
                 <button className="text-sm ml-72">🖤<span>0</span></button>
               )}
             </div>
