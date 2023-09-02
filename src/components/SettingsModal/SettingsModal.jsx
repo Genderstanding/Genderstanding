@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import { useSelector, useDispatch } from 'react-redux';
 import './SettingsModal.css'
@@ -13,6 +14,8 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
     
     // importing dispatch
     const dispatch = useDispatch();
+    // importing history
+    const history = useHistory();
 
     if (!settingsOpen) {
         return null;
@@ -29,7 +32,17 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
 
     //Delete logic...
     const handleDeleteAccount = () => {
-        closeSettings();
+  
+        // Dispatch simply calls for whatever user is logged in to be deleted. 
+        // Confirmation on front end will prevent accidental clicks
+        try {
+            closeSettings();
+            dispatch({type: 'DELETE_USER'})
+            history.push('/login')
+        } catch(error) {
+            console.log('Error in deleting account', error)
+        }
+
     };
 
     const handleNodeCodeInput = (event, nodeCodeInput, nodeAssociation) => {
