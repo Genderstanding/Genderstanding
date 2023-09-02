@@ -13,27 +13,12 @@ const chance = new Chance();
 router.post("/", rejectUnauthenticated, async (req, res) => {
   try {
     let node_id = req.body.node_id;
-    const user_id = req.user.id;
-    console.log('req.body is: ', req.body)
 
     // Generate a random invite code
     const inviteCodeGenerator = chance.string({
       length: 8,
       pool: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
     });
-
-    // Retried the node_id with associated user_id
-    const searchNodeId = await pool.query(
-      `SELECT node_id
-  FROM node_association
-  WHERE user_id = $1
-  ORDER BY id DESC
-  LIMIT 1;`,
-      [user_id]
-    );
-
-    // Set node_id
-    node_id = searchNodeId.rows[0]?.node_id;
 
     // Insert code and node_id into "node_association" table
     const insertQuery = `
