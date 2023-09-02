@@ -6,12 +6,16 @@ import { useHistory } from "react-router-dom";
 import HeaderUserBar from "../HeaderBar/HeaderUserBar";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import AddQuestionModal from "../AddQuestionModal/AddQuestionModal";
+import { useDispatch } from "react-redux";
 
 
 const UserNodes = () => {
   const [addQuestionOpen, setAddQuestionOpen] = useState(false);
   const [addReplyOpen, setAddReplyOpen] = useState(false);
   const [clickedReplyContent, setClickedReplyContent] = useState("");
+
+  // importing dispatch
+  const dispatch = useDispatch();
   
   // Posts being held in store
   let nodePosts = useSelector(
@@ -38,13 +42,18 @@ const UserNodes = () => {
     },
   ];
 
-  const increaseCount = (nodeId) => {
-    const updatedPostArray = nodePosts.map((content) =>
-      content.node_id === nodeId
-        ? { ...content, count: content.count + 1 }
-        : content
-        );
-        setQuestionsArray(updatedQuestionsArray);
+  const increaseCount = (postId) => {
+    console.log('post id is: ', postId)
+    dispatch({
+      type: 'LIKE_POST',
+      payload: postId
+    })
+    // const updatedPostArray = nodePosts.map((content) =>
+    //   content.node_id === nodeId
+    //     ? { ...content, count: content.count + 1 }
+    //     : content
+    //     );
+    //     setQuestionsArray(updatedQuestionsArray);
     };
 
     const openAddQuestion = () => {
