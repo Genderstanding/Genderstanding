@@ -35,23 +35,20 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
     const handleNodeCodeInput = (event, nodeCodeInput, nodeAssociation) => {
         event.preventDefault();
         // loop through all of the current nodeAssociations
-        for ( node of nodeAssociation) {
+        for(let node of nodeAssociation) {
             // look for the auth_code in the database and match it to the inputed code
-            if (node.auth_code == nodeCodeInput){
+            if(node?.auth_code == nodeCodeInput){
                 // If there are no users already associated to the node with the inputed code, 
                 // dispatch a database update to PUT the user's ID into the database as a user
                 // who can view the node
-                if(node.user_id == null) {
+                if(node?.user_id == null) {
                     dispatch({
-                        type: ''
+                        type: 'USER_NODE_ASSOCIATION',
+                        payload: nodeCodeInput
                     })
                 }
             }
         }
-        dispatchEvent({
-
-        })
-
     }
 
     return (
@@ -74,7 +71,7 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
                         onChange={(event)=>setNodeCodeInput(event.target.value)}
                         />
                         <button
-                        onClick={(event)=>handleNodeCodeInput(event, nodeCodeInput)}
+                        onClick={(event)=>handleNodeCodeInput(event, nodeCodeInput, nodeAssociation)}
                         >☑️</button>
                     </div><br />
                     <span className='mb-2'>Theme</span>
