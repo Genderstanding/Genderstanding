@@ -1,173 +1,175 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import HeaderOwnerBar from "../HeaderBar/HeaderOwnerBar";
+import React, { useState } from "react";
 import "./OwnerNodes.css";
-import ElipsisModal from "../ElipsisModal/ElipsisModal";
+import ReplyModal from "../ReplyModal/ReplyModal";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import HeaderUserBar from "../HeaderBar/HeaderUserBar";
+import { MdChevronLeft, MdChevronRight } from "react-icons/md";
+import AddQuestionModal from "../AddQuestionModal/AddQuestionModal";
+import HeaderOwnerBar from "../HeaderBar/HeaderOwnerBar"
+
 
 const OwnerNodes = () => {
-  const [elipsisOpen, setElipsisOpen] = useState(false);
-  const [contentToEdit, setContentToEdit] = useState('(test data) Why are there so so many songs about rainbows and whats on the other side?');
-  const [addReplys, setAddReplys] = useState(0);
-  const [replyTexts, setReplyTexts] = useState([]);
-  const [activeReplyText, setActiveReplyText] = useState("");
-  const [showButton, setShowButton] = useState(true);
-  const [showRejectButton, setShowRejectButton] = useState(true);
-
-  const toggleShowButton = () => {
-    setShowButton(!showButton);
-  }
-
-  const handleShowReject = () => {
-    setShowRejectButton(false);
-  }
-  const handleAddReply = (index, replyText) => {
-    const newReplyTexts = [...replyTexts];
-    newReplyTexts.push(activeReplyText);
-    setReplyTexts(newReplyTexts);
-    setActiveReplyText('');
-    setAddReplys(prev => (prev - 1))
-    toggleShowButton();
-    handleShowReject();
-  }
-
-  const openElipsis = (content) => {
-    console.log('openElipsis clicked!')
-    setElipsisOpen(true);
-    setContentToEdit(content);
-  };
-
-  const closeElipsis = () => {
-    setElipsisOpen(false);
-  };
-
-  const handleSaveEdit = (editedContent) => {
-    // dispatch an action to update for reals
-    // updating content directly in the state
-    setContentToEdit(editedContent);
-  };
-
-
-
-  // sourcing use selector to hold store information
-  let currentNode = useSelector(
-    (store) => store.newNodeReducer.newNodeDatabaseResponse
-  );
+  const [addQuestionOpen, setAddQuestionOpen] = useState(false);
+  const [addReplyOpen, setAddReplyOpen] = useState(false);
+  const [clickedReplyContent, setClickedReplyContent] = useState("");
+  
+  // Posts being held in store
   let nodePosts = useSelector(
     (store) => store.postReducer.postDatabaseResponse
   );
-
-  console.log('new node is: ', currentNode)
-
-  // sourcing use dispatch to set new node
-  const dispatch = useDispatch();
-
-
-  return (
-    <>
-      <div className="flex flex-col h-screen App">
-        <HeaderOwnerBar />
-        <div className="flex justify-center thread-container ">
-          {nodePosts.map((post) => {
-            if (post?.node_id == currentNode.id) {
-              return (
-                <div className="mt-4 question-box">
-                  <div className="flex items-end justify-between px-4 py-2">
-                    <span className="text-sm">5 minutes ago</span>
-                    <button onClick={() => openElipsis(contentToEdit)}>. . .</button>
-                  </div>
-                  <div className="m-4 question-text">{post?.content}</div>
-                  <div className="flex items-end justify-between px-4 py-2">
-                    {showButton &&
-                      <button className="text-sm" onClick={() => setAddReplys(prev => (prev + 1))}>Reply</button>
-                    }
-                    {showRejectButton ? (
-                      <button className="text-sm">Reject</button>
-                    ) : (
-                      <button className="text-sm ml-72">🖤<span>0</span></button>
-                    )}
-                  </div>
-                  {[...Array(addReplys).keys()].map((addReply, i) => (
-                    <div key={i} className="mt-4 ml-5 reply-container flex flex-col items-center">
-                      <textarea
-                        className="reply-text m-4 p-2 min h-20 w-1/2"
-                        placeholder="Enter Reply..."
-                        value={activeReplyText}
-                        onChange={(e) => setActiveReplyText(e.target.value)} />
-                      <div className="flex items-end justify-between px-4 py-2">
-                        {/* could not get these buttons apart without adding the margin??? */}
-                        <button className="add-reply text-sm mr-20" onClick={handleAddReply}>Add Reply</button>
-                        <button className="cancel-reply text-sm ml-24" onClick={() => setAddReplys(prev => (prev - 1))}>Cancel</button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              );
-            }
-          })}
-
-          {/* dummy data for display and tinkering*/}
-          <div className="question-box mt-4 ">
-            <div className="flex items-end justify-between px-4 py-2">
-              <span className="text-sm">5 minutes ago</span>
-              <button onClick={() => openElipsis(contentToEdit)}>. . .</button>
-            </div>
-            <div className="m-4 question-text">
-              {contentToEdit}
-            </div>
-            <div className="flex items-end justify-between px-4 py-2">
-              {showButton &&
-                <button className="text-sm" onClick={() => setAddReplys(prev => (prev + 1))}>Reply</button>
-              }
-              {showRejectButton ? (
-                <button className="text-sm">Reject</button>
-              ) : (
-                <button className="text-sm ml-72">🖤<span>0</span></button>
-              )}
-            </div>
-          </div>
-          {[...Array(addReplys).keys()].map((addReply, i) => (
-            <div key={i} className="mt-4 ml-5 reply-container flex flex-col items-center">
-              <textarea
-                className="reply-text m-4 p-2 min h-20 w-1/2"
-                placeholder="Enter Reply..."
-                value={activeReplyText}
-                onChange={(e) => setActiveReplyText(e.target.value)} />
-              <div className="flex items-end justify-between px-4 py-2">
-                {/* could not get these buttons apart without adding the margin??? */}
-                <button className="add-reply text-sm mr-20" onClick={handleAddReply}>Add Reply</button>
-                <button className="cancel-reply text-sm ml-24" onClick={() => setAddReplys(prev => (prev - 1))}>Cancel</button>
-              </div>
-            </div>
-          ))}
-          {/* end of dummy */}
-
-          {/* this is where the reply maps to, not a dummy... a smarty */}
-          {replyTexts.map((text, i) => (
-            <div key={i} className="mt-4 ml-5 reply-container ">
-              <div className="flex items-end justify-between px-4 py-2">
-                <span className="text-sm">5 minutes ago</span>
-                <button onClick={() => openElipsis(contentToEdit)}>. . .</button>
-              </div>
-              <div className="rendered-reply m-4">
-                {text}
-              </div>
-              <div className="flex items-end justify-between px-4 py-2">
-                <button className="text-sm" onClick={() => setAddReplys(prev => (prev + 1))}>Reply</button>
-                <button className="text-sm" >🖤<span>0</span></button>
-              </div>
-            </div>
-          ))}
-        </div>
-        <ElipsisModal
-          elipsisOpen={elipsisOpen}
-          elipsisClose={closeElipsis}
-          contentToEdit={contentToEdit}
-          handleSaveEdit={handleSaveEdit} />
-
-      </div>
-    </>
+  let newNode = useSelector(
+    (store) => store.newNodeReducer.newNodeDatabaseResponse
   );
+
+  const questionsArray = [
+    {
+      node_id: 1,
+      user_id: 123,
+      question:
+        "Rainbows are visions, but only illusions. Rainbows have nothing to hide.",
+      count: 0,
+    },
+    {
+      node_id: 2,
+      user_id: 234,
+      question:
+        "Rainbows are nightmares, as real as death. Rainbows will eat you alive.",
+      count: 0,
+    },
+  ];
+
+  const increaseCount = (nodeId) => {
+    const updatedPostArray = nodePosts.map((content) =>
+      content.node_id === nodeId
+        ? { ...content, count: content.count + 1 }
+        : content
+        );
+        setQuestionsArray(updatedQuestionsArray);
+    };
+
+    const openAddQuestion = () => {
+        setAddQuestionOpen(true);
+    };
+
+    const closeAddQuestion = () => {
+        setAddQuestionOpen(false);
+    };
+
+    const openAddReply = (questionObject) => {
+        setClickedReplyContent(questionObject);
+        setAddReplyOpen(true);
+    };
+
+    const closeAddReply = () => {
+        setAddReplyOpen(false);
+    };
+
+
+    return (
+        <>
+        <HeaderOwnerBar />
+            <div className="flex flex-col h-screen">
+
+                {/* <div className='flex items-center header-container '>
+                    <MdChevronLeft size={25} className='ml-2' />
+                    <div className="flex-grow"></div>
+                    <button className="mr-4 text-2xl" onClick={()=>openAddQuestion(newNode?.id)}>?</button>
+                </div> */}
+
+
+                <div className="flex flex-col items-center justify-center thread-container">
+                    {nodePosts.map(post => {
+                        if (post?.node_id == newNode.id) {
+                            if (post?.reply_id == null) {
+                                return (
+                                    <div className="mt-4 question-box" key={post?.id}>
+                                        <div className="flex items-end justify-between px-4 py-2">
+                                            <span className="text-sm">5 minutes ago</span>
+
+                                        </div>
+                                        {/* this should display the latest question/reply in this thread */}
+                                        <div className="m-4 question-text" >
+                                            {post?.content}
+                                        </div>
+                                        <div className="flex items-end justify-between px-4 py-2">
+                                            <button className="text-sm" onClick={() => openAddReply(post)}>Reply</button>
+                                            <button className="text-sm" onClick={() => increaseCount(post.id)}>🖤<span>{post.votes || 0}</span></button>
+                                        </div>
+                                    </div>
+                                )
+                            }
+                        }
+                    })}
+                </div>
+                <AddQuestionModal addQuestionOpen={addQuestionOpen} closeAddQuestion={closeAddQuestion} />
+                <ReplyModal addReplyOpen={addReplyOpen} closeAddReply={closeAddReply} questionObject={clickedReplyContent} />
+            </div>
+        </>
+    );
+    setNodeArray(updatedPostArray);
+
+
+//   const openAddQuestion = () => {
+//     setAddQuestionOpen(true);
+//   };
+
+//   const closeAddQuestion = () => {
+//     setAddQuestionOpen(false);
+//   };
+
+  // const openAddReply = (questionObject) => {
+  //   setClickedReplyContent(questionObject);
+  //   setAddReplyOpen(true);
+  // };
+
+  // const closeAddReply = () => {
+  //   setAddReplyOpen(false);
+  // };
+
+  // return (
+  //   <>
+  //     <div className="flex flex-col h-screen App">
+  //       <HeaderUserBar/>
+  //       <div className="flex flex-col items-center justify-center thread-container">
+  //         {nodePosts.map((post) => {
+  //           if (post?.node_id == newNode.id) {
+  //             if (post?.reply_id == null) {
+  //               return (
+  //                 <div className="mt-4 question-box" key={post?.id}>
+  //                   <div className="flex items-end justify-between px-4 py-2">
+  //                     <span className="text-sm">5 minutes ago</span>
+  //                   </div>
+  //                   {/* this should display the latest question/reply in this thread */}
+  //                   <div className="m-4 question-text">{post?.content}</div>
+  //                   <div className="flex items-end justify-between px-4 py-2">
+  //                     <button
+  //                       className="text-sm"
+  //                       onClick={() => openAddReply(post)}
+  //                     >
+  //                       Reply
+  //                     </button>
+  //                     <button
+  //                       className="text-sm"
+  //                       onClick={() => increaseCount(post.id)}
+  //                     >
+  //                       🖤<span>{post.votes || 0}</span>
+  //                     </button>
+  //                   </div>
+  //                 </div>
+  //               );
+  //             }
+  //           }
+  //         })}
+  //       </div>
+  //       <ReplyModal
+  //         addReplyOpen={addReplyOpen}
+  //         closeAddReply={closeAddReply}
+  //         questionObject={clickedReplyContent}
+  //       />
+  //     </div>
+  //   </>
+  // );
 };
 
 export default OwnerNodes;
