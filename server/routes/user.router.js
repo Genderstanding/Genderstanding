@@ -32,6 +32,23 @@ router.post('/register', (req, res, next) => {
     });
 });
 
+router.delete('/', rejectUnauthenticated, (req, res) => {
+  sqlValue = req.user.id;
+  sqlQuery = `
+  DELETE FROM "user"
+  WHERE "id" = $1
+  ;`;
+  pool.query(sqlQuery, [sqlValue])
+    .then(result => {
+      console.log('Result back from database: ', result);
+      res.sendStatus(201);
+    })
+    .catch(error => {
+      console.log('Error in USER deletion from database')
+      res.sendStatus(500);
+    })
+})
+
 // Handles login form authenticate/login POST
 // userStrategy.authenticate('local') is middleware that we run on this route
 // this middleware will run our POST if successful
