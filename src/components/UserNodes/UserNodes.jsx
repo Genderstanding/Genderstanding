@@ -105,69 +105,6 @@ const UserNodes = () => {
             </div>
         </>
     );
-    setNodeArray(updatedPostArray);
-
-
-//   const openAddQuestion = () => {
-//     setAddQuestionOpen(true);
-//   };
-
-//   const closeAddQuestion = () => {
-//     setAddQuestionOpen(false);
-//   };
-
-  // const openAddReply = (questionObject) => {
-  //   setClickedReplyContent(questionObject);
-  //   setAddReplyOpen(true);
-  // };
-
-  // const closeAddReply = () => {
-  //   setAddReplyOpen(false);
-  // };
-
-  // return (
-  //   <>
-  //     <div className="flex flex-col h-screen App">
-  //       <HeaderUserBar/>
-  //       <div className="flex flex-col items-center justify-center thread-container">
-  //         {nodePosts.map((post) => {
-  //           if (post?.node_id == newNode.id) {
-  //             if (post?.reply_id == null) {
-  //               return (
-  //                 <div className="mt-4 question-box" key={post?.id}>
-  //                   <div className="flex items-end justify-between px-4 py-2">
-  //                     <span className="text-sm">5 minutes ago</span>
-  //                   </div>
-  //                   {/* this should display the latest question/reply in this thread */}
-  //                   <div className="m-4 question-text">{post?.content}</div>
-  //                   <div className="flex items-end justify-between px-4 py-2">
-  //                     <button
-  //                       className="text-sm"
-  //                       onClick={() => openAddReply(post)}
-  //                     >
-  //                       Reply
-  //                     </button>
-  //                     <button
-  //                       className="text-sm"
-  //                       onClick={() => increaseCount(post.id)}
-  //                     >
-  //                       🖤<span>{post.votes || 0}</span>
-  //                     </button>
-  //                   </div>
-  //                 </div>
-  //               );
-  //             }
-  //           }
-  //         })}
-  //       </div>
-  //       <ReplyModal
-  //         addReplyOpen={addReplyOpen}
-  //         closeAddReply={closeAddReply}
-  //         questionObject={clickedReplyContent}
-  //       />
-  //     </div>
-  //   </>
-  // );
 };
 
 export default UserNodes;
