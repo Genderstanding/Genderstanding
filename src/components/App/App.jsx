@@ -51,7 +51,7 @@ function App() {
        
   <Nav/>
 
-
+{/* We need to do a use effect */}
           {/* Conditional rendering of the Nav component */}
           {/* {currentPath !== "/action" && <Nav />} */}
 
