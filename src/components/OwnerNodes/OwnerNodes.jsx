@@ -7,6 +7,7 @@ import HeaderUserBar from "../HeaderBar/HeaderUserBar";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import AddQuestionModal from "../AddQuestionModal/AddQuestionModal";
 import HeaderOwnerBar from "../HeaderBar/HeaderOwnerBar"
+import { useDispatch } from "react-redux";
 
 
 const OwnerNodes = () => {
@@ -15,6 +16,13 @@ const OwnerNodes = () => {
   const [clickedReplyContent, setClickedReplyContent] = useState("");
   const [showButton, setShowButton] = useState(true);
   const [toggleButtom, setToggleButton] = useState(true);
+
+  // inputing dispatch
+  const dispatch = useDispatch();
+
+  // const toggleShowButton = () => {
+  //   setShowButton(!showButton);
+  // }
 
   const handleAcceptButton = () => {
     setShowButton(false);
@@ -46,13 +54,19 @@ const OwnerNodes = () => {
     },
   ];
 
-  const increaseCount = (nodeId) => {
-    const updatedPostArray = nodePosts.map((content) =>
-      content.node_id === nodeId
-        ? { ...content, count: content.count + 1 }
-        : content
-        );
-        setQuestionsArray(updatedQuestionsArray);
+  const increaseCount = (postId) => {
+    dispatch({
+      type: 'LIKE_POST',
+      payload: {
+        id: postId
+      }
+    })
+    // const updatedPostArray = nodePosts.map((content) =>
+    //   content.node_id === nodeId
+    //     ? { ...content, count: content.count + 1 }
+    //     : content
+    //     );
+    //     setQuestionsArray(updatedQuestionsArray);
     };
 
     const openAddQuestion = () => {
