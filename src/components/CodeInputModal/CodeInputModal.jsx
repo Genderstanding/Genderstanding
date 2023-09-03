@@ -1,11 +1,11 @@
 import React from "react";
-import "./InviteInputModal.css";
+import "./CodeInputModal.css";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Input } from "@mui/material";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
-export const InviteInputModal = ({ InviteCodeOpen, handleCloseInviteModal, children }) => {
+export const CodeInputModal = ({ InviteCodeOpen, handleCloseInviteModal, children }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [nodeCodeInput, setNodeCodeInput] = useState('')
@@ -74,6 +74,3 @@ export const InviteInputModal = ({ InviteCodeOpen, handleCloseInviteModal, child
 };
 
 
-
-
-export default InviteInputModal;

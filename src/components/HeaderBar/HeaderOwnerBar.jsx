@@ -24,7 +24,6 @@ export default function HeaderOwnerBar() {
   //  INVITE CODE MODAL
   const openInviteCode = (nodeID) => {
     setOpenInviteCode(true);
-    setNodeId(nodeID)
   };
   const closeInviteCode = () => {
     setOpenInviteCode(false);

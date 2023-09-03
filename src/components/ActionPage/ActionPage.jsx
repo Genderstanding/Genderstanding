@@ -7,17 +7,23 @@ import { ActionButton } from "../CustomButton/ActionButton";
 import { CustomButton } from "../CustomButton/CustomButton";
 import { useDispatch } from "react-redux";
 import AddNodeModal from "../AddNodeModal/AddNodeModal";
-import InviteInputModal from "../InviteInputModal/InviteInputModal";
+import { CodeInputModal } from "../CodeInputModal/CodeInputModal";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function ActionPage() {
-  const dispatch = useDispatch();
+  const history = useHistory();
   // INVITE CODE MODAL
   const [inviteModalOpen, setInviteModalOpen] = useState(false);
   const handleOpenInviteModal = () => {
     setInviteModalOpen(true);
   };
+
   const handleCloseInviteModal = () => {
     setInviteModalOpen(false);
+      // Direct to home from action page
+      history.push("/home");
+    
   };
 
   // ADD NODE MODAL
@@ -52,21 +58,21 @@ export default function ActionPage() {
       </div>
       <div className="button-container">
         {/* NEW NODE */}
-        <ActionButton className="btn" 
-        onClick={openAddNode}>
+
+        <ActionButton className="btn" onClick={openAddNode}>
           Create Node
         </ActionButton>
-        <AddNodeModal addNodeOpen={addNodeOpen}  addNodeClose={closeAddNode} />
+
+
+        <AddNodeModal addNodeOpen={addNodeOpen} addNodeClose={closeAddNode} />
 
         {/* INVITE CODE INPUT */}
-        <ActionButton
-          className="btn"
-          onClick={handleOpenInviteModal}
-         
-        >
+
+        <ActionButton className="btn" onClick={handleOpenInviteModal}>
           Join Node
         </ActionButton>
-        <InviteInputModal
+
+        <CodeInputModal
           InviteCodeOpen={inviteModalOpen}
           handleCloseInviteModal={handleCloseInviteModal}
         />
