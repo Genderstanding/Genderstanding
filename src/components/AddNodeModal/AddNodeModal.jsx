@@ -42,7 +42,7 @@ const AddNodeModal = ({ addNodeOpen, addNodeClose, children }) => {
                 {children}
                 <h2 className='mb-4 mr-4 text-xl font-bold'>Create Community</h2>
                 <input type='text' 
-                placeholder='add name' 
+                placeholder='Enter a name ...' 
                 className='border-b border-black'
                 onChange={(event) => setNodeInput(event.target.value)}
                 />

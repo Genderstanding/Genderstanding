@@ -62,12 +62,13 @@ export default function ActionPage() {
         <ActionButton
           className="btn"
           onClick={handleOpenInviteModal}
+         
         >
           Join Node
         </ActionButton>
         <InviteInputModal
           InviteCodeOpen={inviteModalOpen}
-          onClose={handleCloseInviteModal}
+          handleCloseInviteModal={handleCloseInviteModal}
         />
 
         <CustomButton className="btn" path="/home">

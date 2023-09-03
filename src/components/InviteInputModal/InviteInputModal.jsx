@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Input } from "@mui/material";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
-export const InviteInputModal = ({ InviteCodeOpen, children }) => {
+export const InviteInputModal = ({ InviteCodeOpen, handleCloseInviteModal, children }) => {
   if (!InviteCodeOpen) {
     return null;
   }
@@ -28,21 +28,23 @@ export const InviteInputModal = ({ InviteCodeOpen, children }) => {
   };
 
   return (
-    <div className="flex items-center justify-center modal-overlay">
-      <div className="flex flex-col items-center justify-center invite-code-modal">
-        {children}
-        <h2 className="mb-4 mr-4 text-xl font-bold">Enter Invite Code</h2>
+    <div className='flex items-center justify-center modal-overlay'>
+     <div className='flex flex-col items-center justify-center add-node-modal'>
+    {children}
+    <h2 className='mb-4 mr-4 text-xl font-bold'>Enter Invite Code</h2>
         <div className="code-container">
-          <Input
-            className="border-b border-black"
-            type="text"
-            placeholder="enter code"
-            onChange={(event) => setCodeInput(event.target.value)}
-          />
+        <input type='text' 
+    placeholder='Enter a code ...' 
+    className='border-b border-black'
+    onChange={(event) => setCodeInput(event.target.value)}
+    />
 
-          <div className="flex mt-6 buttons-container">
+<div className='mt-6 buttons-container'>
             <button className="mr-6 underline" onClick={handleInputCode}>
-              Submit
+              Confirm
+            </button>
+            <button className="underline " onClick={handleCloseInviteModal}>
+              Close
             </button>
           </div>
         </div>
@@ -50,5 +52,8 @@ export const InviteInputModal = ({ InviteCodeOpen, children }) => {
     </div>
   );
 };
+
+
+
 
 export default InviteInputModal;
