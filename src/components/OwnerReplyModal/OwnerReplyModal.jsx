@@ -9,10 +9,17 @@ const OwnerReplyModal = ({ addReplyOpen, closeAddReply, questionObject }) => {
     }
     const dispatch = useDispatch();
     let nodePosts = useSelector(store => store.postReducer.postDatabaseResponse)
+    let nodeData = useSelector(store => store.nodeReducer.nodeDatabaseResponse);
+    console.log("nodeData=", nodeData)
+    console.log("nodePosts=", nodePosts)
+
+
     const reversePosts = nodePosts.slice().reverse();
 
     // Creating a state to hold text inputed
     const [replyInput, setReplyInput] = useState('');
+
+
 
 
     const handleReply = (event, questionObject) => {
@@ -31,8 +38,10 @@ const OwnerReplyModal = ({ addReplyOpen, closeAddReply, questionObject }) => {
         } catch (error) {
             console.log('Error in button click to create new reply: ', error)
         }
- 
+
     }
+
+    
 
 
     return (
@@ -44,15 +53,33 @@ const OwnerReplyModal = ({ addReplyOpen, closeAddReply, questionObject }) => {
                     {questionObject.content}
                 </div>
 
-                {reversePosts.map(post => {
-                    if (post.reply_id == questionObject.id) {
+                {reversePosts.map((post, index) => {
+                    console.log('post.user_id:', post.user_id);
+                    console.log('nodeData.user_id:', nodeData.user_id);
+                    const matchingNode = nodeData.find(node => node.id === post.node_id);
+                    const isNodeOwner = matchingNode ? post.user_id === matchingNode.user_id : false;
+                    
+                    
+                    // if (post.reply_id == questionObject.id) {
+                        
+                        // const isNodeOwner = post.user_id === nodeData.user_id;
+
                         return (
-                            <div className="question-text m-4" key={post.id}>
-                                {post.content}
+                            // <div className="question-text m-4" key={post.id}>
+                            //     {post.content}
+                            // </div>
+                            <div key={post.id} className={`mt-4 ${isNodeOwner ? 'owner-text-bubble' : 'user-text-bubble'}`}>
+                                <div className="flex items-end justify-between px-4 py-2">
+                                    <span className="text-sm">{isNodeOwner ? 'Node Owner' : 'User'} 5 minutes ago</span>
+                                    <button onClick={() => openElipsis(contentToEdit)}>. . .</button>
+                                </div>
+                                <div className="m-4 question-text">{post?.content}</div>
                             </div>
+
                         )
-                    }
+                    // }
                 })}
+
                 <textarea
                     rows="4"
                     className='w-full px-4 py-2 text-sm text-gray-900 bg-white border-0 reply-textarea dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400'

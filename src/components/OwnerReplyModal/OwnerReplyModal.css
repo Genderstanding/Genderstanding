@@ -19,7 +19,7 @@
   min-height: 90vh;
   background-color: white;
 }
-.reply-textarea {
+.owner-text-bubble {
   border-radius: 10px;
   width: 80vw;
   border: 1px solid black;
