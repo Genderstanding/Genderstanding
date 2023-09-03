@@ -24,6 +24,6 @@ export default function* rootSaga() {
     postSaga(),
     nodeAssociationSaga(),
     newNodeSaga(),
-    inviteCodeSaga()
+    inviteCodeSaga(),
   ]);
 }

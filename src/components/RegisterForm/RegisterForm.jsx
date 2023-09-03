@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import CustomIcon from "../Icon/CustomIcon";
+import CustomIcon from '../../Assets/Icon/CustomIcon'
 import "../App/App.css";
 import { Typography } from "@mui/material";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";

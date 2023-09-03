@@ -7,7 +7,6 @@ import HeaderUserBar from "../HeaderBar/HeaderUserBar";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import AddQuestionModal from "../AddQuestionModal/AddQuestionModal";
 import { useDispatch } from "react-redux";
-import moment from 'moment';
 
 
 const UserNodes = () => {
@@ -17,7 +16,7 @@ const UserNodes = () => {
 
   // importing dispatch
   const dispatch = useDispatch();
-  
+
   // Posts being held in store
   let nodePosts = useSelector(
     (store) => store.postReducer.postDatabaseResponse
@@ -44,36 +43,35 @@ const UserNodes = () => {
   ];
 
   const increaseCount = (postId) => {
-    console.log('post id is: ', postId)
+    console.log("post id is: ", postId);
     dispatch({
-      type: 'LIKE_POST',
-      payload: postId
-    })
+      type: "LIKE_POST",
+      payload: postId,
+    });
     // const updatedPostArray = nodePosts.map((content) =>
     //   content.node_id === nodeId
     //     ? { ...content, count: content.count + 1 }
     //     : content
     //     );
     //     setQuestionsArray(updatedQuestionsArray);
-    };
+  };
 
-    const openAddQuestion = () => {
-        setAddQuestionOpen(true);
-    };
+  const openAddQuestion = () => {
+    setAddQuestionOpen(true);
+  };
 
-    const closeAddQuestion = () => {
-        setAddQuestionOpen(false);
-    };
+  const closeAddQuestion = () => {
+    setAddQuestionOpen(false);
+  };
 
-    const openAddReply = (questionObject) => {
-        setClickedReplyContent(questionObject);
-        setAddReplyOpen(true);
-    };
+  const openAddReply = (questionObject) => {
+    setClickedReplyContent(questionObject);
+    setAddReplyOpen(true);
+  };
 
-    const closeAddReply = () => {
-        setAddReplyOpen(false);
-    };
-
+  const closeAddReply = () => {
+    setAddReplyOpen(false);
+  };
 
     return (
         <>
@@ -93,7 +91,7 @@ const UserNodes = () => {
                                 return (
                                     <div className="mt-4 question-box" key={post?.id}>
                                         <div className="flex items-end justify-between px-4 py-2">
-                                            <span className="text-sm">{moment(post?.post_time).fromNow()}</span>
+                                            <span className="text-sm">5 minutes ago</span>
 
                                         </div>
                                         {/* this should display the latest question/reply in this thread */}
