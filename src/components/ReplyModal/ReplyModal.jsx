@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './ReplyModal.css'
 import { useSelector, useDispatch } from 'react-redux';
+import moment from 'moment';
 
 
 const ReplyModal = ({ addReplyOpen, closeAddReply, questionObject }) => {
@@ -31,7 +32,7 @@ const ReplyModal = ({ addReplyOpen, closeAddReply, questionObject }) => {
         } catch (error) {
             console.log('Error in button click to create new reply: ', error)
         }
- 
+
     }
 
 
@@ -40,6 +41,10 @@ const ReplyModal = ({ addReplyOpen, closeAddReply, questionObject }) => {
             <div className='flex flex-col items-center justify-center reply-box'>
                 {/* {children} */}
                 <h2 className='mb-4 mr-4 text-xl font-bold'>Thread</h2>
+                <div className="flex items-end justify-between px-4 py-2">
+                    <span className="text-sm">{moment(questionObject?.post_time).fromNow()}</span>
+
+                </div>
                 <div className="m-4 question-text">
                     {questionObject.content}
                 </div>
@@ -47,8 +52,15 @@ const ReplyModal = ({ addReplyOpen, closeAddReply, questionObject }) => {
                 {reversePosts.map(post => {
                     if (post.reply_id == questionObject.id) {
                         return (
-                            <div className="question-text m-4" key={post.id}>
-                                {post.content}
+                            <div>
+                                <div className="flex items-end justify-between px-4 py-2">
+                                    <span className="text-sm">{moment(post?.post_time).fromNow()}</span>
+
+                                </div>
+                                <div className="question-text m-4" key={post.id}>
+
+                                    {post.content}
+                                </div>
                             </div>
                         )
                     }
