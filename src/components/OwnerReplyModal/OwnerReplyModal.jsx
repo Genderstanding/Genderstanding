@@ -48,49 +48,33 @@ const OwnerReplyModal = ({ addReplyOpen, closeAddReply, questionObject }) => {
         <div className='flex items-center justify-center modal-overlay'>
             <div className='flex flex-col items-center justify-center reply-box'>
                 {/* {children} */}
-                <h2 className='mb-4 mr-4 text-xl font-bold'>Thread</h2>
-                <div className="m-4 question-text">
-                    {questionObject.content}
-                </div>
-
-                {reversePosts.map((post, index) => {
+                <h2 className='mb-4 mr-4 mt-6 text-xl font-bold'>{questionObject.content}</h2>
+                <div className="scrollable-container overflow-y-auto">
+                {reversePosts.map((post) => {
                     console.log('post.user_id:', post.user_id);
                     console.log('nodeData.user_id:', nodeData.user_id);
                     const matchingNode = nodeData.find(node => node.id === post.node_id);
                     const isNodeOwner = matchingNode ? post.user_id === matchingNode.user_id : false;
-                    
-                    
-                    // if (post.reply_id == questionObject.id) {
-                        
-                        // const isNodeOwner = post.user_id === nodeData.user_id;
-
                         return (
-                            // <div className="question-text m-4" key={post.id}>
-                            //     {post.content}
-                            // </div>
-                            <div key={post.id} className={`mt-4 ${isNodeOwner ? 'owner-text-bubble' : 'user-text-bubble'}`}>
+                            <div key={post.id} className={`mt-4 ${isNodeOwner ? 'owner-text-bubble mr-5' : 'user-text-bubble ml-5'}`}>
                                 <div className="flex items-end justify-between px-4 py-2">
-                                    <span className="text-sm">{isNodeOwner ? 'Node Owner' : 'User'} 5 minutes ago</span>
+                                    <span className="text-sm">{isNodeOwner ? 'Owner' : 'User'} 5 minutes ago</span>
                                     <button onClick={() => openElipsis(contentToEdit)}>. . .</button>
                                 </div>
                                 <div className="m-4 question-text">{post?.content}</div>
                             </div>
-
                         )
-                    // }
                 })}
-
+                </div>
                 <textarea
                     rows="4"
-                    className='w-full px-4 py-2 text-sm text-gray-900 bg-white border-0 reply-textarea dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400'
+                    className='w-full px-4 py-2 mt-4 text-sm text-gray-900 bg-white border-0 reply-textarea dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400'
                     placeholder="Write a Reply..."
                     onChange={(event) => setReplyInput(event.target.value)}
                     value={replyInput}
-                    required>
-                </textarea>
+                    required />
                 <div className='mt-6 buttons-container'>
                     <button className='mr-6 underline' onClick={(event) => handleReply(event, questionObject)}>Confirm</button>
-
                     <button className='underline ' onClick={closeAddReply}>
                         Close
                     </button>
