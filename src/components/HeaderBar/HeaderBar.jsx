@@ -1,32 +1,22 @@
 import React, { useState } from "react";
 import "../HomePage/HomePage.css";
 import AddNodeModal from "../AddNodeModal/AddNodeModal";
-import SettingsModal from "../SettingsModal/SettingsModal";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import { useSelector } from "react-redux";
-import SVG from "../SVG/SVG";
+import SVG from "../../Assets/SVG/SVG";
 import { useHistory } from "react-router-dom";
 import { Typography } from "@mui/material";
 
 export default function HeaderBar() {
   const history = useHistory();
   const [addNodeOpen, setaddNodeOpen] = useState(false);
-  const [settingsOpen, setSettingsOpen] = useState(false);
-  const user = useSelector(store => store.user)
+   const user = useSelector(store => store.user)
 
   const openAddNode = () => {
     setaddNodeOpen(true);
   };
   const closeAddNode = () => {
     setaddNodeOpen(false);
-  };
-
-  const openSettings = () => {
-    setSettingsOpen(true);
-  };
-
-  const closeSettings = () => {
-    setSettingsOpen(false);
   };
 
   const svgNewNode = [
@@ -56,12 +46,7 @@ export default function HeaderBar() {
           fill="#CF6F5A"
         />
       </button>
-
       <AddNodeModal addNodeOpen={addNodeOpen} addNodeClose={closeAddNode} />
-      <SettingsModal
-        settingsOpen={settingsOpen}
-        closeSettings={closeSettings}
-      />
     </div>
   );
 }

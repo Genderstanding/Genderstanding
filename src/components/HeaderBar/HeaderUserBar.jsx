@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import "../HomePage/HomePage.css";
 import AddQuestionModal from "../AddQuestionModal/AddQuestionModal";
-import SettingsModal from "../SettingsModal/SettingsModal";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import { useSelector } from "react-redux";
-import SVG from "../SVG/SVG";
+import SVG from '../../Assets/SVG/SVG'
 import { useHistory } from "react-router-dom";
 import { Typography } from "@mui/material";
 
@@ -12,7 +11,7 @@ export default function HeaderUserBar() {
   const [clickedReplyContent, setClickedReplyContent] = useState("");
   const [addQuestionOpen, setAddQuestionOpen] = useState(false);
   const [addReplyOpen, setAddReplyOpen] = useState(false);
-  const [settingsOpen, setSettingsOpen] = useState(false);
+  // const [settingsOpen, setSettingsOpen] = useState(false);
   const history = useHistory();
 
   // Posts being held in store
@@ -26,13 +25,13 @@ export default function HeaderUserBar() {
     (store) => store.user
   );
   
-  //  SETTING MODAL
-  const openSettings = () => {
-    setSettingsOpen(true);
-  };
-  const closeSettings = () => {
-    setSettingsOpen(false);
-  };
+  // //  SETTING MODAL
+  // const openSettings = () => {
+  //   setSettingsOpen(true);
+  // };
+  // const closeSettings = () => {
+  //   setSettingsOpen(false);
+  // };
 
   // QUESTION MODAL
   const openAddQuestion = () => {
@@ -79,10 +78,10 @@ export default function HeaderUserBar() {
         closeAddQuestion={closeAddQuestion}
       />
       {/* SETTING */}
-      <SettingsModal
+      {/* <SettingsModal
         settingsOpen={settingsOpen}
         closeSettings={closeSettings}
-      />
+      /> */}
     </div>
   );
 }

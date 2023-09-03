@@ -1,37 +1,51 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   HashRouter as Router,
   Redirect,
   Route,
   Switch,
-
 } from "react-router-dom";
-
 import { useDispatch, useSelector } from "react-redux";
-
-import Nav from "../Nav/Nav";
-
+// PAGES
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
-
+import Nav from "../Nav/Nav";
+import "./App.css";
 import AboutPage from "../AboutPage/AboutPage";
 import UserPage from "../UserPage/UserPage";
 import WelcomePage from "../WelcomePage/WelcomePage";
 import LoginPage from "../LoginPage/LoginPage";
 import RegisterPage from "../RegisterPage/RegisterPage";
 import ActionPage from "../ActionPage/ActionPage";
-import "./App.css";
 import HomePage from "../HomePage/HomePage";
 import FeaturedPage from "../FeaturedPage/FeaturedPage";
 import SettingsModal from "../SettingsModal/SettingsModal";
 import OwnerNodes from "../OwnerNodes/OwnerNodes";
 import UserNodes from "../UserNodes/UserNodes";
-import HeaderBar from "../HeaderBar/HeaderBar";
+// TOASTIFY
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const dispatch = useDispatch();
-  // const location = useLocation();
   const user = useSelector((store) => store.user);
 
+  // DARK MODE
+  const [darkMode, setDarkMode] = useState(false);
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+    //
+  };
+
+  // SETTING MODAL
+  const [settingsOpen, setSettingsOpen] = useState(false);
+  const openSettings = () => {
+    setSettingsOpen(true);
+  };
+  const closeSettings = () => {
+    setSettingsOpen(false);
+  };
+
+  // DISPLAY
   useEffect(() => {
     dispatch({ type: "FETCH_USER" });
   }, [dispatch]);
@@ -39,24 +53,30 @@ function App() {
   useEffect(() => {
     dispatch({ type: "FETCH_NODE" });
     dispatch({ type: "FETCH_POST" });
-    dispatch({ type: "FETCH_NODE_ASSOCIATION" })
-    dispatch({ type: 'FETCH_CURRENT_NODE'});
+    dispatch({ type: "FETCH_NODE_ASSOCIATION" });
+    dispatch({ type: "FETCH_CURRENT_NODE" });
   }, []);
-
-  // TO DO: PROTECTEDROUTE 
 
   return (
     <Router>
       <div>
-       
-  <Nav/>
+        {/* Toastify */}
+        <ToastContainer
+          position="bottom-left"
+          autoClose={1500}
+          hideProgressBar
+          newestOnTop
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss={false}
+          draggable
+          pauseOnHover={false}
+          theme="light"
+        />
+        {/* Nav */}
+        <Nav />
 
-{/* We need to do a use effect */}
-          {/* Conditional rendering of the Nav component */}
-          {/* {currentPath !== "/action" && <Nav />} */}
-
-        <Switch> 
-        
+        <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/welcome" />
 
@@ -137,7 +157,11 @@ function App() {
             exact
             path="/setting"
           >
-            <SettingsModal />
+            <SettingsModal
+              openSettings={openSettings}
+              closeSettings={closeSettings}
+              toggleDarkMode={toggleDarkMode}
+            />
           </ProtectedRoute>
 
           <Route exact path="/login">
@@ -210,7 +234,6 @@ function App() {
             <h1>404</h1>
           </Route>
         </Switch>
-
       </div>
     </Router>
   );

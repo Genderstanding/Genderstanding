@@ -10,6 +10,8 @@ import AddNodeModal from "../AddNodeModal/AddNodeModal";
 import { CodeInputModal } from "../CodeInputModal/CodeInputModal";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 export default function ActionPage() {
   const history = useHistory();
@@ -21,9 +23,6 @@ export default function ActionPage() {
 
   const handleCloseInviteModal = () => {
     setInviteModalOpen(false);
-      // Direct to home from action page
-      history.push("/home");
-    
   };
 
   // ADD NODE MODAL
@@ -36,7 +35,20 @@ export default function ActionPage() {
   const closeAddNode = () => {
     setaddNodeOpen(false);
   };
-
+  
+  const handleAlert = () => {
+    toast.info('Welcome to GenderStanding', {
+      position: "top-center",
+      autoClose: 2500,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  }
+  
   return (
     <div className="action-container">
       <div className="flex items-center logo-container ">
@@ -56,13 +68,14 @@ export default function ActionPage() {
           Why Are You Here?
         </Typography>
       </div>
+
+
       <div className="button-container">
         {/* NEW NODE */}
 
         <ActionButton className="btn" onClick={openAddNode}>
           Create Node
         </ActionButton>
-
 
         <AddNodeModal addNodeOpen={addNodeOpen} addNodeClose={closeAddNode} />
 
@@ -77,9 +90,10 @@ export default function ActionPage() {
           handleCloseInviteModal={handleCloseInviteModal}
         />
 
-        <CustomButton className="btn" path="/home">
+        <CustomButton className="btn" path="/home" onClick={handleAlert}>
           Just Browsing
         </CustomButton>
+        
       </div>
     </div>
   );

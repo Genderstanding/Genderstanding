@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 const AddNodeModal = ({ addNodeOpen, addNodeClose, children }) => {
   if (!addNodeOpen) {
@@ -20,12 +22,23 @@ const AddNodeModal = ({ addNodeOpen, addNodeClose, children }) => {
 
   const [nodeInput, setNodeInput] = useState("");
 
+  
   // function to handle adding a node to database
   const handleAddNode = (event) => {
     event.preventDefault();
 
     try {
       dispatch({ type: "CREATE_NODE", payload: { name: nodeInput } });
+      toast.success("Node created successfully", {
+        position: "bottom-left",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
 
       // Check the referrer and redirect accordingly
       if (
@@ -41,6 +54,16 @@ const AddNodeModal = ({ addNodeOpen, addNodeClose, children }) => {
       }
     } catch (error) {
       console.log("Error in button click to create a new node: ", error);
+      toast.error("Failed to created new node", {
+        position: "bottom-left",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
 
@@ -57,11 +80,12 @@ const AddNodeModal = ({ addNodeOpen, addNodeClose, children }) => {
         />
         <div className="mt-6 buttons-container">
           <button className="mr-6 underline" onClick={handleAddNode}>
-            Confirm
+             Confirm
           </button>
           <button className="underline " onClick={addNodeClose}>
             Close
           </button>
+        
         </div>
       </div>
     </div>

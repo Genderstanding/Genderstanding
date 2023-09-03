@@ -4,10 +4,10 @@ import LogOutButton from '../LogOutButton/LogOutButton';
 import { useSelector, useDispatch } from 'react-redux';
 import './SettingsModal.css'
 
-const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
+const SettingsModal = ({ settingsOpen, closeSettings, children, toggleDarkMode }) => {
     const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
     const [nodeCodeInput, setNodeCodeInput] = useState('')
-
+    
     // Store to match against currently available codes
     const nodeAssociation = useSelector(store => store.nodeAssociationReducer.nodeAssociationDatabase)
     
@@ -28,7 +28,7 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
         setShowDeleteConfirmation(false);
     };
 
-    //Delete logic...
+    // Delete account 
     const handleDeleteAccount = () => {
   
         // Dispatch simply calls for whatever user is logged in to be deleted. 
@@ -43,6 +43,7 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
 
     };
 
+    // Code input 
     const handleNodeCodeInput = (event, nodeCodeInput, nodeAssociation) => {
         event.preventDefault();
     try {
@@ -94,7 +95,7 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
                     <span className='mb-2'>Theme</span>
                     <div className="flex justify-between">
                         <button className='ml-20'>☼</button>
-                        <button className='mr-20'>☾</button>
+                        <button className='mr-20' onClick={toggleDarkMode}>☾</button>
                     </div><br />
                     <div className="flex flex-col gap-2">
                         <button className="mt-2 underline ">Remove Node</button>
