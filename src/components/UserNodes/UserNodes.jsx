@@ -7,14 +7,13 @@ import HeaderUserBar from "../HeaderBar/HeaderUserBar";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import AddQuestionModal from "../AddQuestionModal/AddQuestionModal";
 
+
 const UserNodes = () => {
   const dispatch = useDispatch()
   const [addQuestionOpen, setAddQuestionOpen] = useState(false);
   const [addReplyOpen, setAddReplyOpen] = useState(false);
   const [clickedReplyContent, setClickedReplyContent] = useState("");
-  const [count ,setUpdateCount] = useState('')
-
-
+  
   // Posts being held in store
   let nodePosts = useSelector(
     (store) => store.postReducer.postDatabaseResponse
@@ -40,16 +39,14 @@ const UserNodes = () => {
     },
   ];
 
-  // TO DO
   const increaseCount = (nodeId) => {
     const updatedPostArray = nodePosts.map((content) =>
       content.node_id === nodeId
         ? { ...content, count: content.count + 1 }
         : content
-    );
-    setUpdateCount(updatedPostArray);
-    dispatch({type:"SET_LIKES", payload: count })
-  };
+        );
+        setQuestionsArray(updatedQuestionsArray);
+    };
 
   const openAddQuestion = () => {
     setAddQuestionOpen(true);
@@ -73,58 +70,45 @@ const UserNodes = () => {
       <div className="flex flex-col h-screen App">
         <HeaderUserBar />
 
-        <div className="flex flex-col items-center justify-center thread-container">
-          {nodePosts.map((post) => {
-            if (post?.node_id == newNode.id) {
-              if (post?.reply_id == null) {
-                return (
-                  <div className="mt-4 question-box" key={post?.id}>
-                    <div className="flex items-end justify-between px-4 py-2">
-                      <span className="text-sm">5 minutes ago</span>
-                    </div>
-                    {/* this should display the latest question/reply in this thread */}
-                    <div className="m-4 question-text">{post?.content}</div>
-                    <div className="flex items-end justify-between px-4 py-2">
-                      <button
-                        className="text-sm"
-                        onClick={() => openAddReply(post)}
-                      >
-                        Reply
-                      </button>
-                      <button
-                        className="text-sm"
-                        onClick={() => increaseCount(post.id)}
-                      >
-                        🖤<span>{post.votes || 0}</span>
-                      </button>
-                    </div>
-                  </div>
-                );
-              }
-            }
-          })}
-        </div>
-        <AddQuestionModal
-          addQuestionOpen={addQuestionOpen}
-          closeAddQuestion={closeAddQuestion}
-        />
-        <ReplyModal
-          addReplyOpen={addReplyOpen}
-          closeAddReply={closeAddReply}
-          questionObject={clickedReplyContent}
-        />
-      </div>
-    </>
-  );
-  setNodeArray(updatedPostArray);
+                <div className="flex flex-col items-center justify-center thread-container">
+                    {nodePosts.map(post => {
+                        if (post?.node_id == newNode.id) {
+                            if (post?.reply_id == null) {
+                                return (
+                                    <div className="mt-4 question-box" key={post?.id}>
+                                        <div className="flex items-end justify-between px-4 py-2">
+                                            <span className="text-sm">5 minutes ago</span>
 
-  //   const openAddQuestion = () => {
-  //     setAddQuestionOpen(true);
-  //   };
+                                        </div>
+                                        {/* this should display the latest question/reply in this thread */}
+                                        <div className="m-4 question-text" >
+                                            {post?.content}
+                                        </div>
+                                        <div className="flex items-end justify-between px-4 py-2">
+                                            <button className="text-sm" onClick={() => openAddReply(post)}>Reply</button>
+                                            <button className="text-sm" onClick={() => increaseCount(post.id)}>🖤<span>{post.votes || 0}</span></button>
+                                        </div>
+                                    </div>
+                                )
+                            }
+                        }
+                    })}
+                </div>
+                <AddQuestionModal addQuestionOpen={addQuestionOpen} closeAddQuestion={closeAddQuestion} />
+                <ReplyModal addReplyOpen={addReplyOpen} closeAddReply={closeAddReply} questionObject={clickedReplyContent} />
+            </div>
+        </>
+    );
+    setNodeArray(updatedPostArray);
 
-  //   const closeAddQuestion = () => {
-  //     setAddQuestionOpen(false);
-  //   };
+
+//   const openAddQuestion = () => {
+//     setAddQuestionOpen(true);
+//   };
+
+//   const closeAddQuestion = () => {
+//     setAddQuestionOpen(false);
+//   };
 
   // const openAddReply = (questionObject) => {
   //   setClickedReplyContent(questionObject);

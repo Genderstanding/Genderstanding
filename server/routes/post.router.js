@@ -41,8 +41,8 @@ postRouter.post('/', rejectUnauthenticated, (req, res) => {
         sqlParams.reply_id
     ]
     let sqlQuery = `
-    INSERT INTO "posts" ("user_id", "content", "node_id", "orig_post", "reply_id", "post_time")
-    VALUES ($1, $2, $3, $4, $5, current_timestamp);
+    INSERT INTO "posts" ("user_id", "content", "node_id", "orig_post", "reply_id", "post_time", "votes")
+    VALUES ($1, $2, $3, $4, $5, current_timestamp, 0);
     `;
     pool.query(sqlQuery, [sqlUserId, sqlParams.content, sqlParams.node_id, sqlParams.orig_post, sqlParams.reply_id])
         .then(result => {
@@ -84,6 +84,7 @@ postRouter.put('/:id', rejectUnauthenticated, (req, res) => {
 // PUT route if the user likes a post
 postRouter.put('/like/:id', rejectUnauthenticated, (req, res) => {
     let sqlValues = req.params.id;
+    console.log('sql Values are: ', sqlValues)
     let sqlQuery =`
     UPDATE "posts"
     SET "votes" = "votes" + 1
