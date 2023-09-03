@@ -3,6 +3,7 @@ import "./HomePage.css";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { CardActionArea } from "@mui/material";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 
 import HeaderBar from "../HeaderBar/HeaderBar";
@@ -24,9 +25,9 @@ export default function HomePage() {
   let yourContent;
   const checkUserId = (node) => {
     if (node.user_id == user.id) {
-      yourContent = "Created node: ";
+      yourContent = <AccountCircleIcon />;
     } else if (node.user_id !== user.id)  {
-      yourContent = "Joined node: ";
+      yourContent = "";
     }
     return yourContent;
   };
@@ -80,7 +81,7 @@ export default function HomePage() {
                     >
                       {checkUserId(node)}
                       <br />
-                      {node.node_name}
+                      {node.node_name}{'  '}{node.id}
                     </div>
                   );
                 })}

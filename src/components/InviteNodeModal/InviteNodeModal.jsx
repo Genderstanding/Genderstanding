@@ -15,7 +15,7 @@ export const InviteNodeModal = ({
   const dispatch = useDispatch();
   const [isCodeCopied, setIsCodeCopied] = useState(false);
   // store invite code
-  let inviteCode = useSelector((store) => store.invitecodeReducer);
+  let inviteCode = useSelector((store) => store.inviteCodeReducer);
   // store owner's node information
   let ownerNode = useSelector(
     (store) => store.newNodeReducer.newNodeDatabaseResponse
@@ -36,8 +36,12 @@ export const InviteNodeModal = ({
     try { 
       setNodeId(nodeID)
       setIsCodeCopied(false);
-      dispatch({type: "GENERATE_INVITE_CODE", payload: {node_id: nodeID} })
+      dispatch({type: "SET_INVITE_CODE", payload: {node_id: nodeID} })
     } catch (error) {
+      dispatch({
+        type: "GENERATE_INVITE_CODE_ERROR",
+        payload: "An error occurred while generating invite code.",
+      });
       console.log("Error in button click to generate new node: ", error);
     }
   };
@@ -47,7 +51,7 @@ export const InviteNodeModal = ({
     <div className="flex items-center justify-center modal-overlay">
       <div className="flex flex-col items-center justify-center invite-code-modal">
         {children}
-        <h2 className="mb-4 mr-4 text-xl font-bold">Generate Invite Code</h2>
+        <h2 className="mb-4 mr-4 text-xl font-bold">Generate Invite Code For Node: {ownerNode.id}</h2>
         <div className="code-container">
           <span className="code-text">{!inviteCode.length > 0 ? "" : inviteCode}</span>
           <button className="ml-4 copy-code-button" onClick={copyCode}>
@@ -61,7 +65,7 @@ export const InviteNodeModal = ({
           >
             Generate
           </button>
-          <button className="underline " onClick={InviteCodeClose}>
+          <button className="underline " onClick={() => InviteCodeClose(dispatch({type:"CLEAR_GENERATE_INVITE_CODE"}))}>
             Close
           </button>
         </div>

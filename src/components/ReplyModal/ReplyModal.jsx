@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './ReplyModal.css'
 import { useSelector, useDispatch } from 'react-redux';
+import moment from 'moment';
 
 
 const ReplyModal = ({ addReplyOpen, closeAddReply, questionObject }) => {
@@ -39,6 +40,7 @@ const ReplyModal = ({ addReplyOpen, closeAddReply, questionObject }) => {
             console.log('Error in button click to create new reply: ', error)
         }
 
+
     }
 
     
@@ -49,6 +51,10 @@ const ReplyModal = ({ addReplyOpen, closeAddReply, questionObject }) => {
             <div className='flex flex-col items-center justify-center reply-box'>
                 {/* {children} */}
                 <h2 className='mb-4 mr-4 mt-6 text-xl font-bold'>{questionObject.content}</h2>
+                <div className="flex items-end justify-between px-4 py-2">
+                    <span className="text-sm">{moment(questionObject?.post_time).fromNow()}</span>
+
+                </div>
                 <div className="scrollable-container overflow-y-auto">
                 {reversePosts.map((post) => {
                     console.log('post.user_id:', post.user_id);
