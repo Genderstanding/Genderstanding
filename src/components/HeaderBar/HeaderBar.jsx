@@ -6,6 +6,7 @@ import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import { useSelector } from "react-redux";
 import SVG from "../SVG/SVG";
 import { useHistory } from "react-router-dom";
+import { Typography } from "@mui/material";
 
 export default function HeaderBar() {
   const history = useHistory();
@@ -40,9 +41,12 @@ export default function HeaderBar() {
       <button onClick={() => history.goBack()}>
         <MdChevronLeft size={25} className="ml-2" />
       </button>
-
+{/* Display new user name */}
+<div style={{ margin: "25px" }}>
+        <Typography>Hello {user.username}</Typography>
+      </div>
       {/* this flex-grow div is tailwind way to spread out the back and add buttons*/}
-      <div className="flex-grow"> username : {user.username} user_id : {user.id}</div>
+      <div className="flex-grow"> </div>
       <button className="mr-4 text-2xl" onClick={openAddNode}>
         <SVG
           width={24}

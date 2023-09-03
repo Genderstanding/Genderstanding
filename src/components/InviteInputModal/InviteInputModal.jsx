@@ -6,26 +6,42 @@ import { Input } from "@mui/material";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 export const InviteInputModal = ({ InviteCodeOpen, handleCloseInviteModal, children }) => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const [nodeCodeInput, setNodeCodeInput] = useState('')
+
+  // Store to match against currently available codes
+  const nodeAssociation = useSelector(store => store.nodeAssociationReducer.nodeAssociationDatabase)
+  
   if (!InviteCodeOpen) {
     return null;
   }
-
-  const dispatch = useDispatch();
-  const history = useHistory();
-  const [codeInput, setCodeInput] = useState();
   
-  // function to handle posting and getting code from database
-  const handleInputCode = (event) => {
+  const handleNodeCodeInput = (event, nodeCodeInput, nodeAssociation) => {
     event.preventDefault();
     try {
-      // UPDATE the INVITE CODE
-      dispatch({ type:"ENTER_INVITE_CODE", payload: codeInput });
-      // DIRECT user to node
-      history.push(`/user`);
+    // loop through all of the current nodeAssociations
+    for(let node of nodeAssociation) {
+        // look for the auth_code in the database and match it to the inputed code
+        if(node?.auth_code == nodeCodeInput){
+            // If there are no users already associated to the node with the inputed code, 
+            // dispatch a database update to PUT the user's ID into the database as a user
+            // who can view the node
+            if(node?.user_id == null) {
+                dispatch({
+                    type: 'USER_NODE_ASSOCIATION',
+                    payload: nodeCodeInput
+                })
+            }
+        }
+    }
+      // Go to home page when user enter invite code
+      history.push(`/home`);
     } catch (error) {
       console.log("Error submitting invite node: ", error);
     }
-  };
+  
+}
 
   return (
     <div className='flex items-center justify-center modal-overlay'>
@@ -36,13 +52,17 @@ export const InviteInputModal = ({ InviteCodeOpen, handleCloseInviteModal, child
         <input type='text' 
     placeholder='Enter a code ...' 
     className='border-b border-black'
-    onChange={(event) => setCodeInput(event.target.value)}
+    onChange={(event) => setNodeCodeInput(event.target.value)}
     />
 
+
+                        
 <div className='mt-6 buttons-container'>
-            <button className="mr-6 underline" onClick={handleInputCode}>
+            <button className="mr-6 underline" onClick={(event)=>handleNodeCodeInput(event, nodeCodeInput, nodeAssociation)}>
               Confirm
             </button>
+         
+            
             <button className="underline " onClick={handleCloseInviteModal}>
               Close
             </button>

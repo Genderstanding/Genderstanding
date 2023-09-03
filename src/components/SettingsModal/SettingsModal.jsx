@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import './SettingsModal.css'
 
 const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
-    const [codeInput, setCodeInput] = useState('')
     const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
     const [nodeCodeInput, setNodeCodeInput] = useState('')
 

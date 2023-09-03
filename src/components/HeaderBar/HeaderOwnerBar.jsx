@@ -48,9 +48,9 @@ export default function HeaderOwnerBar() {
       <button onClick={() => history.goBack()}>
         <MdChevronLeft size={25} className="ml-2" />
       </button>
-      {/* Display new node name */}
+      {/* Display created node name */}
       <div style={{ margin: "25px" }}>
-        <Typography>{newNode?.[0]?.node_name || newNode?.node_name}</Typography>
+        <Typography>Created Node: {newNode?.[0]?.node_name || newNode?.node_name}</Typography>
       </div>
       {/* this flex-grow div is tailwind way to spread out the back and add buttons*/}
       <div className="flex-grow"></div>

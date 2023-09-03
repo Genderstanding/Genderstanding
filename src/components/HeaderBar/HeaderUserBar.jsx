@@ -55,11 +55,9 @@ export default function HeaderUserBar() {
       <button onClick={() => history.goBack()}>
         <MdChevronLeft size={25} className="ml-2" />
       </button>
-      {/* Display new node name */}
-      <div style={{ margin: "25px" }}>
-        <Typography>{newNode?.[0]?.node_name || newNode?.node_name}</Typography>
-        <Typography>Created by {newNode?.[0]?.user_id || newNode?.user_id}</Typography>
-        <Typography>Logged in as {user.id}</Typography>
+      {/* Display joined node name */}
+<div style={{ margin: "25px" }}>
+<Typography> Joined Node : {newNode?.[0]?.node_name || newNode?.node_name}</Typography>
       </div>
       {/* this flex-grow div is tailwind way to spread out the back and add buttons*/}
       <div className="flex-grow"></div>
