@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './OwnerReplyModal.css'
 import { useSelector, useDispatch } from 'react-redux';
+import moment from 'moment'
 
 
 const OwnerReplyModal = ({ addReplyOpen, closeAddReply, questionObject }) => {
@@ -41,7 +42,7 @@ const OwnerReplyModal = ({ addReplyOpen, closeAddReply, questionObject }) => {
 
     }
 
-    
+
 
 
     return (
@@ -50,21 +51,21 @@ const OwnerReplyModal = ({ addReplyOpen, closeAddReply, questionObject }) => {
                 {/* {children} */}
                 <h2 className='mb-4 mr-4 mt-6 text-xl font-bold'>{questionObject.content}</h2>
                 <div className="scrollable-container overflow-y-auto">
-                {reversePosts.map((post) => {
-                    console.log('post.user_id:', post.user_id);
-                    console.log('nodeData.user_id:', nodeData.user_id);
-                    const matchingNode = nodeData.find(node => node.id === post.node_id);
-                    const isNodeOwner = matchingNode ? post.user_id === matchingNode.user_id : false;
-                        return (
-                            <div key={post.id} className={`mt-4 ${isNodeOwner ? 'owner-text-bubble mr-5' : 'user-text-bubble ml-5'}`}>
-                                <div className="flex items-end justify-between px-4 py-2">
-                                    <span className="text-sm">{isNodeOwner ? 'Owner' : 'User'} 5 minutes ago</span>
-                                    <button onClick={() => openElipsis(contentToEdit)}>. . .</button>
+                    {reversePosts.map((post) => {
+                        if (post?.reply_id == questionObject.id) {
+                            const matchingNode = nodeData.find(node => node.id === post.node_id);
+                            const isNodeOwner = matchingNode ? post.user_id === matchingNode.user_id : false;
+                            return (
+                                <div key={post.id} className={`mt-4 ${isNodeOwner ? 'owner-text-bubble mr-5' : 'user-text-bubble ml-5'}`}>
+                                    <div className="flex items-end justify-between px-4 py-2">
+                                        <span className="text-sm">{isNodeOwner ? 'Owner' : 'User'} {moment(post?.post_time).fromNow()}</span>
+                                        <button onClick={() => openElipsis(contentToEdit)}>. . .</button>
+                                    </div>
+                                    <div className="m-4 question-text">{post?.content}</div>
                                 </div>
-                                <div className="m-4 question-text">{post?.content}</div>
-                            </div>
-                        )
-                })}
+                            )
+                        }
+                    })}
                 </div>
                 <textarea
                     rows="4"
