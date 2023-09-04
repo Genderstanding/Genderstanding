@@ -72,6 +72,13 @@ postRouter.post('/', rejectUnauthenticated, (req, res) => {
 
 // PUT route if user updates content information
 postRouter.put('/:id', rejectUnauthenticated, (req, res) => {
+    // const postId = req.params.id; 
+    // const updatedContent = req.body.content; 
+    // const sqlValues = [updatedContent, postId];
+    // const sqlQuery = `
+    // UPDATE "posts"
+    // SET "content" = $1, "edit" = true
+    // WHERE "id" = $2;`;
     let sqlUserId = req.params.id;
     let sqlParams = req.params;
     let sqlValues = [
@@ -84,6 +91,7 @@ postRouter.put('/:id', rejectUnauthenticated, (req, res) => {
     SET "content"=$3, "edit"=true
     WHERE "id"=$2 AND "user_id"=$1;
     `
+
     pool.query(sqlQuery, [sqlValues])
         .then(result => {
             console.log('Updated post content information in database: ', result);

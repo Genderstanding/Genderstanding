@@ -17,9 +17,6 @@ const OwnerNodes = () => {
   const [showButton, setShowButton] = useState(true);
   const [toggleButtom, setToggleButton] = useState(true);
   const [addQuestionOpen, setAddQuestionOpen] = useState(false);
-  const [elipsisOpen, setElipsisOpen] = useState(false);
-  const [contentToEdit, setContentToEdit] = useState('');
-  const [showEllipsis, setShowEllipsis] = useState(false);
 
   // inputing dispatch
   const dispatch = useDispatch();
@@ -88,22 +85,6 @@ const OwnerNodes = () => {
     setAddReplyOpen(false);
   };
 
-  const openElipsis = (content) => {
-    console.log('openElipsis clicked!')
-    setElipsisOpen(true);
-    setContentToEdit(content);
-  };
-
-  const closeElipsis = () => {
-    setElipsisOpen(false);
-  };
-
-  const handleSaveEdit = (editedContent) => {
-    // dispatch an action to update for reals
-    // updating content directly in the state
-    setContentToEdit(editedContent);
-  };
-
   return (
     <>
 
@@ -119,9 +100,7 @@ const OwnerNodes = () => {
                     <div className="mt-4 question-box" key={post?.id}>
                       <div className="flex items-end justify-between px-4 py-2">
                         <span className="text-sm">{moment(post?.post_time).fromNow()}</span>
-                        { showEllipsis &&
-                      <button onClick={() => openElipsis(contentToEdit)}>. . .</button>
-                    }
+                        
                       </div>
                       {/* this should display the latest question/reply in this thread */}
                       <div className="m-4 question-text" >
@@ -167,11 +146,6 @@ const OwnerNodes = () => {
             }
           })}
         </div>
-        <ElipsisModal 
-          elipsisOpen={elipsisOpen}
-          elipsisClose={closeElipsis}
-          contentToEdit={contentToEdit}
-          handleSaveEdit={handleSaveEdit} />
         <AddQuestionModal addQuestionOpen={addQuestionOpen} closeAddQuestion={closeAddQuestion} />
         <OwnerReplyModal addReplyOpen={addReplyOpen} closeAddReply={closeAddReply} questionObject={clickedReplyContent} />
       </div>
