@@ -115,6 +115,26 @@ postRouter.put('/like/:id', rejectUnauthenticated, (req, res) => {
         })
 }) 
 
+// PUT route if the user likes a post
+postRouter.put('/accept/:id', rejectUnauthenticated, (req, res) => {
+    let sqlValues = req.params.id;
+    console.log('sql Values are: ', sqlValues)
+    let sqlQuery =`
+    UPDATE "posts"
+    SET "replied" = true
+    WHERE "id"=$1;
+    `;
+    pool.query(sqlQuery, [sqlValues])
+        .then(result => {
+            console.log('Updated post replied information in database: ', result);
+            res.sendStatus(201);
+        })
+        .catch(error => {
+            console.log('Error in route PUT to replied post: ', error);
+            res.sendStatus(500);
+        })
+}) 
+
 // PUT route if the moderator flags a post as reported
 postRouter.put('/reported/:id', rejectUnauthenticated, (req, res) => {
     let sqlValues = req.params.id;
