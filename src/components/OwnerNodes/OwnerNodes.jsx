@@ -57,11 +57,10 @@ const OwnerNodes = () => {
 
   // function to like a post
   const increaseCount = (postId) => {
+    console.log('post id is : ', postId)
     dispatch({
       type: 'LIKE_POST',
-      payload: {
-        id: postId
-      }
+      payload: postId
     })
     // const updatedPostArray = nodePosts.map((content) =>
     //   content.node_id === nodeId
