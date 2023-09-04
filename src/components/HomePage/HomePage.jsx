@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./HomePage.css";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { CardActionArea } from "@mui/material";
+import { CardActionArea, Typography } from "@mui/material";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-
 
 import HeaderBar from "../HeaderBar/HeaderBar";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
@@ -25,7 +24,7 @@ export default function HomePage({isDarkMode}) {
   let yourContent;
   const checkUserId = (node) => {
     if (node.user_id == user.id) {
-      yourContent = <AccountCircleIcon />;
+      yourContent = <AccountCircleIcon  style={{ marginTop: '-20px' }}/> ;
     } else if (node.user_id !== user.id)  {
       yourContent = "";
     }
@@ -81,7 +80,8 @@ export default function HomePage({isDarkMode}) {
                     >
                       {checkUserId(node)}
                       <br />
-                      {node.node_name}{'  '}{node.id}
+                      <p> {node.node_name}{'  '}{node.id}</p>
+                     
                     </div>
                   );
                 })}
