@@ -43,8 +43,28 @@ export const CodeInputModal = ({
       }
       // Go to home page when user enter invite code
       history.push(`/home`);
+      toast.success('Invite code submitted successfully', {
+        position: "bottom-left",
+        autoClose: 1500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     } catch (error) {
       console.log("Error submitting invite node: ", error);
+      toast.error('Failed to submit invite code', {
+        position: "bottom-left",
+        autoClose: 1500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
 
@@ -63,7 +83,7 @@ export const CodeInputModal = ({
 
           <div className="mt-6 buttons-container">
             <button
-              className="mr-6 underline"
+              className="mr-6 font-semibold active:underline active:font-bold"
               onClick={(event) =>
                 handleNodeCodeInput(event, nodeCodeInput, nodeAssociation)
               }
@@ -71,7 +91,7 @@ export const CodeInputModal = ({
               Confirm
             </button>
 
-            <button className="underline" onClick={handleCloseInviteModal}>
+            <button className="font-semibold active:underline active:font-bold" onClick={handleCloseInviteModal}>
               Close
             </button>
           </div>

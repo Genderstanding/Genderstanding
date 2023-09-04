@@ -7,10 +7,9 @@ import HeaderUserBar from "../HeaderBar/HeaderUserBar";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import AddQuestionModal from "../AddQuestionModal/AddQuestionModal";
 import { useDispatch } from "react-redux";
-import moment from 'moment';
+import moment from "moment";
 
-
-const UserNodes = ({isDarkMode}) => {
+const UserNodes = ({ isDarkMode }) => {
   const [addQuestionOpen, setAddQuestionOpen] = useState(false);
   const [addReplyOpen, setAddReplyOpen] = useState(false);
   const [clickedReplyContent, setClickedReplyContent] = useState("");
@@ -50,7 +49,6 @@ const UserNodes = ({isDarkMode}) => {
       payload: postId,
     });
 
-
     // const updatedPostArray = nodePosts.map((content) =>
     //   content.node_id === nodeId
     //     ? { ...content, count: content.count + 1 }
@@ -76,50 +74,68 @@ const UserNodes = ({isDarkMode}) => {
     setAddReplyOpen(false);
   };
 
-    return (
-        <>
-            <div className="flex flex-col h-screen App">
-
-                {/* <div className='flex items-center header-container '>
+  return (
+    <>
+      <div className="flex flex-col h-screen App">
+        {/* <div className='flex items-center header-container '>
                     <MdChevronLeft size={25} className='ml-2' />
                     <div className="flex-grow"></div>
                     <button className="mr-4 text-2xl" onClick={()=>openAddQuestion(newNode?.id)}>?</button>
                 </div> */}
-                <HeaderUserBar/>
+        <HeaderUserBar />
 
-
-                <div className="flex flex-col items-center justify-center thread-container ">
-                    {nodePosts.map(post => {
-                        if (post?.node_id == newNode.id) {
-                            if (post?.reply_id == null) {
-                              if(post?.replied == true){
-                                return (
-                               
-                                      <div className={`mt-4 mb-3 pb-2 pt-2 font-medium  text-black shadow-md bg-userContent question-box ${isDarkMode ? 'dark' : 'light'}`} key={post?.id}>
-                                        <div className="flex items-end justify-between px-4 py-2">
-                                            <span className="text-sm">{moment(post?.post_time).fromNow()}</span>
-
-                                      </div>
-                                      {/* this should display the latest question/reply in this thread */}
-                                      <div className="m-4 question-text" >
-                                          {post?.content}
-                                      </div>
-                                      <div className="flex items-end justify-between px-4 py-2">
-                                          <button className="text-sm" onClick={() => openAddReply(post)}>Open</button>
-                                          <button className="text-sm" onClick={() => increaseCount(post.id)}>🖤<span>{post.votes || 0}</span></button>
-                                      </div>
-                                  </div>
-                              )
-                              }
-                            }
-                        }
-                    })}
-                </div>
-                <AddQuestionModal addQuestionOpen={addQuestionOpen} closeAddQuestion={closeAddQuestion} />
-                <ReplyModal addReplyOpen={addReplyOpen} closeAddReply={closeAddReply} questionObject={clickedReplyContent} />
-            </div>
-        </>
-    );
+        <div className="flex flex-col items-center justify-center pb-24 thread-container ">
+          {nodePosts.map((post) => {
+            if (post?.node_id == newNode.id) {
+              if (post?.reply_id == null) {
+                if (post?.replied == true) {
+                  return (
+                    <div
+                      className={`mt-4 mb-2 font-medium  text-black shadow-md bg-userContent question-box ${
+                        isDarkMode ? "dark" : "light"
+                      }`}
+                      key={post?.id}
+                    >
+                     <div className="flex items-end justify-between px-5 py-3">
+                        <span className="text-sm">
+                          {moment(post?.post_time).fromNow()}
+                        </span>
+                      </div>
+                      {/* this should display the latest question/reply in this thread */}
+                      <div className={`m-5 font-normal question-text bg-userContent text-black ${isDarkMode ? 'dark' : 'light'}`}>{post?.content}</div>
+                      <div className="flex items-end justify-between px-5 py-3">
+                        <button
+                          className="text-sm font-bold active:underline"
+                          onClick={() => openAddReply(post)}
+                        >
+                          Open
+                        </button>
+                        <button
+                          className="text-sm font-bold active:underline"
+                          onClick={() => increaseCount(post.id)}
+                        >
+                         🖤{'  '}<span>{post.votes || 0}</span>
+                        </button>
+                      </div>
+                    </div>
+                  );
+                }
+              }
+            }
+          })}
+        </div>
+        <AddQuestionModal
+          addQuestionOpen={addQuestionOpen}
+          closeAddQuestion={closeAddQuestion}
+        />
+        <ReplyModal
+          addReplyOpen={addReplyOpen}
+          closeAddReply={closeAddReply}
+          questionObject={clickedReplyContent}
+        />
+      </div>
+    </>
+  );
 };
 
 export default UserNodes;

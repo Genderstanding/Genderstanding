@@ -6,7 +6,7 @@ import "./UserPage.css";
 import HeaderBar from "../HeaderBar/HeaderBar";
 import { useEffect } from "react";
 
-function UserPage({isDarkMode}) {
+function UserPage({ isDarkMode }) {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
   const history = useHistory();
@@ -18,7 +18,6 @@ function UserPage({isDarkMode}) {
   );
   // sourcing use selector to hold all node store information
   let allNodes = useSelector((store) => store.nodeReducer.nodeDatabaseResponse);
-
 
   console.log("nodes are in: ", allNodes);
 
@@ -66,24 +65,32 @@ function UserPage({isDarkMode}) {
     }
   };
 
+  useEffect(() => {
+    dispatch({ type: "FETCH_NODE" });
+  }, []);
+
   return (
     <>
       <div className="flex flex-col h-screen App">
         <HeaderBar />
         <div className="flex flex-col items-center justify-center userpage-container">
           <div className="mb-24 communities-container">
-          <h1 className="mt-4 mb-1 ml-5 text-xl font-bold font-mulish">Communities you've created</h1>
+            <h1 className="mt-4 mb-1 ml-5 text-xl font-bold font-mulish">
+              Communities you've created
+            </h1>
             <div className="flex flex-col items-center justify-center mb-4 owner-box ">
               {/* map communities you moderate inside these divs*/}
               {allNodes.map((node) => {
                 if (user.id == node?.user_id) {
                   return (
                     <div
-                    key={node?.id}
-               className={`m-4 owner-container bg-ownerContent text-black ${isDarkMode ? 'dark' : 'light'}`}
+                      key={node?.id}
+                      className={`m-4 owner-container bg-ownerContent text-black ${
+                        isDarkMode ? "dark" : "light"
+                      }`}
                       onClick={(event) => goToOwnerNodes(event, node)}
                     >
-                      <div className="m-4 owned-community-names" >
+                      <div className="m-4 owned-community-names">
                         {node?.node_name}
                         {node?.id}
                       </div>
@@ -93,15 +100,19 @@ function UserPage({isDarkMode}) {
               })}
             </div>
 
-            <h1 className="mt-4 mb-1 ml-5 text-xl font-bold font-mulish">Communities you're a part of</h1>
+            <h1 className="mt-4 mb-1 ml-5 text-xl font-bold font-mulish">
+              Communities you're a part of
+            </h1>
             <div className="flex flex-col items-center justify-center mb-4 part-of-box">
               {/* map communities you particpate in in this div*/}
               {allNodes.map((node) => {
                 if (user?.id !== node?.user_id) {
                   return (
                     <div
-                    key={node?.id}
-                    className={`m-4 user-container overflow-y-scroll ... bg-userContent text-black ${isDarkMode ? 'dark' : 'light'}`}
+                      key={node?.id}
+                      className={`m-4 user-container overflow-y-scroll ... bg-userContent text-black ${
+                        isDarkMode ? "dark" : "light"
+                      }`}
                       onClick={(event) => goToUserNodes(event, node)}
                     >
                       <div className="m-4 owned-community-names">
