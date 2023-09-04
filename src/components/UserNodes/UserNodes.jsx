@@ -104,7 +104,7 @@ const UserNodes = () => {
                                           {post?.content}
                                       </div>
                                       <div className="flex items-end justify-between px-4 py-2">
-                                          <button className="text-sm" onClick={() => openAddReply(post)}>Reply</button>
+                                          <button className="text-sm" onClick={() => openAddReply(post)}>Open</button>
                                           <button className="text-sm" onClick={() => increaseCount(post.id)}>🖤<span>{post.votes || 0}</span></button>
                                       </div>
                                   </div>
