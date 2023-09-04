@@ -5,7 +5,7 @@ import moment from 'moment';
 
 
 
-const OwnerReplyModal = ({ addReplyOpen, closeAddReply, questionObject }) => {
+const OwnerReplyModal = ({ addReplyOpen, closeAddReply, questionObject, isDarkMode }) => {
     if (!addReplyOpen) {
         return null;
     }
@@ -50,14 +50,15 @@ const OwnerReplyModal = ({ addReplyOpen, closeAddReply, questionObject }) => {
         <div className='flex items-center justify-center modal-overlay'>
             <div className='flex flex-col items-center justify-center reply-box'>
                 {/* {children} */}
-                <h2 className='mb-4 mr-4 mt-6 text-xl font-bold'>{questionObject.content}</h2>
-                <div className="scrollable-container overflow-y-auto">
+                <h2 className='mt-6 mb-4 mr-4 text-xl font-bold text-amber-950'>{questionObject.content}</h2>
+                <div className="overflow-y-auto scrollable-container">
+                <span className="text-sm font-semibold text-amber-950">{moment(questionObject?.post_time).fromNow()}</span>
                     {reversePosts.map((post) => {
                         if (post?.reply_id == questionObject.id) {
                             const matchingNode = nodeData.find(node => node.id === post.node_id);
                             const isNodeOwner = matchingNode ? post.user_id === matchingNode.user_id : false;
                             return (
-                                <div key={post.id} className={`mt-4 ${isNodeOwner ? 'owner-text-bubble mr-5' : 'user-text-bubble ml-5'}`}>
+                                <div key={post.id} className={`mt-4 ${isNodeOwner ? 'owner-text-bubble mr-4' : 'user-text-bubble ml-4'}`}>
                                     <div className="flex items-end justify-between px-4 py-2">
                                         <span className="text-sm">{isNodeOwner ? 'Owner' : 'User'} {moment(post?.post_time).fromNow()}</span>
                                         <button onClick={() => openElipsis(contentToEdit)}>. . .</button>
@@ -70,14 +71,14 @@ const OwnerReplyModal = ({ addReplyOpen, closeAddReply, questionObject }) => {
                 </div>
                 <textarea
                     rows="4"
-                    className='w-full px-4 py-2 mt-4 text-sm text-gray-900 bg-white border-0 reply-textarea dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400'
+                className={`shadow-md w-5/6 rounded-xl md:w-auto px-4 py-2 mt-4 text-sm text-amber-950 bg-bkg border-0 reply-textarea focus:ring-0 placeholder-text ${isDarkMode ? 'dark' : 'light'}`}
                     placeholder="Write a Reply..."
                     onChange={(event) => setReplyInput(event.target.value)}
                     value={replyInput}
                     required />
-                <div className='mt-6 buttons-container'>
-                    <button className='mr-6 underline' onClick={(event) => handleReply(event, questionObject)}>Confirm</button>
-                    <button className='underline ' onClick={closeAddReply}>
+                <div className='mt-6 text-center buttons-container'>
+                    <button  className={`mx-5 font-bold active:underline text-amber-950 ${isDarkMode ? 'dark' : 'light'}`} onClick={(event) => handleReply(event, questionObject)}>Confirm</button>
+                    <button  className={`mx-5 font-bold active:underline  text-amber-950 ${isDarkMode ? 'dark' : 'light'}`} onClick={closeAddReply}>
                         Close
                     </button>
                 </div>
