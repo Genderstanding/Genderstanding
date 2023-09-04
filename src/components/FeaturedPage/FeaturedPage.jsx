@@ -8,7 +8,7 @@ export default function FeaturedPage() {
       <div className="flex flex-col h-screen App">
         <HeaderBar />
         <div className="mt-4 featured-container">
-          <h2>Featured</h2>
+        <h1 className="mb-1 ml-5 text-2xl font-bold font-mulish">Featured</h1>
           <h4>View community nodes</h4>
           <div className="mt-2 ml-8 featured-buttons"></div>
         </div>

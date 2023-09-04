@@ -4,24 +4,20 @@ import LogOutButton from "../LogOutButton/LogOutButton";
 import { useSelector, useDispatch } from "react-redux";
 import "./SettingsModal.css";
 
-const SettingsModal = ({
-  settingsOpen,
-  closeSettings,
-  children,
-}) => {  
-// importing dispatch
+const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
+  // importing dispatch
   const dispatch = useDispatch();
   // importing history
   const history = useHistory();
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [nodeCodeInput, setNodeCodeInput] = useState("");
-   // DARK MODE
- const [isDarkMode, setIsDarkMode] = useState(
+  // DARK MODE
+  const [isDarkMode, setIsDarkMode] = useState(
     localStorage.theme === "light" ||
       (!("theme" in localStorage) &&
         window.matchMedia("(prefers-color-scheme: light)").matches)
   );
-  
+
   // Store to match against currently available codes
   const nodeAssociation = useSelector(
     (store) => store.nodeAssociationReducer.nodeAssociationDatabase
@@ -35,8 +31,6 @@ const SettingsModal = ({
     setShowDeleteConfirmation(false);
   };
 
-
-
   useEffect(() => {
     if (isDarkMode) {
       document.documentElement.classList.add("light");
@@ -48,13 +42,13 @@ const SettingsModal = ({
       localStorage.theme = "dark";
     }
   }, [isDarkMode]);
-  
+
   // DARK MODE toggle handler
   const handleDarkModeToggle = () => {
     setIsDarkMode(!isDarkMode);
-    console.log(isDarkMode)
+    console.log(isDarkMode);
   };
-  
+
   // Delete account
   const handleDeleteAccount = () => {
     // Dispatch simply calls for whatever user is logged in to be deleted.
@@ -93,14 +87,18 @@ const SettingsModal = ({
       console.log("Error submitting invite node: ", error);
     }
   };
-  
+
   if (!settingsOpen) {
     return null;
   }
-  
+
   return (
     <div className="modal-overlay">
-      <div className="mt-15 settings-modal">
+      <div
+        className={`mt-15 settings-modal bg-re2d-100 ${
+          isDarkMode ? "dark" : "light"
+        }`}
+      >
         {children}
         <div className="flex flex-col">
           {/* onClick Link to login */}
@@ -141,7 +139,7 @@ const SettingsModal = ({
             >
               ☾
             </button> */}
-          <p className="ml-20">
+            <p className="ml-20">
               <button
                 className={isDarkMode ? "dark ml-20" : "light ml-20"}
                 onClick={() => handleDarkModeToggle()}

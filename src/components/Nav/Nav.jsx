@@ -27,7 +27,6 @@ export default function Nav({isDarkMode}) {
 
   return (
     <div className="nav">
-        className={`flex nav-container bg-bkg ${isDarkMode ? 'dark' : 'light'}`}
     <div className="flex nav-container ">
       <Link to="/home">
         {/* <h2 className="nav-title">Prime Solo Project</h2> */}

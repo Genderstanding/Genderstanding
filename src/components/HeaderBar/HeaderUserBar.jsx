@@ -7,7 +7,7 @@ import SVG from '../../Assets/SVG/SVG'
 import { useHistory } from "react-router-dom";
 import { Typography } from "@mui/material";
 
-export default function HeaderUserBar() {
+export default function HeaderUserBar({isDarkMode}) {
   const [clickedReplyContent, setClickedReplyContent] = useState("");
   const [addQuestionOpen, setAddQuestionOpen] = useState(false);
   const [addReplyOpen, setAddReplyOpen] = useState(false);
@@ -49,7 +49,7 @@ export default function HeaderUserBar() {
   ];
 
   return (
-    <div className="fixed top-0 left-0 right-0 flex items-center header-container">
+<div className={`fixed top-0 left-0 right-0 flex items-center header-container text-black ${isDarkMode ? 'dark' : 'light'}`}>
    
       <button onClick={() => history.goBack()}>
         <MdChevronLeft size={25} className="ml-2" />
