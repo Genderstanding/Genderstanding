@@ -12,7 +12,7 @@ import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import PeopleOutlineSharpIcon from '@mui/icons-material/PeopleOutlineSharp';
 
-export default function Nav() {
+export default function Nav({isDarkMode}) {
   const user = useSelector((store) => store.user);
 
   const [settingsOpen, setSettingsOpen] = useState(false);
@@ -27,7 +27,8 @@ export default function Nav() {
 
   return (
     <div className="nav">
-    <div className="flex nav-container">
+        className={`flex nav-container bg-bkg ${isDarkMode ? 'dark' : 'light'}`}
+    <div className="flex nav-container ">
       <Link to="/home">
         {/* <h2 className="nav-title">Prime Solo Project</h2> */}
       </Link>

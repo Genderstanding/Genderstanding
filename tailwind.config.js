@@ -4,17 +4,20 @@ module.exports = {
   darkMode: "class",
   theme: {
     extend: {
+      fontFamily: {
+        body: ["Mulish", "sans"],
+      },
       colors: {
-        primary: "rgb(var(--colors-primary))", 
-        secondary:  "rgb(var(--colors-secondary))", 
-      //   accent: "rgb(var(--color-accent) / <alpha-value>)",
-      //   bkg: "rgb(var(--color-bkg) / <alpha-value>)",
-      //   text: "rgb(var(--color-text) / <alpha-value>)",
-      // },
-      // userContent: "rgb(var(--userContent) / <alpha-value>)",
-      // ownerContent: "rgb(var(--ownerContent) / <alpha-value>)",
+        primary: "rgb(var(--colors-primary))",
+        secondary: "rgb(var(--colors-secondary))",
+        accent: "rgb(var(--colors-accent) / <alpha-value>)",
+        bkg: "rgb(var(--colors-bkg) / <alpha-value>)",
+        text: "rgb(var(--colors-text) / <alpha-value>)",
+        userContent: "rgb(var(--colors-userContent) / <alpha-value>)",
+        ownerContent: "rgb(var(--colors-ownerContent) / <alpha-value>)",
+      },
     },
-  }
   },
   plugins: [],
 };
+

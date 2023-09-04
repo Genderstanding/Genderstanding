@@ -60,8 +60,9 @@ function App() {
   }, []);
   
   return (
-    <div style={{ backgroundColor: isDarkMode ? 'var(--background-dark)' : 'var(--background-light)' }}>
-    <div style={{ color: isDarkMode ? 'var(--text-dark)' : 'var(--text-light)' }}>
+    // <div style={{ backgroundColor: isDarkMode ? 'var(--background-dark)' : 'var(--background-light)' }}>
+    // <div style={{ color: isDarkMode ? 'var(--text-dark)' : 'var(--text-light)' }}>
+    <div className={`bg-bkg text-text ${isDarkMode ? 'dark' : 'light'}`}>
      <Router>
         {/* Toastify */}
         <ToastContainer
@@ -233,7 +234,7 @@ function App() {
         </Switch>     
         </Router>
         </div>
-      </div>
+      // </div>
        
      
  
