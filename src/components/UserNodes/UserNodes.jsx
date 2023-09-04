@@ -43,12 +43,14 @@ const UserNodes = () => {
     },
   ];
 
+  // Function to like a post
   const increaseCount = (postId) => {
-    console.log("post id is: ", postId);
     dispatch({
       type: "LIKE_POST",
       payload: postId,
     });
+
+
     // const updatedPostArray = nodePosts.map((content) =>
     //   content.node_id === nodeId
     //     ? { ...content, count: content.count + 1 }
