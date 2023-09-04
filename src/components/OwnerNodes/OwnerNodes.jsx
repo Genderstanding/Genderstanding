@@ -25,9 +25,29 @@ const OwnerNodes = () => {
   //   setShowButton(!showButton);
   // }
 
-  const handleAcceptButton = () => {
+  // sends a flag to the database to permanently make the post visible to all users
+  const handleAcceptButton = (postId) => {
+    dispatch({
+      type: 'ACCEPT_POST',
+      payload: postId
+    })
     setShowButton(false);
     setToggleButton(false);
+  }
+
+  // Sends a call to the database to remove the post from the database
+  const handleRejectButton = (postId) => {
+    dispatch({
+      type: 'DELETE_POST',
+      payload: postId
+    })
+  }
+
+  const handleReportButton = (postId) => {
+    dispatch({
+      type: 'REPORT_POST',
+      payload: postId
+    })
   }
 
   // Posts being held in store
@@ -95,36 +115,57 @@ const OwnerNodes = () => {
         <HeaderOwnerBar />
         <div className="flex flex-col items-center justify-center thread-container">
           {nodePosts.map(post => {
+            if(post?.reported == false) {
             if (post?.node_id == newNode.id) {
               if (post?.reply_id == null) {
-                return (
-                  <div className="mt-4 question-box" key={post?.id}>
-                    <div className="flex items-end justify-between px-4 py-2">
-                      <span className="text-sm">{moment(post?.post_time).fromNow()}</span>
-
+                if(post?.replied == false) {
+                  return (
+                    <div className="mt-4 question-box" key={post?.id}>
+                      <div className="flex items-end justify-between px-4 py-2">
+                        <span className="text-sm">{moment(post?.post_time).fromNow()}</span>
+  
+                      </div>
+                      {/* this should display the latest question/reply in this thread */}
+                      <div className="m-4 question-text" >
+                        {post?.content}
+                      </div>
+                      <div className="flex items-end justify-between px-4 py-2">
+                        {toggleButtom ? (
+                          <button className="underline text-sm" onClick={()=>handleAcceptButton(post?.id)}>Accept</button>
+                        ) : (
+                          <button className="text-sm" onClick={() => openAddReply(post)}>Reply</button>
+                        )}
+                        {showButton &&
+                          <button className="underline text-sm" onClick={()=>handleRejectButton(post?.id)}>Reject</button>
+                        }
+                        {toggleButtom ? (
+                          <button className="underline text-sm" onClick={()=> handleReportButton(post?.id)}>Report</button>
+                        ) : (
+                          <button className="text-sm" onClick={() => increaseCount(post.id)}>🖤<span>{post.votes || 0}</span></button>
+                        )}
+                      </div>
                     </div>
-                    {/* this should display the latest question/reply in this thread */}
-                    <div className="m-4 question-text" >
-                      {post?.content}
+                  )
+                } else {
+                  return (
+                    <div className="mt-4 question-box" key={post?.id}>
+                      <div className="flex items-end justify-between px-4 py-2">
+                        <span className="text-sm">{moment(post?.post_time).fromNow()}</span>
+  
+                      </div>
+                      {/* this should display the latest question/reply in this thread */}
+                      <div className="m-4 question-text" >
+                        {post?.content}
+                      </div>
+                      <div className="flex items-end justify-between px-4 py-2">
+                          <button className="text-sm" onClick={() => openAddReply(post)}>Reply</button>
+                          <button className="text-sm" onClick={() => increaseCount(post.id)}>🖤<span>{post.votes || 0}</span></button>
+                      </div>
                     </div>
-                    <div className="flex items-end justify-between px-4 py-2">
-                      {toggleButtom ? (
-                        <button className="underline text-sm" onClick={handleAcceptButton}>Accept</button>
-                      ) : (
-                        <button className="text-sm" onClick={() => openAddReply(post)}>Reply</button>
-                      )}
-                      {showButton &&
-                        <button className="underline text-sm">Reject</button>
-                      }
-                      {toggleButtom ? (
-                        <button className="underline text-sm">Report</button>
-                      ) : (
-                        <button className="text-sm" onClick={() => increaseCount(post.id)}>🖤<span>{post.votes || 0}</span></button>
-                      )}
-                    </div>
-                  </div>
-                )
+                  )
+                } 
               }
+            }
             }
           })}
         </div>
