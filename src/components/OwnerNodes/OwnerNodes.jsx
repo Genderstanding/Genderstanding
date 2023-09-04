@@ -55,6 +55,7 @@ const OwnerNodes = () => {
     },
   ];
 
+  // function to like a post
   const increaseCount = (postId) => {
     dispatch({
       type: 'LIKE_POST',
