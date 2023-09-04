@@ -24,27 +24,14 @@ function* fetchPost(action) {
 }
 
 // saga to PUT on a post to edit post information
-// function* editPost(action) {
-//     try {
-//         yield axios.put(`/post/${action.payload}`)
-//         yield put({ type: 'FETCH_POST' })
-//     } catch (error) {
-//         console.log('Error in SAGA PUT post request: ', error)
-//     }
-// }
-
 function* editPost(action) {
     try {
-      yield axios.put(`/post/${action.payload.postId}`, {
-        content: action.payload.editedContent, // Assuming you want to update the content
-      });
-      yield put({ type: 'FETCH_POST' });
+        yield axios.put(`/post/${action.payload}`)
+        yield put({ type: 'FETCH_POST' })
     } catch (error) {
-      console.log('Error in SAGA PUT post request: ', error);
+        console.log('Error in SAGA PUT post request: ', error)
     }
-  }
-  
-
+}
 
 // saga to DELETE a post
 function* deletePost(action) {
