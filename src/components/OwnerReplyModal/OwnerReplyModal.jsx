@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './OwnerReplyModal.css'
 import { useSelector, useDispatch } from 'react-redux';
+import moment from 'moment';
+
 
 
 const OwnerReplyModal = ({ addReplyOpen, closeAddReply, questionObject }) => {
@@ -58,7 +60,7 @@ const OwnerReplyModal = ({ addReplyOpen, closeAddReply, questionObject }) => {
                         return (
                             <div key={post.id} className={`mt-4 ${isNodeOwner ? 'owner-text-bubble mr-5' : 'user-text-bubble ml-5'}`}>
                                 <div className="flex items-end justify-between px-4 py-2">
-                                    <span className="text-sm">{isNodeOwner ? 'Owner' : 'User'} 5 minutes ago</span>
+                                    <span className="text-sm">{isNodeOwner ? 'Owner' : 'User'} {moment(post?.post_time).fromNow()}</span>
                                     <button onClick={() => openElipsis(contentToEdit)}>. . .</button>
                                 </div>
                                 <div className="m-4 question-text">{post?.content}</div>
