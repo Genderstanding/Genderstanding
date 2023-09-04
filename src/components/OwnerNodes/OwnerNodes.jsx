@@ -35,9 +35,17 @@ const OwnerNodes = () => {
     setToggleButton(false);
   }
 
+  // Sends a call to the database to remove the post from the database
   const handleRejectButton = (postId) => {
     dispatch({
       type: 'DELETE_POST',
+      payload: postId
+    })
+  }
+
+  const handleReportButton = (postId) => {
+    dispatch({
+      type: 'REPORT_POST',
       payload: postId
     })
   }
@@ -107,6 +115,7 @@ const OwnerNodes = () => {
         <HeaderOwnerBar />
         <div className="flex flex-col items-center justify-center thread-container">
           {nodePosts.map(post => {
+            if(post?.reported == false) {
             if (post?.node_id == newNode.id) {
               if (post?.reply_id == null) {
                 if(post?.replied == false) {
@@ -130,7 +139,7 @@ const OwnerNodes = () => {
                           <button className="underline text-sm" onClick={()=>handleRejectButton(post?.id)}>Reject</button>
                         }
                         {toggleButtom ? (
-                          <button className="underline text-sm">Report</button>
+                          <button className="underline text-sm" onClick={()=> handleReportButton(post?.id)}>Report</button>
                         ) : (
                           <button className="text-sm" onClick={() => increaseCount(post.id)}>🖤<span>{post.votes || 0}</span></button>
                         )}
@@ -156,6 +165,7 @@ const OwnerNodes = () => {
                   )
                 } 
               }
+            }
             }
           })}
         </div>
