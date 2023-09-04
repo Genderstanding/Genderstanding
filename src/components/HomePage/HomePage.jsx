@@ -94,9 +94,9 @@ export default function HomePage({isDarkMode}) {
             <h1 className="text-2xl font-bold font-mulish">Featured</h1>
             <h3>View community nodes</h3>
             <div className="mt-3 ml-6 featured-buttons">
-            <button className={`pt-3 pb-3 pl-3 pr-4 mb-4 mr-4 font-semibold shadow-lg text-white rounded-2xl bg-primary shadow-black-100 ${isDarkMode ? 'dark' : 'light'}`}>Trending</button>
-              <button className={`pt-3 pb-3 pl-5 pr-5 mb-4 ml-4 mr-4 font-semibold text-white shadow-lg rounded-2xl bg-primary shadow-black-100 ${isDarkMode ? 'dark' : 'light'}`}>Latest</button>
-              <button className={`pt-3 pb-3 pl-4 pr-4 mb-4 ml-4 mr-4 font-semibold text-white shadow-lg rounded-2xl bg-primary shadow-black-100 ${isDarkMode ? 'dark' : 'light'}`}>Popular</button>
+            <button className={`pt-3 pb-3 pl-3 pr-4 mb-4 mr-4 font-semibold shadow-lg  active:underline text-neutral-50 rounded-2xl bg-primary shadow-black-200 ${isDarkMode ? 'dark' : 'light'}`}>Trending</button>
+              <button className={`pt-3 pb-3 pl-5 pr-5 mb-4 ml-4 mr-4 font-semibold active:underline text-neutral-50 shadow-lg rounded-2xl bg-primary shadow-black-200 ${isDarkMode ? 'dark' : 'light'}`}>Latest</button>
+              <button className={`pt-3 pb-3 pl-4 pr-4 mb-4 ml-4 mr-4 font-semibold active:underline text-neutral-50 shadow-lg rounded-2xl bg-primary shadow-black-200 ${isDarkMode ? 'dark' : 'light'}`}>Popular</button>
               </div>
             <div className="flex flex-col items-center featured-nodes-homepage">
               <div className={`font-medium text-md featured-top font-mulish text-neutral-950 bg-userContent/100 ${isDarkMode ? 'dark' : 'light'}`}>Featured Spotlight text 1</div>
