@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './ElipsisModal.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -11,12 +11,23 @@ const ElipsisModal = ({ elipsisOpen, elipsisClose, contentToEdit, handleSaveEdit
 
     const handleEditToggle = () => {
         setIsEditing(!isEditing);
+    // When entering edit mode, set the edited content to the current content
+    if (!isEditing) {
+      setEditedContent(contentToEdit);
+    }
     };
 
     const handleSave = () => {
         handleSaveEdit(editedContent); // Call the parent's handleSaveEdit function
         setIsEditing(false);
     };
+
+    useEffect(() => {
+    // When contentToEdit changes, update the edited content if not in edit mode
+    if (!isEditing) {
+      setEditedContent(contentToEdit);
+    }
+  }, [contentToEdit, isEditing]);
 
     if (!elipsisOpen) {
         return null;

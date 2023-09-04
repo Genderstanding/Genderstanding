@@ -8,6 +8,7 @@ import moment from 'moment';
 
 import OwnerReplyModal from "../OwnerReplyModal/OwnerReplyModal";
 import AddQuestionModal from "../AddQuestionModal/AddQuestionModal";
+import ElipsisModal from "../ElipsisModal/ElipsisModal";
 
 
 const OwnerNodes = ({isDarkMode}) => {
@@ -16,7 +17,6 @@ const OwnerNodes = ({isDarkMode}) => {
   const [showButton, setShowButton] = useState(true);
   const [toggleButtom, setToggleButton] = useState(true);
   const [addQuestionOpen, setAddQuestionOpen] = useState(false);
-
 
   // inputing dispatch
   const dispatch = useDispatch();
@@ -57,23 +57,7 @@ const OwnerNodes = ({isDarkMode}) => {
   let newNode = useSelector(
     (store) => store.newNodeReducer.newNodeDatabaseResponse
   );
-
-  const questionsArray = [
-    {
-      node_id: 1,
-      user_id: 123,
-      question:
-        "Rainbows are visions, but only illusions. Rainbows have nothing to hide.",
-      count: 0,
-    },
-    {
-      node_id: 2,
-      user_id: 234,
-      question:
-        "Rainbows are nightmares, as real as death. Rainbows will eat you alive.",
-      count: 0,
-    },
-  ];
+  console.log('nodePosts object:', nodePosts)
 
   // function to like a post
   const increaseCount = (postId) => {
@@ -82,12 +66,6 @@ const OwnerNodes = ({isDarkMode}) => {
       type: 'LIKE_POST',
       payload: postId
     })
-    // const updatedPostArray = nodePosts.map((content) =>
-    //   content.node_id === nodeId
-    //     ? { ...content, count: content.count + 1 }
-    //     : content
-    //     );
-    //     setQuestionsArray(updatedQuestionsArray);
   };
 
   const openAddQuestion = () => {
@@ -107,7 +85,6 @@ const OwnerNodes = ({isDarkMode}) => {
     setAddReplyOpen(false);
   };
 
-
   return (
     <>
 
@@ -123,7 +100,7 @@ const OwnerNodes = ({isDarkMode}) => {
                     <div className={`mt-4 mb-20 text-black bg-userContent question-box ${isDarkMode ? 'dark' : 'light'}`} key={post?.id}>
                       <div className="flex items-end justify-between px-5 py-3"> New Question
                         <span className="text-sm">{moment(post?.post_time).fromNow()}</span>
-  
+                        
                       </div>
                       {/* this should display the latest question/reply in this thread */}
                       <div className={`m-5 question-text bg-userContent ${isDarkMode ? 'dark' : 'light'}`} >
