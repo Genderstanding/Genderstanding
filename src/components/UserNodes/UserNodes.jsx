@@ -92,22 +92,24 @@ const UserNodes = () => {
                     {nodePosts.map(post => {
                         if (post?.node_id == newNode.id) {
                             if (post?.reply_id == null) {
+                              if(post?.replied == true){
                                 return (
-                                    <div className="mt-4 question-box" key={post?.id}>
-                                        <div className="flex items-end justify-between px-4 py-2">
-                                            <span className="text-sm">{moment(post?.post_time).fromNow()}</span>
+                                  <div className="mt-4 question-box" key={post?.id}>
+                                      <div className="flex items-end justify-between px-4 py-2">
+                                          <span className="text-sm">{moment(post?.post_time).fromNow()}</span>
 
-                                        </div>
-                                        {/* this should display the latest question/reply in this thread */}
-                                        <div className="m-4 question-text" >
-                                            {post?.content}
-                                        </div>
-                                        <div className="flex items-end justify-between px-4 py-2">
-                                            <button className="text-sm" onClick={() => openAddReply(post)}>Reply</button>
-                                            <button className="text-sm" onClick={() => increaseCount(post.id)}>🖤<span>{post.votes || 0}</span></button>
-                                        </div>
-                                    </div>
-                                )
+                                      </div>
+                                      {/* this should display the latest question/reply in this thread */}
+                                      <div className="m-4 question-text" >
+                                          {post?.content}
+                                      </div>
+                                      <div className="flex items-end justify-between px-4 py-2">
+                                          <button className="text-sm" onClick={() => openAddReply(post)}>Reply</button>
+                                          <button className="text-sm" onClick={() => increaseCount(post.id)}>🖤<span>{post.votes || 0}</span></button>
+                                      </div>
+                                  </div>
+                              )
+                              }
                             }
                         }
                     })}

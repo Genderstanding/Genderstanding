@@ -22,7 +22,8 @@ postRouter.get('/', rejectUnauthenticated, (req, res) => {
         "posts"."edit", 
         "posts"."public", 
         "posts"."reported", 
-        "posts"."votes"
+        "posts"."votes",
+        "posts"."replied"
          
     FROM "posts"
     JOIN "node" ON "node"."id" = "posts"."node_id"
