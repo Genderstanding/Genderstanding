@@ -25,6 +25,7 @@ const OwnerNodes = () => {
   //   setShowButton(!showButton);
   // }
 
+  // sends a flag to the database to permanently make the post visible to all users
   const handleAcceptButton = (postId) => {
     dispatch({
       type: 'ACCEPT_POST',
@@ -32,6 +33,13 @@ const OwnerNodes = () => {
     })
     setShowButton(false);
     setToggleButton(false);
+  }
+
+  const handleRejectButton = (postId) => {
+    dispatch({
+      type: 'DELETE_POST',
+      payload: postId
+    })
   }
 
   // Posts being held in store
@@ -119,7 +127,7 @@ const OwnerNodes = () => {
                           <button className="text-sm" onClick={() => openAddReply(post)}>Reply</button>
                         )}
                         {showButton &&
-                          <button className="underline text-sm">Reject</button>
+                          <button className="underline text-sm" onClick={()=>handleRejectButton(post?.id)}>Reject</button>
                         }
                         {toggleButtom ? (
                           <button className="underline text-sm">Report</button>
