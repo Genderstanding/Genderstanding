@@ -1,4 +1,53 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* src/input.css */
+
+
+@layer base {
+    :root[class="light"] {
+        --colors-primary: 204 138 127;
+        --colors-secondary: 223 188 185;
+        --colors-accent: 123 62 55;
+        --colors-bkg: 251 246 246;
+        --colors-text: 9 4 4;
+        --colors-userContent: 239 220 220;
+        --colors-ownerContent: 223 191 191;
+    }
+
+    :root[class="dark"] {
+        --colors-primary: 204 138 127;
+        --colors-secondary: 233 205 200;
+        --colors-accent: 182 87 73;
+        --colors-bkg: 9 2 1;
+        --colors-text: 248 238 237;
+        --colors-userContent: 239 220 220;
+        --colors-ownerContent: 223 191 191;
+    }
+}
+
+/* Default styling for light mode */
+body {
+    --background-light: rgb(var(--colors-bkg));
+    --text-light: rgb(var(--colors-text));
+    --accent-dark: rgb(var(--colors-accent));
+}
+
+/* Light mode styling */
+body {
+    background-color: var(--background-light);
+    color: var(--text-light);
+}
+
+/* Dark mode enabled */
+body.dark {
+    --background-dark: rgb(var(--colors-bkg));
+    --text-dark: rgb(var(--colors-text));
+    --accent-dark: rgb(var(--colors-accent));
+}
+
+/* Dark mode styling */
+body.dark {
+    background-color: var(--background-dark);
+    color: var(--text-dark);
+
+}
