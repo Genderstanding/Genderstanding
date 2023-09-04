@@ -43,12 +43,14 @@ const UserNodes = ({isDarkMode}) => {
     },
   ];
 
+  // Function to like a post
   const increaseCount = (postId) => {
-    console.log("post id is: ", postId);
     dispatch({
       type: "LIKE_POST",
       payload: postId,
     });
+
+
     // const updatedPostArray = nodePosts.map((content) =>
     //   content.node_id === nodeId
     //     ? { ...content, count: content.count + 1 }
@@ -90,23 +92,25 @@ const UserNodes = ({isDarkMode}) => {
                     {nodePosts.map(post => {
                         if (post?.node_id == newNode.id) {
                             if (post?.reply_id == null) {
+                              if(post?.replied == true){
                                 return (
                                
                                       <div className={`mt-4 mb-3 pb-2 pt-2 font-medium  text-black shadow-md bg-userContent question-box ${isDarkMode ? 'dark' : 'light'}`} key={post?.id}>
                                         <div className="flex items-end justify-between px-4 py-2">
                                             <span className="text-sm">{moment(post?.post_time).fromNow()}</span>
 
-                                        </div>
-                                        {/* this should display the latest question/reply in this thread */}
-                                        <div className="m-4 question-text" >
-                                            {post?.content}
-                                        </div>
-                                        <div className="flex items-end justify-between px-4 py-2">
-                                            <button className="text-sm" onClick={() => openAddReply(post)}>Reply</button>
-                                            <button className="text-sm" onClick={() => increaseCount(post.id)}>🖤<span>{post.votes || 0}</span></button>
-                                        </div>
-                                    </div>
-                                )
+                                      </div>
+                                      {/* this should display the latest question/reply in this thread */}
+                                      <div className="m-4 question-text" >
+                                          {post?.content}
+                                      </div>
+                                      <div className="flex items-end justify-between px-4 py-2">
+                                          <button className="text-sm" onClick={() => openAddReply(post)}>Open</button>
+                                          <button className="text-sm" onClick={() => increaseCount(post.id)}>🖤<span>{post.votes || 0}</span></button>
+                                      </div>
+                                  </div>
+                              )
+                              }
                             }
                         }
                     })}

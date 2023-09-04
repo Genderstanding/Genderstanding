@@ -54,6 +54,16 @@ function* likePost(action) {
     }
 }
 
+// Saga to PUT replied into database to make visible to all users in node
+function* acceptPost(action) {
+    try {
+        yield axios.put(`post/accept/${action.payload}`)
+        yield put({ type: 'FETCH_POST' })
+    } catch (error) {
+        console.log('Error in SAGA PUT post accept request: ', error)
+    }
+}
+
 // saga to PUT on a post to report a post to admin
 function* reportPost(action) {
     try {
@@ -81,6 +91,7 @@ function* postSaga() {
     yield takeLatest('FETCH_POST', fetchPost);
     yield takeLatest('EDIT_POST', editPost);
     yield takeLatest('DELETE_POST', deletePost);
+    yield takeLatest('ACCEPT_POST', acceptPost)
     yield takeLatest('LIKE_POST', likePost)
     yield takeLatest('REPORT_POST', reportPost);
     yield takeLatest('PROMOTE_POST', promotePost);
