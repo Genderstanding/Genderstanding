@@ -1,23 +1,22 @@
 import React, { useState } from "react";
 import "./OwnerNodes.css";
-import ReplyModal from "../ReplyModal/ReplyModal";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import HeaderUserBar from "../HeaderBar/HeaderUserBar";
-import { MdChevronLeft, MdChevronRight } from "react-icons/md";
-import AddQuestionModal from "../AddQuestionModal/AddQuestionModal";
 import HeaderOwnerBar from "../HeaderBar/HeaderOwnerBar"
 import { useDispatch } from "react-redux";
 import moment from 'moment';
 
+import OwnerReplyModal from "../OwnerReplyModal/OwnerReplyModal";
+import AddQuestionModal from "../AddQuestionModal/AddQuestionModal";
 
 
 const OwnerNodes = () => {
-  const [addQuestionOpen, setAddQuestionOpen] = useState(false);
   const [addReplyOpen, setAddReplyOpen] = useState(false);
   const [clickedReplyContent, setClickedReplyContent] = useState("");
   const [showButton, setShowButton] = useState(true);
   const [toggleButtom, setToggleButton] = useState(true);
+  const [addQuestionOpen, setAddQuestionOpen] = useState(false);
+
 
   // inputing dispatch
   const dispatch = useDispatch();
@@ -130,7 +129,7 @@ const OwnerNodes = () => {
           })}
         </div>
         <AddQuestionModal addQuestionOpen={addQuestionOpen} closeAddQuestion={closeAddQuestion} />
-        <ReplyModal addReplyOpen={addReplyOpen} closeAddReply={closeAddReply} questionObject={clickedReplyContent} />
+        <OwnerReplyModal addReplyOpen={addReplyOpen} closeAddReply={closeAddReply} questionObject={clickedReplyContent} />
       </div>
     </>
   );

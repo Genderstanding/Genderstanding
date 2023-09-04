@@ -7,15 +7,20 @@ import { ActionButton } from "../CustomButton/ActionButton";
 import { CustomButton } from "../CustomButton/CustomButton";
 import { useDispatch } from "react-redux";
 import AddNodeModal from "../AddNodeModal/AddNodeModal";
-import InviteInputModal from "../InviteInputModal/InviteInputModal";
+import { CodeInputModal } from "../CodeInputModal/CodeInputModal";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 export default function ActionPage() {
-  const dispatch = useDispatch();
+  const history = useHistory();
   // INVITE CODE MODAL
   const [inviteModalOpen, setInviteModalOpen] = useState(false);
   const handleOpenInviteModal = () => {
     setInviteModalOpen(true);
   };
+
   const handleCloseInviteModal = () => {
     setInviteModalOpen(false);
   };
@@ -30,7 +35,20 @@ export default function ActionPage() {
   const closeAddNode = () => {
     setaddNodeOpen(false);
   };
-
+  
+  const handleAlert = () => {
+    toast.info('Welcome to GenderStanding', {
+      position: "top-center",
+      autoClose: 2500,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  }
+  
   return (
     <div className="action-container">
       <div className="flex items-center logo-container ">
@@ -50,29 +68,32 @@ export default function ActionPage() {
           Why Are You Here?
         </Typography>
       </div>
+
+
       <div className="button-container">
         {/* NEW NODE */}
-        <ActionButton className="btn" 
-        onClick={openAddNode}>
+
+        <ActionButton className="btn" onClick={openAddNode}>
           Create Node
         </ActionButton>
-        <AddNodeModal addNodeOpen={addNodeOpen}  addNodeClose={closeAddNode} />
+
+        <AddNodeModal addNodeOpen={addNodeOpen} addNodeClose={closeAddNode} />
 
         {/* INVITE CODE INPUT */}
-        <ActionButton
-          className="btn"
-          onClick={handleOpenInviteModal}
-        >
+
+        <ActionButton className="btn" onClick={handleOpenInviteModal}>
           Join Node
         </ActionButton>
-        <InviteInputModal
+
+        <CodeInputModal
           InviteCodeOpen={inviteModalOpen}
-          onClose={handleCloseInviteModal}
+          handleCloseInviteModal={handleCloseInviteModal}
         />
 
-        <CustomButton className="btn" path="/home">
+        <CustomButton className="btn" path="/home" onClick={handleAlert}>
           Just Browsing
         </CustomButton>
+        
       </div>
     </div>
   );

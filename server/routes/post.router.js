@@ -10,7 +10,20 @@ const postRouter = express.Router();
 postRouter.get('/', rejectUnauthenticated, (req, res) => {
     let sqlValue = req.user.id;
     let sqlQuery = `
-    SELECT "posts"."id", "posts"."user_id", "posts"."content", "posts"."node_id", "node"."node_name", "posts"."orig_post", "posts"."reply_id", "posts"."post_time", "posts"."edit", "posts"."public", "posts"."reported", "posts"."votes"
+    SELECT 
+        "posts"."id", 
+        "posts"."user_id", 
+        "posts"."content", 
+        "posts"."node_id", 
+        "node"."node_name", 
+        "posts"."orig_post", 
+        "posts"."reply_id", 
+        "posts"."post_time", 
+        "posts"."edit", 
+        "posts"."public", 
+        "posts"."reported", 
+        "posts"."votes"
+         
     FROM "posts"
     JOIN "node" ON "node"."id" = "posts"."node_id"
     JOIN "node_association" ON "node_association"."node_id" = "node"."id"

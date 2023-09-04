@@ -21,8 +21,6 @@ nodeAssocRouter.get('/', rejectUnauthenticated, (req, res) => {
         })
 })
 
-
-// THIS NEEDS TO BE USER THAT WAS INVITED 
 nodeAssocRouter.post('/', rejectUnauthenticated, (req, res) => {
     let sqlUserId = req.user.id;
     let sqlNodeId = req.params.id;
