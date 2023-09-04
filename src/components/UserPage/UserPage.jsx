@@ -6,7 +6,7 @@ import "./UserPage.css";
 import HeaderBar from "../HeaderBar/HeaderBar";
 import { useEffect } from "react";
 
-function UserPage() {
+function UserPage({isDarkMode}) {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
   const history = useHistory();
@@ -72,7 +72,7 @@ function UserPage() {
         <HeaderBar />
         <div className="flex flex-col items-center justify-center userpage-container">
           <div className="mb-24 communities-container">
-            <h2 className="mt-4 mb-1 ml-5 ">Communities you created:</h2>
+          <h1 className="mt-4 mb-1 ml-5 text-xl font-bold font-mulish">Communities you've created</h1>
             <div className="flex flex-col items-center justify-center mb-4 owner-box ">
               {/* map communities you moderate inside these divs*/}
               {allNodes.map((node) => {
@@ -93,7 +93,7 @@ function UserPage() {
               })}
             </div>
 
-            <h2 className="mt-4 mb-1 ml-5">Communities you're a part of:</h2>
+            <h1 className="mt-4 mb-1 ml-5 text-xl font-bold font-mulish">Communities you're a part of</h1>
             <div className="flex flex-col items-center justify-center mb-4 part-of-box">
               {/* map communities you particpate in in this div*/}
               {allNodes.map((node) => {

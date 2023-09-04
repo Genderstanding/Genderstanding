@@ -12,7 +12,6 @@ export const InviteNodeModal = ({
     return null;
   }
   const [nodeId, setNodeId] = useState();
-  const dispatch = useDispatch();
   const [isCodeCopied, setIsCodeCopied] = useState(false);
   // store invite code
   let inviteCode = useSelector((store) => store.inviteCodeReducer);
@@ -20,7 +19,8 @@ export const InviteNodeModal = ({
   let ownerNode = useSelector(
     (store) => store.newNodeReducer.newNodeDatabaseResponse
   );
-
+ const dispatch = useDispatch();
+ 
   const copyCode = async () => {
     try {
       await navigator.clipboard.writeText(inviteCode);

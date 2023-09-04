@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import './OwnerReplyModal.css'
 import { useSelector, useDispatch } from 'react-redux';
-import moment from 'moment'
+import moment from 'moment';
+
 
 
 const OwnerReplyModal = ({ addReplyOpen, closeAddReply, questionObject }) => {
