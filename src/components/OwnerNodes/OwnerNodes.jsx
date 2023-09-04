@@ -8,6 +8,7 @@ import moment from 'moment';
 
 import OwnerReplyModal from "../OwnerReplyModal/OwnerReplyModal";
 import AddQuestionModal from "../AddQuestionModal/AddQuestionModal";
+import ElipsisModal from "../ElipsisModal/ElipsisModal";
 
 
 const OwnerNodes = () => {
@@ -16,7 +17,9 @@ const OwnerNodes = () => {
   const [showButton, setShowButton] = useState(true);
   const [toggleButtom, setToggleButton] = useState(true);
   const [addQuestionOpen, setAddQuestionOpen] = useState(false);
-
+  const [elipsisOpen, setElipsisOpen] = useState(false);
+  const [contentToEdit, setContentToEdit] = useState('');
+  const [showEllipsis, setShowEllipsis] = useState(false);
 
   // inputing dispatch
   const dispatch = useDispatch();
@@ -28,6 +31,7 @@ const OwnerNodes = () => {
   const handleAcceptButton = () => {
     setShowButton(false);
     setToggleButton(false);
+    setShowEllipsis(true);
   }
 
   // Posts being held in store
@@ -37,23 +41,7 @@ const OwnerNodes = () => {
   let newNode = useSelector(
     (store) => store.newNodeReducer.newNodeDatabaseResponse
   );
-
-  const questionsArray = [
-    {
-      node_id: 1,
-      user_id: 123,
-      question:
-        "Rainbows are visions, but only illusions. Rainbows have nothing to hide.",
-      count: 0,
-    },
-    {
-      node_id: 2,
-      user_id: 234,
-      question:
-        "Rainbows are nightmares, as real as death. Rainbows will eat you alive.",
-      count: 0,
-    },
-  ];
+  console.log('nodePosts object:', nodePosts)
 
   // function to like a post
   const increaseCount = (postId) => {
@@ -62,12 +50,6 @@ const OwnerNodes = () => {
       type: 'LIKE_POST',
       payload: postId
     })
-    // const updatedPostArray = nodePosts.map((content) =>
-    //   content.node_id === nodeId
-    //     ? { ...content, count: content.count + 1 }
-    //     : content
-    //     );
-    //     setQuestionsArray(updatedQuestionsArray);
   };
 
   const openAddQuestion = () => {
@@ -87,6 +69,21 @@ const OwnerNodes = () => {
     setAddReplyOpen(false);
   };
 
+  const openElipsis = (content) => {
+    console.log('openElipsis clicked!')
+    setElipsisOpen(true);
+    setContentToEdit(content);
+  };
+
+  const closeElipsis = () => {
+    setElipsisOpen(false);
+  };
+
+  const handleSaveEdit = (editedContent) => {
+    // dispatch an action to update for reals
+    // updating content directly in the state
+    setContentToEdit(editedContent);
+  };
 
   return (
     <>
@@ -101,7 +98,9 @@ const OwnerNodes = () => {
                   <div className="mt-4 question-box" key={post?.id}>
                     <div className="flex items-end justify-between px-4 py-2">
                       <span className="text-sm">{moment(post?.post_time).fromNow()}</span>
-
+                      { showEllipsis &&
+                      <button onClick={() => openElipsis(contentToEdit)}>. . .</button>
+                    }
                     </div>
                     {/* this should display the latest question/reply in this thread */}
                     <div className="m-4 question-text" >
@@ -128,6 +127,11 @@ const OwnerNodes = () => {
             }
           })}
         </div>
+        <ElipsisModal 
+          elipsisOpen={elipsisOpen}
+          elipsisClose={closeElipsis}
+          contentToEdit={contentToEdit}
+          handleSaveEdit={handleSaveEdit} />
         <AddQuestionModal addQuestionOpen={addQuestionOpen} closeAddQuestion={closeAddQuestion} />
         <OwnerReplyModal addReplyOpen={addReplyOpen} closeAddReply={closeAddReply} questionObject={clickedReplyContent} />
       </div>

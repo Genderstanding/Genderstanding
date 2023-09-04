@@ -21,6 +21,8 @@ const OwnerReplyModal = ({ addReplyOpen, closeAddReply, questionObject }) => {
     // Creating a state to hold text inputed
     const [replyInput, setReplyInput] = useState('');
 
+    const [elipsisOpen, setElipsisOpen] = useState(false);
+
 
 
 
