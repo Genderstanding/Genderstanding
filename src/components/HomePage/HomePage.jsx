@@ -81,7 +81,7 @@ export default function HomePage({isDarkMode}) {
                     >
                       {checkUserId(node)}
                       <br />
-                      {node.node_name}{'  '}{node.id}
+                      {node.node_name}
                     </div>
                   );
                 })}
