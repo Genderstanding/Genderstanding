@@ -7,7 +7,7 @@ import SVG from "../../Assets/SVG/SVG";
 import { useHistory } from "react-router-dom";
 import { Typography } from "@mui/material";
 
-export default function HeaderOwnerBar() {
+export default function HeaderOwnerBar({isDarkMode}) {
   const dispatch = useDispatch();
   const history = useHistory();
   const [InviteCodeOpen, setOpenInviteCode] = useState(false);
@@ -33,7 +33,7 @@ export default function HeaderOwnerBar() {
   ];
 
   return (
-    <div className="fixed top-0 left-0 right-0 flex items-center header-container">
+<div className={`fixed top-0 left-0 right-0 flex items-center header-container text-black ${isDarkMode ? 'dark' : 'light'}`}>
       <button onClick={() => history.goBack()}>
         <MdChevronLeft size={25} className="ml-2" />
       </button>

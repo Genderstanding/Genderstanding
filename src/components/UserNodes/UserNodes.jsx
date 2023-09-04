@@ -10,7 +10,7 @@ import { useDispatch } from "react-redux";
 import moment from 'moment';
 
 
-const UserNodes = () => {
+const UserNodes = ({isDarkMode}) => {
   const [addQuestionOpen, setAddQuestionOpen] = useState(false);
   const [addReplyOpen, setAddReplyOpen] = useState(false);
   const [clickedReplyContent, setClickedReplyContent] = useState("");
@@ -88,15 +88,16 @@ const UserNodes = () => {
                 <HeaderUserBar/>
 
 
-                <div className="flex flex-col items-center justify-center thread-container">
+                <div className="flex flex-col items-center justify-center thread-container ">
                     {nodePosts.map(post => {
                         if (post?.node_id == newNode.id) {
                             if (post?.reply_id == null) {
                               if(post?.replied == true){
                                 return (
-                                  <div className="mt-4 question-box" key={post?.id}>
-                                      <div className="flex items-end justify-between px-4 py-2">
-                                          <span className="text-sm">{moment(post?.post_time).fromNow()}</span>
+                               
+                                      <div className={`mt-4 mb-3 pb-2 pt-2 font-medium  text-black shadow-md bg-userContent question-box ${isDarkMode ? 'dark' : 'light'}`} key={post?.id}>
+                                        <div className="flex items-end justify-between px-4 py-2">
+                                            <span className="text-sm">{moment(post?.post_time).fromNow()}</span>
 
                                       </div>
                                       {/* this should display the latest question/reply in this thread */}

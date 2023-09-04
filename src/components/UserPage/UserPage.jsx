@@ -80,7 +80,7 @@ function UserPage({isDarkMode}) {
                   return (
                     <div
                     key={node?.id}
-                      className="m-4 owner-container"
+               className={`m-4 owner-container bg-ownerContent text-black ${isDarkMode ? 'dark' : 'light'}`}
                       onClick={(event) => goToOwnerNodes(event, node)}
                     >
                       <div className="m-4 owned-community-names" >
@@ -101,7 +101,7 @@ function UserPage({isDarkMode}) {
                   return (
                     <div
                     key={node?.id}
-                      className="m-4 user-container overflow-y-scroll ..."
+                    className={`m-4 user-container overflow-y-scroll ... bg-userContent text-black ${isDarkMode ? 'dark' : 'light'}`}
                       onClick={(event) => goToUserNodes(event, node)}
                     >
                       <div className="m-4 owned-community-names">

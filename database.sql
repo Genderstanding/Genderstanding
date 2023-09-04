@@ -12,23 +12,23 @@ CREATE TABLE "user" (
 
 CREATE TABLE "node" (
 	"id" SERIAL PRIMARY KEY,
-	"user_id" INTEGER REFERENCES "user" (id),
+	"user_id" INTEGER REFERENCES "user" (id) ON DELETE CASCADE,
 	"node_name" VARCHAR(200),
 	"category" VARCHAR(200)
 );
 
 CREATE TABLE "node_association" (
 	"id" SERIAL PRIMARY KEY,
-	"node_id" INTEGER REFERENCES "node" (id),
-	"user_id" INTEGER REFERENCES "user" (id),
+	"node_id" INTEGER REFERENCES "node" (id) ON DELETE CASCADE,
+	"user_id" INTEGER REFERENCES "user" (id) ON DELETE CASCADE,
 	"auth_code" VARCHAR(8) 
 );
 
 CREATE TABLE "posts" (
 	"id" SERIAL PRIMARY KEY,
-	"user_id" INTEGER REFERENCES "user" (id),
+	"user_id" INTEGER REFERENCES "user" (id) ON DELETE CASCADE,
 	"content" VARCHAR(10000),
-	"node_id" INTEGER REFERENCES "node" (id),
+	"node_id" INTEGER REFERENCES "node" (id) ON DELETE CASCADE,
 	"orig_post" BOOLEAN DEFAULT false,
 	"reply_id" INTEGER,
 	"post_time" TIMESTAMP,
