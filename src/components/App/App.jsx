@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import Nav from "../Nav/Nav";
 import "./App.css";
+import '../../../src/input.css'
 import AboutPage from "../AboutPage/AboutPage";
 import UserPage from "../UserPage/UserPage";
 import WelcomePage from "../WelcomePage/WelcomePage";
@@ -25,19 +26,20 @@ import UserNodes from "../UserNodes/UserNodes";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-function App() {
+function App() {    
   const dispatch = useDispatch();
-  const user = useSelector((store) => store.user);
+  const [isDarkMode, setIsDarkMode] = useState(false);  
+  const [settingsOpen, setSettingsOpen] = useState(false);
 
+  const user = useSelector((store) => store.user);
+    
   // DARK MODE
-  const [darkMode, setDarkMode] = useState(false);
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-    //
+  const handleDarkModeToggle = () => {
+    console.log("Toggling dark mode");
+    setIsDarkMode(!isDarkMode);
   };
 
   // SETTING MODAL
-  const [settingsOpen, setSettingsOpen] = useState(false);
   const openSettings = () => {
     setSettingsOpen(true);
   };
@@ -56,10 +58,12 @@ function App() {
     dispatch({ type: "FETCH_NODE_ASSOCIATION" });
     dispatch({ type: "FETCH_CURRENT_NODE" });
   }, []);
-
+  
   return (
-    <Router>
-      <div>
+    // <div style={{ backgroundColor: isDarkMode ? 'var(--background-dark)' : 'var(--background-light)' }}>
+    // <div style={{ color: isDarkMode ? 'var(--text-dark)' : 'var(--text-light)' }}>
+    <div className={`bg-bkg text-text ${isDarkMode ? 'dark' : 'light'}`}>
+     <Router>
         {/* Toastify */}
         <ToastContainer
           position="bottom-left"
@@ -75,6 +79,13 @@ function App() {
         />
         {/* Nav */}
         <Nav />
+        {/* Setting */}
+        <SettingsModal
+              openSettings={openSettings}
+              closeSettings={closeSettings}
+              handleDarkModeToggle={handleDarkModeToggle} 
+              isDarkMode={isDarkMode}
+            />
 
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
@@ -151,19 +162,6 @@ function App() {
           >
             <ActionPage />
           </ProtectedRoute>
-
-          <ProtectedRoute
-            // logged in shows Setting else shows LoginPage
-            exact
-            path="/setting"
-          >
-            <SettingsModal
-              openSettings={openSettings}
-              closeSettings={closeSettings}
-              toggleDarkMode={toggleDarkMode}
-            />
-          </ProtectedRoute>
-
           <Route exact path="/login">
             {user.id ? (
               // If the user is already logged in,
@@ -218,7 +216,7 @@ function App() {
               <ActionPage />
             )}
           </Route>
-          <Route exact path="createnode">
+          <Route exact path="/createnode">
             {user.id ? (
               // If the user is already logged in,
               // redirect them to the /home page
@@ -233,9 +231,13 @@ function App() {
           <Route>
             <h1>404</h1>
           </Route>
-        </Switch>
-      </div>
-    </Router>
+        </Switch>     
+        </Router>
+        </div>
+      // </div>
+       
+     
+ 
   );
 }
 

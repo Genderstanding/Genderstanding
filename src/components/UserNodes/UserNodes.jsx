@@ -76,13 +76,14 @@ const UserNodes = () => {
 
     return (
         <>
-            <div className="flex flex-col h-screen">
+            <div className="flex flex-col h-screen App">
 
-                <div className='flex items-center header-container '>
+                {/* <div className='flex items-center header-container '>
                     <MdChevronLeft size={25} className='ml-2' />
                     <div className="flex-grow"></div>
                     <button className="mr-4 text-2xl" onClick={()=>openAddQuestion(newNode?.id)}>?</button>
-                </div>
+                </div> */}
+                <HeaderUserBar/>
 
 
                 <div className="flex flex-col items-center justify-center thread-container">

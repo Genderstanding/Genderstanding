@@ -9,7 +9,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import HeaderBar from "../HeaderBar/HeaderBar";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
-export default function HomePage() {
+export default function HomePage({isDarkMode}) {
 // holds user infos
   const user = useSelector((store) => store.user);
 
@@ -62,8 +62,8 @@ export default function HomePage() {
         <HeaderBar />
         <div className="flex-grow content-container">
           <div className="mt-4 communities-container">
-            <h2>Communities</h2>
-            <h4>View your nodes</h4>
+            <h1 className="text-2xl font-bold font-mulish">Communities</h1>
+            <h3>View your nodes</h3>
             <div className="flex items-center">
               {/* useHistory back button */}
               <MdChevronLeft size={35} />
@@ -76,7 +76,7 @@ export default function HomePage() {
                   return (
                     <div
                     onClick={() => handleGoToNode(node)}
-                    className="duration-300 ease-in-out side-scroll-box hover:scale-105"
+                    className={`duration-300 ease-in-out side-scroll-box hover:scale-105 text-neutral-950 bg-red-50 ${isDarkMode ? 'dark' : 'light'}`}
                     key={node.id}
                     >
                       {checkUserId(node)}
@@ -91,16 +91,16 @@ export default function HomePage() {
           </div>
 
           <div className="mt-4 featured-container">
-            <h2>Featured</h2>
-            <h4>View community nodes</h4>
-            <div className="mt-2 ml-8 featured-buttons">
-              <button className="mr-4 underline">Trending</button>
-              <button className="mr-4 underline">Latest</button>
-              <button className="mr-4 underline">Popular</button>
-            </div>
+            <h1 className="text-2xl font-bold font-mulish">Featured</h1>
+            <h3>View community nodes</h3>
+            <div className="mt-3 ml-6 featured-buttons">
+            <button className={`pt-3 pb-3 pl-3 pr-4 mb-4 mr-4 font-semibold shadow-lg text-white rounded-2xl bg-primary shadow-black-100 ${isDarkMode ? 'dark' : 'light'}`}>Trending</button>
+              <button className={`pt-3 pb-3 pl-5 pr-5 mb-4 ml-4 mr-4 font-semibold text-white shadow-lg rounded-2xl bg-primary shadow-black-100 ${isDarkMode ? 'dark' : 'light'}`}>Latest</button>
+              <button className={`pt-3 pb-3 pl-4 pr-4 mb-4 ml-4 mr-4 font-semibold text-white shadow-lg rounded-2xl bg-primary shadow-black-100 ${isDarkMode ? 'dark' : 'light'}`}>Popular</button>
+              </div>
             <div className="flex flex-col items-center featured-nodes-homepage">
-              <div className="featured-top">Featured Spotlight text 1</div>
-              <div className="featured-bottom">Featured Spotlight text 2</div>
+              <div className={`font-medium text-md featured-top font-mulish text-neutral-950 bg-userContent/100 ${isDarkMode ? 'dark' : 'light'}`}>Featured Spotlight text 1</div>
+              <div className={`font-medium text-md featured-top font-mulish text-neutral-950 bg-userContent/100 ${isDarkMode ? 'dark' : 'light'}`}>Featured Spotlight text 2</div>
             </div>
           </div>
         </div>
@@ -108,3 +108,5 @@ export default function HomePage() {
     </>
   );
 }
+
+
