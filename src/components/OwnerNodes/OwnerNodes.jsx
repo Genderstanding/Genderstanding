@@ -20,6 +20,7 @@ const OwnerNodes = ({ isDarkMode }) => {
   const [showButton, setShowButton] = useState(true);
   const [toggleButtom, setToggleButton] = useState(true);
   const [addQuestionOpen, setAddQuestionOpen] = useState(false);
+  const [questionStates, setQuestionStates] = useState({});
 
   // inputing dispatch
   const dispatch = useDispatch();
@@ -31,6 +32,13 @@ const OwnerNodes = ({ isDarkMode }) => {
       type: "ACCEPT_POST",
       payload: postId,
     });
+    setQuestionStates((prevStates) => ({
+      ...prevStates,
+      [postId]: {
+        toggleButtom: false,
+        showButton: false,
+      },
+    }));
     setShowButton(false);
     setToggleButton(false);
     } catch (error) {
@@ -138,6 +146,10 @@ const OwnerNodes = ({ isDarkMode }) => {
               if (post?.node_id == newNode.id) {
                 if (post?.reply_id == null) {
                   if (post?.replied == false) {
+                    const questionState = questionStates[post?.id] || {
+                      toggleButtom: true,
+                      showButton: true,
+                    };
                     return (
                       <div className={`mt-4 mb-20 text-amber-950 shadow-md bg-userContent question-box ${isDarkMode ? 'dark' : 'light'}`} key={post?.id}>
                         <div className="flex items-end justify-between px-5 py-3"> New Question
@@ -148,15 +160,15 @@ const OwnerNodes = ({ isDarkMode }) => {
                           {post?.content}
                         </div>
                         <div className="flex items-end justify-between px-5 py-3 ">
-                          {toggleButtom ? (
+                          {questionState.toggleButtom ? (
                                <button className="text-sm font-bold active:underline" onClick={()=>handleAcceptButton(post?.id)}>Accept</button>
                                ) : (
                                  <button className="text-sm font-bold active:underline" onClick={() => openAddReply(post)}>Reply</button>
                                )}
-                               {showButton &&
+                               {questionState.showButton &&
                                  <button className="text-sm font-bold active:underline" onClick={()=>handleRejectButton(post?.id)}>Reject</button>
                                }
-                               {toggleButtom ? (
+                               {questionState.toggleButtom ? (
                                  <button className="text-sm font-bold active:underline" onClick={()=> handleReportButton(post?.id)}>Report</button>
                           ) : (
                             // THIS SHOULDN'T RENDER UNLESS APPROVED
