@@ -92,7 +92,6 @@ function UserPage({ isDarkMode }) {
                     >
                       <div className="m-4 owned-community-names">
                         {node?.node_name}
-                        {node?.id}
                       </div>
                     </div>
                   );
@@ -117,7 +116,7 @@ function UserPage({ isDarkMode }) {
                     >
                       <div className="m-4 owned-community-names">
                         {node?.node_name}
-                        {node?.id}
+             
                       </div>
                     </div>
                   );

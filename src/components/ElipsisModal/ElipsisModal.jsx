@@ -8,6 +8,7 @@ import { useHistory } from 'react-router-dom';
 const ElipsisModal = ({ elipsisOpen, elipsisClose, contentToEdit, postIdProp, handleDeleteButton, handleReportButton}) => {
     const [editedContent, setEditedContent] = useState(contentToEdit);
     const [isEditing, setIsEditing] = useState(false);
+
     const dispatch = useDispatch();
 
     const handleEditToggle = () => {
@@ -18,24 +19,23 @@ const ElipsisModal = ({ elipsisOpen, elipsisClose, contentToEdit, postIdProp, ha
     }
     };
 
-    const handleSaveEdit = () => {
-        // Handle saving edited content here
-        // You can dispatch an action or perform the necessary logic
-        // based on postIdProp and editedContent
-        console.log('postIdProp in ElipsisModal:', postIdProp);
-        console.log('editedContent in ElipsisModal:', editedContent);
+    console.log('post idProp is going to be: ', postIdProp)
 
-        
-        dispatch({
-            type: 'EDIT_POST',
-            payload: {
-                id: postIdProp,
-                content: editedContent,
-                
-            },
-        });
 
-        // After saving, exit edit mode
+    const handleSaveEdit = (event) => {
+        event.preventDefault();
+        try {
+            dispatch({
+                type: 'EDIT_POST',
+                payload: {
+                    id: postIdProp,
+                    content: editedContent
+                }
+            });
+        } catch (error) {
+            console.log('Error in editing a post: ', error);
+        }
+
         setIsEditing(false);
     };
 
