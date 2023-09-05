@@ -11,7 +11,7 @@ import AddQuestionModal from "../AddQuestionModal/AddQuestionModal";
 import ElipsisModal from "../ElipsisModal/ElipsisModal";
 
 // TOASTIFY
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const OwnerNodes = ({ isDarkMode }) => {

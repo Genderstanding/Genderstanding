@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 // TOASTIFY
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const AddNodeModal = ({ addNodeOpen, addNodeClose, children }) => {

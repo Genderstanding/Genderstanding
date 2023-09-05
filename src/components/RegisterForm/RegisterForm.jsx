@@ -7,7 +7,7 @@ import { Typography } from "@mui/material";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 // TOASTIFY
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"; 
 
 function RegisterForm() {
