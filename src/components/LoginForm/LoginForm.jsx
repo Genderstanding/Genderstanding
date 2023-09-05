@@ -7,6 +7,10 @@ import { Typography } from "@mui/material";
 import "../App/App.css";
 import CustomIcon from "../../Assets/Icon/CustomIcon";
 
+// TOASTIFY
+import { ToastContainer, toast} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function LoginForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -26,6 +30,16 @@ function LoginForm() {
       });
     } else {
       dispatch({ type: "LOGIN_INPUT_ERROR" });
+      toast.error("Login failed", {
+        position: "bottom-left",
+        autoClose: 1500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   }; // end login
 

@@ -74,14 +74,14 @@ export default function HomePage({ isDarkMode }) {
                 {listOfNodes.map((node) => {
                   return (
                     <div
-                      onClick={() => handleGoToNode(node)}
-                      className={`duration-300 ease-in-out side-scroll-box hover:scale-105 text-neutral-950 bg-red-50 ${isDarkMode ? 'dark' : 'light'}`}
-                      key={node.id}
+                    onClick={() => handleGoToNode(node)}
+                    className={`duration-300 ease-in-out side-scroll-box hover:scale-105 text-neutral-950 bg-red-50 ${isDarkMode ? 'dark' : 'light'}`}
+                    key={node.id}
                     >
                       {checkUserId(node)}
                       <br />
                       <p> {node.node_name}{'  '}{node.id}</p>
-
+                     
                     </div>
                   );
                 })}
@@ -108,5 +108,4 @@ export default function HomePage({ isDarkMode }) {
     </>
   );
 }
-
 

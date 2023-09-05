@@ -5,12 +5,10 @@ import { useHistory } from 'react-router-dom';
 
 
 
-const ElipsisModal = ({ elipsisOpen, elipsisClose, contentToEdit, postIdProp, handleDeleteButton, handleReportButton }) => {
+const ElipsisModal = ({ elipsisOpen, elipsisClose, contentToEdit, postIdProp, handleDeleteButton, handleReportButton}) => {
     const [editedContent, setEditedContent] = useState(contentToEdit);
     const [isEditing, setIsEditing] = useState(false);
     const dispatch = useDispatch();
-
-    console.log('postIdProp in ElipsisModal:', postIdProp);
 
     const handleEditToggle = () => {
         setIsEditing(!isEditing);
@@ -57,7 +55,7 @@ const ElipsisModal = ({ elipsisOpen, elipsisClose, contentToEdit, postIdProp, ha
         <div className='flex items-center justify-center modal-overlay'>
             <div className='flex flex-col items-center justify-center add-node-modal'>
                 {/* {children} */}
-                <div className=' flex flex-col justify-start buttons-container'>
+                <div className='flex flex-col justify-start buttons-container'>
                     {isEditing ? (
                         <textarea
                             value={editedContent}
@@ -68,26 +66,26 @@ const ElipsisModal = ({ elipsisOpen, elipsisClose, contentToEdit, postIdProp, ha
 
                     <div className='flex flex-col justify-start buttons-container'>
                         {isEditing ? (
-                            <button className='underline m-2' onClick={handleSaveEdit}>
+                            <button className='m-2 underline' onClick={handleSaveEdit}>
                                 Save
                             </button>
                         ) : (
                             <>
-                                <button className='underline m-2' onClick={handleEditToggle}>
+                                <button className='m-2 underline' onClick={handleEditToggle}>
                                     Edit
                                 </button>
-                                <button className='underline m-2' onClick={() => handleDeleteButton(postIdProp)}>
+                                <button className='m-2 underline' onClick={() => handleDeleteButton(postIdProp)}>
                                     Delete
                                 </button>
-                                <button className='underline m-2'>
+                                <button className='m-2 underline'>
                                     Remove User
                                 </button>
-                                <button className='underline m-2' onClick={() => handleReportButton(postIdProp)}>
+                                <button className='m-2 underline' onClick={() => handleReportButton(postIdProp)}>
                                     Report User
                                 </button>
                             </>
                         )}
-                        <button className='underline m-2' onClick={elipsisClose}>
+                        <button className='m-2 underline' onClick={elipsisClose}>
                             Close
                         </button>
                         </div>
