@@ -26,8 +26,7 @@ function* fetchPost(action) {
 //saga to PUT on a post to edit post information
 function* editPost(action) {
     try {
-        console.log("action.payload in saga", action.payload)
-        yield axios.put(`/post/${action.payload}`)
+        yield axios.put(`/post/${action.payload.id}`, {content: action.payload.content})
         yield put({ type: 'FETCH_POST' })
     } catch (error) {
         console.log('Error in SAGA PUT post request: ', error)
