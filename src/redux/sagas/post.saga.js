@@ -33,7 +33,6 @@ function* editPost(action) {
     }
 }
 
-
 // saga to DELETE a post
 function* deletePost(action) {
     try {

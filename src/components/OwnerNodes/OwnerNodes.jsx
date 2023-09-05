@@ -8,6 +8,7 @@ import moment from "moment";
 
 import OwnerReplyModal from "../OwnerReplyModal/OwnerReplyModal";
 import AddQuestionModal from "../AddQuestionModal/AddQuestionModal";
+import ElipsisModal from "../ElipsisModal/ElipsisModal";
 
 const OwnerNodes = ({ isDarkMode }) => {
   const [addReplyOpen, setAddReplyOpen] = useState(false);
@@ -55,37 +56,15 @@ const OwnerNodes = ({ isDarkMode }) => {
   let newNode = useSelector(
     (store) => store.newNodeReducer.newNodeDatabaseResponse
   );
-
-  const questionsArray = [
-    {
-      node_id: 1,
-      user_id: 123,
-      question:
-        "Rainbows are visions, but only illusions. Rainbows have nothing to hide.",
-      count: 0,
-    },
-    {
-      node_id: 2,
-      user_id: 234,
-      question:
-        "Rainbows are nightmares, as real as death. Rainbows will eat you alive.",
-      count: 0,
-    },
-  ];
+  console.log('nodePosts object:', nodePosts)
 
   // function to like a post
   const increaseCount = (postId) => {
     console.log("post id is : ", postId);
     dispatch({
-      type: "LIKE_POST",
-      payload: postId,
-    });
-    // const updatedPostArray = nodePosts.map((content) =>
-    //   content.node_id === nodeId
-    //     ? { ...content, count: content.count + 1 }
-    //     : content
-    //     );
-    //     setQuestionsArray(updatedQuestionsArray);
+      type: 'LIKE_POST',
+      payload: postId
+    })
   };
 
   const openAddQuestion = () => {
