@@ -66,26 +66,26 @@ const ElipsisModal = ({ elipsisOpen, elipsisClose, contentToEdit, postIdProp, ha
 
                     <div className='flex flex-col justify-start buttons-container'>
                         {isEditing ? (
-                            <button className='m-2 underline' onClick={handleSaveEdit}>
+                            <button className='m-2 font-bold active:underline text-amber-950' onClick={handleSaveEdit}>
                                 Save
                             </button>
                         ) : (
                             <>
-                                <button className='m-2 underline' onClick={handleEditToggle}>
+                                <button className='m-2 font-bold active:underline text-amber-950' onClick={handleEditToggle}>
                                     Edit
                                 </button>
-                                <button className='m-2 underline' onClick={() => handleDeleteButton(postIdProp)}>
+                                <button className='m-2 font-bold active:underline text-amber-950' onClick={() => handleDeleteButton(postIdProp)}>
                                     Delete
                                 </button>
-                                <button className='m-2 underline'>
+                                <button className='m-2 font-bold active:underline text-amber-950'>
                                     Remove User
                                 </button>
-                                <button className='m-2 underline' onClick={() => handleReportButton(postIdProp)}>
+                                <button className='m-2 font-bold active:underline text-amber-950' onClick={() => handleReportButton(postIdProp)}>
                                     Report User
                                 </button>
                             </>
                         )}
-                        <button className='m-2 underline' onClick={elipsisClose}>
+                        <button className='m-2 font-bold active:underline text-amber-950' onClick={elipsisClose}>
                             Close
                         </button>
                         </div>
