@@ -4,12 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 const ElipsisModal = ({
-  elipsisOpen,
-  elipsisClose,
+    elipsisOpen,
+    elipsisClose,
   contentToEdit,
   postIdProp,
-  handleDeleteButton,
   handleReportButton,
+  handleDeleteButton
 }) => {
   const [editedContent, setEditedContent] = useState(contentToEdit);
   const [isEditing, setIsEditing] = useState(false);
@@ -25,20 +25,17 @@ const ElipsisModal = ({
   };
 
   console.log("post idProp is going to be: ", postIdProp);
-
   const handleSaveEdit = (event) => {
     event.preventDefault();
     try {
-      if (editedContent !== contentToEdit) {
-        dispatch({
-          type: "EDIT_POST",
-          payload: {
-            id: postIdProp,
-            content: editedContent,
-          },
-        });
-      }
-      // After saving, exit edit mode
+      dispatch({
+        type: "EDIT_POST",
+        payload: {
+          id: postIdProp,
+          content: editedContent,
+        },
+      });
+      
       setIsEditing(false);
     } catch (error) {
       toast.error("Failed to save edit", {
@@ -69,7 +66,7 @@ const ElipsisModal = ({
     <div className="flex items-center justify-center modal-overlay">
       <div className="flex flex-col items-center justify-center add-node-modal">
         {/* {children} */}
-        <div className="flex flex-col justify-start buttons-container">
+        <div className="flex flex-col justify-start buttons-container text-amber-950">
           {isEditing ? (
             <textarea
               value={editedContent}
