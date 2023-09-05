@@ -5,9 +5,12 @@ import { useHistory } from 'react-router-dom';
 
 
 
-const ElipsisModal = ({ elipsisOpen, elipsisClose, contentToEdit, handleSaveEdit }) => {
+const ElipsisModal = ({ elipsisOpen, elipsisClose, contentToEdit, postIdProp, handleDeleteButton, handleReportButton }) => {
     const [editedContent, setEditedContent] = useState(contentToEdit);
     const [isEditing, setIsEditing] = useState(false);
+    const dispatch = useDispatch();
+
+
 
     const handleEditToggle = () => {
         setIsEditing(!isEditing);
@@ -17,8 +20,24 @@ const ElipsisModal = ({ elipsisOpen, elipsisClose, contentToEdit, handleSaveEdit
     }
     };
 
-    const handleSave = () => {
-        handleSaveEdit(editedContent); // Call the parent's handleSaveEdit function
+    const handleSaveEdit = () => {
+        // Handle saving edited content here
+        // You can dispatch an action or perform the necessary logic
+        // based on postIdProp and editedContent
+        console.log('postIdProp in ElipsisModal:', postIdProp);
+        console.log('editedContent in ElipsisModal:', editedContent);
+
+        
+        dispatch({
+            type: 'EDIT_POST',
+            payload: {
+                id: postIdProp,
+                content: editedContent,
+                
+            },
+        });
+
+        // After saving, exit edit mode
         setIsEditing(false);
     };
 
@@ -38,7 +57,7 @@ const ElipsisModal = ({ elipsisOpen, elipsisClose, contentToEdit, handleSaveEdit
         <div className='flex items-center justify-center modal-overlay'>
             <div className='flex flex-col items-center justify-center add-node-modal'>
                 {/* {children} */}
-                <div className=' flex flex-col justify-start buttons-container'>
+                <div className='flex flex-col justify-start  buttons-container'>
                     {isEditing ? (
                         <textarea
                             value={editedContent}
@@ -49,20 +68,26 @@ const ElipsisModal = ({ elipsisOpen, elipsisClose, contentToEdit, handleSaveEdit
 
                     <div className='flex flex-col justify-start buttons-container'>
                         {isEditing ? (
-                            <button className='underline m-2' onClick={handleSave}>
+                            <button className='m-2 underline' onClick={handleSaveEdit}>
                                 Save
                             </button>
                         ) : (
                             <>
-                                <button className='underline m-2' onClick={handleEditToggle}>
+                                <button className='m-2 underline' onClick={handleEditToggle}>
                                     Edit
                                 </button>
-                                <button className='underline m-2'>Delete</button>
-                                <button className='underline m-2'>Remove User</button>
-                                <button className='underline m-2'>Report User</button>
+                                <button className='m-2 underline' onClick={() => handleDeleteButton(postIdProp)}>
+                                    Delete
+                                </button>
+                                <button className='m-2 underline'>
+                                    Remove User
+                                </button>
+                                <button className='m-2 underline' onClick={() => handleReportButton(postIdProp)}>
+                                    Report User
+                                </button>
                             </>
                         )}
-                        <button className='underline m-2' onClick={elipsisClose}>
+                        <button className='m-2 underline' onClick={elipsisClose}>
                             Close
                         </button>
                         </div>
