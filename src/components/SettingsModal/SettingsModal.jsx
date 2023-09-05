@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import LogOutButton from "../LogOutButton/LogOutButton";
 import { useSelector, useDispatch } from "react-redux";
 import "./SettingsModal.css";
+import DeleteNodeModal from "../DeleteNodeModal/DeleteNodeModal";
 
 const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
   // importing dispatch
@@ -23,6 +24,7 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
     (store) => store.nodeAssociationReducer.nodeAssociationDatabase
   );
 
+  // Delete Account confirmation 
   const openDeleteConfirmation = () => {
     setShowDeleteConfirmation(true);
   };
@@ -150,8 +152,8 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
           </div>
           <br />
           <div className="flex flex-col gap-2">
-            <button className="mt-2 underline ">Remove Node</button>
-            <button className="mt-2 underline" onClick={openDeleteConfirmation}>
+            <button className="mt-2 active:underline "><DeleteNodeModal/></button>
+            <button className="mt-2 font-bold active:underline" onClick={openDeleteConfirmation}>
               Delete Account
             </button>
           </div>

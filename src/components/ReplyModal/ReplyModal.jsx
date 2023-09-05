@@ -122,7 +122,7 @@ const ReplyModal = ({
           required
         />
 
-        <div className="text-center align-middle buttons-container">
+        <div className="mt-6 align-middle mtext-center buttons-container">
           <button
             className={`mx-5 font-bold active:underline  text-amber-950 ${
               isDarkMode ? "dark" : "light"
