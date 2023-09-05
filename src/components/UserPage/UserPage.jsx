@@ -85,12 +85,12 @@ function UserPage({ isDarkMode }) {
                   return (
                     <div
                       key={node?.id}
-                      className={`m-4 owner-container flex flex-col justify-center items-center bg-ownerContent text-black ${
+                      className={`m-4 owner-container flex flex-col justify-center items-center bg-ownerContent text-amber-950 ${
                         isDarkMode ? "dark" : "light"
                       }`}
                       onClick={(event) => goToOwnerNodes(event, node)}
                     >
-                      <div className="m-4 owned-community-names">
+                      <div className="m-4 text-xl font-bold owned-community-names">
                         {node?.node_name}
                       </div>
                     </div>
@@ -109,12 +109,12 @@ function UserPage({ isDarkMode }) {
                   return (
                     <div
                       key={node?.id}
-                      className={`m-4 user-container flex flex-col justify-center items-center overflow-y-scroll ... bg-userContent text-black ${
+                      className={`m-4 user-container flex flex-col justify-center items-center overflow-y-scroll ... bg-userContent text-amber-950 ${
                         isDarkMode ? "dark" : "light"
                       }`}
                       onClick={(event) => goToUserNodes(event, node)}
                     >
-                      <div className="m-4 owned-community-names">
+                      <div className="m-4 text-xl font-bold owned-community-names">
                         {node?.node_name}
              
                       </div>
