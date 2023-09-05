@@ -3,6 +3,7 @@ import "./ElipsisModal.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import moment, { now } from 'moment'
+import { min } from "moment/moment";
 
 const ElipsisModal = ({
     elipsisOpen,
@@ -20,6 +21,14 @@ const ElipsisModal = ({
   const currentDate = moment();
   const minutesElapsed = currentDate.diff(postDate, 'minutes');
   console.log('The number of minutes between the two is: ', minutesElapsed)
+
+  useEffect(()=> {
+    if(minutesElapsed > 60){
+        setShowEdit(false);
+    } else {
+        setShowEdit(true);
+    }
+  })
 
 
   const dispatch = useDispatch();
@@ -93,12 +102,13 @@ const ElipsisModal = ({
               </button>
             ) : (
               <>
-                <button
+                {showEdit && (<button
                   className="m-2 font-bold active:underline text-amber-950"
                   onClick={handleEditToggle}
                 >
                   Edit
                 </button>
+                )}
                 <button
                   className="m-2 font-bold active:underline text-amber-950"
                   onClick={() => handleDeleteButton(postIdProp)}
