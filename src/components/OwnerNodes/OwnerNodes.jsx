@@ -180,6 +180,7 @@ const OwnerNodes = ({ isDarkMode }) => {
                           <button className="text-sm font-bold active:underline" onClick={() => openAddReply(post)}>Reply</button>
                           <button className="text-sm font-bold active:underline" onClick={() => increaseCount(post.id)}>🖤{'  '}<span>{post.votes || 0}</span></button>
                       </div>
+                      </div>
                     );
                   }
                 }
