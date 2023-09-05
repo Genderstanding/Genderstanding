@@ -184,7 +184,7 @@ const OwnerNodes = ({ isDarkMode }) => {
                         <span className="text-sm">{moment(post?.post_time).fromNow()}</span>
                         </div>
                         {/* this should display the latest question/reply in this thread */}
-                        <div className={`m-5 font-normal question-text bg-ownerContent text-amber-950 ${isDarkMode ? 'dark' : 'light'}`} >
+                        <div className={`flex flex-col items-center justify-center m-5 text-lg font-bold question-text bg-ownerContent text-amber-950 ${isDarkMode ? 'dark' : 'light'}`} >
                         {post?.content}
                       </div>
                       <div className="flex items-end justify-between px-5 py-3 ">
