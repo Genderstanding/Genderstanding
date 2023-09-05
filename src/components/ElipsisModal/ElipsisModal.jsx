@@ -5,12 +5,10 @@ import { useHistory } from 'react-router-dom';
 
 
 
-const ElipsisModal = ({ elipsisOpen, elipsisClose, contentToEdit, postIdProp, handleDeleteButton, handleReportButton }) => {
+const ElipsisModal = ({ elipsisOpen, elipsisClose, contentToEdit, postIdProp, handleDeleteButton, handleReportButton}) => {
     const [editedContent, setEditedContent] = useState(contentToEdit);
     const [isEditing, setIsEditing] = useState(false);
     const dispatch = useDispatch();
-
-
 
     const handleEditToggle = () => {
         setIsEditing(!isEditing);
@@ -57,7 +55,7 @@ const ElipsisModal = ({ elipsisOpen, elipsisClose, contentToEdit, postIdProp, ha
         <div className='flex items-center justify-center modal-overlay'>
             <div className='flex flex-col items-center justify-center add-node-modal'>
                 {/* {children} */}
-                <div className='flex flex-col justify-start  buttons-container'>
+                <div className='flex flex-col justify-start buttons-container'>
                     {isEditing ? (
                         <textarea
                             value={editedContent}

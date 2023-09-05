@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 // TOASTIFY
-import { ToastContainer, toast} from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
 
 const AddNodeModal = ({ addNodeOpen, addNodeClose, children }) => {
   if (!addNodeOpen) {
@@ -23,7 +23,6 @@ const AddNodeModal = ({ addNodeOpen, addNodeClose, children }) => {
 
   const [nodeInput, setNodeInput] = useState("");
 
-  
   // function to handle adding a node to database
   const handleAddNode = (event) => {
     event.preventDefault();
@@ -80,13 +79,18 @@ const AddNodeModal = ({ addNodeOpen, addNodeClose, children }) => {
           onChange={(event) => setNodeInput(event.target.value)}
         />
         <div className="mt-6 buttons-container">
-          <button className="mr-6 font-semibold active:underline active:font-bold" onClick={handleAddNode}>
-             Confirm
+          <button
+            className="mr-6 font-semibold active:underline active:font-bold"
+            onClick={handleAddNode}
+          >
+            Confirm
           </button>
-          <button className="font-semibold active:underline active:font-bold " onClick={addNodeClose}>
+          <button
+            className="font-semibold active:underline active:font-bold "
+            onClick={addNodeClose}
+          >
             Close
           </button>
-        
         </div>
       </div>
     </div>

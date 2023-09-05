@@ -5,7 +5,7 @@ import { useState } from "react";
 
 // TOASTIFY
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import "react-toastify/dist/ReactToastify.min.css";
 
 const AddQuestionModal = ({
   addQuestionOpen,

@@ -78,10 +78,10 @@ const OwnerReplyModal = ({
   };
 
   return (
-    <div className='flex items-center justify-center modal-overlay'>
-      <div className='flex flex-col items-center justify-center reply-box'>
-        <h2 className='mt-6 mb-4 mr-4 text-xl font-bold'>{questionObject.content}</h2>
-        <div className="overflow-y-auto scrollable-container">
+    <div className="flex items-center justify-center modal-overlay">
+      <div className="flex flex-col items-center justify-center reply-box">
+        <h2 className="mt-6 mb-4 mr-4 text-xl font-bold text-amber-950">{questionObject.content}</h2>
+        <div className="overflow-y-auto scrollable-container text-amber-950">
           {reversePosts.map((post) => {
             if (post?.reply_id == questionObject.id) {
               const matchingNode = nodeData.find((node) => node.id === post.node_id);
@@ -103,15 +103,15 @@ const OwnerReplyModal = ({
         </div>
         <textarea
           rows="4"
-          className='w-full px-4 py-2 mt-4 text-sm text-gray-900 bg-white border-0 reply-textarea dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400'
+          className={`shadow-lg w-5/6 rounded-xl md:w-auto px-4 py-4 mt-4 mb-4 text-sm bg-bkg border-1 reply-textarea focus:ring-0 text-text placeholder-text font-normal ${isDarkMode ? "dark" : "light"}`}
           placeholder="Write a Reply..."
           onChange={(event) => setReplyInput(event.target.value)}
           value={replyInput}
           required
         />
-        <div className='mt-6 buttons-container'>
-          <button className='mr-6 underline' onClick={(event) => handleReply(event, questionObject)}>Confirm</button>
-          <button className='underline' onClick={closeAddReply}>
+<div className='mt-6 buttons-container'>
+<button className={`mr-6 font-bold active:underline text-amber-950 ${isDarkMode ? "dark" : "light"}`} onClick={(event) => handleReply(event, questionObject)}>Confirm</button>
+<button className={`font-bold active:underline text-amber-950 ${isDarkMode ? "dark" : "light"}`} onClick={closeAddReply}>
             Close
           </button>
         </div>
