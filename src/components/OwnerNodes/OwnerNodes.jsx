@@ -101,12 +101,12 @@ const OwnerNodes = ({ isDarkMode }) => {
                   if (post?.replied == false) {
                     return (
                       <div
-                        className={`mt-4 mb-2 font-medium text-amber-950 bg-userContent question-box ${
+                        className={`mt-4 mb-4 font-medium text-amber-950 shadow-md bg-userContent question-box ${
                           isDarkMode ? "dark" : "light"
                         }`}
                         key={post?.id}
                       >
-                        <div className="flex items-end justify-between px-5 py-2">
+                        <div className="flex items-end justify-between px-4 py-2">
                           {" "}
                           New Question
                           <span className="text-sm">
@@ -115,13 +115,13 @@ const OwnerNodes = ({ isDarkMode }) => {
                         </div>
                         {/* this should display the latest question/reply in this thread */}
                         <div
-                          className={`m-5 question-text bg-userContent text-amber-950 ${
+                          className={`m-5 question-text bg-userContent text-text ${
                             isDarkMode ? "dark" : "light"
                           }`}
                         >
                           {post?.content}
                         </div>
-                        <div className="flex items-end justify-between px-5 py-3 ">
+                        <div className="flex items-end justify-between px-4 py-2 ">
                           {toggleButtom ? (
                             <button
                               className="text-sm font-bold active:underline"
@@ -168,12 +168,12 @@ const OwnerNodes = ({ isDarkMode }) => {
                   } else {
                     return (
                       <div
-                        className={`mt-4 mb-2 question-box pt-2  font-medium text-amber-950 shadow-md bg-ownerContent ${
+                        className={`mt-4 mb-2 pb-2 pt-2  question-box font-medium text-amber-950 shadow-md bg-ownerContent ${
                           isDarkMode ? "dark" : "light"
                         }`}
                         key={post?.id}
                       >
-                        <div className="flex items-end justify-between px-5 py-2">
+                        <div className="flex items-end justify-between px-4 py-2 ">
                           <span className="text-sm">
                             {moment(post?.post_time).fromNow()}
                           </span>
@@ -186,15 +186,15 @@ const OwnerNodes = ({ isDarkMode }) => {
                         >
                           {post?.content}
                         </div>
-                        <div className="flex items-end justify-between px-5 py-3 ">
+                        <div className="flex items-end justify-between px-4 py-2 ">
                           <button
-                            className="text-sm font-bold active:underline"
+                            className="text-sm font-bold active:underline text-amber-950"
                             onClick={() => openAddReply(post)}
                           >
                             Reply
                           </button>
                           <button
-                            className="text-sm font-bold active:underline"
+                            className="text-sm font-bold active:underline text-amber-950"
                             onClick={() => increaseCount(post.id)}
                           >
                             🖤{"  "}

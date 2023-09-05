@@ -77,7 +77,7 @@ const AddQuestionModal = ({
         }`}
       >
         {children}
-        <h2 className="mb-4 mr-4 text-xl font-bold">Ask a New Question</h2>
+        <h2 className="mb-4 mr-4 text-xl font-bold text-amber-950">Ask a New Question</h2>
         <textarea
           rows="4"
           className="w-full px-4 py-2 text-sm text-gray-900 bg-white border-0 question-textarea dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
@@ -87,10 +87,10 @@ const AddQuestionModal = ({
           required
         ></textarea>
         <div className="mt-6 buttons-container">
-          <button className="mr-6 font-semibold active:underline active:font-bold" onClick={handleSubmitQuestion}>
+          <button className="mx-5 font-bold active:underline text-amber-950" onClick={handleSubmitQuestion}>
             Confirm
           </button>
-          <button className="font-semibold active:underline active:font-bold " onClick={closeAddQuestion}>
+          <button className="mx-5 font-bold active:underline text-amber-950" onClick={closeAddQuestion}>
             Close
           </button>
         </div>
