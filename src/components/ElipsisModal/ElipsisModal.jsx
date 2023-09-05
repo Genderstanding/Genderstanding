@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./ElipsisModal.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import moment, { now } from 'moment'
 
 const ElipsisModal = ({
     elipsisOpen,
@@ -11,8 +12,15 @@ const ElipsisModal = ({
   handleReportButton,
   handleDeleteButton
 }) => {
-  const [editedContent, setEditedContent] = useState(contentToEdit);
+  const [editedContent, setEditedContent] = useState(contentToEdit.content);
   const [isEditing, setIsEditing] = useState(false);
+  const [showEdit, setShowEdit] = useState(true);
+
+  const postDate = moment(contentToEdit.post_time);
+  const currentDate = moment();
+  const minutesElapsed = currentDate.diff(postDate, 'minutes');
+  console.log('The number of minutes between the two is: ', minutesElapsed)
+
 
   const dispatch = useDispatch();
 
@@ -69,7 +77,7 @@ const ElipsisModal = ({
         <div className="flex flex-col justify-start buttons-container text-amber-950">
           {isEditing ? (
             <textarea
-              value={editedContent}
+              value={editedContent.content}
               onChange={(e) => setEditedContent(e.target.value)}
               className="edit-textarea"
             />

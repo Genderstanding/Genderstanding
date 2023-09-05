@@ -131,7 +131,7 @@ const OwnerReplyModal = ({ addReplyOpen, closeAddReply, questionObject, isDarkMo
                                 <div key={post.id} className={`mt-4 ${isNodeOwner ? 'owner-text-bubble mr-5 mb-2' : 'user-text-bubble ml-5 mb-2'}`}>
                                     <div className="flex items-end justify-between px-4 py-2">
                                         <span className="text-sm">{isNodeOwner ? 'Owner' : 'User'} {moment(post?.post_time).fromNow()}</span>
-                                        <button onClick={() => openElipsis(post?.content, post?.id)}>. . .</button>
+                                        <button onClick={() => openElipsis(post, post?.id)}>. . .</button>
                                     </div>
                                     <div className="m-4 question-text">{post?.content}</div>
                                 </div>
