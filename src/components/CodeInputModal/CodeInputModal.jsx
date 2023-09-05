@@ -5,6 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Input } from "@mui/material";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
+// TOASTIFY
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export const CodeInputModal = ({
   InviteCodeOpen,
   handleCloseInviteModal,
@@ -43,7 +47,7 @@ export const CodeInputModal = ({
       }
       // Go to home page when user enter invite code
       history.push(`/home`);
-      toast.success('Invite code submitted successfully', {
+      toast.success("Invite code submitted successfully", {
         position: "bottom-left",
         autoClose: 1500,
         hideProgressBar: true,
@@ -54,8 +58,7 @@ export const CodeInputModal = ({
         theme: "light",
       });
     } catch (error) {
-      console.log("Error submitting invite node: ", error);
-      toast.error('Failed to submit invite code', {
+      toast.error("Failed to submit invite code", {
         position: "bottom-left",
         autoClose: 1500,
         hideProgressBar: true,
@@ -91,7 +94,10 @@ export const CodeInputModal = ({
               Confirm
             </button>
 
-            <button className="font-semibold active:underline active:font-bold" onClick={handleCloseInviteModal}>
+            <button
+              className="font-semibold active:underline active:font-bold"
+              onClick={handleCloseInviteModal}
+            >
               Close
             </button>
           </div>

@@ -10,6 +10,10 @@ import OwnerReplyModal from "../OwnerReplyModal/OwnerReplyModal";
 import AddQuestionModal from "../AddQuestionModal/AddQuestionModal";
 import ElipsisModal from "../ElipsisModal/ElipsisModal";
 
+// TOASTIFY
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const OwnerNodes = ({ isDarkMode }) => {
   const [addReplyOpen, setAddReplyOpen] = useState(false);
   const [clickedReplyContent, setClickedReplyContent] = useState("");
@@ -26,27 +30,66 @@ const OwnerNodes = ({ isDarkMode }) => {
 
   // sends a flag to the database to permanently make the post visible to all users
   const handleAcceptButton = (postId) => {
-    dispatch({
+    try {
+       dispatch({
       type: "ACCEPT_POST",
       payload: postId,
     });
     setShowButton(false);
     setToggleButton(false);
+    } catch (error) {
+      toast.error("Failed to accept question", {
+        position: "bottom-left",
+        autoClose: 1500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
   };
 
   // Sends a call to the database to remove the post from the database
   const handleRejectButton = (postId) => {
-    dispatch({
-      type: "DELETE_POST",
-      payload: postId,
-    });
+    try {
+      dispatch({
+        type: "DELETE_POST",
+        payload: postId,
+      });
+    } catch (error) {
+      toast.error("Failed to reject question", {
+        position: "bottom-left",
+        autoClose: 1500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
   };
 
   const handleReportButton = (postId) => {
-    dispatch({
+    try {
+        dispatch({
       type: "REPORT_POST",
       payload: postId,
     });
+    } catch (error) {
+      toast.error("Failed to report", {
+        position: "bottom-left",
+        autoClose: 1500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
   };
 
   // Posts being held in store
@@ -56,15 +99,15 @@ const OwnerNodes = ({ isDarkMode }) => {
   let newNode = useSelector(
     (store) => store.newNodeReducer.newNodeDatabaseResponse
   );
-  console.log('nodePosts object:', nodePosts)
+  console.log("nodePosts object:", nodePosts);
 
   // function to like a post
   const increaseCount = (postId) => {
     console.log("post id is : ", postId);
     dispatch({
-      type: 'LIKE_POST',
-      payload: postId
-    })
+      type: "LIKE_POST",
+      payload: postId,
+    });
   };
 
   const openAddQuestion = () => {

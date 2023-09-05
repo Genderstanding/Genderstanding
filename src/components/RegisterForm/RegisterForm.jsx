@@ -6,6 +6,10 @@ import "../App/App.css";
 import { Typography } from "@mui/material";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
+// TOASTIFY
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"; 
+
 function RegisterForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -16,16 +20,28 @@ function RegisterForm() {
 
   const registerUser = (event) => {
     event.preventDefault();
-
-    dispatch({
+try {
+   dispatch({
       type: "REGISTER",
       payload: {
         username: username,
         password: password,
       },
     });
-
     history.push("/action")
+} catch (error) {
+  toast.error("Registration failed", {
+    position: "bottom-left",
+    autoClose: 1500,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+  });
+}
+   
   }; // end registerUser
 
   return (

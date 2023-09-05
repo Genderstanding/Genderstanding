@@ -3,6 +3,10 @@ import "./ReplyModal.css";
 import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
 
+// TOASTIFY
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const ReplyModal = ({
   addReplyOpen,
   closeAddReply,
@@ -38,8 +42,27 @@ const ReplyModal = ({
           orig_post: false,
         },
       });
+        toast.success("Post successfully created", {
+          position: "bottom-left",
+          autoClose: 1500,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
     } catch (error) {
-      console.log("Error in button click to create new reply: ", error);
+      toast.error("Failed to create post", {
+        position: "bottom-left",
+        autoClose: 1500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
 
@@ -50,7 +73,7 @@ const ReplyModal = ({
         <h2 className="mt-6 mb-4 mr-4 text-xl font-bold text-amber-950">
           {questionObject.content}
         </h2>
-        <div className="flex items-end justify-between px-4 py-2">
+        <div className="flex items-end justify-between px-4 py-2 text-amber-950">
           <span className="text-sm font-semibold text-amber-950">
             {moment(questionObject?.post_time).fromNow()}
           </span>
@@ -99,7 +122,7 @@ const ReplyModal = ({
           required
         />
 
-        <div className="mt-6 text-center align-middle buttons-container">
+        <div className="text-center align-middle buttons-container">
           <button
             className={`mx-5 font-bold active:underline  text-amber-950 ${
               isDarkMode ? "dark" : "light"

@@ -3,6 +3,10 @@ import "../InviteNodeModal/InviteNodeModal.css";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+// TOASTIFY
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export const InviteNodeModal = ({
   InviteCodeOpen,
   InviteCodeClose,
@@ -26,7 +30,16 @@ export const InviteNodeModal = ({
       await navigator.clipboard.writeText(inviteCode);
       setIsCodeCopied(true);
     } catch (error) {
-      console.error("Error copying code:", error);
+      toast.error("Failed to copy invite code", {
+        position: "bottom-left",
+        autoClose: 1500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
 
@@ -38,11 +51,16 @@ export const InviteNodeModal = ({
       setIsCodeCopied(false);
       dispatch({type: "SET_INVITE_CODE", payload: {node_id: nodeID} })
     } catch (error) {
-      dispatch({
-        type: "GENERATE_INVITE_CODE_ERROR",
-        payload: "An error occurred while generating invite code.",
+      toast.error("Failed to generate invite code", {
+        position: "bottom-left",
+        autoClose: 1500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
       });
-      console.log("Error in button click to generate new node: ", error);
     }
   };
 

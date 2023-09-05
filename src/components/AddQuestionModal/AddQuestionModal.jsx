@@ -2,8 +2,10 @@ import React from "react";
 import "./AddQuestionModal.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.min.css";
+
+// TOASTIFY
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AddQuestionModal = ({
   addQuestionOpen,
