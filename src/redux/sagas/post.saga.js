@@ -23,15 +23,17 @@ function* fetchPost(action) {
     }
 }
 
-// saga to PUT on a post to edit post information
+//saga to PUT on a post to edit post information
 function* editPost(action) {
     try {
+        console.log("action.payload in saga", action.payload)
         yield axios.put(`/post/${action.payload}`)
         yield put({ type: 'FETCH_POST' })
     } catch (error) {
         console.log('Error in SAGA PUT post request: ', error)
     }
 }
+
 
 // saga to DELETE a post
 function* deletePost(action) {

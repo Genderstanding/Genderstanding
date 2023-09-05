@@ -26,18 +26,20 @@ const OwnerReplyModal = ({ addReplyOpen, closeAddReply, questionObject }) => {
     const [contentToEdit, setContentToEdit] = useState('');
     const [isEditing, setIsEditing] = useState(false);
     const [addReplys, setAddReplys] = useState(0);
+    const [postIdProp, setPostIdProp] = useState(null);
 
-    
-      const openElipsis = (content) => {
-        console.log('openElipsis clicked, content is:', content)
+
+    const openElipsis = (content, postId) => {
         setElipsisOpen(true);
         setContentToEdit(content);
-      };
-    
-      const closeElipsis = () => {
+        setPostIdProp(postId);
+        
+    };
+
+    const closeElipsis = () => {
         setElipsisOpen(false);
-      };
-    
+    };
+
     //   const handleSaveEdit = (editedContent) => {
     //     // dispatch an action to update for reals
     //     // updating content directly in the state
@@ -63,28 +65,45 @@ const OwnerReplyModal = ({ addReplyOpen, closeAddReply, questionObject }) => {
 
     }
 
-    
-    const handleSaveEdit = () => {
 
-        console.log('Content To Edit:', contentToEdit);
-        console.log('Edited Content:', editedContent); 
-        
-        if (editedContent !== contentToEdit) {
-          try {
-            dispatch({
-              type: 'EDIT_POST', 
-              payload: {
-                id: nodePosts.id,
-                content: editedContent,
-              },
-            });
-          } catch (error) {
-            console.log('Error in button click to edit post: ', error);
-          }
-        }
-        setContentToEdit(editedContent);
-        setIsEditing(false);
-      };
+    // const handleSaveEdit = (postId) => {
+
+    //     console.log('Content To Edit:', contentToEdit);
+    //     console.log('Edited Content:', editedContent);
+
+    //     if (editedContent !== contentToEdit) {
+    //         try {
+    //             dispatch({
+    //                 type: 'EDIT_POST',
+    //                 payload: {
+    //                     id: postId,
+    //                     content: editedContent,
+    //                 },
+    //             });
+    //         } catch (error) {
+    //             console.log('Error in button click to edit post: ', error);
+    //         }
+    //     }
+    //     setContentToEdit(editedContent);
+    //     setIsEditing(false);
+    // };
+
+    
+    const handleDeleteButton = (postId) => {
+        console.log('delete clicked!')
+        console.log('postId in handleDeleteButton:', postId)
+        dispatch({
+            type: 'DELETE_POST',
+            payload: postId
+        })
+    }
+
+    const handleReportButton = (postId) => {
+        dispatch({
+          type: 'REPORT_POST',
+          payload: postId
+        })
+      }
 
     return (
         <div className='flex items-center justify-center modal-overlay'>
@@ -97,10 +116,10 @@ const OwnerReplyModal = ({ addReplyOpen, closeAddReply, questionObject }) => {
                             const matchingNode = nodeData.find(node => node.id === post.node_id);
                             const isNodeOwner = matchingNode ? post.user_id === matchingNode.user_id : false;
                             return (
-                                <div key={post.id} className={`mt-4 ${isNodeOwner ? 'owner-text-bubble mr-5' : 'user-text-bubble ml-5'}`}>
+                                <div key={post.id} className={`mt-4 ${isNodeOwner ? 'owner-text-bubble mr-5 mb-2' : 'user-text-bubble ml-5 mb-2'}`}>
                                     <div className="flex items-end justify-between px-4 py-2">
                                         <span className="text-sm">{isNodeOwner ? 'Owner' : 'User'} {moment(post?.post_time).fromNow()}</span>
-                                        <button onClick={() => openElipsis(post?.content)}>. . .</button>
+                                        <button onClick={() => openElipsis(post?.content, post?.id)}>. . .</button>
                                     </div>
                                     <div className="m-4 question-text">{post?.content}</div>
                                 </div>
@@ -121,13 +140,16 @@ const OwnerReplyModal = ({ addReplyOpen, closeAddReply, questionObject }) => {
                         Close
                     </button>
                 </div>
-                
+
             </div>
             <ElipsisModal
                 elipsisOpen={elipsisOpen}
                 elipsisClose={closeElipsis}
                 contentToEdit={contentToEdit}
-                handleSaveEdit={handleSaveEdit} />
+                // handleSaveEdit={handleSaveEdit} 
+                postIdProp={postIdProp}
+                handleDeleteButton={handleDeleteButton}
+                handleReportButton={handleReportButton} />
         </div>
     );
 };
