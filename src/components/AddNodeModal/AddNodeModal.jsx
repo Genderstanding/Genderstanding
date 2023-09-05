@@ -31,7 +31,7 @@ const AddNodeModal = ({ addNodeOpen, addNodeClose, children }) => {
       dispatch({ type: "CREATE_NODE", payload: { name: nodeInput } });
       toast.success("Node created successfully", {
         position: "bottom-left",
-        autoClose: 2000,
+        autoClose: 1500,
         hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: false,
@@ -56,7 +56,7 @@ const AddNodeModal = ({ addNodeOpen, addNodeClose, children }) => {
       console.log("Error in button click to create a new node: ", error);
       toast.error("Failed to created new node", {
         position: "bottom-left",
-        autoClose: 2000,
+        autoClose: 1500,
         hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: false,
@@ -79,10 +79,10 @@ const AddNodeModal = ({ addNodeOpen, addNodeClose, children }) => {
           onChange={(event) => setNodeInput(event.target.value)}
         />
         <div className="mt-6 buttons-container">
-          <button className="mr-6 underline" onClick={handleAddNode}>
+          <button className="mr-6 font-semibold active:underline active:font-bold" onClick={handleAddNode}>
              Confirm
           </button>
-          <button className="underline " onClick={addNodeClose}>
+          <button className="font-semibold active:underline active:font-bold " onClick={addNodeClose}>
             Close
           </button>
         

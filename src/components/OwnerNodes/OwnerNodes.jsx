@@ -8,22 +8,18 @@ import moment from 'moment';
 
 import OwnerReplyModal from "../OwnerReplyModal/OwnerReplyModal";
 import AddQuestionModal from "../AddQuestionModal/AddQuestionModal";
+import ElipsisModal from "../ElipsisModal/ElipsisModal";
 
 
-const OwnerNodes = () => {
+const OwnerNodes = ({isDarkMode}) => {
   const [addReplyOpen, setAddReplyOpen] = useState(false);
   const [clickedReplyContent, setClickedReplyContent] = useState("");
   const [showButton, setShowButton] = useState(true);
   const [toggleButtom, setToggleButton] = useState(true);
   const [addQuestionOpen, setAddQuestionOpen] = useState(false);
 
-
   // inputing dispatch
   const dispatch = useDispatch();
-
-  // const toggleShowButton = () => {
-  //   setShowButton(!showButton);
-  // }
 
   // sends a flag to the database to permanently make the post visible to all users
   const handleAcceptButton = (postId) => {
@@ -57,23 +53,7 @@ const OwnerNodes = () => {
   let newNode = useSelector(
     (store) => store.newNodeReducer.newNodeDatabaseResponse
   );
-
-  const questionsArray = [
-    {
-      node_id: 1,
-      user_id: 123,
-      question:
-        "Rainbows are visions, but only illusions. Rainbows have nothing to hide.",
-      count: 0,
-    },
-    {
-      node_id: 2,
-      user_id: 234,
-      question:
-        "Rainbows are nightmares, as real as death. Rainbows will eat you alive.",
-      count: 0,
-    },
-  ];
+  console.log('nodePosts object:', nodePosts)
 
   // function to like a post
   const increaseCount = (postId) => {
@@ -82,12 +62,6 @@ const OwnerNodes = () => {
       type: 'LIKE_POST',
       payload: postId
     })
-    // const updatedPostArray = nodePosts.map((content) =>
-    //   content.node_id === nodeId
-    //     ? { ...content, count: content.count + 1 }
-    //     : content
-    //     );
-    //     setQuestionsArray(updatedQuestionsArray);
   };
 
   const openAddQuestion = () => {
@@ -107,39 +81,38 @@ const OwnerNodes = () => {
     setAddReplyOpen(false);
   };
 
-
   return (
     <>
 
       <div className="flex flex-col h-screen App">
         <HeaderOwnerBar />
-        <div className="flex flex-col items-center justify-center thread-container">
+        <div className="flex flex-col items-center justify-center pb-24 thread-container">
           {nodePosts.map(post => {
             if(post?.reported == false) {
             if (post?.node_id == newNode.id) {
               if (post?.reply_id == null) {
                 if(post?.replied == false) {
                   return (
-                    <div className="mt-4 question-box" key={post?.id}>
-                      <div className="flex items-end justify-between px-4 py-2">
+                    <div className={`mt-4 mb-20 text-black bg-userContent question-box ${isDarkMode ? 'dark' : 'light'}`} key={post?.id}>
+                      <div className="flex items-end justify-between px-5 py-3"> New Question
                         <span className="text-sm">{moment(post?.post_time).fromNow()}</span>
-  
+                        
                       </div>
                       {/* this should display the latest question/reply in this thread */}
-                      <div className="m-4 question-text" >
-                        {post?.content}
-                      </div>
-                      <div className="flex items-end justify-between px-4 py-2">
+                        <div className={`m-5 flex flex-col justify-center items-center question-text bg-userContent ${isDarkMode ? 'dark' : 'light'}`} >
+                          {post?.content}
+                        </div>
+                      <div className="flex items-end justify-between px-5 py-3 ">
                         {toggleButtom ? (
-                          <button className="underline text-sm" onClick={()=>handleAcceptButton(post?.id)}>Accept</button>
+                          <button className="text-sm font-semi-bold active:underline active:font-bold" onClick={()=>handleAcceptButton(post?.id)}>Accept</button>
                         ) : (
-                          <button className="text-sm" onClick={() => openAddReply(post)}>Reply</button>
+                          <button className="text-sm font-semi-bold active:underline active:font-bolde" onClick={() => openAddReply(post)}>Reply</button>
                         )}
                         {showButton &&
-                          <button className="underline text-sm" onClick={()=>handleRejectButton(post?.id)}>Reject</button>
+                          <button className="text-sm font-semi-bold active:underline active:font-bold" onClick={()=>handleRejectButton(post?.id)}>Reject</button>
                         }
                         {toggleButtom ? (
-                          <button className="underline text-sm" onClick={()=> handleReportButton(post?.id)}>Report</button>
+                          <button className="text-sm font-semi-bold active:underline active:font-bold" onClick={()=> handleReportButton(post?.id)}>Report</button>
                         ) : (
                           <button className="text-sm" onClick={() => increaseCount(post.id)}>🖤<span>{post.votes || 0}</span></button>
                         )}
@@ -148,18 +121,18 @@ const OwnerNodes = () => {
                   )
                 } else {
                   return (
-                    <div className="mt-4 question-box" key={post?.id}>
-                      <div className="flex items-end justify-between px-4 py-2">
+                    <div className={`mt-4 mb-2 question-box font-medium text-black shadow-md bg-ownerContent ${isDarkMode ? 'dark' : 'light'}`} key={post?.id}>
+                      <div className="flex items-end justify-between px-5 py-3">
                         <span className="text-sm">{moment(post?.post_time).fromNow()}</span>
   
                       </div>
                       {/* this should display the latest question/reply in this thread */}
-                      <div className="m-4 question-text" >
+                      <div className={`m-5 flex flex-col justify-center items-center font-normal question-text bg-ownerContent text-black ${isDarkMode ? 'dark' : 'light'}`} >
                         {post?.content}
                       </div>
-                      <div className="flex items-end justify-between px-4 py-2">
-                          <button className="text-sm" onClick={() => openAddReply(post)}>Reply</button>
-                          <button className="text-sm" onClick={() => increaseCount(post.id)}>🖤<span>{post.votes || 0}</span></button>
+                      <div className="flex items-end justify-between px-5 py-3 ">
+                          <button className="text-sm font-bold active:underline" onClick={() => openAddReply(post)}>Reply</button>
+                          <button className="text-sm font-bold active:underline" onClick={() => increaseCount(post.id)}>🖤{'  '}<span>{post.votes || 0}</span></button>
                       </div>
                     </div>
                   )

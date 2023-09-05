@@ -7,7 +7,7 @@ import ElipsisModal from "../ElipsisModal/ElipsisModal";
 
 const ThreadModal = () => {
   const [elipsisOpen, setElipsisOpen] = useState(false);
-  const [contentToEdit, setContentToEdit] = useState('(test data) Why are there so so many songs about rainbows and whats on the other side?');
+  const [contentToEdit, setContentToEdit] = useState('');
   const [addReplys, setAddReplys] = useState(0);
   const [replyTexts, setReplyTexts] = useState([]);
   const [activeReplyText, setActiveReplyText] = useState("");

@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import Nav from "../Nav/Nav";
 import "./App.css";
-import '../../../src/input.css'
+import "../../../src/input.css";
 import AboutPage from "../AboutPage/AboutPage";
 import UserPage from "../UserPage/UserPage";
 import WelcomePage from "../WelcomePage/WelcomePage";
@@ -26,13 +26,13 @@ import UserNodes from "../UserNodes/UserNodes";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-function App() {    
+function App() {
   const dispatch = useDispatch();
-  const [isDarkMode, setIsDarkMode] = useState(false);  
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
 
   const user = useSelector((store) => store.user);
-    
+
   // DARK MODE
   const handleDarkModeToggle = () => {
     console.log("Toggling dark mode");
@@ -58,12 +58,12 @@ function App() {
     dispatch({ type: "FETCH_NODE_ASSOCIATION" });
     dispatch({ type: "FETCH_CURRENT_NODE" });
   }, []);
-  
+
   return (
     // <div style={{ backgroundColor: isDarkMode ? 'var(--background-dark)' : 'var(--background-light)' }}>
     // <div style={{ color: isDarkMode ? 'var(--text-dark)' : 'var(--text-light)' }}>
-    <div className={`bg-bkg text-text ${isDarkMode ? 'dark' : 'light'}`}>
-     <Router>
+    <div className={`bg-bkg text-text ${isDarkMode ? "dark" : "light"}`}>
+      <Router>
         {/* Toastify */}
         <ToastContainer
           position="bottom-left"
@@ -75,17 +75,16 @@ function App() {
           pauseOnFocusLoss={false}
           draggable
           pauseOnHover={false}
-          theme="light"
         />
         {/* Nav */}
         <Nav />
         {/* Setting */}
         <SettingsModal
-              openSettings={openSettings}
-              closeSettings={closeSettings}
-              handleDarkModeToggle={handleDarkModeToggle} 
-              isDarkMode={isDarkMode}
-            />
+          openSettings={openSettings}
+          closeSettings={closeSettings}
+          handleDarkModeToggle={handleDarkModeToggle}
+          isDarkMode={isDarkMode}
+        />
 
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
@@ -231,13 +230,10 @@ function App() {
           <Route>
             <h1>404</h1>
           </Route>
-        </Switch>     
-        </Router>
-        </div>
-      // </div>
-       
-     
- 
+        </Switch>
+      </Router>
+    </div>
+    // </div>
   );
 }
 
