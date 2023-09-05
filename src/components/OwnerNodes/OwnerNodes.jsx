@@ -21,10 +21,6 @@ const OwnerNodes = ({isDarkMode}) => {
   // inputing dispatch
   const dispatch = useDispatch();
 
-  // const toggleShowButton = () => {
-  //   setShowButton(!showButton);
-  // }
-
   // sends a flag to the database to permanently make the post visible to all users
   const handleAcceptButton = (postId) => {
     dispatch({
@@ -103,9 +99,9 @@ const OwnerNodes = ({isDarkMode}) => {
                         
                       </div>
                       {/* this should display the latest question/reply in this thread */}
-                      <div className={`m-5 question-text bg-userContent ${isDarkMode ? 'dark' : 'light'}`} >
-                        {post?.content}
-                      </div>
+                        <div className={`m-5 flex flex-col justify-center items-center question-text bg-userContent ${isDarkMode ? 'dark' : 'light'}`} >
+                          {post?.content}
+                        </div>
                       <div className="flex items-end justify-between px-5 py-3 ">
                         {toggleButtom ? (
                           <button className="text-sm font-semi-bold active:underline active:font-bold" onClick={()=>handleAcceptButton(post?.id)}>Accept</button>
@@ -131,7 +127,7 @@ const OwnerNodes = ({isDarkMode}) => {
   
                       </div>
                       {/* this should display the latest question/reply in this thread */}
-                      <div className={`m-5 font-normal question-text bg-ownerContent text-black ${isDarkMode ? 'dark' : 'light'}`} >
+                      <div className={`m-5 flex flex-col justify-center items-center font-normal question-text bg-ownerContent text-black ${isDarkMode ? 'dark' : 'light'}`} >
                         {post?.content}
                       </div>
                       <div className="flex items-end justify-between px-5 py-3 ">

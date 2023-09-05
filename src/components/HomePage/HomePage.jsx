@@ -8,8 +8,8 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import HeaderBar from "../HeaderBar/HeaderBar";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
-export default function HomePage({isDarkMode}) {
-// holds user infos
+export default function HomePage({ isDarkMode }) {
+  // holds user infos
   const user = useSelector((store) => store.user);
 
   // store that holds all of nodes
@@ -24,8 +24,8 @@ export default function HomePage({isDarkMode}) {
   let yourContent;
   const checkUserId = (node) => {
     if (node.user_id == user.id) {
-      yourContent = <AccountCircleIcon  style={{ marginTop: '-20px' }}/> ;
-    } else if (node.user_id !== user.id)  {
+      yourContent = <AccountCircleIcon style={{ marginTop: '-20px' }} />;
+    } else if (node.user_id !== user.id) {
       yourContent = "";
     }
     return yourContent;
@@ -52,7 +52,7 @@ export default function HomePage({isDarkMode}) {
     dispatch({ type: "FETCH_NODE" });
     dispatch({ type: "FETCH_POST" });
     dispatch({ type: "FETCH_NODE_ASSOCIATION" })
-    dispatch({ type: 'FETCH_CURRENT_NODE'});
+    dispatch({ type: 'FETCH_CURRENT_NODE' });
   }, []);
 
   return (
@@ -74,14 +74,14 @@ export default function HomePage({isDarkMode}) {
                 {listOfNodes.map((node) => {
                   return (
                     <div
-                    onClick={() => handleGoToNode(node)}
-                    className={`duration-300 ease-in-out side-scroll-box hover:scale-105 text-neutral-950 bg-red-50 ${isDarkMode ? 'dark' : 'light'}`}
-                    key={node.id}
+                      onClick={() => handleGoToNode(node)}
+                      className={`duration-300 ease-in-out side-scroll-box hover:scale-105 text-neutral-950 bg-red-50 ${isDarkMode ? 'dark' : 'light'}`}
+                      key={node.id}
                     >
                       {checkUserId(node)}
                       <br />
                       <p> {node.node_name}{'  '}{node.id}</p>
-                     
+
                     </div>
                   );
                 })}
@@ -94,13 +94,13 @@ export default function HomePage({isDarkMode}) {
             <h1 className="text-2xl font-bold font-mulish">Featured</h1>
             <h3>View community nodes</h3>
             <div className="mt-3 ml-6 featured-buttons">
-            <button className={`pt-3 pb-3 pl-3 pr-4 mb-4 mr-4 font-semibold shadow-lg  active:underline text-neutral-50 rounded-2xl bg-primary shadow-black-200 ${isDarkMode ? 'dark' : 'light'}`}>Trending</button>
+              <button className={`pt-3 pb-3 pl-3 pr-4 mb-4 mr-4 font-semibold shadow-lg  active:underline text-neutral-50 rounded-2xl bg-primary shadow-black-200 ${isDarkMode ? 'dark' : 'light'}`}>Trending</button>
               <button className={`pt-3 pb-3 pl-5 pr-5 mb-4 ml-4 mr-4 font-semibold active:underline text-neutral-50 shadow-lg rounded-2xl bg-primary shadow-black-200 ${isDarkMode ? 'dark' : 'light'}`}>Latest</button>
               <button className={`pt-3 pb-3 pl-4 pr-4 mb-4 ml-4 mr-4 font-semibold active:underline text-neutral-50 shadow-lg rounded-2xl bg-primary shadow-black-200 ${isDarkMode ? 'dark' : 'light'}`}>Popular</button>
-              </div>
+            </div>
             <div className="flex flex-col items-center featured-nodes-homepage">
-              <div className={`font-medium text-md featured-top font-mulish text-neutral-950 bg-userContent/100 ${isDarkMode ? 'dark' : 'light'}`}>Featured Spotlight text 1</div>
-              <div className={`font-medium text-md featured-top font-mulish text-neutral-950 bg-userContent/100 ${isDarkMode ? 'dark' : 'light'}`}>Featured Spotlight text 2</div>
+              <div className={`flex flex-col justify-center items-center p-2 font-medium text-md featured-top font-mulish text-neutral-950 bg-userContent/100 ${isDarkMode ? 'dark' : 'light'}`}>Featured Spotlight text 1</div>
+              <div className={`flex flex-col justify-center items-center p-2 font-medium text-md featured-bottom font-mulish text-neutral-950 bg-userContent/100 ${isDarkMode ? 'dark' : 'light'}`}>Featured Spotlight text 2</div>
             </div>
           </div>
         </div>
