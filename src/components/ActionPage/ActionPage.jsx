@@ -5,7 +5,7 @@ import { Typography } from "@mui/material";
 import LogoButton from "../CustomButton/LogoButton";
 import { ActionButton } from "../CustomButton/ActionButton";
 import { CustomButton } from "../CustomButton/CustomButton";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AddNodeModal from "../AddNodeModal/AddNodeModal";
 import { CodeInputModal } from "../CodeInputModal/CodeInputModal";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
@@ -15,6 +15,8 @@ import 'react-toastify/dist/ReactToastify.min.css';
 
 export default function ActionPage() {
   const history = useHistory();
+  
+ const user = useSelector(store => store.user)
   // INVITE CODE MODAL
   const [inviteModalOpen, setInviteModalOpen] = useState(false);
   const handleOpenInviteModal = () => {
@@ -36,8 +38,9 @@ export default function ActionPage() {
     setaddNodeOpen(false);
   };
   
-  const handleAlert = () => {
-    toast.info('Welcome to GenderStanding', {
+  const handleAlert = (username) => {
+    console.log(username, "username")
+    toast.info(`Hello ${username}, Welcome to GenderStanding`, {
       position: "top-center",
       autoClose: 2500,
       hideProgressBar: true,
@@ -90,7 +93,7 @@ export default function ActionPage() {
           handleCloseInviteModal={handleCloseInviteModal}
         />
 
-        <CustomButton className="btn" path="/home" onClick={handleAlert}>
+        <CustomButton className="btn" path="/home" onClick={() => handleAlert(user?.username)}>
           Just Browsing
         </CustomButton>
         

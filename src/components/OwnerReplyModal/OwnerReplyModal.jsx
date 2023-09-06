@@ -83,14 +83,22 @@ const OwnerReplyModal = ({ addReplyOpen, closeAddReply, questionObject, isDarkMo
 
     const handleDeleteButton = (postId) => {
       try {
-        console.log('delete clicked!')
-        console.log('postId in handleDeleteButton:', postId)
         dispatch({
             type: 'DELETE_POST',
             payload: postId
         })
+        toast.success("Comment deleted", {
+          position: "bottom-left",
+          autoClose: 1500,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       } catch (error) {
-        toast.error("Failed to delete post", {
+        toast.error("Failed to delete comment", {
           position: "bottom-left",
           autoClose: 1500,
           hideProgressBar: true,
@@ -129,7 +137,7 @@ const OwnerReplyModal = ({ addReplyOpen, closeAddReply, questionObject, isDarkMo
             <div className='flex flex-col items-center justify-center reply-box'>
                 {/* {children} */}
                 <h2 className='mt-6 mb-4 mr-4 text-xl font-bold text-amber-950'>{questionObject.content}</h2>
-                <div className="overflow-y-auto scrollable-container text-amber-950">
+                <div className="overflow-y-auto h-90 scrollable-container text-amber-950">
                     {reversePosts.map((post) => {
                         if (post?.reply_id == questionObject.id) {
                             const matchingNode = nodeData.find(node => node.id === post.node_id);
@@ -154,8 +162,8 @@ const OwnerReplyModal = ({ addReplyOpen, closeAddReply, questionObject, isDarkMo
                     value={replyInput}
                     required />
                 <div className='mt-6 buttons-container'>
-                    <button className={`mr-6 font-bold active:underline text-amber-950 ${isDarkMode ? "dark" : "light"}`}  onClick={(event) => handleReply(event, questionObject)}>Confirm</button>
-                    <button className={`font-bold active:underline text-amber-950 ${isDarkMode ? "dark" : "light"}`} onClick={closeAddReply}>
+                    <button className={`mx-5 font-bold active:underline text-amber-950 ${isDarkMode ? "dark" : "light"}`}  onClick={(event) => handleReply(event, questionObject)}>Confirm</button>
+                    <button className={`mx-5 font-bold active:underline text-amber-950 ${isDarkMode ? "dark" : "light"}`} onClick={closeAddReply}>
                         Close
                     </button>
                 </div>

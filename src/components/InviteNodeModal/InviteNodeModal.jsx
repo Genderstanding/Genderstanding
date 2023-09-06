@@ -69,21 +69,21 @@ export const InviteNodeModal = ({
     <div className="flex items-center justify-center modal-overlay">
       <div className="flex flex-col items-center justify-center invite-code-modal">
         {children}
-        <h2 className="mb-4 mr-4 text-xl font-bold">Generate Invite Code For Node: {ownerNode.id}</h2>
+        <h2 className="mb-4 mr-4 text-xl font-bold">Generate Invite Code </h2>
         <div className="code-container">
           <span className="code-text">{!inviteCode.length > 0 ? "" : inviteCode}</span>
           <button className="ml-4 copy-code-button" onClick={copyCode}>
             {isCodeCopied ? "Code Copied!" : "Copy Code"}
           </button>
         </div>
-        <div className="flex mt-6 buttons-container">
+        <div className="flex mt-6 buttons-container text-amber-950">
           <button
-            className="mr-6 underline"
+            className="mr-6 font-bold underline active:underline text-amber-950"
             onClick={(e) => handleGenerateCode(e, ownerNode.id)}
           >
             Generate
           </button>
-          <button className="underline " onClick={() => InviteCodeClose(dispatch({type:"CLEAR_GENERATE_INVITE_CODE"}))}>
+          <button className="font-bold underline active:underline" onClick={() => InviteCodeClose(dispatch({type:"CLEAR_GENERATE_INVITE_CODE"}))}>
             Close
           </button>
         </div>
