@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./ReplyModal.css";
 import { useSelector, useDispatch } from "react-redux";
-import EllipsisUserModal from "../EllipsisUserModal/EllipsisUserModal";
+import ElipsisModal from '../ElipsisModal/ElipsisModal';
 import moment from "moment";
 
 // TOASTIFY
@@ -32,13 +32,15 @@ const ReplyModal = ({
     const [elipsisOpen, setElipsisOpen] = useState(false);
     const [contentToEdit, setContentToEdit] = useState('');
     const [postIdProp, setPostIdProp] = useState(null);
+    const [userIdProp, setUserIdProp] = useState(null);
+    const [nodeOwnerIdProp, setNodeOwnerIdProp] = useState(null);
 
-
-    const openElipsis = (content, postId) => {
+    const openElipsis = (content, postId, userId, nodeOwnerId) => {
         setElipsisOpen(true);
         setContentToEdit(content);
         setPostIdProp(postId);
-        
+        setUserIdProp(userId);
+        setNodeOwnerIdProp(nodeOwnerId);
     };
 
     const closeElipsis = () => {
@@ -47,46 +49,46 @@ const ReplyModal = ({
 
     const handleDeleteButton = (postId) => {
         try {
-          console.log('delete clicked!')
-          console.log('postId in handleDeleteButton:', postId)
-          dispatch({
-              type: 'DELETE_POST',
-              payload: postId
-          })
+            console.log('delete clicked!')
+            console.log('postId in handleDeleteButton:', postId)
+            dispatch({
+                type: 'DELETE_POST',
+                payload: postId
+            })
         } catch (error) {
-          toast.error("Failed to delete post", {
-            position: "bottom-left",
-            autoClose: 1500,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
+            toast.error("Failed to delete post", {
+                position: "bottom-left",
+                autoClose: 1500,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
         }
-      }
+    }
 
-      const handleReportButton = (postId) => {
+    const handleReportButton = (postId) => {
         try {
-           dispatch({
-            type: 'REPORT_POST',
-            payload: postId
-          })
+            dispatch({
+                type: 'REPORT_POST',
+                payload: postId
+            })
         } catch (error) {
-          toast.error("Failed to report user", {
-            position: "bottom-left",
-            autoClose: 1500,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
+            toast.error("Failed to report user", {
+                position: "bottom-left",
+                autoClose: 1500,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
         }
-         
-        }
+
+    }
 
 
     const handleReply = (event, questionObject) => {
@@ -151,8 +153,8 @@ const ReplyModal = ({
                                 <div
                                     key={post.id}
                                     className={`mt-4 ${isNodeOwner
-                                            ? "owner-text-bubble mr-4"
-                                            : "user-text-bubble ml-4"
+                                        ? "owner-text-bubble mr-4"
+                                        : "user-text-bubble ml-4"
                                         }`}
                                 >
                                     <div className="flex items-end justify-between px-4 py-2">
@@ -160,7 +162,7 @@ const ReplyModal = ({
                                             {isNodeOwner ? "Owner" : "User"}{" "}
                                             {moment(post?.post_time).fromNow()}
                                         </span>
-                                        <button onClick={() => openElipsis(contentToEdit)}>
+                                        <button onClick={() => openElipsis(post, post?.id, post.user_id, matchingNode?.user_id)}>
                                             . . .
                                         </button>
                                     </div>
@@ -197,11 +199,13 @@ const ReplyModal = ({
                     </button>
                 </div>
             </div>
-            <EllipsisUserModal
+            <ElipsisModal
                 elipsisOpen={elipsisOpen}
                 elipsisClose={closeElipsis}
                 contentToEdit={contentToEdit}
                 postIdProp={postIdProp}
+                userIdProp={userIdProp}
+                nodeOwnerIdProp={nodeOwnerIdProp}
                 handleDeleteButton={handleDeleteButton}
                 handleReportButton={handleReportButton} />
         </div>

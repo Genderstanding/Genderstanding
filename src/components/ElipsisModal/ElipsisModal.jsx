@@ -11,37 +11,24 @@ const ElipsisModal = ({
   contentToEdit,
   postIdProp,
   userIdProp,
+  nodeOwnerIdProp,
   handleReportButton,
   handleDeleteButton
 }) => {
   const [editedContent, setEditedContent] = useState(contentToEdit.content);
   const [isEditing, setIsEditing] = useState(false);
   const [showEdit, setShowEdit] = useState(true);
+  const [showDelete, setShowDelete] = useState(true);
 
   const postDate = moment(contentToEdit.post_time);
   const currentDate = moment();
   const minutesElapsed = currentDate.diff(postDate, 'minutes');
   console.log('The number of minutes between the two is: ', minutesElapsed)
 
-  let nodePosts = useSelector(store => store.postReducer.postDatabaseResponse)
+  const dispatch = useDispatch();
+ 
   const user = useSelector((state) => state.user);
   
-  
-
-  useEffect(()=> {
-    console.log('useEffect running')
-    console.log('user.id:', user.id)
-    console.log('userIdProp:',userIdProp)
-    if(minutesElapsed < 60 && userIdProp === user.id){
-        setShowEdit(true);
-    } else {
-        setShowEdit(false);
-    }
-  }, [minutesElapsed, userIdProp, user.id])
-
-
-  const dispatch = useDispatch();
-
   const handleEditToggle = () => {
     setIsEditing(!isEditing);
     // When entering edit mode, set the edited content to the current content
@@ -77,12 +64,30 @@ const ElipsisModal = ({
     }
   };
 
+    //edit button render logic
+    useEffect(()=> {
+        if(nodeOwnerIdProp === user.id){
+            setShowDelete(true);
+        } else {
+            setShowDelete(false);
+        }
+    }, [nodeOwnerIdProp, user.id])
+
   useEffect(() => {
     // When contentToEdit changes, update the edited content if not in edit mode
     if (!isEditing) {
       setEditedContent(contentToEdit);
     }
   }, [contentToEdit, isEditing]);
+
+  //edit button render logic
+  useEffect(()=> {
+    if(minutesElapsed < 60 && userIdProp === user.id){
+        setShowEdit(true);
+    } else {
+        setShowEdit(false);
+    }
+  }, [minutesElapsed, userIdProp, user.id])
 
   if (!elipsisOpen) {
     return null;
@@ -118,12 +123,14 @@ const ElipsisModal = ({
                   Edit
                 </button>
                 )}
+                {showDelete &&(
                 <button
                   className="m-2 font-bold active:underline text-amber-950"
                   onClick={() => handleDeleteButton(postIdProp)}
                 >
                   Delete
                 </button>
+                )}
                 <button className="m-2 font-bold active:underline text-amber-950">
                   Remove User
                 </button>

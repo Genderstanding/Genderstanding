@@ -14,33 +14,31 @@ const OwnerReplyModal = ({ addReplyOpen, closeAddReply, questionObject, isDarkMo
     let nodePosts = useSelector(store => store.postReducer.postDatabaseResponse)
     let nodeData = useSelector(store => store.nodeReducer.nodeDatabaseResponse);
 
-    // console.log('nodePosts:', nodePosts)
+    console.log('nodePosts:', nodePosts)
     console.log('nodeData:', nodeData)
 
     const reversePosts = nodePosts.slice().reverse();
 
     // Creating a state to hold text inputed
     const [replyInput, setReplyInput] = useState('');
-    const [editedContent, setEditedContent] = useState('');
+    // const [editedContent, setEditedContent] = useState('');
     const [elipsisOpen, setElipsisOpen] = useState(false);
     const [contentToEdit, setContentToEdit] = useState('');
-    const [isEditing, setIsEditing] = useState(false);
-    const [addReplys, setAddReplys] = useState(0);
+    // const [isEditing, setIsEditing] = useState(false);
+    // const [addReplys, setAddReplys] = useState(0);
     const [postIdProp, setPostIdProp] = useState(null);
     const [userIdProp, setUserIdProp] = useState(null);
+    const [nodeOwnerIdProp, setNodeOwnerIdProp] = useState(null);
 
 
-    const openElipsis = (content, postId, userId) => {
+    const openElipsis = (content, postId, userId, nodeOwnerId) => {
         setElipsisOpen(true);
         setContentToEdit(content);
         setPostIdProp(postId);
         setUserIdProp(userId);
+        setNodeOwnerIdProp(nodeOwnerId);
         // console.log('userIdProp in openElipsis:', userIdProp)
     };
-
-    useEffect(() => {
-        console.log('userIdProp in openElipsis:', userIdProp);
-      }, [userIdProp]);
 
     const closeElipsis = () => {
         setElipsisOpen(false);
@@ -140,7 +138,7 @@ const OwnerReplyModal = ({ addReplyOpen, closeAddReply, questionObject, isDarkMo
                                 <div key={post.id} className={`mt-4 ${isNodeOwner ? 'owner-text-bubble mr-5 mb-2' : 'user-text-bubble ml-5 mb-2'}`}>
                                     <div className="flex items-end justify-between px-4 py-2">
                                         <span className="text-sm">{isNodeOwner ? 'Owner' : 'User'} {moment(post?.post_time).fromNow()}</span>
-                                        <button onClick={() => openElipsis(post, post?.id, post.user_id)}>. . .</button>
+                                        <button onClick={() => openElipsis(post, post?.id, post.user_id, matchingNode?.user_id)}>. . .</button>
                                     </div>
                                     <div className="m-4 question-text">{post?.content}</div>
                                 </div>
@@ -169,6 +167,7 @@ const OwnerReplyModal = ({ addReplyOpen, closeAddReply, questionObject, isDarkMo
                 contentToEdit={contentToEdit}
                 postIdProp={postIdProp}
                 userIdProp={userIdProp}
+                nodeOwnerIdProp={nodeOwnerIdProp}
                 handleDeleteButton={handleDeleteButton}
                 handleReportButton={handleReportButton} />
         </div>
