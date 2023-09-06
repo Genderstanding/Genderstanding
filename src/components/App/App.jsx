@@ -74,6 +74,7 @@ function App() {
           pauseOnFocusLoss={false}
           draggable
           pauseOnHover={false}
+          limit={1}
         />
         {/* Nav */}
         <Nav />
