@@ -21,12 +21,12 @@ export default function DeleteNodeModal() {
   };
 
   // all nodes from a user
-  let allNodes = useSelector((store) => store.nodeReducer.nodeDatabaseResponse);
+  const allNodes = useSelector((store) => store.nodeReducer.nodeDatabaseResponse);
   const user = useSelector((store) => store.user);
 
-  const handleDeleteNode = (nodeId) => {
+  const handleDeleteNode = (nodeID) => {
     try {
-      dispatch({ type: "DELETE_NODE", payload: {id: nodeId} });
+      dispatch({ type: "DELETE_NODE", payload: nodeID});
     } catch (error) {
       console.log("error deleting nodes", error);
     }
@@ -66,7 +66,7 @@ export default function DeleteNodeModal() {
 
               return (
                 <div
-                  className="my-5 font-semibold text-center text-md"
+                  className="my-5 font-semibold text-center text-md overflow-y-scroll ..."
                   key={node.id}
                 >
                   <Card
@@ -95,13 +95,13 @@ export default function DeleteNodeModal() {
                 </div>
               );
             }
+            return null; // if condition doesn't match
           })}
-          <button
-            className="font-bold text-center ml-15 active:underline"
-            onClick={() => handleClose(false)}
-          >
+          <div  className="mt-12 text-center">
+          <button className="font-bold active:underline" onClick={() => handleClose(false)}>
             Close
           </button>
+        </div>
         </Box>
       </StyledModal>
     </div>
@@ -156,8 +156,8 @@ const StyledBackdrop = styled(Backdrop)`
 
 const style = (theme) => ({
   width: 270,
-  minHeight: 200,
-  maxHeight: 500,
+  minHeight: 100,
+  maxHeight: 400,
   borderRadius: "12px",
   padding: "16px 32px 24px 32px",
   backgroundColor: theme.palette.mode === "dark" ? "#0A1929" : "white",

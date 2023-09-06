@@ -5,7 +5,7 @@
 
 @layer base {
     :root[class="light"] {
-        --colors-primary: 204 138 127;
+        --colors-primary: 207 111 90;
         --colors-secondary: 223 188 185;
         --colors-accent: 123 62 55;
         --colors-bkg: 251 246 246;

@@ -147,24 +147,51 @@ nodeRouter.put("/:id", rejectUnauthenticated, (req, res) => {
 });
 
 // DELETE route to database to remove a node
-nodeRouter.delete("/:id", rejectUnauthenticated, (req, res) => {
-  
-  let sqlId = req.params.id;
-  let sqlUser = req.user.id;
-  let sqlQuery = `
-    DELETE FROM "node"
-    WHERE "id"=$1 AND "user_id"=$2;
-    `;
-  pool
-    .query(sqlQuery, [sqlId, sqlUser])
-    .then((result) => {
-      console.log("Delete node from database: ", result);
-      res.sendStatus(201);
-    })
-    .catch((error) => {
-      console.log("Error in DELETE to node query: ", error);
-      res.sendStatus(500);
-    });
+nodeRouter.delete("/:id", rejectUnauthenticated, async (req, res) => {
+  const connection = await pool.connect();
+  try {
+    let node_id = req.params.id;
+    let user_id = req.user.id;
+
+    /***** BEGIN SQL transaction *****/
+    await connection.query("BEGIN"); // Begin the transaction to start
+
+    const { rows } = await pool.query(
+      `
+    DELETE FROM node WHERE id = $1 AND user_id = $2 RETURNING *;
+      `,
+      [node_id, user_id]
+    );
+
+    const deletedNode = rows[0];
+
+    if (deletedNode) {
+      // Delete associated rows frm other tables
+      const nodeAssociationRow = await pool.query(
+        `DELETE FROM node_association WHERE node_id = $1 AND user_id = $2`,
+        [node_id, user_id]
+      );
+      const postRow = await pool.query(
+        `DELETE FROM posts WHERE node_id = $1 AND user_id = $2`,
+        [node_id, user_id]
+      );
+    }
+
+    /***** COMMIT SQL transaction *****/
+    await connection.query("COMMIT"); // Commit the transaction to execute
+    /***** SUCCESS *****/
+    console.log("Delete node from database: ");
+    res.sendStatus(201);
+    /***** ERROR *****/
+  } catch (error) {
+    console.error("Error deleting node from database: ", error);
+    res.sendStatus(500);
+    /***** ROLLBACK SQL transaction *****/
+    await connection.query("ROLLBACK"); // Rollback the transaction in case of an error
+    /***** FINALLY *****/
+  } finally {
+    connection.release(); // Release the connection back to the pool
+  }
 });
 
 module.exports = nodeRouter;

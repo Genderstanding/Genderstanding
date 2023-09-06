@@ -83,9 +83,29 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
           }
         }
       }
-      // Go to home page when user enter invite code
-      history.push(`/usernodes`);
+      toast.success("Invite code submitted successfully", {
+        position: "bottom-left",
+        autoClose: 1500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });  
+      // Go to the node when user enter invite code
+      history.push('/home');
     } catch (error) {
+      toast.error("Failed to submit invite code", {
+        position: "bottom-left",
+        autoClose: 1500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       console.log("Error submitting invite node: ", error);
     }
   };
@@ -93,7 +113,7 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
   if (!settingsOpen) {
     return null;
   }
-
+  
   return (
     <div className="modal-overlay">
       <div
@@ -129,18 +149,6 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
           <span className="mb-2">Theme</span>
           <div className="flex justify-between">
             {/* DARK MODE */}
-            {/* <button
-              className={isDarkMode ? "dark ml-20" : "light ml-20"}
-              onClick={() => handleDarkModeToggle(isDarkMode)}
-            >
-              ☼
-            </button>
-            <button
-              className={isDarkMode ? "dark mr-20" : "light mr-20"}
-              onClick={() => handleDarkModeToggle(!isDarkMode)}
-            >
-              ☾
-            </button> */}
             <p className="ml-20">
               <button
                 className={isDarkMode ? "dark ml-20" : "light ml-20"}

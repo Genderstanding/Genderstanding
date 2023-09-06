@@ -81,7 +81,7 @@ const ElipsisModal = ({
 
   return (
     <div className="flex items-center justify-center modal-overlay">
-      <div className="flex flex-col items-center justify-center add-node-modal">
+      <div className="flex flex-col items-center justify-center ellipsis-modal">
         {/* {children} */}
         <div className="flex flex-col justify-start buttons-container text-amber-950">
           {isEditing ? (

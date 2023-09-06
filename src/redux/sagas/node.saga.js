@@ -44,8 +44,11 @@ function* updateNode(action) {
 function* deleteNode(action) {
     try {
         yield axios.delete(`/node/${action.payload}`)
+
         console.log(action.payload, "action.payload")
+
         yield put({ type: 'FETCH_NODE'})
+        
     } catch (error) {
         console.log('Error in SAGA DELETE node request: ', error)
     }
