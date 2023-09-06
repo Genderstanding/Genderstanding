@@ -153,8 +153,8 @@ const ReplyModal = ({
                                 <div
                                     key={post.id}
                                     className={`mt-4 ${isNodeOwner
-                                        ? "owner-text-bubble mr-4"
-                                        : "user-text-bubble ml-4"
+                                        ? "owner-text-bubble mb-2"
+                                        : "user-text-bubble ml-5 mb-2"
                                         }`}
                                 >
                                     <div className="flex items-end justify-between px-4 py-2">
