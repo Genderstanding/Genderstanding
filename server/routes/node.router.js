@@ -148,6 +148,7 @@ nodeRouter.put("/:id", rejectUnauthenticated, (req, res) => {
 
 // DELETE route to database to remove a node
 nodeRouter.delete("/:id", rejectUnauthenticated, (req, res) => {
+  
   let sqlId = req.params.id;
   let sqlUser = req.user.id;
   let sqlQuery = `

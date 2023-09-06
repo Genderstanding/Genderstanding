@@ -116,7 +116,6 @@ function UserPage({ isDarkMode }) {
                     >
                       <div className="m-4 text-xl font-bold owned-community-names">
                         {node?.node_name}
-             
                       </div>
                     </div>
                   );

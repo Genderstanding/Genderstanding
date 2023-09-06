@@ -22,10 +22,11 @@ export default function DeleteNodeModal() {
 
   // all nodes from a user
   let allNodes = useSelector((store) => store.nodeReducer.nodeDatabaseResponse);
+  const user = useSelector((store) => store.user);
 
   const handleDeleteNode = (nodeId) => {
     try {
-      dispatch({ type: "DELETE_NODE", nodeId });
+      dispatch({ type: "DELETE_NODE", payload: {id: nodeId} });
     } catch (error) {
       console.log("error deleting nodes", error);
     }
@@ -59,33 +60,41 @@ export default function DeleteNodeModal() {
         <Box className="text-center text-amber-950" sx={style}>
           <h2 className="text-xl font-bold text-center">Your Communities</h2>
           {allNodes.map((node) => {
-            const isDeleteButtonVisible = showDeleteButtons.includes(node.id);
+            if (user?.id == node?.user_id) {
+              
+              const isDeleteButtonVisible = showDeleteButtons.includes(node?.id);
 
-            return (
-              <div
-                className="my-5 font-semibold text-center text-md"
-                key={node.id}
-              >
-                <Card className=" bg-rose-100 border-r-12" sx={{ minWidth: 50, maxWidth: 200, height:30}}>
-                  <CardActionArea onClick={() => toggleShowDeleteButton(node.id)}>
-                    <Typography>
-                      {isDeleteButtonVisible ? (
-                        <button
-                          className="font-semibold border-r-12"
-                          onClick={() => handleDeleteNode(node.id)}
-                        >
-                          Delete
-                        </button>
-                      ) : (
-                        <div className="font-semibold border-r-12">
-                          {node.node_name}
-                        </div>
-                      )}
-                    </Typography>
-                  </CardActionArea>
-                </Card>
-              </div>
-            );
+              return (
+                <div
+                  className="my-5 font-semibold text-center text-md"
+                  key={node.id}
+                >
+                  <Card
+                    className=" bg-rose-100 border-r-12"
+                    sx={{ minWidth: 50, maxWidth: 200, height: 30 }}
+                  >
+                    <CardActionArea
+                      onClick={() => toggleShowDeleteButton(node?.id)}
+                    >
+                      <Typography>
+                        {isDeleteButtonVisible ? (
+                          <button
+                            className="font-semibold border-r-12"
+                            onClick={() => handleDeleteNode(node?.id)}
+                          >
+                            Delete
+                          </button>
+                        ) : (
+                          <div className="font-semibold border-r-12">
+                            {node?.node_name}
+                          </div>
+                        )}
+                      </Typography>
+                    </CardActionArea>
+                  </Card>
+                </div>
+              );
+            }
           })}
           <button
             className="font-bold text-center ml-15 active:underline"
