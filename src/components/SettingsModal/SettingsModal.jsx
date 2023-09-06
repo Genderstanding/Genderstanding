@@ -100,7 +100,7 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
             });
 
             history.push("/home");
-          } else if (node?.user_id !== null) {
+          } else {
             toast.error("Invite code has already been used", {
               position: "bottom-left",
               autoClose: 1500,
@@ -112,6 +112,17 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
               theme: "light",
             });
           }
+        } else {
+          toast.error("Invalid invite code", {
+            position: "bottom-left",
+            autoClose: 1500,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
         }
       }
     } catch (error) {
@@ -134,7 +145,7 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
         <div className="flex flex-col">
           {/* onClick Link to login */}
           {/* <button className="self-end mt-2 mb-6 mr-2 text-sm underline">Log Out</button> */}
-          <LogOutButton onCloseSettings={closeSettings} />
+          <LogOutButton setIsDarkMode={setIsDarkMode} onCloseSettings={closeSettings} />
         </div>
         <div className="flex flex-col">
           <span className="mb-2">Join Node</span>
