@@ -49,7 +49,7 @@ export default function HeaderUserBar({isDarkMode}) {
   ];
 
   return (
-<div className={`fixed top-0 left-0 right-0 flex items-center header-container text-black ${isDarkMode ? "light" : "dark"}`}>
+<div className={`fixed top-0 left-0 right-0 flex items-center header-container text-text bg-bkg ${isDarkMode ? "light" : "dark"}`}>
    
       <button onClick={() => history.goBack()}>
         <MdChevronLeft size={25} className="ml-2" />
@@ -66,7 +66,7 @@ export default function HeaderUserBar({isDarkMode}) {
           height={24}
           viewBox="0 0 24 24"
           pathData={svgQuestion}
-          stroke="#CF6F5A"
+          className={`stroke-secondary ${isDarkMode ? "light" : "dark"}`}
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"

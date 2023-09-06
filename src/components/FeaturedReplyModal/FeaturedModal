@@ -1,4 +1,4 @@
-.question-box {
+.featured-box {
     width: 85vw;
     border-radius: 10px;
     border: solid .5px rgb(218, 206, 206);
@@ -6,7 +6,7 @@
     text-align: center;
 }
 
-.reply-text {
+.featured-text {
     width: 75vw;
 }
 

@@ -184,14 +184,14 @@ const ReplyModal = ({
 
                 <div className="text-center align-middle buttons-container">
                     <button
-                        className={`mx-5 font-bold active:underline  text-amber-950 ${ isDarkMode ? "light" : "dark"
+                        className={`my-5 mx-5 font-bold active:underline  text-amber-950 ${ isDarkMode ? "light" : "dark"
                             }`}
                         onClick={(event) => handleReply(event, questionObject)}
                     >
                         Confirm
                     </button>
                     <button
-                        className={`mx-5 font-bold active:underline  text-amber-950 ${ isDarkMode ? "light" : "dark"
+                        className={`my-5 mx-5 font-bold active:underline  text-amber-950 ${ isDarkMode ? "light" : "dark"
                             }`}
                         onClick={closeAddReply}
                     >

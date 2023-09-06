@@ -1,11 +1,10 @@
-export default function SvgIcon({ width, height, viewBox, pathData, ...props }) {
+export default function SvgIcon({ width, height, viewBox, pathData, isDarkMode , ...props }) {
   return (
     <div
-    className="Rectangle18"
+    className={`Rectangle18 bg-bkg ${isDarkMode ? 'dark' : 'light'}`}
     style={{
       width: "40px",
       height: "40px",
-      background: "white",
       boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.16)",
       borderRadius: 12,
       display: "flex",

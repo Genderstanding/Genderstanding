@@ -30,9 +30,6 @@ function FeaturedPage() {
     setViewPostOpen(true);
   }
 
-
-
-
     return (
       <>
         <div className="flex flex-col h-screen App">
@@ -46,7 +43,7 @@ function FeaturedPage() {
                 if (post?.reply_id == null) {
                   if (post?.public == true) {
                     return (
-                      <div className="mt-4 mb-2 pb-2 pt-2 font-medium  text-amber-950 shadow-md bg-userContent question-box " key={post?.id}>
+                      <div className="pt-2 pb-2 mt-4 mb-2 font-medium shadow-md text-amber-950 bg-userContent question-box " key={post?.id}>
                         <div className="flex items-end justify-between px-4 py-2">
                           <span className="text-sm">
                             {moment(post?.post_time).fromNow()}
