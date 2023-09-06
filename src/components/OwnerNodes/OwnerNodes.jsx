@@ -165,13 +165,13 @@ const closeElipsis = () => {
                       showButton: true,
                     };
                     return (
-                      <div className={`mt-4 mb-4 text-amber-950 shadow-md bg-userContent question-box ${isDarkMode ? "light": "dark"}`} key={post?.id}>
-                        <div className="flex items-end justify-between px-5 py-3"> New Question
+                      <div className={`mt-4 mb-4 text-amber-950 shadow-md bg-userContent question-box ${isDarkMode ? 'dark' : 'light'}`} key={post?.id}>
+                        <div className="flex items-end justify-between px-5 py-3"> New Question!
                           <span className="text-sm">{moment(post?.post_time).fromNow()}</span>
                           
                         </div>
                         {/* this should display the latest question/reply in this thread */}
-                        <div className={`m-5 question-text bg-userContent text-text ${isDarkMode ? "light": "dark"}`} >
+                        <div className={`flex flex-col items-center justify-center text-lg font-bold m-5 question-text bg-userContent text-amber-950 ${isDarkMode ? 'dark' : 'light'}`} >
                           {post?.content}
                         </div>
                         <div className="flex items-end justify-between px-5 py-3 ">

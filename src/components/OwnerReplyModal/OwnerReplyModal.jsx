@@ -141,7 +141,7 @@ const OwnerReplyModal = ({ addReplyOpen, closeAddReply, questionObject, isDarkMo
                             const matchingNode = nodeData.find(node => node.id === post.node_id);
                             const isNodeOwner = matchingNode ? post.user_id === matchingNode.user_id : false;
                             return (
-                                <div key={post.id} className={`mt-4 ${isNodeOwner ? 'owner-text-bubble mr-5 mb-2' : 'user-text-bubble ml-5 mb-2'}`}>
+                                <div key={post.id} className={`mt-4 ${isNodeOwner ? 'owner-text-bubble mb-2' : 'user-text-bubble ml-5 mb-2'}`}>
                                     <div className="flex items-end justify-between px-4 py-2">
                                         <span className="text-sm">{isNodeOwner ? 'Owner' : 'User'} {moment(post?.post_time).fromNow()}</span>
                                         <button onClick={() => openElipsis(post, post?.id, post.user_id, matchingNode?.user_id)}>. . .</button>
