@@ -105,7 +105,7 @@ function* postSaga() {
     yield takeLatest('LIKE_POST', likePost)
     yield takeLatest('REPORT_POST', reportPost);
     yield takeLatest('PROMOTE_POST', promotePost);
-    yield takeLatest('FETCH_PUBLIC_POST', fetchPublicPost)
+    yield takeLatest('FETCH_PUBLIC_POSTS', fetchPublicPost)
 }
 
 export default postSaga;

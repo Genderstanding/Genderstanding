@@ -44,7 +44,6 @@ postRouter.get('/', rejectUnauthenticated, (req, res) => {
 
 // GET route to obtain all posts
 postRouter.get('/public', rejectUnauthenticated, (req, res) => {
-    let sqlValue = req.user.id;
     let sqlQuery = `
     SELECT 
         "posts"."id", 
@@ -60,15 +59,15 @@ postRouter.get('/public', rejectUnauthenticated, (req, res) => {
         "posts"."reported", 
         "posts"."votes",
         "posts"."replied"
-         
     FROM "posts"
     JOIN "node" ON "node"."id" = "posts"."node_id"
     JOIN "node_association" ON "node_association"."node_id" = "node"."id"
     JOIN "user" ON "user"."id" = "node_association"."user_id"
     WHERE "posts"."public" = true
     GROUP BY "posts"."id", "posts"."user_id", "posts"."content", "posts"."node_id", "node"."node_name", "posts"."orig_post", "posts"."reply_id", "posts"."post_time", "posts"."edit", "posts"."public", "posts"."reported", "posts"."votes"
-    ORDER BY "posts"."id" DESC;`;
-    pool.query(sqlQuery, [sqlValue])
+    ORDER BY "posts"."id" DESC;
+    `;
+    pool.query(sqlQuery)
         .then( result => {
             res.send(result.rows);
         })
@@ -82,7 +81,6 @@ postRouter.get('/public', rejectUnauthenticated, (req, res) => {
 postRouter.post('/', rejectUnauthenticated, (req, res) => {
     let sqlUserId = req.user.id;
     let sqlParams = req.body;
-    console.log('sqlParams are: ', sqlParams)
     let sqlValues = [
         sqlUserId,
         sqlParams.content,
