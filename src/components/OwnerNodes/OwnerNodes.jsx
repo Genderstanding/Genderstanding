@@ -23,16 +23,19 @@ const OwnerNodes = ({ isDarkMode }) => {
   const [questionStates, setQuestionStates] = useState({});
   const [postIdProp, setPostIdProp] = useState(null);
   const [elipsisOpen, setElipsisOpen] = useState(false);
+  const [postContent, setPostContent] = useState();
 
   // inputing dispatch
   const dispatch = useDispatch();
+  
 
 
   
 
-  const openElipsis = (postId) => {
+  const openElipsis = (postId, postContent) => {
     setElipsisOpen(true);
     setPostIdProp(postId);  
+    setPostContent(postContent)
 };
 
 const closeElipsis = () => {
@@ -201,7 +204,7 @@ const closeElipsis = () => {
                       <div className={`mt-4 mb-2 question-box font-medium text-amber-950 shadow-md bg-ownerContent ${isDarkMode ? 'dark' : 'light'}`} key={post?.id}>
                         <div className="flex items-end justify-between px-5 py-3">
                         <span className="text-sm">{moment(post?.post_time).fromNow()}</span>
-                        <button onClick={() => openElipsis( post?.id)}>. . .</button>
+                        <button onClick={() => openElipsis( post?.id, post)}>. . .</button>
                         </div>
                         {/* this should display the latest question/reply in this thread */}
                         <div className={`flex flex-col items-center justify-center m-5 text-lg font-bold question-text bg-ownerContent text-amber-950 ${isDarkMode ? 'dark' : 'light'}`} >
@@ -232,6 +235,7 @@ const closeElipsis = () => {
         elipsisOpen={elipsisOpen}
         elipsisClose={closeElipsis}
         postIdProp={postIdProp}
+        postContent={postContent}
         handleRejectButton={handleRejectButton}
         handleReportButton={handleReportButton}
         />
