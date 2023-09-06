@@ -46,7 +46,7 @@ function App() {
   const closeSettings = () => {
     setSettingsOpen(false);
   };
-
+    
   // DISPLAY
   useEffect(() => {
     dispatch({ type: "FETCH_USER" });
@@ -60,7 +60,7 @@ function App() {
   }, []);
 
   return (
-    <div className={`bg-bkg/.7 text-text ${isDarkMode ? "dark" : "light"}`}>
+    <div className={`bg-bkg/.7 text-text ${isDarkMode ? "light" : "dark"}`}>
       <Router>
         {/* Toastify */}
         <ToastContainer

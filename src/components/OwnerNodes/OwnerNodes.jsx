@@ -151,12 +151,12 @@ const OwnerNodes = ({ isDarkMode }) => {
                       showButton: true,
                     };
                     return (
-                      <div className={`mt-4 mb-4 text-amber-950 shadow-md bg-userContent question-box ${isDarkMode ? 'dark' : 'light'}`} key={post?.id}>
+                      <div className={`mt-4 mb-4 text-amber-950 shadow-md bg-userContent question-box ${isDarkMode ? "light": "dark"}`} key={post?.id}>
                         <div className="flex items-end justify-between px-5 py-3"> New Question
                           <span className="text-sm">{moment(post?.post_time).fromNow()}</span>
                         </div>
                         {/* this should display the latest question/reply in this thread */}
-                        <div className={`m-5 question-text bg-userContent text-text ${isDarkMode ? 'dark' : 'light'}`} >
+                        <div className={`m-5 question-text bg-userContent text-text ${isDarkMode ? "light": "dark"}`} >
                           {post?.content}
                         </div>
                         <div className="flex items-end justify-between px-5 py-3 ">
@@ -179,12 +179,12 @@ const OwnerNodes = ({ isDarkMode }) => {
                     )
                   } else {
                     return (
-                      <div className={`mt-4 mb-2 question-box font-medium text-amber-950 shadow-md bg-ownerContent ${isDarkMode ? 'dark' : 'light'}`} key={post?.id}>
+                      <div className={`mt-4 mb-2 question-box font-medium text-amber-950 shadow-md bg-ownerContent ${isDarkMode ? "light": "dark"}`} key={post?.id}>
                         <div className="flex items-end justify-between px-5 py-3">
                         <span className="text-sm">{moment(post?.post_time).fromNow()}</span>
                         </div>
                         {/* this should display the latest question/reply in this thread */}
-                        <div className={`flex flex-col items-center justify-center m-5 text-lg font-bold question-text bg-ownerContent text-amber-950 ${isDarkMode ? 'dark' : 'light'}`} >
+                        <div className={`flex flex-col items-center justify-center m-5 text-lg font-bold question-text bg-ownerContent text-amber-950 ${isDarkMode ? "light": "dark"}`} >
                         {post?.content}
                       </div>
                       <div className="flex items-end justify-between px-5 py-3 ">

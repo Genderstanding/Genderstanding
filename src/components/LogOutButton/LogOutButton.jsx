@@ -14,6 +14,10 @@ const history = useHistory();
     history.push('/login')
     // close setting modal
     props.onCloseSettings();
+      // LOGOUT
+    props.setIsDarkMode(false);
+    console.log(setIsDarkMode)
+  
   }
   return (
     <button

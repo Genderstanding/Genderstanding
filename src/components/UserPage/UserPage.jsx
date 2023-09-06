@@ -76,7 +76,7 @@ function UserPage({ isDarkMode }) {
         <div className="flex flex-col items-center justify-center userpage-container">
           <div className="mb-24 communities-container">
             <h1 className="mt-4 mb-1 ml-5 text-xl font-bold font-mulish">
-              {(newNode.user_id == user.id) && newNode.length > 0 ? ""  : "Communities you've created"}
+              Communities you've created
             </h1>
             <div className="flex flex-col items-center justify-center mb-4 owner-box ">
               {/* map communities you moderate inside these divs*/}
@@ -86,7 +86,7 @@ function UserPage({ isDarkMode }) {
                     <div
                       key={node?.id}
                       className={`m-4 owner-container flex flex-col justify-center items-center bg-ownerContent text-amber-950 ${
-                        isDarkMode ? "dark" : "light"
+                        isDarkMode ? "light" : "dark"
                       }`}
                       onClick={(event) => goToOwnerNodes(event, node)}
                     >
@@ -100,7 +100,7 @@ function UserPage({ isDarkMode }) {
             </div>
 
             <h1 className="mt-4 mb-1 ml-5 text-xl font-bold font-mulish">
-            { (newNode.user_id !== user.id) && newNode.length > 0 ? "" : "Communities you're a part of"} 
+              Communities you're a part of
             </h1>
             <div className="flex flex-col items-center justify-center mb-4 part-of-box">
               {/* map communities you particpate in in this div*/}
@@ -110,7 +110,7 @@ function UserPage({ isDarkMode }) {
                     <div
                       key={node?.id}
                       className={`m-4 user-container flex flex-col justify-center items-center overflow-y-scroll ... bg-userContent text-amber-950 ${
-                        isDarkMode ? "dark" : "light"
+                        isDarkMode ? "light" : "dark"
                       }`}
                       onClick={(event) => goToUserNodes(event, node)}
                     >

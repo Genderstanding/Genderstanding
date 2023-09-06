@@ -4,9 +4,9 @@ import LogOutButton from "../LogOutButton/LogOutButton";
 import { useSelector, useDispatch } from "react-redux";
 import "./SettingsModal.css";
 import DeleteNodeModal from "../DeleteNodeModal/DeleteNodeModal";
-import WbSunnyIcon from '@mui/icons-material/WbSunny';
-import DarkModeIcon from '@mui/icons-material/DarkMode';
-import TaskAltIcon from '@mui/icons-material/TaskAlt';
+import WbSunnyIcon from "@mui/icons-material/WbSunny";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import TaskAltIcon from "@mui/icons-material/TaskAlt";
 
 // TOASTIFY
 import { ToastContainer, toast } from "react-toastify";
@@ -31,7 +31,7 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
     (store) => store.nodeAssociationReducer.nodeAssociationDatabase
   );
 
-  // Delete Account confirmation 
+  // Delete Account confirmation
   const openDeleteConfirmation = () => {
     setShowDeleteConfirmation(true);
   };
@@ -87,32 +87,34 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
               type: "USER_NODE_ASSOCIATION",
               payload: nodeCodeInput,
             });
+
+            toast.success("Invite code submitted successfully", {
+              position: "bottom-left",
+              autoClose: 1500,
+              hideProgressBar: true,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+
+            history.push("/home");
+          } else if (node?.user_id !== null) {
+            toast.error("Invite code has already been used", {
+              position: "bottom-left",
+              autoClose: 1500,
+              hideProgressBar: true,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
           }
         }
       }
-      toast.success("Invite code submitted successfully", {
-        position: "bottom-left",
-        autoClose: 1500,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });  
-      // Go to the node when user enter invite code
-      history.push('/home');
     } catch (error) {
-      toast.error("Failed to submit invite code", {
-        position: "bottom-left",
-        autoClose: 1500,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
       console.log("Error submitting invite node: ", error);
     }
   };
@@ -120,12 +122,12 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
   if (!settingsOpen) {
     return null;
   }
-  
+
   return (
     <div className="modal-overlay">
       <div
         className={`mt-15 settings-modal bg-red-100 ${
-          isDarkMode ? "dark" : "light"
+          isDarkMode ? "light" : "dark"
         }`}
       >
         {children}
@@ -138,18 +140,23 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
           <span className="mb-2">Join Node</span>
           <div className="text-center text-amber-950">
             <input
-            style={{maxWidth:"160px", marginLeft:"25px", borderRadius:"8px"}}
+              style={{
+                maxWidth: "160px",
+                marginLeft: "25px",
+                borderRadius: "8px",
+              }}
               type="text"
               placeholder="enter code"
               className="text-center bg-bkg "
               onChange={(event) => setNodeCodeInput(event.target.value)}
             />
-            <button className="text-green-800 "
+            <button
+              className="text-green-800 "
               onClick={(event) =>
                 handleNodeCodeInput(event, nodeCodeInput, nodeAssociation)
               }
             >
-              <TaskAltIcon/>
+              <TaskAltIcon />
             </button>
           </div>
           <br />
@@ -158,21 +165,31 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
             {/* DARK MODE */}
             <div className="flex items-center mx-auto">
               <button
-                className={isDarkMode ? "dark text-gray-700" : "light text-yellow-700"}
+                className={
+                  isDarkMode ? "dark text-gray-700" : "light text-yellow-700"
+                }
                 onClick={() => handleDarkModeToggle()}
               >
-                {isDarkMode ? <DarkModeIcon/> : <WbSunnyIcon/>}
+                {isDarkMode ? <DarkModeIcon /> : <WbSunnyIcon />}
               </button>
             </div>
           </div>
           <div className="flex flex-col gap-2">
-            <button className="mt-2 active:underline "><DeleteNodeModal/></button>
-            <button className="mt-2 font-bold active:underline" onClick={openDeleteConfirmation}>
+            <button className="mt-2 active:underline ">
+              <DeleteNodeModal />
+            </button>
+            <button
+              className="mt-2 font-bold active:underline"
+              onClick={openDeleteConfirmation}
+            >
               Delete Account
             </button>
           </div>
           <br />
-          <button className="mt-4 font-bold active:underline" onClick={closeSettings}>
+          <button
+            className="mt-4 font-bold active:underline"
+            onClick={closeSettings}
+          >
             Close
           </button>
           {showDeleteConfirmation && (

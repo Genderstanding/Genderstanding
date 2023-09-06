@@ -174,7 +174,7 @@ const ReplyModal = ({
                 </div>
                 <textarea
                     rows="4"
-                    className={`shadow-lg w-5/6 rounded-xl md:w-auto px-4 py-4 mt-4 mb-4 text-sm bg-bkg border-1 reply-textarea focus:ring-0 text-text placeholder-text font-normal ${isDarkMode ? "dark" : "light"
+                    className={`shadow-lg w-5/6 rounded-xl md:w-auto px-4 py-4 mt-4 mb-4 text-sm bg-bkg border-1 reply-textarea focus:ring-0 text-text placeholder-text font-normal ${ isDarkMode ? "light" : "dark"
                         }`}
                     placeholder="Write a Reply..."
                     onChange={(event) => setReplyInput(event.target.value)}
@@ -184,14 +184,14 @@ const ReplyModal = ({
 
                 <div className="text-center align-middle buttons-container">
                     <button
-                        className={`mx-5 font-bold active:underline  text-amber-950 ${isDarkMode ? "dark" : "light"
+                        className={`mx-5 font-bold active:underline  text-amber-950 ${ isDarkMode ? "light" : "dark"
                             }`}
                         onClick={(event) => handleReply(event, questionObject)}
                     >
                         Confirm
                     </button>
                     <button
-                        className={`mx-5 font-bold active:underline  text-amber-950 ${isDarkMode ? "dark" : "light"
+                        className={`mx-5 font-bold active:underline  text-amber-950 ${ isDarkMode ? "light" : "dark"
                             }`}
                         onClick={closeAddReply}
                     >
