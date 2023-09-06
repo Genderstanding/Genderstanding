@@ -68,7 +68,7 @@ const ElipsisModal = ({
 
     //edit button render logic
     useEffect(()=> {
-        if(nodeOwnerIdProp === user.id){
+        if(userIdProp === user.id){
             setShowDelete(true);
         } else {
             setShowDelete(false);
@@ -109,7 +109,7 @@ const ElipsisModal = ({
 
   return (
     <div className="flex items-center justify-center modal-overlay">
-      <div className="flex flex-col items-center justify-center ellipsis-modal">
+      <div className="flex flex-col items-center justify-center ellipsis-node-modal">
         {/* {children} */}
         <div className="flex flex-col justify-start buttons-container text-amber-950">
           {isEditing ? (
