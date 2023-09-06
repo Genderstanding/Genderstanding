@@ -23,6 +23,8 @@ likesRouter.get('/', rejectUnauthenticated, (req, res) => {
     })
 })
 
+// this router has no need for a PUT as it is only track likes
+
 likesRouter.post('/', rejectUnauthenticated, (req, res) => {
     let sqlUserId = req.user.id;
     let sqlPostId = req.body;
