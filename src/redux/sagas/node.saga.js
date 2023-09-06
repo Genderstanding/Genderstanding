@@ -21,8 +21,6 @@ function* createNode(action) {
 function* fetchNode(action) {
     try {
         const nodeResponse = yield axios.get('/node')
-        
-        console.log('Node data received:', nodeResponse.data); 
 
         yield put({ type: 'SET_NODE', payload: nodeResponse.data })
     } catch (error) {

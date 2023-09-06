@@ -38,3 +38,10 @@ CREATE TABLE "posts" (
 	"votes" INTEGER DEFAULT 0,
 	"replied" BOOLEAN DEFAULT false
 );
+
+
+CREATE TABLE "likes" (
+	"id" SERIAL PRIMARY KEY,
+	"post_id" INTEGER REFERENCES "posts" (id),
+	"user_id" INTEGER REFERENCES "user" (id)
+);

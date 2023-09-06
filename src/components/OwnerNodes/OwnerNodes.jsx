@@ -117,7 +117,7 @@ const closeElipsis = () => {
   let newNode = useSelector(
     (store) => store.newNodeReducer.newNodeDatabaseResponse
   );
-  console.log("nodePosts object:", nodePosts);
+
 
   // function to like a post
   const increaseCount = (postId) => {
