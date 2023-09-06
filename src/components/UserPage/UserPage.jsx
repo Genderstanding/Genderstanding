@@ -19,7 +19,6 @@ function UserPage({ isDarkMode }) {
   // sourcing use selector to hold all node store information
   let allNodes = useSelector((store) => store.nodeReducer.nodeDatabaseResponse);
 
-  console.log("nodes are in: ", allNodes);
 
   const openAddNode = () => {
     setaddNodeOpen(true);
