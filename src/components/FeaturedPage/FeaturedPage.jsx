@@ -4,8 +4,12 @@ import HeaderBar from "../HeaderBar/HeaderBar";
 import { useSelector } from "react-redux";
 import moment from 'moment'
 import { useDispatch } from "react-redux";
+import { useState } from "react";
 
 function FeaturedPage() {
+
+  const [ publicPost, setPublicPost] = useState("")
+  const [ viewPostOpen, setViewPostOpen] = useState(false);
 
   let nodePosts = useSelector(
     (store) => store.postReducer.postDatabaseResponse
@@ -20,6 +24,14 @@ function FeaturedPage() {
       payload: postId,
     });
   }
+
+  const openPublicPost = (post) =>{
+    setPublicPost(post);
+    setViewPostOpen(true);
+  }
+
+
+
 
     return (
       <>
@@ -44,7 +56,7 @@ function FeaturedPage() {
                         <div className="flex items-end justify-between px-4 py-2 ">
                           <button
                             className="text-sm font-bold active:underline text-amber-950"
-                            onClick={() => openAddReply(post)}
+                            onClick={() => openPublicPost(post)}
                           >
                             Open
                           </button>
