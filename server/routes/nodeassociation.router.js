@@ -56,10 +56,14 @@ nodeAssocRouter.put('/:id', rejectUnauthenticated, (req, res) => {
 
 nodeAssocRouter.delete('/:id', rejectUnauthenticated, (req, res) => {
     let sqlParams = req.params.id;
+    let sqlValue = req.body.node_id
+ 
+    console.log('req.body is: ', sqlValue);
+
     let sqlQuery = `
-    DELETE "node_association"
-    WHERE "id"=$1;`;
-    pool.query(sqlQuery, [sqlParams])
+    DELETE FROM "node_association"
+    WHERE "node_id"=$1 AND "user_id"=$2;`;
+    pool.query(sqlQuery)
         .then( result => {
             console.log('Delete node association from database: ', result);
             res.sendStatus(201);
