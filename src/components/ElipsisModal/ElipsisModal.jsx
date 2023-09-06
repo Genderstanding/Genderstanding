@@ -76,8 +76,8 @@ const ElipsisModal = ({
     dispatch({
         type: 'REMOVE_NODE_ASSOCIATION',
         payload: {
-            user_id: editedContent.user_id,
-            node_id: editedContent.node_id
+            user: editedContent.user_id,
+            node: editedContent.node_id
         }
     })
   }
