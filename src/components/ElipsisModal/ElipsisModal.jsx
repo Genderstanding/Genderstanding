@@ -87,6 +87,7 @@ const ElipsisModal = ({
     })
   }
 
+
   useEffect(() => {
     // When contentToEdit changes, update the edited content if not in edit mode
     if (!isEditing) {
