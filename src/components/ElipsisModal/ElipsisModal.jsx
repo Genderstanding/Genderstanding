@@ -68,7 +68,7 @@ const ElipsisModal = ({
 
     //edit button render logic
     useEffect(()=> {
-        if(nodeOwnerIdProp === user.id){
+        if(userIdProp === user.id){
             setShowDelete(true);
         } else {
             setShowDelete(false);

@@ -8,7 +8,7 @@ import moment from "moment";
 
 import OwnerReplyModal from "../OwnerReplyModal/OwnerReplyModal";
 import AddQuestionModal from "../AddQuestionModal/AddQuestionModal";
-import ElipsisModal from "../ElipsisModal/ElipsisModal";
+import QuestionTitleEllipsis from "../QuestionTitleEllipsis/QuestionTitleEllipsis";
 
 // TOASTIFY
 import { ToastContainer, toast } from "react-toastify";
@@ -21,9 +21,23 @@ const OwnerNodes = ({ isDarkMode }) => {
   const [toggleButtom, setToggleButton] = useState(true);
   const [addQuestionOpen, setAddQuestionOpen] = useState(false);
   const [questionStates, setQuestionStates] = useState({});
+  const [postIdProp, setPostIdProp] = useState(null);
+  const [elipsisOpen, setElipsisOpen] = useState(false);
 
   // inputing dispatch
   const dispatch = useDispatch();
+
+
+  
+
+  const openElipsis = (postId) => {
+    setElipsisOpen(true);
+    setPostIdProp(postId);  
+};
+
+const closeElipsis = () => {
+    setElipsisOpen(false);
+};
 
   // sends a flag to the database to permanently make the post visible to all users
   const handleAcceptButton = (postId) => {
@@ -154,6 +168,7 @@ const OwnerNodes = ({ isDarkMode }) => {
                       <div className={`mt-4 mb-4 text-amber-950 shadow-md bg-userContent question-box ${isDarkMode ? 'dark' : 'light'}`} key={post?.id}>
                         <div className="flex items-end justify-between px-5 py-3"> New Question
                           <span className="text-sm">{moment(post?.post_time).fromNow()}</span>
+                          
                         </div>
                         {/* this should display the latest question/reply in this thread */}
                         <div className={`m-5 question-text bg-userContent text-text ${isDarkMode ? 'dark' : 'light'}`} >
@@ -182,6 +197,7 @@ const OwnerNodes = ({ isDarkMode }) => {
                       <div className={`mt-4 mb-2 question-box font-medium text-amber-950 shadow-md bg-ownerContent ${isDarkMode ? 'dark' : 'light'}`} key={post?.id}>
                         <div className="flex items-end justify-between px-5 py-3">
                         <span className="text-sm">{moment(post?.post_time).fromNow()}</span>
+                        <button onClick={() => openElipsis( post?.id)}>. . .</button>
                         </div>
                         {/* this should display the latest question/reply in this thread */}
                         <div className={`flex flex-col items-center justify-center m-5 text-lg font-bold question-text bg-ownerContent text-amber-950 ${isDarkMode ? 'dark' : 'light'}`} >
@@ -207,6 +223,13 @@ const OwnerNodes = ({ isDarkMode }) => {
           addReplyOpen={addReplyOpen}
           closeAddReply={closeAddReply}
           questionObject={clickedReplyContent}
+        />
+        <QuestionTitleEllipsis 
+        elipsisOpen={elipsisOpen}
+        elipsisClose={closeElipsis}
+        postIdProp={postIdProp}
+        handleRejectButton={handleRejectButton}
+        handleReportButton={handleReportButton}
         />
       </div>
     </>
