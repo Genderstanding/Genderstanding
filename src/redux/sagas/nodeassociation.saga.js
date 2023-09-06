@@ -50,6 +50,7 @@ function* removeNodeAssociation(action) {
         yield axios.delete(`/post/banned/${action.payload.node}/${action.payload.user}`)
         yield put({ type: 'FETCH_NODE_ASSOCIATION'})
         yield put({ type: 'FETCH_NODE'})
+        yield put({ type: 'FETCH_POST' })
     } catch (error) {
         console.log('Error in SAGA DELETE to remove a user from a node association: ', error)
     }
