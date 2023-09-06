@@ -25,19 +25,23 @@ const UserNodes = ({ isDarkMode }) => {
     (store) => store.newNodeReducer.newNodeDatabaseResponse
   );
 
+  //like store
+  let likePosts = useSelector(
+    (store) => store.likesReducer.likeDatabaseResponse
+  );
+
+  console.log('likePosts object:', likePosts)
+
   // Function to like a post
   const increaseCount = (postId) => {
     dispatch({
       type: "LIKE_POST",
       payload: postId,
     });
-
-    // const updatedPostArray = nodePosts.map((content) =>
-    //   content.node_id === nodeId
-    //     ? { ...content, count: content.count + 1 }
-    //     : content
-    //     );
-    //     setQuestionsArray(updatedQuestionsArray);
+    dispatch({
+      type: 'LIKE_POST_USER',
+      payload: { post: postId }
+    })
   };
 
   const openAddQuestion = () => {
@@ -68,12 +72,11 @@ const UserNodes = ({ isDarkMode }) => {
                 if (post?.replied == true) {
                   return (
                     <div
-                      className={`mt-4 mb-2 pb-2 pt-2 font-medium  text-amber-950 shadow-md bg-userContent question-box ${
-                        isDarkMode ? "dark" : "light"
-                      }`}
+                      className={`mt-4 mb-2 pb-2 pt-2 font-medium  text-amber-950 shadow-md bg-userContent question-box ${isDarkMode ? "dark" : "light"
+                        }`}
                       key={post?.id}
-                    > 
-                     <div className="flex items-end justify-between px-4 py-2">
+                    >
+                      <div className="flex items-end justify-between px-4 py-2">
                         <span className="text-sm">
                           {moment(post?.post_time).fromNow()}
                         </span>
@@ -91,7 +94,7 @@ const UserNodes = ({ isDarkMode }) => {
                           className="text-sm font-bold active:underline text-amber-950"
                           onClick={() => increaseCount(post.id)}
                         >
-                         🖤{'  '}<span>{post.votes || 0}</span>
+                          🖤{'  '}<span>{post.votes || 0}</span>
                         </button>
                       </div>
                     </div>

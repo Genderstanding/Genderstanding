@@ -23,6 +23,10 @@ function FeaturedPage() {
       type: "LIKE_POST",
       payload: postId,
     });
+    dispatch({
+      type: 'LIKE_POST_USER',
+      payload: { post: postId }
+    })
   }
 
   const openPublicPost = (post) =>{
