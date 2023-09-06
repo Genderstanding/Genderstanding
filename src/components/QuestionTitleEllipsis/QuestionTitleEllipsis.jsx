@@ -19,7 +19,6 @@ const QuestionTitleEllipsis = ({
 
   const dispatch = useDispatch();
 
-  console.log('post content is: ', postContent)
   // function to remove a user from the give node
   const handleRemoveUser = (postContent) => {
     dispatch({
