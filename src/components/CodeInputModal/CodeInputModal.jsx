@@ -45,8 +45,7 @@ export const CodeInputModal = ({
           }
         }
       }
-      // Go to home page when user enter invite code
-      history.push(`/home`);
+      
       toast.success("Invite code submitted successfully", {
         position: "bottom-left",
         autoClose: 1500,
@@ -57,6 +56,8 @@ export const CodeInputModal = ({
         progress: undefined,
         theme: "light",
       });
+      // Go to home page when user enter invite code
+      history.push('/usernodes');
     } catch (error) {
       toast.error("Failed to submit invite code", {
         position: "bottom-left",
@@ -75,16 +76,16 @@ export const CodeInputModal = ({
     <div className="flex items-center justify-center modal-overlay">
       <div className="flex flex-col items-center justify-center add-node-modal">
         {children}
-        <h2 className="mb-4 mr-4 text-xl font-bold">Enter Invite Code</h2>
+        <h2 className="mb-4 mr-4 text-xl font-bold text-amber-950">Enter Invite Code</h2>
         <div className="code-container">
           <input
             type="text"
             placeholder="Enter a code ..."
-            className="border-b border-black"
+            className="border-b border-black text-amber-950"
             onChange={(event) => setNodeCodeInput(event.target.value)}
           />
 
-          <div className="mt-6 buttons-container">
+          <div className="mt-6 buttons-container text-amber-950">
             <button
               className="mr-6 font-semibold active:underline active:font-bold"
               onClick={(event) =>

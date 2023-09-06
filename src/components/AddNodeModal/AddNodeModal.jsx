@@ -71,22 +71,22 @@ const AddNodeModal = ({ addNodeOpen, addNodeClose, children }) => {
     <div className="flex items-center justify-center modal-overlay">
       <div className="flex flex-col items-center justify-center add-node-modal">
         {children}
-        <h2 className="mb-4 mr-4 text-xl font-bold">Create Community</h2>
+        <h2 className="mb-4 mr-4 text-xl font-bold text-amber-950">Create Community</h2>
         <input
           type="text"
           placeholder="Enter a name ..."
-          className="border-b border-black"
+          className="border-b border-black text-amber-950"
           onChange={(event) => setNodeInput(event.target.value)}
         />
-        <div className="mt-6 buttons-container">
+        <div className="mt-6 text-amber-950 buttons-container">
           <button
-            className="mr-6 font-semibold active:underline active:font-bold"
+            className="mr-6 font-bold active:underline "
             onClick={handleAddNode}
           >
             Confirm
           </button>
           <button
-            className="font-semibold active:underline active:font-bold "
+            className="font-bold active:underline "
             onClick={addNodeClose}
           >
             Close

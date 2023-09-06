@@ -76,7 +76,7 @@ function UserPage({ isDarkMode }) {
         <div className="flex flex-col items-center justify-center userpage-container">
           <div className="mb-24 communities-container">
             <h1 className="mt-4 mb-1 ml-5 text-xl font-bold font-mulish">
-              Communities you've created
+              {(newNode.user_id == user.id) && newNode.length > 0 ? ""  : "Communities you've created"}
             </h1>
             <div className="flex flex-col items-center justify-center mb-4 owner-box ">
               {/* map communities you moderate inside these divs*/}
@@ -90,7 +90,7 @@ function UserPage({ isDarkMode }) {
                       }`}
                       onClick={(event) => goToOwnerNodes(event, node)}
                     >
-                      <div className="m-4 text-xl font-bold owned-community-names">
+                      <div className="m-4 text-xl font-bold text-amber-950 owned-community-names">
                         {node?.node_name}
                       </div>
                     </div>
@@ -100,7 +100,7 @@ function UserPage({ isDarkMode }) {
             </div>
 
             <h1 className="mt-4 mb-1 ml-5 text-xl font-bold font-mulish">
-              Communities you're a part of
+            { (newNode.user_id !== user.id) && newNode.length > 0 ? "" : "Communities you're a part of"} 
             </h1>
             <div className="flex flex-col items-center justify-center mb-4 part-of-box">
               {/* map communities you particpate in in this div*/}
@@ -116,7 +116,6 @@ function UserPage({ isDarkMode }) {
                     >
                       <div className="m-4 text-xl font-bold owned-community-names">
                         {node?.node_name}
-             
                       </div>
                     </div>
                   );
