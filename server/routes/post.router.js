@@ -184,6 +184,25 @@ postRouter.delete('/:id', rejectUnauthenticated, (req, res) => {
         })
 })
 
+// DELETE route if the user is banned from a node
+postRouter.delete('/banned/:node/:id', rejectUnauthenticated, (req, res) => {
+    let sqlId = req.params.id;
+    let sqlNode = req.params.node;
+
+    let sqlQuery = `
+    DELETE FROM "posts"
+    WHERE "user_id"=$1 AND "node_id"=$2;
+    `;
+    pool.query(sqlQuery, [sqlId, sqlNode])
+        .then( result => {
+            console.log('Delete post from database: ', result);
+            res.sendStatus(201);
+        })
+        .catch(error => {
+            console.log('Error in DELETE to post query: ', error);
+            res.sendStatus(500);
+        })
+})
 
 
 
