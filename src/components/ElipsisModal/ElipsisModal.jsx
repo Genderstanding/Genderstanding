@@ -10,6 +10,7 @@ const ElipsisModal = ({
     elipsisClose,
   contentToEdit,
   postIdProp,
+  userIdProp,
   handleReportButton,
   handleDeleteButton
 }) => {
@@ -22,13 +23,21 @@ const ElipsisModal = ({
   const minutesElapsed = currentDate.diff(postDate, 'minutes');
   console.log('The number of minutes between the two is: ', minutesElapsed)
 
+  let nodePosts = useSelector(store => store.postReducer.postDatabaseResponse)
+  const user = useSelector((state) => state.user);
+  
+  
+
   useEffect(()=> {
-    if(minutesElapsed > 60){
-        setShowEdit(false);
-    } else {
+    console.log('useEffect running')
+    console.log('user.id:', user.id)
+    console.log('userIdProp:',userIdProp)
+    if(minutesElapsed < 60 && userIdProp === user.id){
         setShowEdit(true);
+    } else {
+        setShowEdit(false);
     }
-  })
+  }, [minutesElapsed, userIdProp, user.id])
 
 
   const dispatch = useDispatch();

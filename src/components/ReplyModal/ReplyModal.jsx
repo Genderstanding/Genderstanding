@@ -30,6 +30,8 @@ const ReplyModal = ({
     // Creating a state to hold text inputed
     const [replyInput, setReplyInput] = useState("");
     const [elipsisOpen, setElipsisOpen] = useState(false);
+    const [contentToEdit, setContentToEdit] = useState('');
+    const [postIdProp, setPostIdProp] = useState(null);
 
 
     const openElipsis = (content, postId) => {
@@ -42,6 +44,50 @@ const ReplyModal = ({
     const closeElipsis = () => {
         setElipsisOpen(false);
     };
+
+    const handleDeleteButton = (postId) => {
+        try {
+          console.log('delete clicked!')
+          console.log('postId in handleDeleteButton:', postId)
+          dispatch({
+              type: 'DELETE_POST',
+              payload: postId
+          })
+        } catch (error) {
+          toast.error("Failed to delete post", {
+            position: "bottom-left",
+            autoClose: 1500,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        }
+      }
+
+      const handleReportButton = (postId) => {
+        try {
+           dispatch({
+            type: 'REPORT_POST',
+            payload: postId
+          })
+        } catch (error) {
+          toast.error("Failed to report user", {
+            position: "bottom-left",
+            autoClose: 1500,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        }
+         
+        }
+
 
     const handleReply = (event, questionObject) => {
         event.preventDefault();
