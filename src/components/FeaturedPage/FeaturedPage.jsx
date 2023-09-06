@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import moment from 'moment'
 import { useDispatch } from "react-redux";
 
-export default function FeaturedPage() {
+function FeaturedPage() {
 
   let nodePosts = useSelector(
     (store) => store.postReducer.postDatabaseResponse
@@ -19,7 +19,7 @@ export default function FeaturedPage() {
       type: "LIKE_POST",
       payload: postId,
     });
-
+  }
 
     return (
       <>
@@ -68,4 +68,6 @@ export default function FeaturedPage() {
       </>
     );
   }
-}
+
+
+export default FeaturedPage;
