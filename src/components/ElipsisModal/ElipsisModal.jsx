@@ -68,7 +68,7 @@ const ElipsisModal = ({
 
     //edit button render logic
     useEffect(()=> {
-        if(nodeOwnerIdProp === user.id){
+        if(userIdProp === user.id){
             setShowDelete(true);
         } else {
             setShowDelete(false);
@@ -86,6 +86,7 @@ const ElipsisModal = ({
         }
     })
   }
+
 
   useEffect(() => {
     // When contentToEdit changes, update the edited content if not in edit mode

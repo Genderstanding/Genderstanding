@@ -23,6 +23,16 @@ function* fetchPost(action) {
     }
 }
 
+// Saga to GET public posts
+function* fetchPublicPost(action){
+    try{
+        const publicPostResponse = yield axios.get('/post/public')
+        yield put({ type: 'SET_PUBLIC_POSTS', payload: publicPostResponse.data })
+    } catch (error) {
+        console.log('Error in SAGA GET for all public posts', error)
+    }
+}
+
 //saga to PUT on a post to edit post information
 function* editPost(action) {
     try {
@@ -95,6 +105,7 @@ function* postSaga() {
     yield takeLatest('LIKE_POST', likePost)
     yield takeLatest('REPORT_POST', reportPost);
     yield takeLatest('PROMOTE_POST', promotePost);
+    yield takeLatest('FETCH_PUBLIC_POSTS', fetchPublicPost)
 }
 
 export default postSaga;

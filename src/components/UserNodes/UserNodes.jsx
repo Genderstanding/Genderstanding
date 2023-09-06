@@ -25,23 +25,6 @@ const UserNodes = ({ isDarkMode }) => {
     (store) => store.newNodeReducer.newNodeDatabaseResponse
   );
 
-  const questionsArray = [
-    {
-      node_id: 1,
-      user_id: 123,
-      question:
-        "Rainbows are visions, but only illusions. Rainbows have nothing to hide.",
-      count: 0,
-    },
-    {
-      node_id: 2,
-      user_id: 234,
-      question:
-        "Rainbows are nightmares, as real as death. Rainbows will eat you alive.",
-      count: 0,
-    },
-  ];
-
   // Function to like a post
   const increaseCount = (postId) => {
     dispatch({

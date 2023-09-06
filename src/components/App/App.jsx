@@ -57,6 +57,7 @@ function App() {
     dispatch({ type: "FETCH_POST" });
     dispatch({ type: "FETCH_NODE_ASSOCIATION" });
     dispatch({ type: "FETCH_CURRENT_NODE" });
+    dispatch({ type: 'FETCH_PUBLIC_POSTS'})
   }, []);
 
   return (

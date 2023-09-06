@@ -19,7 +19,6 @@ function UserPage({ isDarkMode }) {
   // sourcing use selector to hold all node store information
   let allNodes = useSelector((store) => store.nodeReducer.nodeDatabaseResponse);
 
-  console.log("nodes are in: ", allNodes);
 
   const openAddNode = () => {
     setaddNodeOpen(true);
@@ -100,7 +99,8 @@ function UserPage({ isDarkMode }) {
             </div>
 
             <h1 className="mt-4 mb-1 ml-5 text-xl font-bold font-mulish">
-              Communities you're a part of
+            {/* { (newNode.user_id !== user.id) && newNode.length > 0 ? "Communities you're a part of" : ""}  */}
+            Communities you're a part of
             </h1>
             <div className="flex flex-col items-center justify-center mb-4 part-of-box">
               {/* map communities you particpate in in this div*/}
