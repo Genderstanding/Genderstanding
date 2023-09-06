@@ -7,6 +7,7 @@ import postSaga from './post.saga';
 import nodeAssociationSaga from './nodeassociation.saga';
 import newNodeSaga from './newnode.saga';
 import inviteCodeSaga from './invitecode.saga';
+import likeSaga from './likes.saga'
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -25,5 +26,6 @@ export default function* rootSaga() {
     nodeAssociationSaga(),
     newNodeSaga(),
     inviteCodeSaga(),
+    likeSaga(),
   ]);
 }
