@@ -151,7 +151,7 @@ const OwnerNodes = ({ isDarkMode }) => {
                       showButton: true,
                     };
                     return (
-                      <div className={`mt-4 mb-20 text-amber-950 shadow-md bg-userContent question-box ${isDarkMode ? 'dark' : 'light'}`} key={post?.id}>
+                      <div className={`mt-4 mb-4 text-amber-950 shadow-md bg-userContent question-box ${isDarkMode ? 'dark' : 'light'}`} key={post?.id}>
                         <div className="flex items-end justify-between px-5 py-3"> New Question
                           <span className="text-sm">{moment(post?.post_time).fromNow()}</span>
                         </div>

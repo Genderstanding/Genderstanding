@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './OwnerReplyModal.css'
 import { useSelector, useDispatch } from 'react-redux';
 import moment from 'moment';
@@ -14,23 +14,30 @@ const OwnerReplyModal = ({ addReplyOpen, closeAddReply, questionObject, isDarkMo
     let nodePosts = useSelector(store => store.postReducer.postDatabaseResponse)
     let nodeData = useSelector(store => store.nodeReducer.nodeDatabaseResponse);
 
+    console.log('nodePosts:', nodePosts)
+    console.log('nodeData:', nodeData)
+
     const reversePosts = nodePosts.slice().reverse();
 
     // Creating a state to hold text inputed
     const [replyInput, setReplyInput] = useState('');
-    const [editedContent, setEditedContent] = useState('');
+    // const [editedContent, setEditedContent] = useState('');
     const [elipsisOpen, setElipsisOpen] = useState(false);
     const [contentToEdit, setContentToEdit] = useState('');
-    const [isEditing, setIsEditing] = useState(false);
-    const [addReplys, setAddReplys] = useState(0);
+    // const [isEditing, setIsEditing] = useState(false);
+    // const [addReplys, setAddReplys] = useState(0);
     const [postIdProp, setPostIdProp] = useState(null);
+    const [userIdProp, setUserIdProp] = useState(null);
+    const [nodeOwnerIdProp, setNodeOwnerIdProp] = useState(null);
 
 
-    const openElipsis = (content, postId) => {
+    const openElipsis = (content, postId, userId, nodeOwnerId) => {
         setElipsisOpen(true);
         setContentToEdit(content);
         setPostIdProp(postId);
-        
+        setUserIdProp(userId);
+        setNodeOwnerIdProp(nodeOwnerId);
+        // console.log('userIdProp in openElipsis:', userIdProp)
     };
 
     const closeElipsis = () => {
@@ -76,14 +83,22 @@ const OwnerReplyModal = ({ addReplyOpen, closeAddReply, questionObject, isDarkMo
 
     const handleDeleteButton = (postId) => {
       try {
-        console.log('delete clicked!')
-        console.log('postId in handleDeleteButton:', postId)
         dispatch({
             type: 'DELETE_POST',
             payload: postId
         })
+        toast.success("Comment deleted", {
+          position: "bottom-left",
+          autoClose: 1500,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       } catch (error) {
-        toast.error("Failed to delete post", {
+        toast.error("Failed to delete comment", {
           position: "bottom-left",
           autoClose: 1500,
           hideProgressBar: true,
@@ -122,7 +137,7 @@ const OwnerReplyModal = ({ addReplyOpen, closeAddReply, questionObject, isDarkMo
             <div className='flex flex-col items-center justify-center reply-box'>
                 {/* {children} */}
                 <h2 className='mt-6 mb-4 mr-4 text-xl font-bold text-amber-950'>{questionObject.content}</h2>
-                <div className="overflow-y-auto scrollable-container text-amber-950">
+                <div className="overflow-y-auto h-90 scrollable-container text-amber-950">
                     {reversePosts.map((post) => {
                         if (post?.reply_id == questionObject.id) {
                             const matchingNode = nodeData.find(node => node.id === post.node_id);
@@ -131,7 +146,7 @@ const OwnerReplyModal = ({ addReplyOpen, closeAddReply, questionObject, isDarkMo
                                 <div key={post.id} className={`mt-4 ${isNodeOwner ? 'owner-text-bubble mr-5 mb-2' : 'user-text-bubble ml-5 mb-2'}`}>
                                     <div className="flex items-end justify-between px-4 py-2">
                                         <span className="text-sm">{isNodeOwner ? 'Owner' : 'User'} {moment(post?.post_time).fromNow()}</span>
-                                        <button onClick={() => openElipsis(post, post?.id)}>. . .</button>
+                                        <button onClick={() => openElipsis(post, post?.id, post.user_id, matchingNode?.user_id)}>. . .</button>
                                     </div>
                                     <div className="m-4 question-text">{post?.content}</div>
                                 </div>
@@ -147,8 +162,8 @@ const OwnerReplyModal = ({ addReplyOpen, closeAddReply, questionObject, isDarkMo
                     value={replyInput}
                     required />
                 <div className='mt-6 buttons-container'>
-                    <button className={`mr-6 font-bold active:underline text-amber-950 ${isDarkMode ? "dark" : "light"}`}  onClick={(event) => handleReply(event, questionObject)}>Confirm</button>
-                    <button className={`font-bold active:underline text-amber-950 ${isDarkMode ? "dark" : "light"}`} onClick={closeAddReply}>
+                    <button className={`mx-5 font-bold active:underline text-amber-950 ${isDarkMode ? "dark" : "light"}`}  onClick={(event) => handleReply(event, questionObject)}>Confirm</button>
+                    <button className={`mx-5 font-bold active:underline text-amber-950 ${isDarkMode ? "dark" : "light"}`} onClick={closeAddReply}>
                         Close
                     </button>
                 </div>
@@ -159,6 +174,8 @@ const OwnerReplyModal = ({ addReplyOpen, closeAddReply, questionObject, isDarkMo
                 elipsisClose={closeElipsis}
                 contentToEdit={contentToEdit}
                 postIdProp={postIdProp}
+                userIdProp={userIdProp}
+                nodeOwnerIdProp={nodeOwnerIdProp}
                 handleDeleteButton={handleDeleteButton}
                 handleReportButton={handleReportButton} />
         </div>
