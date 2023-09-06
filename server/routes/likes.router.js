@@ -10,7 +10,8 @@ const likesRouter = express.Router();
 likesRouter.get('/', rejectUnauthenticated, (req, res) => {
     let sqlValue = req.user.id; 
     let sqlQuery = `
-    
+    SELECT * FROM "likes"
+    WHERE "user_id" = $1;
     `
     pool.query(sqlQuery, [ sqlValue ])
     .then(result => {
