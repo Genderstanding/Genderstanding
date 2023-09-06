@@ -27,7 +27,8 @@ likesRouter.get('/', rejectUnauthenticated, (req, res) => {
 
 likesRouter.post('/', rejectUnauthenticated, (req, res) => {
     let sqlUserId = req.user.id;
-    let sqlPostId = req.body;
+    let sqlPostId = req.body.post;
+    console.log('the req.body is: ', sqlPostId)
     let sqlQuery = `
     INSERT INTO "likes" ("user_id", "post_id")
     VALUES ($1, $2);

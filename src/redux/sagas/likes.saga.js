@@ -22,7 +22,7 @@ function* likePost(action){
 
 function* likeSaga(){
     yield takeLatest('FETCH_LIKES', fetchLikes);
-    yield takeLatest('LIKE_POST', likePost);
+    yield takeLatest('LIKE_POST_USER', likePost);
 }
 
 export default likeSaga;
