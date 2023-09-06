@@ -23,6 +23,7 @@ const OwnerNodes = ({ isDarkMode }) => {
   const [questionStates, setQuestionStates] = useState({});
   const [postIdProp, setPostIdProp] = useState(null);
   const [elipsisOpen, setElipsisOpen] = useState(false);
+  const [isLikeClicked, setIsLikeClicked] = useState(false);
 
   // inputing dispatch
   const dispatch = useDispatch();
@@ -122,10 +123,13 @@ const closeElipsis = () => {
   // function to like a post
   const increaseCount = (postId) => {
     console.log("post id is : ", postId);
+    if (!isLikeClicked) {
     dispatch({
       type: "LIKE_POST",
       payload: postId,
     });
+    setIsLikeClicked(true);
+  }
   };
 
   const openAddQuestion = () => {
@@ -171,7 +175,7 @@ const closeElipsis = () => {
                           
                         </div>
                         {/* this should display the latest question/reply in this thread */}
-                        <div className={`flex flex-col items-center justify-center m-5 text-lg font-bold m-5 question-text bg-userContent text-amber-950 ${isDarkMode ? 'dark' : 'light'}`} >
+                        <div className={`flex flex-col items-center justify-center text-lg font-bold m-5 question-text bg-userContent text-amber-950 ${isDarkMode ? 'dark' : 'light'}`} >
                           {post?.content}
                         </div>
                         <div className="flex items-end justify-between px-5 py-3 ">
@@ -187,7 +191,9 @@ const closeElipsis = () => {
                                  <button className="text-sm font-bold active:underline" onClick={()=> handleReportButton(post?.id)}>Report</button>
                           ) : (
                             // THIS SHOULDN'T RENDER UNLESS APPROVED
-                            <button className="text-sm" onClick={() => increaseCount(post.id)}>🖤{"  "}<span>{post.votes || 0}</span></button>
+                            <button className={`text-sm font-bold active:underline ${
+                              isButtonClicked ? "text-gray-400 cursor-not-allowed" : "text-amber-950"
+                            }`} onClick={() => increaseCount(post.id)} disabled={isButtonClicked} >🖤{"  "}<span>{post.votes || 0}</span></button>
                           )}
                         </div>
                       </div>
@@ -204,7 +210,7 @@ const closeElipsis = () => {
                         {post?.content}
                       </div>
                       <div className="flex items-end justify-between px-5 py-3 ">
-                      <button className="text-sm font-bold active:underline text-amber-950" onClick={() => openAddReply(post)}>Reply</button>
+                      <button className="text-sm font-bold active:underline text-amber-950" onClick={() => openAddReply(post)}>Open</button>
                       <button className="text-sm font-bold active:underline text-amber-950" onClick={() => increaseCount(post.id)}>🖤{'  '}<span>{post.votes || 0}</span></button>
                       </div>
                       </div>
