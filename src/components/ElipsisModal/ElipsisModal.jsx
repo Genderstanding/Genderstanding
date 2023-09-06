@@ -42,6 +42,8 @@ const ElipsisModal = ({
   };
 
   console.log("post idProp is going to be: ", postIdProp);
+
+  // Function to edit a comment and update the inputed information
   const handleSaveEdit = (event) => {
     event.preventDefault();
     try {
@@ -67,6 +69,18 @@ const ElipsisModal = ({
       });
     }
   };
+
+  // function to remove a user from the give node
+  const handleRemoveUser = (contentToEdit) => {
+    console.log('Yeah the content is: ', editedContent)
+    dispatch({
+        type: 'REMOVE_NODE_ASSOCIATION',
+        payload: {
+            user: editedContent.user_id,
+            node: editedContent.node_id
+        }
+    })
+  }
 
   useEffect(() => {
     // When contentToEdit changes, update the edited content if not in edit mode
@@ -115,7 +129,10 @@ const ElipsisModal = ({
                 >
                   Delete
                 </button>
-                <button className="m-2 font-bold active:underline text-amber-950">
+                <button 
+                    className="m-2 font-bold active:underline text-amber-950"
+                    onClick={()=>handleRemoveUser(postIdProp)}
+                >
                   Remove User
                 </button>
                 <button
