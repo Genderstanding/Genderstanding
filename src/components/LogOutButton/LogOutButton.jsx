@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 function LogOutButton(props) {
 const history = useHistory();
   const dispatch = useDispatch();
-  const styleClass = "text-sm underline self-end mr-2 mt-2 mb-6";
+  const styleClass = "text-md font-bold active:underline self-end mr-2 mt-2 mb-6";
   const combineClasses = `${styleClass} ${props.className}`;
 
   const handleLogout = ()=> {

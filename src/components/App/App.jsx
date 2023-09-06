@@ -60,9 +60,7 @@ function App() {
   }, []);
 
   return (
-    // <div style={{ backgroundColor: isDarkMode ? 'var(--background-dark)' : 'var(--background-light)' }}>
-    // <div style={{ color: isDarkMode ? 'var(--text-dark)' : 'var(--text-light)' }}>
-    <div className={`bg-bkg text-text ${isDarkMode ? "dark" : "light"}`}>
+    <div className={`bg-bkg/.7 text-text ${isDarkMode ? "dark" : "light"}`}>
       <Router>
         {/* Toastify */}
         <ToastContainer

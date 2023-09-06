@@ -4,6 +4,13 @@ import LogOutButton from "../LogOutButton/LogOutButton";
 import { useSelector, useDispatch } from "react-redux";
 import "./SettingsModal.css";
 import DeleteNodeModal from "../DeleteNodeModal/DeleteNodeModal";
+import WbSunnyIcon from '@mui/icons-material/WbSunny';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import TaskAltIcon from '@mui/icons-material/TaskAlt';
+
+// TOASTIFY
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
   // importing dispatch
@@ -34,7 +41,7 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
   };
 
   useEffect(() => {
-    if (isDarkMode) {
+    if (!isDarkMode) {
       document.documentElement.classList.add("light");
       document.documentElement.classList.remove("dark");
       localStorage.theme = "light";
@@ -117,7 +124,7 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
   return (
     <div className="modal-overlay">
       <div
-        className={`mt-15 settings-modal bg-re2d-100 ${
+        className={`mt-15 settings-modal bg-red-100 ${
           isDarkMode ? "dark" : "light"
         }`}
       >
@@ -129,36 +136,35 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
         </div>
         <div className="flex flex-col">
           <span className="mb-2">Join Node</span>
-          <div>
+          <div className="text-center text-amber-950">
             <input
-              style={{ textAlign: "center" }}
+            style={{maxWidth:"160px", marginLeft:"25px", borderRadius:"8px"}}
               type="text"
               placeholder="enter code"
-              className="ml-4"
+              className="text-center bg-bkg "
               onChange={(event) => setNodeCodeInput(event.target.value)}
             />
-            <button
+            <button className="text-green-800 "
               onClick={(event) =>
                 handleNodeCodeInput(event, nodeCodeInput, nodeAssociation)
               }
             >
-              ☑️
+              <TaskAltIcon/>
             </button>
           </div>
           <br />
           <span className="mb-2">Theme</span>
-          <div className="flex justify-between">
+          <div className="flex text-center">
             {/* DARK MODE */}
-            <p className="ml-20">
+            <div className="flex items-center mx-auto">
               <button
-                className={isDarkMode ? "dark ml-20" : "light ml-20"}
+                className={isDarkMode ? "dark text-gray-700" : "light text-yellow-700"}
                 onClick={() => handleDarkModeToggle()}
               >
-                {isDarkMode ? "☼" : "☾"}
+                {isDarkMode ? <DarkModeIcon/> : <WbSunnyIcon/>}
               </button>
-            </p>
+            </div>
           </div>
-          <br />
           <div className="flex flex-col gap-2">
             <button className="mt-2 active:underline "><DeleteNodeModal/></button>
             <button className="mt-2 font-bold active:underline" onClick={openDeleteConfirmation}>
@@ -166,7 +172,7 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
             </button>
           </div>
           <br />
-          <button className="mt-4 underline" onClick={closeSettings}>
+          <button className="mt-4 font-bold active:underline" onClick={closeSettings}>
             Close
           </button>
           {showDeleteConfirmation && (
@@ -175,13 +181,13 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
                 Are you sure you want to delete your account?
               </p>
               <button
-                className="mt-2 mr-10 underline"
+                className="mt-2 mr-10 font-bold active:underline"
                 onClick={handleDeleteAccount}
               >
                 Confirm
               </button>
               <button
-                className="mt-2 underline"
+                className="mt-2 font-bold active:underline"
                 onClick={closeDeleteConfirmation}
               >
                 Cancel
