@@ -133,7 +133,7 @@ function App() {
           <ProtectedRoute
             // logged in shows FeaturedPage else shows LoginPage
             exact
-            path="/public"
+            path="/featured"
           >
             <FeaturedPage />
           </ProtectedRoute>

@@ -13,13 +13,15 @@ function FeaturedModal({
     return null;
   }
 
+  // store all public posts (questions and responses)
   const publicPosts = useSelector(
     (store) => store.postReducer.publicDatabaseResponse
   );
 
+  // store all nodes 
   let nodeData = useSelector((store) => store.nodeReducer.nodeDatabaseResponse);
 
-
+  // filter 
   const nodeResponses = publicPosts.filter((post) => {
     console.log("Comparing post.reply_id:", post.reply_id, "with selectedPostId:", selectedPostId);
     return post.reply_id === selectedPostId;
