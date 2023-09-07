@@ -65,8 +65,9 @@ const UserNodes = ({ isDarkMode }) => {
                 if (post?.replied == true) {
                   return (
                     <div
-                      className={`mt-4 mb-2 pb-2 pt-2 font-medium  text-amber-950 shadow-md bg-userContent question-box ${isDarkMode ? "dark" : "light"
-                        }`}
+                      className={`mt-4 mb-2 pb-2 pt-2 font-medium  text-amber-950 shadow-md bg-userContent question-box ${
+                        isDarkMode ? "light" : "dark"
+                      }`}
                       key={post?.id}
                     >
                       <div className="flex items-end justify-between px-4 py-2">
@@ -75,7 +76,7 @@ const UserNodes = ({ isDarkMode }) => {
                         </span>
                       </div>
                       {/* this should display the latest question/reply in this thread */}
-                      <div className={`flex flex-col items-center justify-center m-5 text-lg font-bold question-text bg-userContent text-amber-950 ${isDarkMode ? 'dark' : 'light'}`}>{post?.content}</div>
+                      <div className={`flex flex-col items-center justify-center m-5 text-lg font-bold question-text bg-userContent text-amber-950 ${isDarkMode ? "light" : "dark"}`}>{post?.content}</div>
                       <div className="flex items-end justify-between px-4 py-2 ">
                         <button
                           className="text-sm font-bold active:underline text-amber-950"

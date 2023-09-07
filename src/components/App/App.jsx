@@ -18,13 +18,16 @@ import LoginPage from "../LoginPage/LoginPage";
 import RegisterPage from "../RegisterPage/RegisterPage";
 import ActionPage from "../ActionPage/ActionPage";
 import HomePage from "../HomePage/HomePage";
-import FeaturedPage from "../FeaturedPage/FeaturedPage";
 import SettingsModal from "../SettingsModal/SettingsModal";
+import FeaturedPage from "../FeaturedPage/FeaturedPage";
 import OwnerNodes from "../OwnerNodes/OwnerNodes";
 import UserNodes from "../UserNodes/UserNodes";
+import FeaturedModal from "../FeaturedReplyModal/FeaturedModal";
+
 // TOASTIFY
 import { ToastContainer , toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 
 function App() {
   const dispatch = useDispatch();
@@ -46,7 +49,7 @@ function App() {
   const closeSettings = () => {
     setSettingsOpen(false);
   };
-
+    
   // DISPLAY
   useEffect(() => {
     dispatch({ type: "FETCH_USER" });
@@ -62,7 +65,7 @@ function App() {
   }, []);
 
   return (
-    <div className={`bg-bkg/.7 text-text ${isDarkMode ? "dark" : "light"}`}>
+    <div className={`bg-bkg/.7 text-text ${isDarkMode ? "light" : "dark"}`}>
       <Router>
         {/* Toastify */}
         <ToastContainer
@@ -75,6 +78,7 @@ function App() {
           pauseOnFocusLoss={false}
           draggable
           pauseOnHover={false}
+          limit={1}
         />
         {/* Nav */}
         <Nav />
@@ -129,10 +133,19 @@ function App() {
           <ProtectedRoute
             // logged in shows FeaturedPage else shows LoginPage
             exact
-            path="/featured"
+            path="/public"
           >
             <FeaturedPage />
           </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows FeaturedPage else shows LoginPage
+            exact
+            path="/featured"
+          >
+            <FeaturedModal />
+          </ProtectedRoute>
+
           <ProtectedRoute
             // logged in shows OnwerNode else shows LoginPage
             exact

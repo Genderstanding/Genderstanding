@@ -6,7 +6,7 @@
 @layer base {
     :root[class="light"] {
         --colors-primary: 207 111 90;
-        --colors-secondary: 223 188 185;
+        --colors-secondary: 207 111 90;
         --colors-accent: 123 62 55;
         --colors-bkg: 251 246 246;
         --colors-text: 39 6 6;
@@ -16,9 +16,9 @@
 
     :root[class="dark"] {
         --colors-primary: 204 138 127;
-        --colors-secondary: 233 205 200;
+        --colors-secondary: 248 238 237;
         --colors-accent: 182 87 73;
-        --colors-bkg: 18 18 18;
+        --colors-bkg: 32 32 35;
         --colors-text: 248 238 237;
         --colors-userContent: 254 246 246;
         --colors-ownerContent: 239 220 220;

@@ -27,6 +27,8 @@ export const CodeInputModal = ({
     return null;
   }
 
+
+  // Code input
   const handleNodeCodeInput = (event, nodeCodeInput, nodeAssociation) => {
     event.preventDefault();
     try {
@@ -42,24 +44,35 @@ export const CodeInputModal = ({
               type: "USER_NODE_ASSOCIATION",
               payload: nodeCodeInput,
             });
+
+            toast.success("Invite code submitted successfully", {
+              position: "bottom-left",
+              autoClose: 1500,
+              hideProgressBar: true,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+
+            history.push("/home");
+          } else if (node?.user_id !== null) {
+            toast.error("Invite code has already been used", {
+              position: "bottom-left",
+              autoClose: 1500,
+              hideProgressBar: true,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
           }
         }
       }
-      
-      toast.success("Invite code submitted successfully", {
-        position: "bottom-left",
-        autoClose: 1500,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-      // Go to home page when user enter invite code
-      history.push('/usernodes');
     } catch (error) {
-      toast.error("Failed to submit invite code", {
+      toast.error("Error submitting invite code", {
         position: "bottom-left",
         autoClose: 1500,
         hideProgressBar: true,

@@ -70,12 +70,12 @@ const AddQuestionModal = ({
   return (
     <div
       className={`flex items-center justify-center modal-overlay ${
-        isDarkMode ? "dark" : "light"
+        isDarkMode ? "light" : "dark"
       }`}
     >
       <div
         className={`flex flex-col items-center justify-center ask-question-box ${
-          isDarkMode ? "dark" : "light"
+          isDarkMode ? "light" : "dark"
         }`}
       >
         {children}
