@@ -61,7 +61,7 @@ export default function DeleteNodeModal() {
         type="button"
         onClick={handleOpen}
       >
-        Remove Node
+        Remove Community
       </TriggerButton>
       <StyledModal
         aria-labelledby="unstyled-modal-title"
