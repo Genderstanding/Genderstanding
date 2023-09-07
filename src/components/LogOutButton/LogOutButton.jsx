@@ -14,6 +14,8 @@ const history = useHistory();
     history.push('/login')
     // close setting modal
     props.onCloseSettings();
+      // LOGOUT
+
   }
   return (
     <button

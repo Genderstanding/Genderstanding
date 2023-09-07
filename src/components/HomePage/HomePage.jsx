@@ -75,7 +75,7 @@ export default function HomePage({ isDarkMode }) {
                   return (
                     <div
                     onClick={() => handleGoToNode(node)}
-                    className={`duration-300 ease-in-out side-scroll-box hover:scale-105 text-neutral-950 bg-red-50 ${isDarkMode ? 'dark' : 'light'}`}
+                    className={`duration-300 ease-in-out side-scroll-box hover:scale-105 text-neutral-950 bg-red-50 ${isDarkMode ? "light" : "dark"}`}
                     key={node.id}
                     >
                       {checkUserId(node)}
@@ -93,13 +93,13 @@ export default function HomePage({ isDarkMode }) {
             <h1 className="text-2xl font-bold font-mulish">Featured</h1>
             <h3>View community nodes</h3>
             <div className="mt-3 ml-6 featured-buttons">
-              <button className={`pt-3 pb-3 pl-3 pr-4 mb-4 mr-4 font-semibold shadow-lg  active:underline text-neutral-50 rounded-2xl bg-primary shadow-black-200 ${isDarkMode ? 'dark' : 'light'}`}>Trending</button>
-              <button className={`pt-3 pb-3 pl-5 pr-5 mb-4 ml-4 mr-4 font-semibold active:underline text-neutral-50 shadow-lg rounded-2xl bg-primary shadow-black-200 ${isDarkMode ? 'dark' : 'light'}`}>Latest</button>
-              <button className={`pt-3 pb-3 pl-4 pr-4 mb-4 ml-4 mr-4 font-semibold active:underline text-neutral-50 shadow-lg rounded-2xl bg-primary shadow-black-200 ${isDarkMode ? 'dark' : 'light'}`}>Popular</button>
+              <button className={`pt-3 pb-3 pl-3 pr-4 mb-4 mr-4 font-semibold shadow-lg  active:underline text-neutral-50 rounded-2xl bg-primary shadow-black-200 ${isDarkMode ? "light": "dark"}`}>Trending</button>
+              <button className={`pt-3 pb-3 pl-5 pr-5 mb-4 ml-4 mr-4 font-semibold active:underline text-neutral-50 shadow-lg rounded-2xl bg-primary shadow-black-200 ${isDarkMode ? "light": "dark"}`}>Latest</button>
+              <button className={`pt-3 pb-3 pl-4 pr-4 mb-4 ml-4 mr-4 font-semibold active:underline text-neutral-50 shadow-lg rounded-2xl bg-primary shadow-black-200 ${isDarkMode ? "light": "dark"}`}>Popular</button>
             </div>
             <div className="flex flex-col items-center featured-nodes-homepage">
-              <div className={`flex flex-col justify-center items-center p-2 font-medium text-md featured-top font-mulish text-neutral-950 bg-userContent/100 ${isDarkMode ? 'dark' : 'light'}`}>Featured Spotlight text 1</div>
-              <div className={`flex flex-col justify-center items-center p-2 font-medium text-md featured-bottom font-mulish text-neutral-950 bg-userContent/100 ${isDarkMode ? 'dark' : 'light'}`}>Featured Spotlight text 2</div>
+              <div className={`flex flex-col justify-center items-center p-2 font-medium text-md featured-top font-mulish text-neutral-950 bg-userContent/100 ${isDarkMode ? "light": "dark"}`}>Featured Spotlight text 1</div>
+              <div className={`flex flex-col justify-center items-center p-2 font-medium text-md featured-bottom font-mulish text-neutral-950 bg-userContent/100 ${isDarkMode ? "light": "dark"}`}>Featured Spotlight text 2</div>
             </div>
           </div>
         </div>

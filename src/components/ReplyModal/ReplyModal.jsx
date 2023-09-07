@@ -17,6 +17,7 @@ const ReplyModal = ({
     if (!addReplyOpen) {
         return null;
     }
+    
     const dispatch = useDispatch();
     let nodePosts = useSelector(
         (store) => store.postReducer.postDatabaseResponse
@@ -39,9 +40,8 @@ const ReplyModal = ({
     const [showReply, setShowReply] = useState(false);
 
     useEffect(() => {
-        // 2. Update showReply based on your logic
         if (user.id === questionObject.user_id) {
-          setShowReply(true); // Set to false when the condition is met
+          setShowReply(true); 
         }
       }, [user.id, questionObject.user_id]);
 

@@ -1,21 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./FeaturedPage.css";
 import HeaderBar from "../HeaderBar/HeaderBar";
 import { useSelector } from "react-redux";
-import moment from 'moment'
+import moment from "moment";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import FeaturedModal from "../FeaturedReplyModal/FeaturedModal";
 
 function FeaturedPage() {
+  const dispatch = useDispatch();
+  const history = useHistory();
 
-  const [publicPost, setPublicPost] = useState("")
+  const [publicPost, setPublicPost] = useState("");
   const [viewPostOpen, setViewPostOpen] = useState(false);
 
-  let nodePosts = useSelector(
-    (store) => store.postReducer.postDatabaseResponse
+  const publicPosts = useSelector(
+    (store) => store.postReducer.publicDatabaseResponse
   );
-
-  const dispatch = useDispatch();
+  
+  let nodeData = useSelector((store) => store.nodeReducer.nodeDatabaseResponse);
 
   //like store
   let likePosts = useSelector(
@@ -44,14 +48,30 @@ function FeaturedPage() {
    // setIsLikeClicked(true);
   }
 
-  const openPublicPost = (post) => {
-    setPublicPost(post);
-    setViewPostOpen(true);
-  }
+  // Function to open selected post
+  const openPublicPost = (selectedPostId) => {
+    
+    try {
 
+      setPublicPost(selectedPostId);
+      setViewPostOpen(true);
 
+      dispatch({
+        type: "FETCH_PUBLIC_POSTS",
+        payload: selectedPostId,
+      });
+      
+      // history.push('/public')
+      console.log("selectedPostId", selectedPostId);
+    } catch (error) {
+      console.log(
+        "Error in obtaining postId information on FeaturedPage: ",
+        error
+      );
+    }
+  };
 
-
+  
   return (
     <>
       <div className="flex flex-col h-screen App">
@@ -61,21 +81,30 @@ function FeaturedPage() {
           <h4>View community nodes</h4>
           <div className="mt-2 ml-8 featured-buttons"></div>
           <div className="flex flex-col items-center justify-center pb-24 thread-container ">
-            {nodePosts.map(post => {
+            {publicPosts.map((post) => {
               if (post?.reply_id == null) {
                 if (post?.public == true) {
                   return (
-                    <div className="mt-4 mb-2 pb-2 pt-2 font-medium  text-amber-950 shadow-md bg-userContent question-box " key={post?.id}>
+                    <div
+                      className="pt-2 pb-2 mt-4 mb-2 font-medium shadow-md text-amber-950 bg-userContent featured-box "
+                      key={post?.id}
+                    > 
                       <div className="flex items-end justify-between px-4 py-2">
                         <span className="text-sm">
                           {moment(post?.post_time).fromNow()}
                         </span>
+                        <span className="text-sm text-end">
+                           node ID : {post.node_id}
+                        </span>
                       </div>
-                      <div className="flex flex-col items-center justify-center m-5 text-lg font-bold question-text bg-userContent text-amber-950">{post?.content}</div>
+                      <div className="flex flex-col items-center justify-center m-5 text-lg font-bold featured-text bg-userContent text-amber-950">
+                         {/* Display the user's question */}
+                      <span>Question: {post?.content} </span>  
+                      </div>
                       <div className="flex items-end justify-between px-4 py-2 ">
                         <button
                           className="text-sm font-bold active:underline text-amber-950"
-                          onClick={() => openPublicPost(post)}
+                          onClick={() => openPublicPost(post.id)}
                         >
                           Open
                         </button>
@@ -83,22 +112,25 @@ function FeaturedPage() {
                           className="text-sm font-bold active:underline text-amber-950"
                           onClick={() => increaseCount(post.id)}
                         >
-                          🖤{'  '}<span>{post.votes || 0}</span>
+                          🖤{"  "}
+                          <span>{post.votes || 0}</span>
                         </button>
                       </div>
                     </div>
-
-
-                  )
+                  );
                 }
               }
             })}
           </div>
         </div>
-      </div >
+        <FeaturedModal
+          viewPostOpen={viewPostOpen}
+          setViewPostOpen={setViewPostOpen}
+          selectedPostId={publicPost}
+        />
+      </div>
     </>
   );
 }
-
 
 export default FeaturedPage;

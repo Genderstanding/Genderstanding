@@ -7,6 +7,10 @@ import { Modal } from "@mui/base/Modal";
 import { useSelector, useDispatch } from "react-redux";
 import { Card, CardActionArea, Typography } from "@mui/material";
 
+// TOASTIFY
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export default function DeleteNodeModal() {
   const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
@@ -29,6 +33,16 @@ export default function DeleteNodeModal() {
       dispatch({ type: "DELETE_NODE", payload: nodeID});
     } catch (error) {
       console.log("error deleting nodes", error);
+      toast.error("Failed to delete node", {
+        position: "bottom-left",
+        autoClose: 1500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
 
@@ -47,7 +61,7 @@ export default function DeleteNodeModal() {
         type="button"
         onClick={handleOpen}
       >
-        Remove Node
+        Remove Community
       </TriggerButton>
       <StyledModal
         aria-labelledby="unstyled-modal-title"
@@ -57,8 +71,8 @@ export default function DeleteNodeModal() {
         slots={{ backdrop: StyledBackdrop }}
       >
         {/* NODES */}
-        <Box className="text-center text-amber-950" sx={style}>
-          <h2 className="text-xl font-bold text-center">Your Communities</h2>
+        <Box className="overflow-y-auto text-center text-amber-950" sx={style}>
+          <h2 className="fixed text-xl font-bold text-center">Your Communities</h2>
           {allNodes.map((node) => {
             if (user?.id == node?.user_id) {
               
@@ -66,12 +80,12 @@ export default function DeleteNodeModal() {
 
               return (
                 <div
-                  className="my-5 font-semibold text-center text-md overflow-y-scroll ..."
+                  className="my-5 font-semibold text-center text-md "
                   key={node.id}
                 >
                   <Card
-                    className=" bg-rose-100 border-r-12"
-                    sx={{ minWidth: 50, maxWidth: 200, height: 30 }}
+                    className=" border-r-12"
+                    sx={{ minWidth: 50, maxWidth: 200, minHeight: 30 }}
                   >
                     <CardActionArea
                       onClick={() => toggleShowDeleteButton(node?.id)}
@@ -79,7 +93,7 @@ export default function DeleteNodeModal() {
                       <Typography>
                         {isDeleteButtonVisible ? (
                           <button
-                            className="font-semibold border-r-12"
+                            className="font-bold border-r-12"
                             onClick={() => handleDeleteNode(node?.id)}
                           >
                             Delete
@@ -156,7 +170,7 @@ const StyledBackdrop = styled(Backdrop)`
 
 const style = (theme) => ({
   width: 270,
-  minHeight: 100,
+  height: 400,
   maxHeight: 400,
   borderRadius: "12px",
   padding: "16px 32px 24px 32px",
