@@ -178,7 +178,7 @@ const closeElipsis = () => {
                           
                         </div>
                         {/* this should display the latest question/reply in this thread */}
-                        <div className={`flex flex-col items-center justify-center m-5 text-lg font-bold m-5 question-text bg-userContent text-amber-950 ${isDarkMode ? 'dark' : 'light'}`} >
+                        <div className={`flex flex-col items-center justify-center text-lg font-bold m-5 question-text bg-userContent text-amber-950 ${isDarkMode ? 'dark' : 'light'}`} >
                           {post?.content}
                         </div>
                         <div className="flex items-end justify-between px-5 py-3 ">
@@ -201,13 +201,13 @@ const closeElipsis = () => {
                     )
                   } else {
                     return (
-                      <div className={`mt-4 mb-2 question-box font-medium text-amber-950 shadow-md bg-ownerContent ${isDarkMode ? 'dark' : 'light'}`} key={post?.id}>
+                      <div className={`mt-4 mb-2 question-box font-medium text-amber-950 shadow-md bg-ownerContent ${isDarkMode ? "light": "dark"}`} key={post?.id}>
                         <div className="flex items-end justify-between px-5 py-3">
                         <span className="text-sm">{moment(post?.post_time).fromNow()}</span>
                         <button onClick={() => openElipsis( post?.id, post)}>. . .</button>
                         </div>
                         {/* this should display the latest question/reply in this thread */}
-                        <div className={`flex flex-col items-center justify-center m-5 text-lg font-bold question-text bg-ownerContent text-amber-950 ${isDarkMode ? 'dark' : 'light'}`} >
+                        <div className={`flex flex-col items-center justify-center m-5 text-lg font-bold question-text bg-ownerContent text-amber-950 ${isDarkMode ? "light": "dark"}`} >
                         {post?.content}
                       </div>
                       <div className="flex items-end justify-between px-5 py-3 ">

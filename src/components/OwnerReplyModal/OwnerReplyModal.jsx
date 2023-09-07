@@ -3,6 +3,8 @@ import './OwnerReplyModal.css'
 import { useSelector, useDispatch } from 'react-redux';
 import moment from 'moment';
 import ElipsisModal from '../ElipsisModal/ElipsisModal';
+
+// TOASTIFY
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -154,14 +156,14 @@ const OwnerReplyModal = ({ addReplyOpen, closeAddReply, questionObject, isDarkMo
                 </div>
                 <textarea
                     rows="4"
-                    className={`shadow-lg w-5/6 rounded-xl md:w-auto px-4 py-4 mt-4 mb-4 text-sm bg-bkg border-1 text-text reply-textarea focus:ring-0 placeholder-text font-normal ${isDarkMode ? "dark" : "light"}`}
+                    className={`shadow-lg w-5/6 rounded-xl md:w-auto px-4 py-4 mt-4 mb-4 text-sm bg-bkg border-1 text-text reply-textarea focus:ring-0 placeholder-text font-normal${isDarkMode ? "light" : "dark"}`}
                     placeholder="Write a Reply..."
                     onChange={(event) => setReplyInput(event.target.value)}
                     value={replyInput}
                     required />
-                <div className='mt-6 buttons-container'>
-                    <button className={`mx-5 font-bold active:underline text-amber-950 ${isDarkMode ? "dark" : "light"}`}  onClick={(event) => handleReply(event, questionObject)}>Confirm</button>
-                    <button className={`mx-5 font-bold active:underline text-amber-950 ${isDarkMode ? "dark" : "light"}`} onClick={closeAddReply}>
+                <div className=' buttons-container'>
+                    <button className={`my-5 mx-5 font-bold active:underline text-amber-950 ${ isDarkMode ? "light" : "dark"}`}  onClick={(event) => handleReply(event, questionObject)}>Confirm</button>
+                    <button className={`my-5 mx-5  font-bold active:underline text-amber-950 ${ isDarkMode ? "light" : "dark"}`} onClick={closeAddReply}>
                         Close
                     </button>
                 </div>

@@ -33,7 +33,7 @@ export default function HeaderOwnerBar({isDarkMode}) {
   ];
 
   return (
-<div className={`fixed top-0 left-0 right-0 flex items-center header-container text-black ${isDarkMode ? 'dark' : 'light'}`}>
+<div className={`fixed top-0 left-0 right-0 flex items-center header-container text-text bg-bkg ${isDarkMode ? "light" : "dark"}`}>
       <button onClick={() => history.goBack()}>
         <MdChevronLeft size={25} className="ml-2" />
       </button>
@@ -54,7 +54,7 @@ export default function HeaderOwnerBar({isDarkMode}) {
           height={24}
           viewBox="8 5 27 27"
           pathData={svgInvite}
-          fill="#CF6F5A"
+          className={`fill-secondary ${isDarkMode ? "light" : "dark"}`}
         />
       </button>
       <InviteNodeModal
