@@ -118,23 +118,17 @@ const OwnerNodes = ({ isDarkMode }) => {
   let newNode = useSelector(
     (store) => store.newNodeReducer.newNodeDatabaseResponse
   );
-
+  let nodeData = useSelector(store => store.nodeReducer.nodeDatabaseResponse);
   //like store
   let likePosts = useSelector(
     (store) => store.likesReducer.likeDatabaseResponse
   );
-
+  //user store
   const user = useSelector((state) => state.user);
-
-  console.log('likePosts object:', likePosts)
-  console.log('nodePosts object:', nodePosts)
-
 
   // function to like a post
   const increaseCount = (postId) => {
     console.log("post id is : ", postId);
-    if (!isLikeClicked) {
-
       const isLikedByUser = likePosts.some((like) => like.post_id === postId && like.user_id === user.id);
       console.log('isLikedByUser:', isLikedByUser)
       if (!isLikedByUser) {
@@ -150,8 +144,6 @@ const OwnerNodes = ({ isDarkMode }) => {
         //future toast
         alert("You have already liked this post.");
       }
-      setIsLikeClicked(true);
-    }
   };
 
   const openAddQuestion = () => {
@@ -161,6 +153,8 @@ const OwnerNodes = ({ isDarkMode }) => {
   const closeAddQuestion = () => {
     setAddQuestionOpen(false);
   };
+
+  const userIds = nodeData.map(node => node.user_id);
 
   const openAddReply = (questionObject) => {
     setClickedReplyContent(questionObject);
@@ -204,7 +198,7 @@ const OwnerNodes = ({ isDarkMode }) => {
                           {questionState.toggleButtom ? (
                             <button className="text-sm font-bold active:underline" onClick={() => handleAcceptButton(post?.id)}>Accept</button>
                           ) : (
-                            <button className="text-sm font-bold active:underline" onClick={() => openAddReply(post)}>Reply</button>
+                            <button className="text-sm font-bold active:underline" onClick={() => openAddReply(post)}>Open</button>
                           )}
                           {questionState.showButton &&
                             <button className="text-sm font-bold active:underline" onClick={() => handleRejectButton(post?.id)}>Reject</button>
@@ -213,8 +207,8 @@ const OwnerNodes = ({ isDarkMode }) => {
                             <button className="text-sm font-bold active:underline" onClick={() => handleReportButton(post?.id)}>Report</button>
                           ) : (
                             // THIS SHOULDN'T RENDER UNLESS APPROVED
-                            <button className={`text-sm font-bold active:underline ${isLikeClicked ? "text-gray-400 cursor-not-allowed" : "text-amber-950"
-                              }`} onClick={() => increaseCount(post.id)} disabled={isLikeClicked} >🖤{"  "}<span>{post.votes || 0}</span></button>
+                            <button className="text-sm font-bold active:underline text-amber-950" onClick={() => increaseCount(post.id)}>🖤{'  '}<span>{post.votes || 0}</span></button>
+
                           )}
                         </div>
                       </div>

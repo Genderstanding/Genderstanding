@@ -6,7 +6,7 @@ import ElipsisModal from '../ElipsisModal/ElipsisModal';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const OwnerReplyModal = ({ addReplyOpen, closeAddReply, questionObject, isDarkMode}) => {
+const OwnerReplyModal = ({ addReplyOpen, closeAddReply, questionObject, isDarkMode }) => {
     if (!addReplyOpen) {
         return null;
     }
@@ -35,7 +35,6 @@ const OwnerReplyModal = ({ addReplyOpen, closeAddReply, questionObject, isDarkMo
         setPostIdProp(postId);
         setUserIdProp(userId);
         setNodeOwnerIdProp(nodeOwnerId);
-        // console.log('userIdProp in openElipsis:', userIdProp)
     };
 
     const closeElipsis = () => {
@@ -56,79 +55,79 @@ const OwnerReplyModal = ({ addReplyOpen, closeAddReply, questionObject, isDarkMo
                 }
             })
             toast.success("Replied sent", {
-              position: "bottom-left",
-              autoClose: 1500,
-              hideProgressBar: true,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "light",
+                position: "bottom-left",
+                autoClose: 1500,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
             });
         } catch (error) {
-          toast.error("Failed to reply to user", {
-            position: "bottom-left",
-            autoClose: 1500,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
+            toast.error("Failed to reply to user", {
+                position: "bottom-left",
+                autoClose: 1500,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
         }
     }
 
     const handleDeleteButton = (postId) => {
-      try {
-        dispatch({
-            type: 'DELETE_POST',
-            payload: postId
-        })
-        toast.success("Comment deleted", {
-          position: "bottom-left",
-          autoClose: 1500,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
-      } catch (error) {
-        toast.error("Failed to delete comment", {
-          position: "bottom-left",
-          autoClose: 1500,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
-      }
+        try {
+            dispatch({
+                type: 'DELETE_POST',
+                payload: postId
+            })
+            toast.success("Comment deleted", {
+                position: "bottom-left",
+                autoClose: 1500,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        } catch (error) {
+            toast.error("Failed to delete comment", {
+                position: "bottom-left",
+                autoClose: 1500,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        }
     }
 
     const handleReportButton = (postId) => {
-      try {
-         dispatch({
-          type: 'REPORT_POST',
-          payload: postId
-        })
-      } catch (error) {
-        toast.error("Failed to report user", {
-          position: "bottom-left",
-          autoClose: 1500,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
-      }
-       
-      }
+        try {
+            dispatch({
+                type: 'REPORT_POST',
+                payload: postId
+            })
+        } catch (error) {
+            toast.error("Failed to report user", {
+                position: "bottom-left",
+                autoClose: 1500,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        }
+
+    }
 
     return (
         <div className='flex items-center justify-center modal-overlay'>
@@ -152,20 +151,23 @@ const OwnerReplyModal = ({ addReplyOpen, closeAddReply, questionObject, isDarkMo
                         }
                     })}
                 </div>
-                <textarea
-                    rows="4"
-                    className={`shadow-lg w-5/6 rounded-xl md:w-auto px-4 py-4 mt-4 mb-4 text-sm bg-bkg border-1 text-text reply-textarea focus:ring-0 placeholder-text font-normal ${isDarkMode ? "dark" : "light"}`}
-                    placeholder="Write a Reply..."
-                    onChange={(event) => setReplyInput(event.target.value)}
-                    value={replyInput}
-                    required />
-                <div className='mt-6 buttons-container'>
-                    <button className={`mx-5 font-bold active:underline text-amber-950 ${isDarkMode ? "dark" : "light"}`}  onClick={(event) => handleReply(event, questionObject)}>Confirm</button>
-                    <button className={`mx-5 font-bold active:underline text-amber-950 ${isDarkMode ? "dark" : "light"}`} onClick={closeAddReply}>
-                        Close
-                    </button>
-                </div>
-
+                
+                    <div className='owner-reply-container'>
+                        <textarea
+                            rows="4"
+                            className={`shadow-lg w-5/6 rounded-xl md:w-auto px-4 py-4 mt-4 mb-4 text-sm bg-bkg border-1 text-text reply-textarea focus:ring-0 placeholder-text font-normal ${isDarkMode ? "dark" : "light"}`}
+                            placeholder="Write a Reply..."
+                            onChange={(event) => setReplyInput(event.target.value)}
+                            value={replyInput}
+                            required />
+                        <div className='mt-6 buttons-container'>
+                            <button className={`mx-5 font-bold active:underline text-amber-950 ${isDarkMode ? "dark" : "light"}`} onClick={(event) => handleReply(event, questionObject)}>Confirm</button>
+                            <button className={`mx-5 font-bold active:underline text-amber-950 ${isDarkMode ? "dark" : "light"}`} onClick={closeAddReply}>
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                
             </div>
             <ElipsisModal
                 elipsisOpen={elipsisOpen}

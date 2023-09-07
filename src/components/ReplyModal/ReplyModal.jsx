@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./ReplyModal.css";
 import { useSelector, useDispatch } from "react-redux";
 import ElipsisModal from '../ElipsisModal/ElipsisModal';
@@ -27,6 +27,8 @@ const ReplyModal = ({
 
     const reversePosts = nodePosts.slice().reverse();
 
+    const user = useSelector((state) => state.user);
+
     // Creating a state to hold text inputed
     const [replyInput, setReplyInput] = useState("");
     const [elipsisOpen, setElipsisOpen] = useState(false);
@@ -34,6 +36,14 @@ const ReplyModal = ({
     const [postIdProp, setPostIdProp] = useState(null);
     const [userIdProp, setUserIdProp] = useState(null);
     const [nodeOwnerIdProp, setNodeOwnerIdProp] = useState(null);
+    const [showReply, setShowReply] = useState(false);
+
+    useEffect(() => {
+        // 2. Update showReply based on your logic
+        if (user.id === questionObject.user_id) {
+          setShowReply(true); // Set to false when the condition is met
+        }
+      }, [user.id, questionObject.user_id]);
 
     const openElipsis = (content, postId, userId, nodeOwnerId) => {
         setElipsisOpen(true);
@@ -172,32 +182,46 @@ const ReplyModal = ({
                         }
                     })}
                 </div>
-                <textarea
-                    rows="4"
-                    className={`shadow-lg w-5/6 rounded-xl md:w-auto px-4 py-4 mt-4 mb-4 text-sm bg-bkg border-1 reply-textarea focus:ring-0 text-text placeholder-text font-normal ${isDarkMode ? "dark" : "light"
-                        }`}
-                    placeholder="Write a Reply..."
-                    onChange={(event) => setReplyInput(event.target.value)}
-                    value={replyInput}
-                    required
-                />
+                {showReply ? (
+                <div className='user-reply-contaner'>
+                    <textarea
+                        rows="4"
+                        className={`shadow-lg w-5/6 rounded-xl md:w-auto px-4 py-4 mt-4 mb-4 text-sm bg-bkg border-1 reply-textarea focus:ring-0 text-text placeholder-text font-normal ${isDarkMode ? "dark" : "light"
+                            }`}
+                        placeholder="Write a Reply..."
+                        onChange={(event) => setReplyInput(event.target.value)}
+                        value={replyInput}
+                        required
+                    />
 
-                <div className="text-center align-middle buttons-container">
-                    <button
-                        className={`mx-5 font-bold active:underline  text-amber-950 ${isDarkMode ? "dark" : "light"
-                            }`}
-                        onClick={(event) => handleReply(event, questionObject)}
-                    >
-                        Confirm
-                    </button>
-                    <button
-                        className={`mx-5 font-bold active:underline  text-amber-950 ${isDarkMode ? "dark" : "light"
-                            }`}
-                        onClick={closeAddReply}
-                    >
-                        Close
-                    </button>
+                    <div className="text-center align-middle buttons-container">
+                        <button
+                            className={`mx-5 font-bold active:underline  text-amber-950 ${isDarkMode ? "dark" : "light"
+                                }`}
+                            onClick={(event) => handleReply(event, questionObject)}
+                        >
+                            Confirm
+                        </button>
+                        <button
+                            className={`mx-5 font-bold active:underline  text-amber-950 ${isDarkMode ? "dark" : "light"
+                                }`}
+                            onClick={closeAddReply}
+                        >
+                            Close
+                        </button>
+                    </div>
                 </div>
+                ) : (
+                    <div className="text-center align-middle pb-4 buttons-container">
+                    <button
+                            className={`mx-5 font-bold active:underline  text-amber-950 ${isDarkMode ? "dark" : "light"
+                                }`}
+                            onClick={closeAddReply}
+                        >
+                            Close
+                        </button>
+                        </div>
+                )}
             </div>
             <ElipsisModal
                 elipsisOpen={elipsisOpen}
