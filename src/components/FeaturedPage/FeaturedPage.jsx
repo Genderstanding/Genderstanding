@@ -41,13 +41,6 @@ function FeaturedPage() {
       setPublicPost(selectedPostId);
       setViewPostOpen(true);
 
-      dispatch({
-        type: "FETCH_PUBLIC_POSTS",
-        payload: selectedPostId,
-      });
-      
-      // history.push('/public')
-      console.log("selectedPostId", selectedPostId);
     } catch (error) {
       console.log(
         "Error in obtaining postId information on FeaturedPage: ",
@@ -63,7 +56,7 @@ function FeaturedPage() {
         <HeaderBar />
         <div className="mt-4 featured-container">
           <h1 className="mb-1 ml-5 text-2xl font-bold font-mulish">Featured</h1>
-          <h4>View community nodes</h4>
+          <h4>View featured posts </h4>
           <div className="mt-2 ml-8 featured-buttons"></div>
           <div className="flex flex-col items-center justify-center pb-24 thread-container ">
             {publicPosts.map((post) => {
