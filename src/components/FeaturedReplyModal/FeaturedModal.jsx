@@ -62,7 +62,7 @@ function FeaturedModal({
               >
                 <div className="flex items-end justify-between px-4 py-2">
                   <span className="text-sm font-bold">
-                    {isNodeOwner ? "Owner" : "User"}{" "}
+                    {isNodeOwner ? "Node Owner" : "User"}{" "}
                   </span>
                   <span className="text-sm text-end">
                     {" "}
