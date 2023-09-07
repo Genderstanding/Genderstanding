@@ -53,12 +53,6 @@ function FeaturedPage() {
     }
   };
 
-  // useEffect(() => {
-  //   dispatch({
-  //     type: "FETCH_PUBLIC_POSTS",
-  //   });
-  // }, [])
-
   return (
     <>
       <div className="flex flex-col h-screen App">
@@ -73,15 +67,18 @@ function FeaturedPage() {
                 if (post?.public == true) {
                   return (
                     <div
-                      className="pt-2 pb-2 mt-4 mb-2 font-medium shadow-md text-amber-950 bg-userContent question-box "
+                      className="pt-2 pb-2 mt-4 mb-2 font-medium shadow-md text-amber-950 bg-userContent featured-box "
                       key={post?.id}
-                    >
+                    > 
                       <div className="flex items-end justify-between px-4 py-2">
                         <span className="text-sm">
                           {moment(post?.post_time).fromNow()}
                         </span>
+                        <span className="text-sm text-end">
+                          Featured
+                        </span>
                       </div>
-                      <div className="flex flex-col items-center justify-center m-5 text-lg font-bold question-text bg-userContent text-amber-950">
+                      <div className="flex flex-col items-center justify-center m-5 text-lg font-bold featured-text bg-userContent text-amber-950">
                         {post?.node_name}
                       </div>
                       <div className="flex items-end justify-between px-4 py-2 ">
