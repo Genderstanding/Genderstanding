@@ -73,7 +73,7 @@ export default function HomePage({ isDarkMode }) {
             <h3>View your communities</h3>
             <div className="flex items-center">
               {/* useHistory back button */}
-              <MdChevronLeft size={35} />
+              <MdChevronLeft size={35} className="text-gray-500"/>
               <div
                 id="slider"
                 className="w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth"
@@ -95,7 +95,7 @@ export default function HomePage({ isDarkMode }) {
                   );
                 })}
               </div>
-              <MdChevronRight size={35} />
+              <MdChevronRight size={35} className="text-gray-500"/>
             </div>
           </div>
 

@@ -21,17 +21,32 @@ function FeaturedPage() {
   
   let nodeData = useSelector((store) => store.nodeReducer.nodeDatabaseResponse);
 
+  //like store
+  let likePosts = useSelector(
+    (store) => store.likesReducer.likeDatabaseResponse
+  );
+
+  //user store
+  const user = useSelector((state) => state.user);
+
   // Function to like a post
   const increaseCount = (postId) => {
-    dispatch({
-      type: "LIKE_POST",
-      payload: postId,
-    });
-    dispatch({
-      type: "LIKE_POST_USER",
-      payload: { post: postId },
-    });
-  };
+    const isLikedByUser = likePosts.some((like) => like.post_id === postId && like.user_id === user.id);
+    if (!isLikedByUser) {
+      dispatch({
+        type: "LIKE_POST",
+        payload: postId,
+      });
+      dispatch({
+        type: 'LIKE_POST_USER',
+        payload: { post: postId }
+      })
+    } else {
+      //future toast
+      alert("You have already liked this post.");
+    }
+   // setIsLikeClicked(true);
+  }
 
   // Function to open selected post
   const openPublicPost = (selectedPostId) => {
