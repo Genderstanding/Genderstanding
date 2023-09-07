@@ -17,6 +17,7 @@ const ReplyModal = ({
     if (!addReplyOpen) {
         return null;
     }
+    
     const dispatch = useDispatch();
     let nodePosts = useSelector(
         (store) => store.postReducer.postDatabaseResponse
