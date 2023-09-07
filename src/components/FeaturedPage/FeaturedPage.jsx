@@ -15,11 +15,11 @@ function FeaturedPage() {
   const [publicPost, setPublicPost] = useState("");
   const [viewPostOpen, setViewPostOpen] = useState(false);
 
-  let publicPosts = useSelector(
-    (store) => store.postReducer.postDatabaseResponse
+  const publicPosts = useSelector(
+    (store) => store.postReducer.publicDatabaseResponse
   );
-
-  let user = useSelector((store) => store.user);
+  
+  let nodeData = useSelector((store) => store.nodeReducer.nodeDatabaseResponse);
 
   // Function to like a post
   const increaseCount = (postId) => {
@@ -34,38 +34,29 @@ function FeaturedPage() {
   };
 
   // Function to open selected post
-  const openPublicPost = (selectedNodeId) => {
+  const openPublicPost = (selectedPostId) => {
+    
     try {
-      setPublicPost(selectedNodeId);
+
+      setPublicPost(selectedPostId);
       setViewPostOpen(true);
 
-      dispatch({
-        type: "FETCH_PUBLIC_POSTS",
-        payload: selectedNodeId,
-      });
-      // history.push('/public')
-      console.log("postID", selectedNodeId);
     } catch (error) {
       console.log(
-        "Error in obtaining node information on FeaturedPage: ",
+        "Error in obtaining postId information on FeaturedPage: ",
         error
       );
     }
   };
 
-  // useEffect(() => {
-  //   dispatch({
-  //     type: "FETCH_PUBLIC_POSTS",
-  //   });
-  // }, [])
-
+  
   return (
     <>
       <div className="flex flex-col h-screen App">
         <HeaderBar />
         <div className="mt-4 featured-container">
           <h1 className="mb-1 ml-5 text-2xl font-bold font-mulish">Featured</h1>
-          <h4>View community nodes</h4>
+          <h4>View featured posts </h4>
           <div className="mt-2 ml-8 featured-buttons"></div>
           <div className="flex flex-col items-center justify-center pb-24 thread-container ">
             {publicPosts.map((post) => {
@@ -73,21 +64,25 @@ function FeaturedPage() {
                 if (post?.public == true) {
                   return (
                     <div
-                      className="pt-2 pb-2 mt-4 mb-2 font-medium shadow-md text-amber-950 bg-userContent question-box "
+                      className="pt-2 pb-2 mt-4 mb-2 font-medium shadow-md text-amber-950 bg-userContent featured-box "
                       key={post?.id}
-                    >
+                    > 
                       <div className="flex items-end justify-between px-4 py-2">
                         <span className="text-sm">
                           {moment(post?.post_time).fromNow()}
                         </span>
+                        <span className="text-sm text-end">
+                           node ID : {post.node_id}
+                        </span>
                       </div>
-                      <div className="flex flex-col items-center justify-center m-5 text-lg font-bold question-text bg-userContent text-amber-950">
-                        {post?.node_name}
+                      <div className="flex flex-col items-center justify-center m-5 text-lg font-bold featured-text bg-userContent text-amber-950">
+                         {/* Display the user's question */}
+                      <span>Question: {post?.content} </span>  
                       </div>
                       <div className="flex items-end justify-between px-4 py-2 ">
                         <button
                           className="text-sm font-bold active:underline text-amber-950"
-                          onClick={() => openPublicPost(post.node_id)}
+                          onClick={() => openPublicPost(post.id)}
                         >
                           Open
                         </button>
@@ -109,7 +104,7 @@ function FeaturedPage() {
         <FeaturedModal
           viewPostOpen={viewPostOpen}
           setViewPostOpen={setViewPostOpen}
-          selectedNodeId={publicPost}
+          selectedPostId={publicPost}
         />
       </div>
     </>

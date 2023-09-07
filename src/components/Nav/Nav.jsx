@@ -62,7 +62,7 @@ export default function Nav({isDarkMode}) {
           </Link>
 
           {/* Link this to the Featured page */}
-          <Link className="navLink" to="/public">
+          <Link className="navLink" to="/featured">
             <button className="flex flex-col items-center justify-center flex-grow px-4 py-2 ">
             <PeopleOutlineSharpIcon sx={{fontSize:"32px"}}/>
               <span>Featured</span>

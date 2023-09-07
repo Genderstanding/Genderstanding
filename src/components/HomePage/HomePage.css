@@ -35,7 +35,7 @@
   
   .featured-top {
     border-top: solid 1px black;
-    border-bottom: dotted;
+    border-bottom: dashed;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
   }
