@@ -19,6 +19,7 @@ const ElipsisModal = ({
   const [isEditing, setIsEditing] = useState(false);
   const [showEdit, setShowEdit] = useState(true);
   const [showDelete, setShowDelete] = useState(true);
+  const [showRemove, setShowRemove] = useState(true);
 
   const postDate = moment(contentToEdit.post_time);
   const currentDate = moment();
@@ -66,12 +67,21 @@ const ElipsisModal = ({
     }
   };
 
-    //edit button render logic
+    //delete button render logic
     useEffect(()=> {
         if(userIdProp === user.id){
             setShowDelete(true);
         } else {
             setShowDelete(false);
+        }
+    }, [userIdProp, user.id])
+
+    //remove button render logic
+    useEffect(()=> {
+        if(nodeOwnerIdProp === user.id){
+            setShowRemove(true);
+        } else {
+            setShowRemove(false);
         }
     }, [nodeOwnerIdProp, user.id])
 
@@ -146,12 +156,14 @@ const ElipsisModal = ({
                   Delete
                 </button>
                 )}
+                {showRemove && (
                 <button 
                     className="m-2 font-bold active:underline text-amber-950"
                     onClick={()=>handleRemoveUser(postIdProp)}
                 >
                   Remove User
                 </button>
+                )}
                 <button
                   className="m-2 font-bold active:underline text-amber-950"
                   onClick={() => handleReportButton(postIdProp)}

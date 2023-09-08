@@ -8,20 +8,13 @@ import ElipsisModal from "../ElipsisModal/ElipsisModal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const OwnerReplyModal = ({
-  addReplyOpen,
-  closeAddReply,
-  questionObject,
-  isDarkMode,
-}) => {
-  if (!addReplyOpen) {
-    return null;
-  }
-  const dispatch = useDispatch();
-  let nodePosts = useSelector(
-    (store) => store.postReducer.postDatabaseResponse
-  );
-  let nodeData = useSelector((store) => store.nodeReducer.nodeDatabaseResponse);
+const OwnerReplyModal = ({ addReplyOpen, closeAddReply, questionObject, isDarkMode}) => {
+    if (!addReplyOpen) {
+        return null;
+    }
+    const dispatch = useDispatch();
+    let nodePosts = useSelector(store => store.postReducer.postDatabaseResponse)
+    let nodeData = useSelector(store => store.nodeReducer.nodeDatabaseResponse);
 
   console.log("nodePosts:", nodePosts);
   console.log("nodeData:", nodeData);
@@ -39,61 +32,54 @@ const OwnerReplyModal = ({
 
   const [autofill, setAutofill] = useState("");
 
-  const openElipsis = (content, postId, userId, nodeOwnerId) => {
-    setElipsisOpen(true);
-    setContentToEdit(content);
-    setPostIdProp(postId);
-    setUserIdProp(userId);
-    setNodeOwnerIdProp(nodeOwnerId);
-    // console.log('userIdProp in openElipsis:', userIdProp)
-  };
+    const openElipsis = (content, postId, userId, nodeOwnerId) => {
+        setElipsisOpen(true);
+        setContentToEdit(content);
+        setPostIdProp(postId);
+        setUserIdProp(userId);
+        setNodeOwnerIdProp(nodeOwnerId);
+    };
 
   const closeElipsis = () => {
     setElipsisOpen(false);
   };
 
-  const handleReply = (event, questionObject) => {
-    event.preventDefault();
-   
-    console.log("handleReply function called"); // Add this line
-    try {
-      dispatch({
-        type: "CREATE_POST",
-        payload: {
-          content: replyInput,
-          reply_id: questionObject.id,
-          node_id: questionObject.node_id,
-          orig_post: false,
-        },
-      });
-
-      toast.success("Replied sent", {
-        position: "bottom-left",
-        autoClose: 1500,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-      
-       setAutofill("");
-       setReplyInput("");
-      
-    } catch (error) { 
-      toast.error("Failed to reply to user", {
-      position: "bottom-left",
-      autoClose: 1500,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
-  }
-}
+    const handleReply = (event, questionObject) => {
+        event.preventDefault();
+        setReplyInput('')
+        try {
+            dispatch({
+                type: 'CREATE_POST',
+                payload: {
+                    content: replyInput,
+                    reply_id: questionObject.id,
+                    node_id: questionObject.node_id,
+                    orig_post: false
+                }
+            })
+            toast.success("Replied sent", {
+              position: "bottom-left",
+              autoClose: 1500,
+              hideProgressBar: true,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+        } catch (error) {
+          toast.error("Failed to reply to user", {
+            position: "bottom-left",
+            autoClose: 1500,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        }
+    }
 
     const handleDeleteButton = (postId) => {
       try {
@@ -127,10 +113,10 @@ const OwnerReplyModal = ({
 
     const handleReportButton = (postId) => {
       try {
-        dispatch({
-          type: "REPORT_POST",
-          payload: postId,
-        });
+         dispatch({
+          type: 'REPORT_POST',
+          payload: postId
+        })
       } catch (error) {
         toast.error("Failed to report user", {
           position: "bottom-left",
@@ -143,109 +129,56 @@ const OwnerReplyModal = ({
           theme: "light",
         });
       }
-    };
-  
-
-    const handleAutofill = () => {
-      setAutofill(
-        "Being transgender is not new or a phase. People whose gender does not match their body at birth have been documented across many cultures for thousands of years. The difference today is that some transgender people feel increasingly safe to be open about who they are and have the option of not having to live with secrecy, imposter syndrome and shame."
-      );
-    };
+       
+      }
 
     return (
-      <div className="flex items-center justify-center modal-overlay">
-        <div className="flex flex-col items-center justify-center reply-box">
-          {/* {children} */}
-          <h2
-            onClick={handleAutofill}
-            className="mt-6 mb-4 mr-4 text-xl font-bold text-amber-950"
-          >
-            {questionObject.content}
-          </h2>
-          <div className="overflow-y-auto h-90 scrollable-container text-amber-950">
-            {reversePosts.map((post) => {
-              if (post?.reply_id == questionObject.id) {
-                const matchingNode = nodeData.find(
-                  (node) => node.id === post.node_id
-                );
-                const isNodeOwner = matchingNode
-                  ? post.user_id === matchingNode.user_id
-                  : false;
-                return (
-                  <div
-                    key={post.id}
-                    className={`mt-4 ${
-                      isNodeOwner
-                        ? "owner-text-bubble mb-2"
-                        : "user-text-bubble ml-5 mb-2"
-                    }`}
-                  >
-                    <div className="flex items-end justify-between px-4 py-2">
-                      <span className="text-sm">
-                        {isNodeOwner ? "Owner" : "User"}{" "}
-                        {moment(post?.post_time).fromNow()}
-                      </span>
-                      <button
-                        onClick={() =>
-                          openElipsis(
-                            post,
-                            post?.id,
-                            post.user_id,
-                            matchingNode?.user_id
-                          )
+        <div className='flex items-center justify-center modal-overlay'>
+            <div className='flex flex-col items-center justify-center reply-box'>
+                {/* {children} */}
+                <h2 className='mt-6 mb-4 mr-4 text-xl font-bold text-amber-950'>{questionObject.content}</h2>
+                <div className="overflow-y-auto h-90 scrollable-container text-amber-950">
+                    {reversePosts.map((post) => {
+                        if (post?.reply_id == questionObject.id) {
+                            const matchingNode = nodeData.find(node => node.id === post.node_id);
+                            const isNodeOwner = matchingNode ? post.user_id === matchingNode.user_id : false;
+                            return (
+                                <div key={post.id} className={`mt-4 ${isNodeOwner ? 'owner-text-bubble mb-2' : 'user-text-bubble ml-5 mb-2'}`}>
+                                    <div className="flex items-end justify-between px-4 py-2">
+                                        <span className="text-sm">{isNodeOwner ? 'Owner' : 'User'} {moment(post?.post_time).fromNow()}</span>
+                                        <button onClick={() => openElipsis(post, post?.id, post.user_id, matchingNode?.user_id)}>. . .</button>
+                                    </div>
+                                    <div className="m-4 question-text">{post?.content}</div>
+                                </div>
+                            )
                         }
-                      >
-                        . . .
-                      </button>
-                    </div>
-                    <div className="m-4 question-text">{post?.content}</div>
-                  </div>
-                );
-              }
-            })}
-          </div>
-          <textarea
-            rows="4"
-            className={`shadow-lg w-5/6 rounded-xl md:w-auto px-4 py-4 mt-4 mb-4 text-sm bg-bkg border-1 text-text reply-textarea focus:ring-0 placeholder-text font-normal${
-              isDarkMode ? "light" : "dark"
-            }`}
-            placeholder="Write a Reply..."
-            onChange={(event) => setReplyInput(event.target.value)}
-            value={replyInput || autofill}
-            required
-          />
+                    })}
+                </div>
+                <textarea
+                    rows="4"
+                    className={`shadow-lg w-5/6 rounded-xl md:w-auto px-4 py-4 mt-4 mb-4 text-sm bg-bkg border-1 text-text reply-textarea focus:ring-0 placeholder-text font-normal${isDarkMode ? "light" : "dark"}`}
+                    placeholder="Write a Reply..."
+                    onChange={(event) => setReplyInput(event.target.value)}
+                    value={replyInput}
+                    required />
+                <div className=' buttons-container'>
+                    <button className={`my-5 mx-5 font-bold active:underline text-amber-950 ${ isDarkMode ? "light" : "dark"}`}  onClick={(event) => handleReply(event, questionObject)}>Confirm</button>
+                    <button className={`my-5 mx-5  font-bold active:underline text-amber-950 ${ isDarkMode ? "light" : "dark"}`} onClick={closeAddReply}>
+                        Close
+                    </button>
+                </div>
 
-          <div className=" buttons-container">
-            <button
-              className={`my-5 mx-5 font-bold active:underline text-amber-950 ${
-                isDarkMode ? "light" : "dark"
-              }`}
-              onClick={(event) => handleReply(event, questionObject)}
-            >
-              {" "}
-              Confirm
-            </button>
-            <button
-              className={`my-5 mx-5  font-bold active:underline text-amber-950 ${
-                isDarkMode ? "light" : "dark"
-              }`}
-              onClick={closeAddReply}
-            >
-              Close
-            </button>
-          </div>
+            </div>
+            <ElipsisModal
+                elipsisOpen={elipsisOpen}
+                elipsisClose={closeElipsis}
+                contentToEdit={contentToEdit}
+                postIdProp={postIdProp}
+                userIdProp={userIdProp}
+                nodeOwnerIdProp={nodeOwnerIdProp}
+                handleDeleteButton={handleDeleteButton}
+                handleReportButton={handleReportButton} />
         </div>
-        <ElipsisModal
-          elipsisOpen={elipsisOpen}
-          elipsisClose={closeElipsis}
-          contentToEdit={contentToEdit}
-          postIdProp={postIdProp}
-          userIdProp={userIdProp}
-          nodeOwnerIdProp={nodeOwnerIdProp}
-          handleDeleteButton={handleDeleteButton}
-          handleReportButton={handleReportButton}
-        />
-      </div>
     );
   };
 

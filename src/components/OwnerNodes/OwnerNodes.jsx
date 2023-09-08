@@ -23,6 +23,7 @@ const OwnerNodes = ({ isDarkMode }) => {
   const [questionStates, setQuestionStates] = useState({});
   const [postIdProp, setPostIdProp] = useState(null);
   const [elipsisOpen, setElipsisOpen] = useState(false);
+  const [isLikeClicked, setIsLikeClicked] = useState(false);
   const [postContent, setPostContent] = useState();
 
   // inputing dispatch
@@ -30,7 +31,7 @@ const OwnerNodes = ({ isDarkMode }) => {
   
 
 
-  
+
 
   const openElipsis = (postId, postContent) => {
     setElipsisOpen(true);
@@ -38,26 +39,26 @@ const OwnerNodes = ({ isDarkMode }) => {
     setPostContent(postContent)
 };
 
-const closeElipsis = () => {
+  const closeElipsis = () => {
     setElipsisOpen(false);
-};
+  };
 
   // sends a flag to the database to permanently make the post visible to all users
   const handleAcceptButton = (postId) => {
     try {
-       dispatch({
-      type: "ACCEPT_POST",
-      payload: postId,
-    });
-    setQuestionStates((prevStates) => ({
-      ...prevStates,
-      [postId]: {
-        toggleButtom: false,
-        showButton: false,
-      },
-    }));
-    setShowButton(false);
-    setToggleButton(false);
+      dispatch({
+        type: "ACCEPT_POST",
+        payload: postId,
+      });
+      setQuestionStates((prevStates) => ({
+        ...prevStates,
+        [postId]: {
+          toggleButtom: false,
+          showButton: false,
+        },
+      }));
+      setShowButton(false);
+      setToggleButton(false);
     } catch (error) {
       toast.error("Failed to accept question", {
         position: "bottom-left",
@@ -95,10 +96,10 @@ const closeElipsis = () => {
 
   const handleReportButton = (postId) => {
     try {
-        dispatch({
-      type: "REPORT_POST",
-      payload: postId,
-    });
+      dispatch({
+        type: "REPORT_POST",
+        payload: postId,
+      });
     } catch (error) {
       toast.error("Failed to report", {
         position: "bottom-left",
@@ -120,19 +121,32 @@ const closeElipsis = () => {
   let newNode = useSelector(
     (store) => store.newNodeReducer.newNodeDatabaseResponse
   );
-
+  let nodeData = useSelector(store => store.nodeReducer.nodeDatabaseResponse);
+  //like store
+  let likePosts = useSelector(
+    (store) => store.likesReducer.likeDatabaseResponse
+  );
+  //user store
+  const user = useSelector((state) => state.user);
 
   // function to like a post
   const increaseCount = (postId) => {
     console.log("post id is : ", postId);
-    dispatch({
-      type: "LIKE_POST",
-      payload: postId,
-    });
-    dispatch({
-      type: 'LIKE_POST_USER',
-      payload: { post: postId }
-    })
+      const isLikedByUser = likePosts.some((like) => like.post_id === postId && like.user_id === user.id);
+      console.log('isLikedByUser:', isLikedByUser)
+      if (!isLikedByUser) {
+        dispatch({
+          type: "LIKE_POST",
+          payload: postId,
+        });
+      dispatch({
+          type: 'LIKE_POST_USER',
+          payload: { post: postId }
+        })
+      } else {
+        //future toast
+        alert("You have already liked this post.");
+      }
   };
 
   const openAddQuestion = () => {
@@ -142,6 +156,8 @@ const closeElipsis = () => {
   const closeAddQuestion = () => {
     setAddQuestionOpen(false);
   };
+
+  const userIds = nodeData.map(node => node.user_id);
 
   const openAddReply = (questionObject) => {
     console.log("openAddReply function called"); // Add this line
@@ -176,7 +192,7 @@ const closeElipsis = () => {
                       <div className={`mt-4 mb-4 text-amber-950 shadow-md bg-userContent question-box ${isDarkMode ? 'dark' : 'light'}`} key={post?.id}>
                         <div className="flex items-end justify-between px-5 py-3"> New Question!
                           <span className="text-sm">{moment(post?.post_time).fromNow()}</span>
-                          
+
                         </div>
                         {/* this should display the latest question/reply in this thread */}
                         <div className={`flex flex-col items-center justify-center text-lg font-bold m-5 question-text bg-userContent text-amber-950 ${isDarkMode ? 'dark' : 'light'}`} >
@@ -184,18 +200,19 @@ const closeElipsis = () => {
                         </div>
                         <div className="flex items-end justify-between px-5 py-3 ">
                           {questionState.toggleButtom ? (
-                               <button className="text-sm font-bold active:underline" onClick={()=>handleAcceptButton(post?.id)}>Accept</button>
-                               ) : (
-                                 <button className="text-sm font-bold active:underline" onClick={() => openAddReply(post)}>Reply</button>
-                               )}
-                               {questionState.showButton &&
-                                 <button className="text-sm font-bold active:underline" onClick={()=>handleRejectButton(post?.id)}>Reject</button>
-                               }
-                               {questionState.toggleButtom ? (
-                                 <button className="text-sm font-bold active:underline" onClick={()=> handleReportButton(post?.id)}>Report</button>
+                            <button className="text-sm font-bold active:underline" onClick={() => handleAcceptButton(post?.id)}>Accept</button>
+                          ) : (
+                            <button className="text-sm font-bold active:underline" onClick={() => openAddReply(post)}>Open</button>
+                          )}
+                          {questionState.showButton &&
+                            <button className="text-sm font-bold active:underline" onClick={() => handleRejectButton(post?.id)}>Reject</button>
+                          }
+                          {questionState.toggleButtom ? (
+                            <button className="text-sm font-bold active:underline" onClick={() => handleReportButton(post?.id)}>Report</button>
                           ) : (
                             // THIS SHOULDN'T RENDER UNLESS APPROVED
-                            <button className="text-sm" onClick={() => increaseCount(post.id)}>🖤{"  "}<span>{post.votes || 0}</span></button>
+                            <button className="text-sm font-bold active:underline text-amber-950" onClick={() => increaseCount(post.id)}>🖤{'  '}<span>{post.votes || 0}</span></button>
+
                           )}
                         </div>
                       </div>
