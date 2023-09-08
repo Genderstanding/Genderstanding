@@ -41,6 +41,13 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
   };
 
   useEffect(() => {
+    dispatch({ type: "FETCH_NODE" });
+    dispatch({ type: "FETCH_POST"});
+    dispatch({ type: "FETCH_NODE_ASSOCIATION" });
+    dispatch({ type: 'FETCH_PUBLIC_POSTS'});
+  }, []);
+
+  useEffect(() => {
     if (!isDarkMode) {
       document.documentElement.classList.add("light");
       document.documentElement.classList.remove("dark");
