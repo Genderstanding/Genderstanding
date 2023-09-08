@@ -11,6 +11,7 @@ import { FiSettings } from "react-icons/fi";
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import PeopleOutlineSharpIcon from '@mui/icons-material/PeopleOutlineSharp';
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 
 export default function Nav({isDarkMode}) {
   const user = useSelector((store) => store.user);
@@ -75,8 +76,8 @@ export default function Nav({isDarkMode}) {
               className="flex flex-col items-center justify-center flex-grow px-4 py-2 navLinkSetting"
               onClick={openSettings}
             >
-              <FiSettings className="navLinkSetting"  size={32} />
-              <span>Settings</span>
+              <SettingsOutlinedIcon className="navLinkSetting mt-1" style={{fontSize: "32px"}}/>
+              <span className="settings-span no-underline ">Settings</span>
             </button>
             <SettingsModal
               settingsOpen={settingsOpen}
