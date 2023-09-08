@@ -46,7 +46,7 @@ function* userNodeAssociation(action){
 // Saga to remove a user ID from a node association (if kicked from community)
 function* removeNodeAssociation(action) {
     try {
-        yield axios.delete(`/nodeassociation/${action.payload.node}/${action.payload.user}`)
+        yield axios.delete(`/nodeassociation/single/${action.payload.node}/${action.payload.user}`)
         yield axios.delete(`/post/banned/${action.payload.node}/${action.payload.user}`)
         yield put({ type: 'FETCH_NODE_ASSOCIATION'})
         yield put({ type: 'FETCH_NODE'})
@@ -56,13 +56,23 @@ function* removeNodeAssociation(action) {
     }
 }
 
+function* deleteNodePlus(action){
+    try {
+        yield axios.delete(`/nodeassociation/nodeplus/${action.payload}`)
+        yield put({ type: 'FETCH_NODE_ASSOCIATION' })
+    } catch(error) {
+        console.log('Error in SAGA DELETE to remove all associations from a deleting node call: ', error);
+    }
+}
+
 // call listener for different dispatches
 function* nodeAssociationSaga() {
     yield takeLatest('CREATE_NODE_ASSOCIATION', createNodeAssociation);
     yield takeLatest('FETCH_NODE_ASSOCIATION', fetchNodeAssociation);
     yield takeLatest('REMOVE_NODE_ASSOCIATION', removeNodeAssociation);
     yield takeLatest('USER_NODE_ASSOCIATION', userNodeAssociation);
-    yield takeLatest('USER_CREATE_NEW_NODE', newNodeAssociation)
+    yield takeLatest('USER_CREATE_NEW_NODE', newNodeAssociation);
+    yield takeLatest('DELETE_NODE_PLUS_ASSOCIATION', deleteNodePlus)
 }
 
 export default nodeAssociationSaga;

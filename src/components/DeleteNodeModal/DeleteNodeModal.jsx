@@ -29,6 +29,7 @@ export default function DeleteNodeModal() {
   const user = useSelector((store) => store.user);
 
   const handleDeleteNode = (nodeID) => {
+    console.log('Node id is: ', nodeID)
     try {
       dispatch({ type: "DELETE_NODE", payload: nodeID});
     } catch (error) {
