@@ -39,6 +39,7 @@ function FeaturedPage({ isDarkMode }) {
 
   // Function to like a post
   const increaseCount = (postId) => {
+    console.log("clicked")
     const isLikedByUser = likePosts.some((like) => like.post_id === postId && like.user_id === user.id);
     if (!isLikedByUser) {
       dispatch({
@@ -86,12 +87,12 @@ function FeaturedPage({ isDarkMode }) {
                       className="pt-2 pb-2 mt-4 mb-2 font-medium shadow-md text-amber-950 bg-userContent featured-box "
                       key={post?.id}
                     > 
-                      <div className="flex items-end justify-between px-4 py-2">
-                        <span className="text-sm">
+                      <div className="flex items-end px-4 py-2">
+                        <div className="text-sm">
                           {moment(post?.post_time).fromNow()}
-                        </span>
-                        <span className="text-sm text-end">
-                        </span>
+                        </div>
+                    
+                       
                       </div>
                       <div className="flex flex-col items-center justify-center m-5 text-lg font-bold featured-text bg-userContent text-amber-950">
                          {/* Display the user's question */}

@@ -53,8 +53,8 @@ const AddNodeModal = ({ addNodeOpen, addNodeClose, children }) => {
         history.push("/user");
       }
     } catch (error) {
-      console.log("Error in button click to create a new node: ", error);
-      toast.error("Failed to created new node", {
+      console.log("Error in button click to create a new community: ", error);
+      toast.error("Failed to created new community", {
         position: "bottom-left",
         autoClose: 1500,
         hideProgressBar: true,

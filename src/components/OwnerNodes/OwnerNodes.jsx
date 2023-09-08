@@ -195,15 +195,15 @@ const OwnerNodes = ({ isDarkMode }) => {
                         </div>
                         <div className="flex items-end justify-between px-5 py-3 ">
                           {questionState.toggleButtom ? (
-                            <button className="text-sm font-bold active:underline" onClick={() => handleAcceptButton(post?.id)}>Accept</button>
+                            <button className="text-sm font-semibold active:underline" onClick={() => handleAcceptButton(post?.id)}>Accept</button>
                           ) : (
-                            <button className="text-sm font-bold active:underline" onClick={() => openAddReply(post)}>Open</button>
+                            <button className="text-sm font-semibold active:underline" onClick={() => openAddReply(post)}>Open</button>
                           )}
                           {questionState.showButton &&
-                            <button className="text-sm font-bold active:underline" onClick={() => handleRejectButton(post?.id)}>Reject</button>
+                            <button className="text-sm font-semibold active:underline" onClick={() => handleRejectButton(post?.id)}>Reject</button>
                           }
                           {questionState.toggleButtom ? (
-                            <button className="text-sm font-bold active:underline" onClick={() => handleReportButton(post?.id)}>Report</button>
+                            <button className="text-sm font-semibold active:underline" onClick={() => handleReportButton(post?.id)}>Report</button>
                           ) : (
                             // THIS SHOULDN'T RENDER UNLESS APPROVED
                             <button className="text-sm font-bold active:underline text-amber-950" onClick={() => increaseCount(post.id)}>
@@ -229,7 +229,7 @@ const OwnerNodes = ({ isDarkMode }) => {
                           {post?.content}
                         </div>
                         <div className="flex items-end justify-between px-5 py-3 ">
-                          <button className="text-sm font-bold active:underline text-amber-950" onClick={() => openAddReply(post)}>Reply</button>
+                          <button className="text-sm font-semibold active:underline text-amber-950" onClick={() => openAddReply(post)}>Reply</button>
                           {/* <button className="text-sm font-bold active:underline text-amber-950" onClick={() => increaseCount(post.id)}>
                             {toggleHeart ? (<FavoriteIcon />) : (<FavoriteBorderIcon />)}{'  '}<span>{post.votes || 0}</span></button> */}
 
