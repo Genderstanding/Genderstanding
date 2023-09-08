@@ -147,7 +147,7 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
           />
         </div>
         <div className="flex flex-col">
-          <span className="mb-2">Join Node</span>
+          <span className="mb-2">Join Community</span>
           <div className="text-center text-amber-950">
             <input
               style={{
