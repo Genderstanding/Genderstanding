@@ -70,7 +70,7 @@ function UserPage({ isDarkMode }) {
 
   return (
     <>
-      <div className="flex flex-col h-screen App">
+      <div className="flex flex-col App">
         <HeaderBar />
         <div className="flex flex-col items-center justify-center userpage-container">
           <div className="mb-24 communities-container">
@@ -89,7 +89,7 @@ function UserPage({ isDarkMode }) {
                       }`}
                       onClick={(event) => goToOwnerNodes(event, node)}
                     >
-                      <div className="m-4 text-xl font-bold text-amber-950 owned-community-names">
+                      <div className="m-4 text-xl font-bold text-center truncate w-52 text-amber-950 owned-community-names">
                         {node?.node_name}
                       </div>
                     </div>
@@ -114,7 +114,7 @@ function UserPage({ isDarkMode }) {
                       }`}
                       onClick={(event) => goToUserNodes(event, node)}
                     >
-                      <div className="m-4 text-xl font-bold owned-community-names">
+                      <div className="m-4 text-xl font-bold text-center truncate w-52 owned-community-names">
                         {node?.node_name}
                       </div>
                     </div>

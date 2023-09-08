@@ -67,7 +67,7 @@ function FeaturedPage() {
   
   return (
     <>
-      <div className="flex flex-col h-screen App">
+      <div className="flex flex-col App">
         <HeaderBar />
         <div className="mt-4 featured-container">
           <h1 className="mb-1 ml-5 text-2xl font-bold font-mulish">Featured</h1>
@@ -86,13 +86,13 @@ function FeaturedPage() {
                         <span className="text-sm">
                           {moment(post?.post_time).fromNow()}
                         </span>
-                        <span className="text-sm text-end">
-                           node ID : {post.node_id}
+                        <span className="w-32 text-sm truncate text-end">
+                           node ID : {post.node_name}
                         </span>
                       </div>
                       <div className="flex flex-col items-center justify-center m-5 text-lg font-bold featured-text bg-userContent text-amber-950">
                          {/* Display the user's question */}
-                      <span>Question: {post?.content} </span>  
+                      <span className="">{post?.content} </span>  
                       </div>
                       <div className="flex items-end justify-between px-4 py-2 ">
                         <button

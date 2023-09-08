@@ -137,6 +137,9 @@ const OwnerReplyModal = ({ addReplyOpen, closeAddReply, questionObject, isDarkMo
             <div className='flex flex-col items-center justify-center reply-box'>
                 {/* {children} */}
                 <h2 className='mt-6 mb-4 mr-4 text-xl font-bold text-amber-950'>{questionObject.content}</h2>
+                <span className="text-sm font-semibold text-amber-950">
+                        {moment(questionObject?.post_time).fromNow()}
+                    </span>
                 <div className="overflow-y-auto h-90 scrollable-container text-amber-950">
                     {reversePosts.map((post) => {
                         if (post?.reply_id == questionObject.id) {
@@ -145,7 +148,10 @@ const OwnerReplyModal = ({ addReplyOpen, closeAddReply, questionObject, isDarkMo
                             return (
                                 <div key={post.id} className={`mt-4 ${isNodeOwner ? 'owner-text-bubble mb-2' : 'user-text-bubble ml-5 mb-2'}`}>
                                     <div className="flex items-end justify-between px-4 py-2">
-                                        <span className="text-sm">{isNodeOwner ? 'Owner' : 'User'} {moment(post?.post_time).fromNow()}</span>
+                                    <span className="text-sm font-bold">
+                                            {isNodeOwner ? "Owner" : "User"}{" "}
+                                            <span className="pl-2 text-sm font-normal">{moment(post?.post_time).fromNow()}</span> 
+                                        </span>
                                         <button onClick={() => openElipsis(post, post?.id, post.user_id, matchingNode?.user_id)}>. . .</button>
                                     </div>
                                     <div className="m-4 question-text">{post?.content}</div>
