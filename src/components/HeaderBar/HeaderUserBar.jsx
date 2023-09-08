@@ -55,9 +55,9 @@ export default function HeaderUserBar({isDarkMode}) {
         <MdChevronLeft size={25} className="ml-2" />
       </button>
       {/* Display joined node name */}
-<div style={{ margin: "25px" }}>
+{/* <div style={{ margin: "25px" }}>
 <Typography> Joined Community: <br/>{newNode?.[0]?.node_name || newNode?.node_name}</Typography>
-      </div>
+      </div> */}
       {/* this flex-grow div is tailwind way to spread out the back and add buttons*/}
       <div className="flex-grow"></div>
       <button className="mr-4 text-2xl" onClick={()=>openAddQuestion(newNode?.id)}>

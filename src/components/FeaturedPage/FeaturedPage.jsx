@@ -106,7 +106,7 @@ function FeaturedPage({ isDarkMode }) {
                           Open
                         </button>
                         <button
-                          className="text-sm font-bold active:underline text-amber-950"
+                          className="font-semibold text-md active:underline text-amber-950"
                           onClick={() => increaseCount(post.id)}
                         >
                           {likePosts.some((like) => like.post_id === post.id && like.user_id === user.id) ? (

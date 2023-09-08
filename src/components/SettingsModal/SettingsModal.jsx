@@ -47,7 +47,9 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
     dispatch({ type: 'FETCH_PUBLIC_POSTS'});
   }, []);
 
-  useEffect(() => {
+  // DARK MODE toggle handler
+  const handleDarkModeToggle = () => {
+    setIsDarkMode(!isDarkMode);
     if (!isDarkMode) {
       document.documentElement.classList.add("light");
       document.documentElement.classList.remove("dark");
@@ -57,12 +59,6 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
       document.documentElement.classList.remove("light");
       localStorage.theme = "dark";
     }
-  }, [isDarkMode]);
-
-  // DARK MODE toggle handler
-  const handleDarkModeToggle = () => {
-    setIsDarkMode(!isDarkMode);
-    console.log(isDarkMode);
   };
 
   // Delete account
