@@ -34,9 +34,9 @@ export default function HeaderBar({isDarkMode}) {
         <MdChevronLeft size={25} className="ml-2" />
       </button>
 {/* Display new user name */}
-<div style={{ margin: "25px" }}>
+{/* <div style={{ margin: "25px" }}>
         <Typography>Hello {user.username}</Typography>
-      </div>
+      </div> */}
       {/* this flex-grow div is tailwind way to spread out the back and add buttons*/}
       <div className="flex-grow"> </div>
       <button className="mr-4 text-2xl" onClick={openAddNode}>

@@ -20,6 +20,8 @@ const AddQuestionModal = ({
   // State to hold text input
   const [questionInput, setQuestionInput] = useState("");
 
+  const [autofill, setAutofill] = useState("");
+
   // Sourcing dispatch
   const dispatch = useDispatch();
 
@@ -40,6 +42,8 @@ const AddQuestionModal = ({
           orig_post: false,
         },
       });
+      setAutofill('')
+      setQuestionInput("");
       closeAddQuestion();
       toast.success("Question submitted", {
         position: "bottom-left",
@@ -64,8 +68,12 @@ const AddQuestionModal = ({
         theme: "light",
       });
     }
-    setQuestionInput("");
+  
   };
+
+  const handleAutofill = () => {
+    setAutofill('How do you feel about being transgender?')
+  }
 
   return (
     <div
@@ -79,13 +87,13 @@ const AddQuestionModal = ({
         }`}
       >
         {children}
-        <h2 className="mb-4 mr-4 text-xl font-bold text-amber-950">Ask a New Question</h2>
-        <textarea
+        <h2 onClick={handleAutofill} className="mb-4 mr-4 text-xl font-bold text-amber-950">Ask a New Question</h2>
+        <textarea 
           rows="4"
           className="w-full px-4 py-2 text-sm text-gray-900 bg-white border-0 question-textarea dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
           placeholder="Write a question..."
           onChange={(event) => setQuestionInput(event.target.value)}
-          value={questionInput}
+          value={questionInput || autofill}
           required
         ></textarea>
         <div className="mt-6 buttons-container">

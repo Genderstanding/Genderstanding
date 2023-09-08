@@ -14,8 +14,6 @@ router.post("/", rejectUnauthenticated, async (req, res) => {
   try {
     let node_id = req.body.node_id;
 
-    console.log(node_id, "node_id")
-
     // Generate a random invite code
     const inviteCodeGenerator = chance.string({
       length: 8,
@@ -65,7 +63,6 @@ router.post("/code", rejectUnauthenticated, async (req, res) => {
       [user_id, auth_code]
     );
 
-    console.log(result, "result")
     if (result.rowCount === 1) {
       res.status(200).json({ message: "Auth code submitted successfully." });
     } else {

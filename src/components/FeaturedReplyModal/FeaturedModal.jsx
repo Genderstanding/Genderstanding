@@ -18,17 +18,22 @@ function FeaturedModal({
     (store) => store.postReducer.publicDatabaseResponse
   );
 
-  // store all nodes 
+  // store all nodes
   let nodeData = useSelector((store) => store.nodeReducer.nodeDatabaseResponse);
 
-  // filter 
+  // filter
   const nodeResponses = publicPosts.filter((post) => {
-    console.log("Comparing post.reply_id:", post.reply_id, "with selectedPostId:", selectedPostId);
+    console.log(
+      "Comparing post.reply_id:",
+      post.reply_id,
+      "with selectedPostId:",
+      selectedPostId
+    );
     return post.reply_id === selectedPostId;
   });
-  
-  console.log(nodeResponses,"nodeResponses");
-  console.log(selectedPostId, "postID selected")
+
+  console.log(nodeResponses, "nodeResponses");
+  console.log(selectedPostId, "postID selected");
 
   // Reverse the order of responses
   const reverseResponses = [...nodeResponses].reverse();
@@ -40,7 +45,10 @@ function FeaturedModal({
   return (
     <div className="flex items-center justify-center modal-overlay">
       <div className="flex flex-col items-center justify-center reply-box">
-        {/* Title if needed */}
+        {/* Title */}
+        <h2 className="mt-6 mb-4 mr-4 text-xl font-bold text-amber-950">
+        
+        </h2>
         <div className="overflow-y-auto scrollable-container text-amber-950">
           {reverseResponses.map((response) => {
             // Find the corresponding node in nodeData

@@ -16,7 +16,7 @@ function RegisterForm() {
   const errors = useSelector((store) => store.errors);
   const user = useSelector(store => store.user)
   const dispatch = useDispatch();
-  const history = useHistory()
+  const history = useHistory();
 
   const registerUser = (event) => {
     event.preventDefault();
@@ -42,7 +42,14 @@ try {
   });
 }
    
-  }; // end registerUser
+
+  }; // end registerUser 
+  
+const handleAutofill = ( ) =>{
+  setUsername("Juniper")
+  setPassword('123')
+  
+}
 
   return (
     <form className="formPanel" onSubmit={registerUser}>
@@ -56,6 +63,7 @@ try {
       <div className="label-container">
         <label htmlFor="username" className="label">
           <Typography
+          onClick={handleAutofill}
             variant="h6"
             sx={{
               marginLeft: "35px",
@@ -128,6 +136,8 @@ try {
           <Link exact to="/login">
             Already Registered?
           </Link>
+          
+         
         </div>
 
       
