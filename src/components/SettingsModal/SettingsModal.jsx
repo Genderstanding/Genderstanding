@@ -150,7 +150,7 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
               }}
               type="text"
               placeholder="enter code"
-              className="text-center bg-bkg "
+              className={`text-center text-text bg-bkg ${isDarkMode ? "dark" : "light"}`}
               onChange={(event) => setNodeCodeInput(event.target.value)}
             />
             <button

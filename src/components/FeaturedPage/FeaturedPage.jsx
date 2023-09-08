@@ -87,7 +87,7 @@ function FeaturedPage() {
                           {moment(post?.post_time).fromNow()}
                         </span>
                         <span className="w-32 text-sm truncate text-end">
-                           node ID : {post.node_name}
+                           By: {post.node_name}
                         </span>
                       </div>
                       <div className="flex flex-col items-center justify-center m-5 text-lg font-bold featured-text bg-userContent text-amber-950">
