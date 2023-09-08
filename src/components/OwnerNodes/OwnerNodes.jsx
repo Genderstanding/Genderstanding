@@ -6,9 +6,9 @@ import HeaderOwnerBar from "../HeaderBar/HeaderOwnerBar";
 import { useDispatch } from "react-redux";
 import moment from "moment";
 
-import OwnerReplyModal from "../OwnerReplyModal/OwnerReplyModal";
 import AddQuestionModal from "../AddQuestionModal/AddQuestionModal";
 import QuestionTitleEllipsis from "../QuestionTitleEllipsis/QuestionTitleEllipsis";
+import OwnerReplyModal from '../OwnerReplyModal/OwnerReplyModal'
 
 // TOASTIFY
 import { ToastContainer, toast } from "react-toastify";
@@ -144,6 +144,7 @@ const closeElipsis = () => {
   };
 
   const openAddReply = (questionObject) => {
+    console.log("openAddReply function called"); // Add this line
     setClickedReplyContent(questionObject);
     setAddReplyOpen(true);
   };
