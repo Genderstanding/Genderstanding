@@ -87,12 +87,11 @@ function FeaturedPage() {
                           {moment(post?.post_time).fromNow()}
                         </span>
                         <span className="text-sm text-end">
-                           node ID : {post.node_id}
                         </span>
                       </div>
                       <div className="flex flex-col items-center justify-center m-5 text-lg font-bold featured-text bg-userContent text-amber-950">
                          {/* Display the user's question */}
-                      <span>Question: {post?.content} </span>  
+                      <span>{post?.content} </span>  
                       </div>
                       <div className="flex items-end justify-between px-4 py-2 ">
                         <button
