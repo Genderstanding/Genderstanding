@@ -14,8 +14,11 @@
 .button-container {
   display: flex;
   flex-direction: column;
-    text-align: center;
-  
+  /* text-align: center; */
+  align-content: center;
+  flex-wrap: wrap;
+  height: 450px;
+  justify-content: space-around;
   }
 
 .centered-container {

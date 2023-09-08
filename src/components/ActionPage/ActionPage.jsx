@@ -50,6 +50,7 @@ export default function ActionPage() {
       progress: undefined,
       theme: "light",
     });
+    history.push('/home')
   }
   
   return (
@@ -76,7 +77,7 @@ export default function ActionPage() {
       <div className="button-container">
         {/* NEW NODE */}
 
-        <ActionButton className="btn" onClick={openAddNode}>
+        <ActionButton className="m-10 btn" onClick={openAddNode}>
           Create Node
         </ActionButton>
 
@@ -93,9 +94,9 @@ export default function ActionPage() {
           handleCloseInviteModal={handleCloseInviteModal}
         />
 
-        <CustomButton className="btn" path="/home" onClick={() => handleAlert(user?.username)}>
+        <ActionButton className="btn" onClick={() => handleAlert(user?.username)}>
           Just Browsing
-        </CustomButton>
+        </ActionButton>
         
       </div>
     </div>

@@ -67,7 +67,7 @@ function FeaturedPage() {
   
   return (
     <>
-      <div className="flex flex-col h-screen App">
+      <div className="flex flex-col App">
         <HeaderBar />
         <div className="mt-4 featured-container">
           <h1 className="mb-1 ml-5 text-2xl font-bold font-mulish">Featured</h1>
