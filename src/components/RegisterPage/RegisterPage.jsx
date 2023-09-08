@@ -11,6 +11,7 @@ export default function RegisterPage() {
    <div className="flex items-center logo-container "><LogoButton/></div>
         <div className="centered-container">
         <RegisterForm />
+        <div></div>
       </div>
       </div>
 
