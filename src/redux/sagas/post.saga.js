@@ -47,6 +47,7 @@ function* editPost(action) {
 // saga to DELETE a post
 function* deletePost(action) {
     try {
+        yield put({ type: 'DELETE_LIKE', payload: action.payload })
         yield axios.delete(`/post/${action.payload}`)
         yield put({ type: 'FETCH_POST' })
     } catch (error) {

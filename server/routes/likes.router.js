@@ -44,4 +44,21 @@ likesRouter.post('/', rejectUnauthenticated, (req, res) => {
     })
 })
 
+likesRouter.delete('/:id', rejectUnauthenticated, (req, res) => {
+    let sqlValue = req.params.id
+    console.log('req.params in like router delete is: ', sqlValue);
+    let sqlQuery = `
+    DELETE FROM "likes"
+    WHERE "post_id" = $1`;
+    pool.query(sqlQuery, [sqlValue])
+    .then(result => {
+        console.log('Deleted a like entry, ', result);
+        res.sendStatus(201);
+    })
+    .catch(error => {
+        console.log('Error in DELETE to likes: ', error);
+        res.sendStatus(500);
+    })
+})
+
 module.exports = likesRouter
