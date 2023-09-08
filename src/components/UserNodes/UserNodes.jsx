@@ -8,6 +8,8 @@ import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import AddQuestionModal from "../AddQuestionModal/AddQuestionModal";
 import { useDispatch } from "react-redux";
 import moment from "moment";
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 const UserNodes = ({ isDarkMode }) => {
   const [addQuestionOpen, setAddQuestionOpen] = useState(false);
@@ -46,10 +48,7 @@ const UserNodes = ({ isDarkMode }) => {
           type: 'LIKE_POST_USER',
           payload: { post: postId }
         })
-      } else {
-        //future toast
-        alert("You have already liked this post.");
-      }
+      } 
   };
 
   const openAddQuestion = () => {
@@ -100,10 +99,14 @@ const UserNodes = ({ isDarkMode }) => {
                           Open
                         </button>
                         <button
-                          className="text-sm font-bold active:underline text-amber-950"
                           onClick={() => increaseCount(post.id)}
                         >
-                          🖤{'  '}<span>{post.votes || 0}</span>
+                          {likePosts.some((like) => like.post_id === post.id && like.user_id === user.id) ? (
+                              <FavoriteIcon className={`text-hearts ${isDarkMode ? 'dark' : 'light'}`}/>
+                            ) : (
+                              <FavoriteBorderIcon className={`text-hearts ${isDarkMode ? 'dark' : 'light'}`}/>
+                            )}
+                          {'  '}<span>{post.votes || 0}</span>
                         </button>
                       </div>
                     </div>

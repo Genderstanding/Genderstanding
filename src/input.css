@@ -12,6 +12,7 @@
         --colors-text: 39 6 6;
         --colors-userContent:  254 242 242;
         --colors-ownerContent: 254 235 235;
+        --colors-hearts: 207 111 90;
     }
 
     :root[class="dark"] {
@@ -22,6 +23,7 @@
         --colors-text: 248 238 237;
         --colors-userContent: 254 246 246;
         --colors-ownerContent: 239 220 220;
+        --colors-hearts: 32 32 35;
     }
 }
 
