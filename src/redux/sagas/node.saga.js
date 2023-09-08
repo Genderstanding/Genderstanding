@@ -41,10 +41,8 @@ function* updateNode(action) {
 // function to DELETE a node from database
 function* deleteNode(action) {
     try {
+        yield put({ type: 'DELETE_NODE_PLUS_ASSOCIATION', payload: action.payload })
         yield axios.delete(`/node/${action.payload}`)
-
-        console.log(action.payload, "action.payload")
-
         yield put({ type: 'FETCH_NODE'})
         
     } catch (error) {

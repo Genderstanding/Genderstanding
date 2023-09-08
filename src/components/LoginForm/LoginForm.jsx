@@ -43,6 +43,11 @@ function LoginForm() {
     }
   }; // end login
 
+  const handleAutofill = ( ) =>{
+    setUsername("Juniper")
+    setPassword('1234')
+  }
+  
   return (
     <form className="formPanel" onSubmit={login}>
       {errors.loginMessage && (
@@ -54,7 +59,8 @@ function LoginForm() {
       {/* INPUT */}
       <div className="label-container">
         <label htmlFor="username" className="label">
-          <Typography
+          <Typography 
+           onClick={handleAutofill}
             variant="h6"
             sx={{
               marginLeft: "35px",

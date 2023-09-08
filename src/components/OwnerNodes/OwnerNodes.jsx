@@ -155,6 +155,7 @@ const OwnerNodes = ({ isDarkMode }) => {
   const userIds = nodeData.map(node => node.user_id);
 
   const openAddReply = (questionObject) => {
+    console.log("openAddReply function called"); // Add this line
     setClickedReplyContent(questionObject);
     setAddReplyOpen(true);
   };

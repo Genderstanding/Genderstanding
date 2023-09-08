@@ -19,10 +19,20 @@ function* likePost(action){
     }
 }
 
+function* deleteLike(action) {
+    try{
+        yield axios.delete(`/likes/${action.payload}`)
+        yield put({ type: 'FETCH_LIKES'})
+    } catch (error) {
+        console.log('Error in SAGA DELETE of likes: ', error);
+    }
+}
+
 
 function* likeSaga(){
     yield takeLatest('FETCH_LIKES', fetchLikes);
     yield takeLatest('LIKE_POST_USER', likePost);
+    yield takeLatest('DELETE_LIKE', deleteLike);
 }
 
 export default likeSaga;

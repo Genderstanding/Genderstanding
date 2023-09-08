@@ -22,7 +22,7 @@ export const CustomButton = ({
     
     <Link to={path}>
       <button
-        className={`btn ${checkButtonStyle} ${checkButtonSize}`}
+        className={`btn btn-action ${checkButtonStyle} ${checkButtonSize}`}
         onClick={onClick}
         type={type}
       >

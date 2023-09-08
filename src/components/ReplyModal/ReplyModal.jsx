@@ -168,9 +168,9 @@ const ReplyModal = ({
                                         }`}
                                 >
                                     <div className="flex items-end justify-between px-4 py-2">
-                                        <span className="text-sm">
-                                            {isNodeOwner ? "Owner" : "User"}{" "}
-                                            {moment(post?.post_time).fromNow()}
+                                        <span className="text-sm font-bold">
+                                            {isNodeOwner ? "Owner" : "User"}{"   "}
+                                            <span className="pl-2 text-sm font-normal">{moment(post?.post_time).fromNow()}</span> 
                                         </span>
                                         <button onClick={() => openElipsis(post, post?.id, post.user_id, matchingNode?.user_id)}>
                                             . . .
@@ -183,7 +183,7 @@ const ReplyModal = ({
                     })}
                 </div>
                 {showReply ? (
-                <div className='user-reply-contaner'>
+                <>
                     <textarea
                         rows="4"
                         className={`shadow-lg w-5/6 rounded-xl md:w-auto px-4 py-4 mt-4 mb-4 text-sm bg-bkg border-1 reply-textarea focus:ring-0 text-text placeholder-text font-normal ${isDarkMode ? "dark" : "light"
@@ -203,18 +203,18 @@ const ReplyModal = ({
                             Confirm
                         </button>
                         <button
-                            className={`mx-5 font-bold active:underline  text-amber-950 ${isDarkMode ? "dark" : "light"
+                            className={`mx-5 my-5 font-bold active:underline  text-amber-950 ${isDarkMode ? "dark" : "light"
                                 }`}
                             onClick={closeAddReply}
                         >
                             Close
                         </button>
                     </div>
-                </div>
+                </>
                 ) : (
-                    <div className="text-center align-middle pb-4 buttons-container">
+                    <div className="pb-4 text-center align-middle buttons-container">
                     <button
-                            className={`mx-5 font-bold active:underline  text-amber-950 ${isDarkMode ? "dark" : "light"
+                            className={`mx-5 my-5 font-bold active:underline  text-amber-950 ${isDarkMode ? "dark" : "light"
                                 }`}
                             onClick={closeAddReply}
                         >

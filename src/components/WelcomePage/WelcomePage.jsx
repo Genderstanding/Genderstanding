@@ -44,8 +44,8 @@ export default function WelcomePage() {
       </div>
 
       <div className="centered-container" style={{ marginTop: "45px" }}>
-        <CustomButton className="btn" path="/registration">
-          Get Started
+        <CustomButton className="btn-btn" path="/registration">
+          Get Started 
         </CustomButton>
       </div>
     </div>
