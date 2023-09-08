@@ -78,7 +78,7 @@ export default function ActionPage() {
         {/* NEW NODE */}
 
         <ActionButton className="m-10 btn" onClick={openAddNode}>
-          Create Node
+          Create Community
         </ActionButton>
 
         <AddNodeModal addNodeOpen={addNodeOpen} addNodeClose={closeAddNode} />
@@ -86,7 +86,7 @@ export default function ActionPage() {
         {/* INVITE CODE INPUT */}
 
         <ActionButton className="btn" onClick={handleOpenInviteModal}>
-          Join Node
+          Join A Community
         </ActionButton>
 
         <CodeInputModal

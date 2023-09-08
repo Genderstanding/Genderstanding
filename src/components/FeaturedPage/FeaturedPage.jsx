@@ -7,8 +7,11 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import FeaturedModal from "../FeaturedReplyModal/FeaturedModal";
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
-function FeaturedPage() {
+
+function FeaturedPage({ isDarkMode }) {
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -26,11 +29,17 @@ function FeaturedPage() {
     (store) => store.likesReducer.likeDatabaseResponse
   );
 
+  useEffect(() => {
+    dispatch({ type: 'FETCH_PUBLIC_POSTS'});
+    dispatch({ type: 'FETCH_LIKES'})
+  }, []);
+
   //user store
   const user = useSelector((state) => state.user);
 
   // Function to like a post
   const increaseCount = (postId) => {
+    console.log("clicked")
     const isLikedByUser = likePosts.some((like) => like.post_id === postId && like.user_id === user.id);
     if (!isLikedByUser) {
       dispatch({
@@ -41,11 +50,7 @@ function FeaturedPage() {
         type: 'LIKE_POST_USER',
         payload: { post: postId }
       })
-    } else {
-      //future toast
-      alert("You have already liked this post.");
-    }
-   // setIsLikeClicked(true);
+    } 
   }
 
   // Function to open selected post
@@ -82,17 +87,16 @@ function FeaturedPage() {
                       className="pt-2 pb-2 mt-4 mb-2 font-medium shadow-md text-amber-950 bg-userContent featured-box "
                       key={post?.id}
                     > 
-                      <div className="flex items-end justify-between px-4 py-2">
-                        <span className="text-sm">
+                      <div className="flex items-end px-4 py-2">
+                        <div className="text-sm">
                           {moment(post?.post_time).fromNow()}
-                        </span>
-                        <span className="w-32 text-sm truncate text-end">
-                           By: {post.node_name}
-                        </span>
+                        </div>
+                    
+                       
                       </div>
                       <div className="flex flex-col items-center justify-center m-5 text-lg font-bold featured-text bg-userContent text-amber-950">
                          {/* Display the user's question */}
-                      <span className="">{post?.content} </span>  
+                      <span>{post?.content} </span>  
                       </div>
                       <div className="flex items-end justify-between px-4 py-2 ">
                         <button
@@ -105,7 +109,12 @@ function FeaturedPage() {
                           className="text-sm font-bold active:underline text-amber-950"
                           onClick={() => increaseCount(post.id)}
                         >
-                          🖤{"  "}
+                          {likePosts.some((like) => like.post_id === post.id && like.user_id === user.id) ? (
+                              <FavoriteIcon className={`text-hearts ${isDarkMode ? 'dark' : 'light'}`}/>
+                            ) : (
+                              <FavoriteBorderIcon className={`text-hearts ${isDarkMode ? 'dark' : 'light'}`}/>
+                            )}
+                          {"  "}
                           <span>{post.votes || 0}</span>
                         </button>
                       </div>
