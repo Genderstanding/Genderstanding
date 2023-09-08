@@ -10,6 +10,7 @@ import FeaturedModal from "../FeaturedReplyModal/FeaturedModal";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
+
 function FeaturedPage({ isDarkMode }) {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -27,6 +28,11 @@ function FeaturedPage({ isDarkMode }) {
   let likePosts = useSelector(
     (store) => store.likesReducer.likeDatabaseResponse
   );
+
+  useEffect(() => {
+    dispatch({ type: 'FETCH_PUBLIC_POSTS'});
+    dispatch({ type: 'FETCH_LIKES'})
+  }, []);
 
   //user store
   const user = useSelector((state) => state.user);
@@ -84,13 +90,12 @@ function FeaturedPage({ isDarkMode }) {
                         <span className="text-sm">
                           {moment(post?.post_time).fromNow()}
                         </span>
-                        <span className="w-32 text-sm truncate text-end">
-                           node ID : {post.node_name}
+                        <span className="text-sm text-end">
                         </span>
                       </div>
                       <div className="flex flex-col items-center justify-center m-5 text-lg font-bold featured-text bg-userContent text-amber-950">
                          {/* Display the user's question */}
-                      <span className="">{post?.content} </span>  
+                      <span>{post?.content} </span>  
                       </div>
                       <div className="flex items-end justify-between px-4 py-2 ">
                         <button
