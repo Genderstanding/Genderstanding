@@ -7,7 +7,7 @@ import SVG from "../../Assets/SVG/SVG";
 import { useHistory } from "react-router-dom";
 import { Typography } from "@mui/material";
 
-export default function HeaderOwnerBar({isDarkMode}) {
+export default function HeaderOwnerBar({ isDarkMode }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const [InviteCodeOpen, setOpenInviteCode] = useState(false);
@@ -33,16 +33,16 @@ export default function HeaderOwnerBar({isDarkMode}) {
   ];
 
   return (
-<div className={`fixed top-0 left-0 right-0 flex items-center header-container text-text bg-bkg ${isDarkMode ? "light" : "dark"}`}>
+    <div className={`fixed top-0 left-0 right-0 flex items-center header-container text-text bg-bkg ${isDarkMode ? "light" : "dark"}`}>
       <button onClick={() => history.goBack()}>
         <MdChevronLeft size={25} className="ml-2" />
       </button>
       {/* Display created node name */}
-      {/* <div style={{ margin: "25px" }}>
+      <div style={{ margin: "25px" }}>
         <Typography>
-          Created Node: {newNode?.[0]?.node_name || newNode?.node_name}
+          {newNode?.[0]?.node_name || newNode?.node_name}
         </Typography>
-      </div> */}
+      </div>
       {/* this flex-grow div is tailwind way to spread out the back and add buttons*/}
       <div className="flex-grow"></div>
       <button
