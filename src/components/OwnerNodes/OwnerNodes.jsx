@@ -5,11 +5,11 @@ import { useHistory } from "react-router-dom";
 import HeaderOwnerBar from "../HeaderBar/HeaderOwnerBar";
 import { useDispatch } from "react-redux";
 import moment from "moment";
-
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import OwnerReplyModal from "../OwnerReplyModal/OwnerReplyModal";
 import AddQuestionModal from "../AddQuestionModal/AddQuestionModal";
 import QuestionTitleEllipsis from "../QuestionTitleEllipsis/QuestionTitleEllipsis";
-
 // TOASTIFY
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -25,19 +25,17 @@ const OwnerNodes = ({ isDarkMode }) => {
   const [elipsisOpen, setElipsisOpen] = useState(false);
   const [isLikeClicked, setIsLikeClicked] = useState(false);
   const [postContent, setPostContent] = useState();
+  const [toggleHeart, setToggleHeart] = useState(true);
+  const [likeStates, setLikeStates] = useState({}); //this will make it so only one changes when I finish it
 
   // inputing dispatch
   const dispatch = useDispatch();
-  
-
-
-
 
   const openElipsis = (postId, postContent) => {
     setElipsisOpen(true);
-    setPostIdProp(postId);  
+    setPostIdProp(postId);
     setPostContent(postContent)
-};
+  };
 
   const closeElipsis = () => {
     setElipsisOpen(false);
@@ -132,21 +130,20 @@ const OwnerNodes = ({ isDarkMode }) => {
   // function to like a post
   const increaseCount = (postId) => {
     console.log("post id is : ", postId);
-      const isLikedByUser = likePosts.some((like) => like.post_id === postId && like.user_id === user.id);
-      console.log('isLikedByUser:', isLikedByUser)
-      if (!isLikedByUser) {
-        dispatch({
-          type: "LIKE_POST",
-          payload: postId,
-        });
+    const isLikedByUser = likePosts.some((like) => like.post_id === postId && like.user_id === user.id);
+    console.log('isLikedByUser:', isLikedByUser)
+    if (!isLikedByUser) {
+      // setToggleHeart(false);
       dispatch({
-          type: 'LIKE_POST_USER',
-          payload: { post: postId }
-        })
-      } else {
-        //future toast
-        alert("You have already liked this post.");
-      }
+        type: "LIKE_POST",
+        payload: postId,
+      });
+      dispatch({
+        type: 'LIKE_POST_USER',
+        payload: { post: postId }
+      })
+
+    }
   };
 
   const openAddQuestion = () => {
@@ -218,19 +215,30 @@ const OwnerNodes = ({ isDarkMode }) => {
                     )
                   } else {
                     return (
-                      <div className={`mt-4 mb-2 question-box font-medium text-amber-950 shadow-md bg-ownerContent ${isDarkMode ? "light": "dark"}`} key={post?.id}>
+                      <div className={`mt-4 mb-2 question-box font-medium text-amber-950 shadow-md bg-ownerContent ${isDarkMode ? "light" : "dark"}`} key={post?.id}>
                         <div className="flex items-end justify-between px-5 py-3">
-                        <span className="text-sm">{moment(post?.post_time).fromNow()}</span>
-                        <button onClick={() => openElipsis( post?.id, post)}>. . .</button>
+                          <span className="text-sm">{moment(post?.post_time).fromNow()}</span>
+                          <button onClick={() => openElipsis(post?.id, post)}>. . .</button>
                         </div>
                         {/* this should display the latest question/reply in this thread */}
-                        <div className={`flex flex-col items-center justify-center m-5 text-lg font-bold question-text bg-ownerContent text-amber-950 ${isDarkMode ? "light": "dark"}`} >
-                        {post?.content}
-                      </div>
-                      <div className="flex items-end justify-between px-5 py-3 ">
-                      <button className="text-sm font-bold active:underline text-amber-950" onClick={() => openAddReply(post)}>Reply</button>
-                      <button className="text-sm font-bold active:underline text-amber-950" onClick={() => increaseCount(post.id)}>🖤{'  '}<span>{post.votes || 0}</span></button>
-                      </div>
+                        <div className={`flex flex-col items-center justify-center m-5 text-lg font-bold question-text bg-ownerContent text-amber-950 ${isDarkMode ? "light" : "dark"}`} >
+                          {post?.content}
+                        </div>
+                        <div className="flex items-end justify-between px-5 py-3 ">
+                          <button className="text-sm font-bold active:underline text-amber-950" onClick={() => openAddReply(post)}>Reply</button>
+                          {/* <button className="text-sm font-bold active:underline text-amber-950" onClick={() => increaseCount(post.id)}>
+                            {toggleHeart ? (<FavoriteIcon />) : (<FavoriteBorderIcon />)}{'  '}<span>{post.votes || 0}</span></button> */}
+
+                          <button className="text-sm font-bold active:underline text-amber-950" onClick={() => increaseCount(post.id)}>
+                            {likePosts.some((like) => like.post_id === post.id && like.user_id === user.id) ? (
+                              <FavoriteIcon />
+                            ) : (
+                              <FavoriteBorderIcon />
+                            )}
+                            {'  '}
+                            <span>{post.votes || 0}</span>
+                          </button>
+                        </div>
                       </div>
                     );
                   }
@@ -248,13 +256,13 @@ const OwnerNodes = ({ isDarkMode }) => {
           closeAddReply={closeAddReply}
           questionObject={clickedReplyContent}
         />
-        <QuestionTitleEllipsis 
-        elipsisOpen={elipsisOpen}
-        elipsisClose={closeElipsis}
-        postIdProp={postIdProp}
-        postContent={postContent}
-        handleRejectButton={handleRejectButton}
-        handleReportButton={handleReportButton}
+        <QuestionTitleEllipsis
+          elipsisOpen={elipsisOpen}
+          elipsisClose={closeElipsis}
+          postIdProp={postIdProp}
+          postContent={postContent}
+          handleRejectButton={handleRejectButton}
+          handleReportButton={handleReportButton}
         />
       </div>
     </>
