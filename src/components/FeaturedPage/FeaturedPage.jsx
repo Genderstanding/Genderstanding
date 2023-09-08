@@ -7,8 +7,10 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import FeaturedModal from "../FeaturedReplyModal/FeaturedModal";
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
-function FeaturedPage() {
+function FeaturedPage({ isDarkMode }) {
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -41,11 +43,7 @@ function FeaturedPage() {
         type: 'LIKE_POST_USER',
         payload: { post: postId }
       })
-    } else {
-      //future toast
-      alert("You have already liked this post.");
-    }
-   // setIsLikeClicked(true);
+    } 
   }
 
   // Function to open selected post
@@ -112,7 +110,12 @@ function FeaturedPage() {
                           className="text-sm font-bold active:underline text-amber-950"
                           onClick={() => increaseCount(post.id)}
                         >
-                          🖤{"  "}
+                          {likePosts.some((like) => like.post_id === post.id && like.user_id === user.id) ? (
+                              <FavoriteIcon className={`text-hearts ${isDarkMode ? 'dark' : 'light'}`}/>
+                            ) : (
+                              <FavoriteBorderIcon className={`text-hearts ${isDarkMode ? 'dark' : 'light'}`}/>
+                            )}
+                          {"  "}
                           <span>{post.votes || 0}</span>
                         </button>
                       </div>

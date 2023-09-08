@@ -25,8 +25,7 @@ const OwnerNodes = ({ isDarkMode }) => {
   const [elipsisOpen, setElipsisOpen] = useState(false);
   const [isLikeClicked, setIsLikeClicked] = useState(false);
   const [postContent, setPostContent] = useState();
-  const [toggleHeart, setToggleHeart] = useState(true);
-  const [likeStates, setLikeStates] = useState({}); //this will make it so only one changes when I finish it
+ 
 
   // inputing dispatch
   const dispatch = useDispatch();
@@ -133,7 +132,6 @@ const OwnerNodes = ({ isDarkMode }) => {
     const isLikedByUser = likePosts.some((like) => like.post_id === postId && like.user_id === user.id);
     console.log('isLikedByUser:', isLikedByUser)
     if (!isLikedByUser) {
-      // setToggleHeart(false);
       dispatch({
         type: "LIKE_POST",
         payload: postId,
@@ -207,9 +205,14 @@ const OwnerNodes = ({ isDarkMode }) => {
                             <button className="text-sm font-bold active:underline" onClick={() => handleReportButton(post?.id)}>Report</button>
                           ) : (
                             // THIS SHOULDN'T RENDER UNLESS APPROVED
-                            <button className="text-sm font-bold active:underline text-amber-950" onClick={() => increaseCount(post.id)}>🖤{'  '}<span>{post.votes || 0}</span></button>
-
-                          )}
+                            <button className="text-sm font-bold active:underline text-amber-950" onClick={() => increaseCount(post.id)}>
+                              {likePosts.some((like) => like.post_id === post.id && like.user_id === user.id) ? (
+                              <FavoriteIcon className={`text-hearts ${isDarkMode ? 'dark' : 'light'}`}/>
+                            ) : (
+                              <FavoriteBorderIcon className={`text-hearts ${isDarkMode ? 'dark' : 'light'}`}/>
+                              )}
+                              {'  '}<span>{post.votes || 0}</span></button>
+                            )}
                         </div>
                       </div>
                     )
@@ -231,9 +234,9 @@ const OwnerNodes = ({ isDarkMode }) => {
 
                           <button className="text-sm font-bold active:underline text-amber-950" onClick={() => increaseCount(post.id)}>
                             {likePosts.some((like) => like.post_id === post.id && like.user_id === user.id) ? (
-                              <FavoriteIcon />
+                              <FavoriteIcon className={`text-hearts ${isDarkMode ? 'dark' : 'light'}`}/>
                             ) : (
-                              <FavoriteBorderIcon />
+                              <FavoriteBorderIcon className={`text-hearts ${isDarkMode ? 'dark' : 'light'}`}/>
                             )}
                             {'  '}
                             <span>{post.votes || 0}</span>

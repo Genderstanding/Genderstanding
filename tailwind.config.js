@@ -15,6 +15,7 @@ module.exports = {
         text: "rgb(var(--colors-text) / <alpha-value>)",
         userContent: "rgb(var(--colors-userContent) / <alpha-value>)",
         ownerContent: "rgb(var(--colors-ownerContent) / <alpha-value>)",
+        hearts: "rgb(var(--colors-hearts) / <alpha-value>)",
       },
     },
   },
