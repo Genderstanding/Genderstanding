@@ -10,6 +10,7 @@ import FeaturedModal from "../FeaturedReplyModal/FeaturedModal";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
+
 function FeaturedPage({ isDarkMode }) {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -27,6 +28,11 @@ function FeaturedPage({ isDarkMode }) {
   let likePosts = useSelector(
     (store) => store.likesReducer.likeDatabaseResponse
   );
+
+  useEffect(() => {
+    dispatch({ type: 'FETCH_PUBLIC_POSTS'});
+    dispatch({ type: 'FETCH_LIKES'})
+  }, []);
 
   //user store
   const user = useSelector((state) => state.user);
