@@ -60,7 +60,7 @@ function UserPage({ isDarkMode }) {
         type: "SET_NEW_NODE",
         payload: node,
       });
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       history.push("/usernodes");
     } catch (error) {
       console.log("Error in going to user node page: ", error);
