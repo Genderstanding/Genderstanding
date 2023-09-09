@@ -72,7 +72,7 @@ const AddQuestionModal = ({
   };
 
   const handleAutofill = () => {
-    setAutofill('How do you feel about being transgender?')
+    setAutofill('Why did you choose now to come out as a man?')
   }
 
   return (
