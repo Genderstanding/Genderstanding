@@ -19,25 +19,26 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
   const history = useHistory();
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [nodeCodeInput, setNodeCodeInput] = useState("");
- // DARK MODE
- const [isDarkMode, setIsDarkMode] = useState(() => {
-  // Check if the theme preference is not set in localStorage
-  if (!localStorage.theme) {
-    localStorage.theme = "light"; // Set the default theme to "light"
-  }
+  // DARK MODE
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    // Check if the theme preference is not set in localStorage
+    if (!localStorage.theme) {
+      localStorage.theme = "light"; // Set the default theme to "light"
+    }
 
-  // Use the value from localStorage or the system preference
-  return localStorage.theme === "dark" ||
-    (!("theme" in localStorage) &&
-      window.matchMedia("(prefers-color-scheme: light)").matches)
-    ? true
-    : false;
-});
+    // Use the value from localStorage or the system preference
+    return localStorage.theme === "dark" ||
+      (!("theme" in localStorage) &&
+        window.matchMedia("(prefers-color-scheme: light)").matches)
+      ? true
+      : false;
+  });
 
   // Store to match against currently available codes
   const nodeAssociation = useSelector(
     (store) => store.nodeAssociationReducer.nodeAssociationDatabase
   );
+  const user = useSelector((store) => store.user);
 
   // Delete Account confirmation
   const openDeleteConfirmation = () => {
@@ -77,11 +78,8 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
       document.documentElement.classList.remove("light");
       localStorage.theme = "dark";
     }
-   
   };
-  
 
-    
   // Delete account
   const handleDeleteAccount = () => {
     // Dispatch simply calls for whatever user is logged in to be deleted.
@@ -96,52 +94,52 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
   };
 
   // Code input
-  const handleNodeCodeInput = (event, nodeCodeInput, nodeAssociation) => {
+  const handleNodeCodeInput = (event, nodeCodeInput, nodeAssociation, user) => {
     event.preventDefault();
-    try {
-      // loop through all of the current nodeAssociations
-      for (let node of nodeAssociation) {
-        // look for the auth_code in the database and match it to the inputed code
-        if (node?.auth_code == nodeCodeInput) {
-          // If there are no users already associated to the node with the inputed code,
-          // dispatch a database update to PUT the user's ID into the database as a user
-          // who can view the node
-          if (node?.user_id == null) {
-            dispatch({
-              type: "USER_NODE_ASSOCIATION",
-              payload: nodeCodeInput,
-            });
+ 
+    const matchingNode = nodeAssociation.find(
+      (node) => node?.auth_code === nodeCodeInput
+    );
 
-            toast.success("Invite code submitted successfully", {
-              position: "bottom-left",
-              autoClose: 1500,
-              hideProgressBar: true,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "light",
-            });
+    if (
+      !matchingNode ||
+      !matchingNode.auth_code ||
+      nodeCodeInput.length !== 8
+    ) {
+      toast.error("Invalid Code or Community not found", getToastOptions());
+      return;
+    }
 
-            history.push("/home");
-          } else if (node?.user_id !== null) {
-            toast.error("Invite code has already been used", {
-              position: "bottom-left",
-              autoClose: 1500,
-              hideProgressBar: true,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "light",
-            });
-          }
-        }
-      }
-    } catch (error) {
-      console.log("Error submitting invite node: ", error);
+    if (
+      matchingNode.user_id === user.id ||
+      nodeAssociation.some((node) => node.user_id === user.id)
+    ) {
+      toast.error("You're already in the community", getToastOptions());
+    } else if (matchingNode.user_id !== null) {
+      toast.error("Invite code has already been used", getToastOptions());
+    } else {
+      // Dispatch a database update to PUT the user's ID into the database
+      dispatch({
+        type: "USER_NODE_ASSOCIATION",
+        payload: nodeCodeInput,
+      });
+
+      toast.success("Invite code submitted successfully", getToastOptions());
+      history.push("/home");
     }
   };
+
+  // TOASTIFY
+  const getToastOptions = () => ({
+    position: "bottom-left",
+    autoClose: 1500,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+  });
 
   if (!settingsOpen) {
     return null;
@@ -182,7 +180,7 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
             <button
               className="text-green-800 "
               onClick={(event) =>
-                handleNodeCodeInput(event, nodeCodeInput, nodeAssociation)
+                handleNodeCodeInput(event, nodeCodeInput, nodeAssociation, user)
               }
             >
               <TaskAltIcon />
