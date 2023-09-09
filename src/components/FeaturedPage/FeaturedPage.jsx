@@ -75,9 +75,9 @@ function FeaturedPage({ isDarkMode }) {
       <div className="flex flex-col App">
         <HeaderBar />
         <div className="mt-4 featured-container">
-          <h1 className="mb-1 ml-5 text-2xl font-bold font-mulish">Featured</h1>
-          <h4>View featured posts </h4>
-          <div className="mt-2 ml-8 featured-buttons"></div>
+          <h1 className="mb-1 ml-8 text-2xl font-bold font-mulish">Featured</h1>
+          <h4 className="mb-1 ml-8 font-mulish">View featured posts </h4>
+    
           <div className="flex flex-col items-center justify-center pb-24 thread-container ">
             {publicPosts.map((post) => {
               if (post?.reply_id == null) {
@@ -100,7 +100,7 @@ function FeaturedPage({ isDarkMode }) {
                       </div>
                       <div className="flex items-end justify-between px-4 py-2 ">
                         <button
-                          className="text-sm font-bold active:underline text-amber-950"
+                          className="font-bold text-semibold active:underline text-amber-950"
                           onClick={() => openPublicPost(post.id)}
                         >
                           Open
