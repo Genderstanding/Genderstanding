@@ -16,6 +16,7 @@ function FeaturedPage({ isDarkMode }) {
   const history = useHistory();
 
   const [publicPost, setPublicPost] = useState("");
+  const [postInfos, setPostInfo] = useState("");
   const [viewPostOpen, setViewPostOpen] = useState(false);
 
   const publicPosts = useSelector(
@@ -54,11 +55,12 @@ function FeaturedPage({ isDarkMode }) {
   }
 
   // Function to open selected post
-  const openPublicPost = (selectedPostId) => {
-    
+  const openPublicPost = (selectedPostId, postInfo) => {
+ 
     try {
 
       setPublicPost(selectedPostId);
+      setPostInfo(postInfo)
       setViewPostOpen(true);
 
     } catch (error) {
@@ -101,7 +103,7 @@ function FeaturedPage({ isDarkMode }) {
                       <div className="flex items-end justify-between px-4 py-2 ">
                         <button
                           className="font-bold text-semibold active:underline text-amber-950"
-                          onClick={() => openPublicPost(post.id)}
+                          onClick={() => openPublicPost(post.id, post)}
                         >
                           Open
                         </button>
@@ -129,6 +131,7 @@ function FeaturedPage({ isDarkMode }) {
           viewPostOpen={viewPostOpen}
           setViewPostOpen={setViewPostOpen}
           selectedPostId={publicPost}
+          postInfo={postInfos}
         />
       </div>
     </>

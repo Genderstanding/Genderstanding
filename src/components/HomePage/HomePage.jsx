@@ -4,7 +4,7 @@ import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { CardActionArea, IconButton, Typography } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import KeyboardDoubleArrowRightRoundedIcon from "@mui/icons-material/KeyboardDoubleArrowRightRounded";
+import QuestionMarkRoundedIcon from '@mui/icons-material/QuestionMarkRounded';
 
 import HeaderBar from "../HeaderBar/HeaderBar";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
@@ -28,9 +28,9 @@ export default function HomePage({ isDarkMode }) {
   let yourContent;
   const checkUserId = (node) => {
     if (node.user_id == user.id) {
-      yourContent = <AccountCircleIcon style={{ marginTop: "-20px" }} />;
+      yourContent = <img style={{  marginBottom:"10px" , padding:0 ,width: "27px" }} src="./brand.png" /> 
     } else if (node.user_id !== user.id) {
-      yourContent = "";
+      yourContent = <img style={{  marginBottom:"10px", padding:0 ,width: "30px" }} src="./storytelling.png" /> 
     }
     return yourContent;
   };
@@ -80,24 +80,22 @@ export default function HomePage({ isDarkMode }) {
               />
               <div
                 id="slider"
-                className="w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth"
+                className="w-full pb-2 overflow-x-scroll pw-full whitespace-nowrap scroll-smooth"
               >
                 {/* Here is the div where we MAP ya'll */}
                 {listOfNodes.map((node) => {
                   return (
                     <div
                       onClick={() => handleGoToNode(node)}
-                      className={` duration-300 ease-in-out side-scroll-box hover:scale-105 text-neutral-950 bg-red-50 ${
+                      className={` m-0 duration-300 ease-in-out side-scroll-box hover:scale-105 text-neutral-950 bg-red-50 ${
                         isDarkMode ? "light" : "dark"
                       }`}
                       key={node.id}
                     >
-                      {checkUserId(node)}
-                      <br />
-                      <span className="truncate w-52">{node.node_name}</span>
+                     {checkUserId(node)}<span className="font-bold capitalize truncate w-52">{node.node_name}</span>
                       <div className="pt-2 text-xs font-bold text-primary active:underline">
-                        View community{" "}
-                        <span className="pt-2 text-xs text-primary"> </span>
+                        View Community{" "}
+                  
                       </div>
                     </div>
                   );
@@ -155,24 +153,23 @@ export default function HomePage({ isDarkMode }) {
                           isDarkMode ? "light" : "dark"
                         }`}
                       >
-                        <p className="text-xl font-bold truncate text-amber-950 font-mulish w-52 ">
+                        <p className="text-xl font-bold capitalize truncate text-amber-950 font-mulish w-52 ">
                           {post.node_name}{" "}
                         </p>
-                        <p className="pt-1 font-semibold truncate text-md w-52 font-body">
+                        <p className="pt-1 font-semibold normal-case truncate text-md w-52 font-body">
                           {post.content}
                         </p>
 
                         {/* <p className="pt-4 text-xl font-bold truncate w-52 font-title">
                           {post.content}
                         </p> */}
-                        <div className="pt-5 text-sm font-bold text-primary active:underline">
+                        <div className="pt-5 text-sm font-bold normal-case text-primary active:underline">
                           View Question{" "}
                           <span
-                            className="pt-2 text-primary"
-                            sx={{ fontSize: "16px" }}
+                            className=" text-primary"
                           >
-                            {" "}
-                            <KeyboardDoubleArrowRightRoundedIcon />
+                            {/* <KeyboardDoubleArrowRightRoundedIcon /> */}
+                           <QuestionMarkRoundedIcon style={{fontSize:"16px"}}/>
                           </span>
                         </div>
                       </div>

@@ -31,7 +31,11 @@ export default function HeaderBar({isDarkMode}) {
      <div className={`fixed top-0 left-0 right-0 flex bg-bkg items-center header-container text-text ${isDarkMode ? "light" : "dark"}`}>
       
       <button onClick={() => history.goBack()}>
-        <MdChevronLeft size={25} className="ml-2" />
+      <MdChevronLeft
+                size={35}
+                className={`ml-2 text-secondary  ${isDarkMode ? "light" : "dark"}`}
+              />
+
       </button>
 {/* Display new user name */}
 {/* <div style={{ margin: "25px" }}>

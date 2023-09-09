@@ -6,7 +6,7 @@
   .side-scroll-box {
     display: inline-block;
     height: 15vh;
-    max-width: 45vw;
+    width: 45vw;
     margin: 15px 25px 0 0;
     padding: 1.5rem;
     cursor: pointer;
