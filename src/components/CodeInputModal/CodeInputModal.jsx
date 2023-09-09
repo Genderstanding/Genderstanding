@@ -23,86 +23,88 @@ export const CodeInputModal = ({
     (store) => store.nodeAssociationReducer.nodeAssociationDatabase
   );
 
+  const node = useSelector((store) => store.nodeReducer.nodeDatabaseResponse);
+
+  const user = useSelector((store) => store.user);
+
   if (!InviteCodeOpen) {
     return null;
   }
 
-
   // Code input
-  const handleNodeCodeInput = (event, nodeCodeInput, nodeAssociation) => {
+  const handleNodeCodeInput = (event, nodeCodeInput, nodeAssociation, user) => {
     event.preventDefault();
+    console.log("button clicked");
     try {
-      // loop through all of the current nodeAssociations
-      for (let node of nodeAssociation) {
-        // look for the auth_code in the database and match it to the inputed code
-        if (node?.auth_code == nodeCodeInput) {
-          // If there are no users already associated to the node with the inputed code,
-          // dispatch a database update to PUT the user's ID into the database as a user
-          // who can view the node
-          if (node?.user_id == null) {
-            dispatch({
-              type: "USER_NODE_ASSOCIATION",
-              payload: nodeCodeInput,
-            });
+      const matchingNode = nodeAssociation.find(
+        (node) => node?.auth_code === nodeCodeInput
+      );
 
-            toast.success("Invite code submitted successfully", {
-              position: "bottom-left",
-              autoClose: 1500,
-              hideProgressBar: true,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "light",
-            });
-
-            history.push("/home");
-          } else if (node?.user_id !== null) {
-            toast.error("Invite code has already been used", {
-              position: "bottom-left",
-              autoClose: 1500,
-              hideProgressBar: true,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "light",
-            });
-          }
-        }
+      if (
+        !matchingNode ||
+        !matchingNode.auth_code ||
+        nodeCodeInput.length !== 8
+      ) {
+        toast.error("Invalid Code or Community not found", getToastOptions());
+        return;
       }
+
+      if (
+        matchingNode.user_id === user.id ||
+        nodeAssociation.some((node) => node.user_id === user.id)
+      ) {
+        toast.error("You're already in the community", getToastOptions());
+      } else if (matchingNode.user_id !== null) {
+        toast.error("Invite code has already been used", getToastOptions());
+      } else {
+        // Dispatch a database update to PUT the user's ID into the database
+        dispatch({
+          type: "USER_NODE_ASSOCIATION",
+          payload: nodeCodeInput,
+        });
+
+        toast.success("Invite code submitted successfully", getToastOptions());
+        history.push("/home");
+      }
+      setNodeCodeInput("");
     } catch (error) {
-      toast.error("Error submitting invite code", {
-        position: "bottom-left",
-        autoClose: 1500,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      console.log("error inputting code", error);
     }
   };
+
+  // TOASTIFY
+  const getToastOptions = () => ({
+    position: "bottom-left",
+    autoClose: 1500,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+  });
 
   return (
     <div className="flex items-center justify-center modal-overlay">
       <div className="flex flex-col items-center justify-center add-node-modal">
         {children}
-        <h2 className="mb-4 mr-4 text-xl font-bold text-amber-950">Enter Invite Code</h2>
+        <h2 className="mb-4 mr-4 text-xl font-bold text-amber-950">
+          Enter Invite Code
+        </h2>
         <div className="code-container">
           <input
             type="text"
             placeholder="Enter a code ..."
             className="border-b border-black text-amber-950"
             onChange={(event) => setNodeCodeInput(event.target.value)}
+            value={nodeCodeInput}
           />
 
           <div className="mt-6 buttons-container text-amber-950">
             <button
               className="mr-6 font-semibold active:underline active:font-bold"
               onClick={(event) =>
-                handleNodeCodeInput(event, nodeCodeInput, nodeAssociation)
+                handleNodeCodeInput(event, nodeCodeInput, nodeAssociation, user)
               }
             >
               Confirm
