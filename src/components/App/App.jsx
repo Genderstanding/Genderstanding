@@ -36,12 +36,6 @@ function App() {
 
   const user = useSelector((store) => store.user);
 
-  // DARK MODE
-  const handleDarkModeToggle = () => {
-    console.log("Toggling dark mode");
-    setIsDarkMode(!isDarkMode);
-  };
-
   // SETTING MODAL
   const openSettings = () => {
     setSettingsOpen(true);
@@ -86,7 +80,6 @@ function App() {
         <SettingsModal
           openSettings={openSettings}
           closeSettings={closeSettings}
-          handleDarkModeToggle={handleDarkModeToggle}
           isDarkMode={isDarkMode}
         />
 

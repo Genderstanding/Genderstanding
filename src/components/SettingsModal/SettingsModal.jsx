@@ -19,12 +19,20 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
   const history = useHistory();
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [nodeCodeInput, setNodeCodeInput] = useState("");
-  // DARK MODE
-  const [isDarkMode, setIsDarkMode] = useState(
-    localStorage.theme === "light" ||
-      (!("theme" in localStorage) &&
-        window.matchMedia("(prefers-color-scheme: light)").matches)
-  );
+ // DARK MODE
+ const [isDarkMode, setIsDarkMode] = useState(() => {
+  // Check if the theme preference is not set in localStorage
+  if (!localStorage.theme) {
+    localStorage.theme = "light"; // Set the default theme to "light"
+  }
+
+  // Use the value from localStorage or the system preference
+  return localStorage.theme === "dark" ||
+    (!("theme" in localStorage) &&
+      window.matchMedia("(prefers-color-scheme: light)").matches)
+    ? true
+    : false;
+});
 
   // Store to match against currently available codes
   const nodeAssociation = useSelector(
@@ -41,13 +49,7 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
   };
 
   useEffect(() => {
-    dispatch({ type: "FETCH_NODE" });
-    dispatch({ type: "FETCH_POST"});
-    dispatch({ type: "FETCH_NODE_ASSOCIATION" });
-    dispatch({ type: 'FETCH_PUBLIC_POSTS'});
-  }, []);
-
-  useEffect(() => {
+    setIsDarkMode(!isDarkMode);
     if (!isDarkMode) {
       document.documentElement.classList.add("light");
       document.documentElement.classList.remove("dark");
@@ -57,14 +59,29 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
       document.documentElement.classList.remove("light");
       localStorage.theme = "dark";
     }
-  }, [isDarkMode]);
+    dispatch({ type: "FETCH_NODE" });
+    dispatch({ type: "FETCH_POST" });
+    dispatch({ type: "FETCH_NODE_ASSOCIATION" });
+    dispatch({ type: "FETCH_PUBLIC_POSTS" });
+  }, []);
 
   // DARK MODE toggle handler
   const handleDarkModeToggle = () => {
     setIsDarkMode(!isDarkMode);
-    console.log(isDarkMode);
+    if (!isDarkMode) {
+      document.documentElement.classList.add("light");
+      document.documentElement.classList.remove("dark");
+      localStorage.theme = "light";
+    } else {
+      document.documentElement.classList.add("dark");
+      document.documentElement.classList.remove("light");
+      localStorage.theme = "dark";
+    }
+   
   };
+  
 
+    
   // Delete account
   const handleDeleteAccount = () => {
     // Dispatch simply calls for whatever user is logged in to be deleted.
@@ -157,7 +174,9 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
               }}
               type="text"
               placeholder="enter code"
-              className={`text-center text-text bg-bkg ${isDarkMode ? "dark" : "light"}`}
+              className={`text-center text-text bg-bkg ${
+                isDarkMode ? "dark" : "light"
+              }`}
               onChange={(event) => setNodeCodeInput(event.target.value)}
             />
             <button

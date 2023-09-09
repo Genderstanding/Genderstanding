@@ -171,7 +171,7 @@ const OwnerNodes = ({ isDarkMode }) => {
 
   return (
     <>
-      <div className="flex flex-col h-screen App">
+      <div className="flex flex-col App">
         <HeaderOwnerBar />
         <div className="flex flex-col items-center justify-center pb-24 thread-container">
           {nodePosts.map((post) => {
