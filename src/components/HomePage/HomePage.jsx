@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { CardActionArea, IconButton, Typography } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import QuestionMarkRoundedIcon from '@mui/icons-material/QuestionMarkRounded';
+import SupervisedUserCircleRoundedIcon from '@mui/icons-material/SupervisedUserCircleRounded';
 
 import HeaderBar from "../HeaderBar/HeaderBar";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
@@ -28,9 +29,11 @@ export default function HomePage({ isDarkMode }) {
   let yourContent;
   const checkUserId = (node) => {
     if (node.user_id == user.id) {
-      yourContent = <img style={{  marginBottom:"10px" , padding:0 ,width: "27px" }} src="./brand.png" /> 
+       yourContent = <AccountCircleIcon sx={{marginTop:1, marginBottom:"10px", marginRight:"5px", color:"#451b03" ,fontSize:"30px"}}/>
+      // <img style={{  marginBottom:"10px" , padding:0 ,width: "27px" }} src="./brand.png" /> 
     } else if (node.user_id !== user.id) {
-      yourContent = <img style={{  marginBottom:"10px", padding:0 ,width: "30px" }} src="./storytelling.png" /> 
+      yourContent = <SupervisedUserCircleRoundedIcon sx={{marginTop:1, marginBottom:"10px", marginRight:"10px", color:"#451b03", fontSize:"32px"}}/>
+      // <img style={{  marginBottom:"10px", padding:0 ,width: "30px" }} src="./storytelling.png" /> 
     }
     return yourContent;
   };
@@ -92,7 +95,8 @@ export default function HomePage({ isDarkMode }) {
                       }`}
                       key={node.id}
                     >
-                     {checkUserId(node)}<span className="font-bold capitalize truncate w-52">{node.node_name}</span>
+                   
+                    <span className="font-bold capitalize truncate w-52">  {checkUserId(node)}{node.node_name}</span>
                       <div className="pt-2 text-xs font-bold text-primary active:underline">
                         View Community{" "}
                   
