@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./OwnerNodes.css";
 import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
 import HeaderOwnerBar from "../HeaderBar/HeaderOwnerBar";
 import { useDispatch } from "react-redux";
 import moment from "moment";
@@ -26,7 +25,6 @@ const OwnerNodes = ({ isDarkMode }) => {
   const [isLikeClicked, setIsLikeClicked] = useState(false);
   const [postContent, setPostContent] = useState();
  
-
   // inputing dispatch
   const dispatch = useDispatch();
 
@@ -155,7 +153,7 @@ const OwnerNodes = ({ isDarkMode }) => {
   const userIds = nodeData.map(node => node.user_id);
 
   const openAddReply = (questionObject) => {
-    console.log("openAddReply function called"); // Add this line
+
     setClickedReplyContent(questionObject);
     setAddReplyOpen(true);
   };
@@ -171,9 +169,11 @@ const OwnerNodes = ({ isDarkMode }) => {
 
   return (
     <>
-      <div className="flex flex-col h-screen App">
+      <div className="flex flex-col App">
         <HeaderOwnerBar />
         <div className="flex flex-col items-center justify-center pb-24 thread-container">
+
+   
           {nodePosts.map((post) => {
             if (post?.reported == false) {
               if (post?.node_id == newNode.id) {
@@ -185,25 +185,33 @@ const OwnerNodes = ({ isDarkMode }) => {
                     };
                     return (
                       <div className={`mt-4 mb-4 text-amber-950 shadow-md bg-userContent question-box ${isDarkMode ? 'dark' : 'light'}`} key={post?.id}>
-                        <div className="flex items-end justify-between px-5 py-3"> New Question!
-                          <span className="text-sm">{moment(post?.post_time).fromNow()}</span>
+                        <div className="flex items-end justify-between px-5 py-3">  
+                         
+                          <span className="text-sm">{moment(post?.post_time).fromNow()}</span> 
+                        
+                          <img
+                            style={{ width: "30px" }}
+                            src="./bell.gif"
+                            alt="Bell"
+                          />
+           
 
                         </div>
                         {/* this should display the latest question/reply in this thread */}
-                        <div className={`flex flex-col items-center justify-center text-lg font-bold m-5 question-text bg-userContent text-amber-950 ${isDarkMode ? 'dark' : 'light'}`} >
+                        <div className={`flex flex-col items-center justify-center text-xl font-bold m-5 question-text bg-userContent text-amber-950 ${isDarkMode ? 'dark' : 'light'}`} >
                           {post?.content}
                         </div>
                         <div className="flex items-end justify-between px-5 py-3 ">
                           {questionState.toggleButtom ? (
-                            <button className="text-sm font-bold active:underline" onClick={() => handleAcceptButton(post?.id)}>Accept</button>
+                            <button className="text-sm font-semibold active:underline" onClick={() => handleAcceptButton(post?.id)}>Accept</button>
                           ) : (
-                            <button className="text-sm font-bold active:underline" onClick={() => openAddReply(post)}>Open</button>
+                            <button className="text-sm font-semibold active:underline" onClick={() => openAddReply(post)}>Open</button>
                           )}
                           {questionState.showButton &&
-                            <button className="text-sm font-bold active:underline" onClick={() => handleRejectButton(post?.id)}>Reject</button>
+                            <button className="text-sm font-semibold active:underline" onClick={() => handleRejectButton(post?.id)}>Reject</button>
                           }
                           {questionState.toggleButtom ? (
-                            <button className="text-sm font-bold active:underline" onClick={() => handleReportButton(post?.id)}>Report</button>
+                            <button className="text-sm font-semibold active:underline" onClick={() => handleReportButton(post?.id)}>Report</button>
                           ) : (
                             // THIS SHOULDN'T RENDER UNLESS APPROVED
                             <button className="text-sm font-bold active:underline text-amber-950" onClick={() => increaseCount(post.id)}>
@@ -225,11 +233,11 @@ const OwnerNodes = ({ isDarkMode }) => {
                           <button onClick={() => openElipsis(post?.id, post)}>. . .</button>
                         </div>
                         {/* this should display the latest question/reply in this thread */}
-                        <div className={`flex flex-col items-center justify-center m-5 text-lg font-bold question-text bg-ownerContent text-amber-950 ${isDarkMode ? "light" : "dark"}`} >
+                        <div className={`flex flex-col items-center justify-center m-5 text-xl font-bold question-text bg-ownerContent text-amber-950 ${isDarkMode ? "light" : "dark"}`} >
                           {post?.content}
                         </div>
                         <div className="flex items-end justify-between px-5 py-3 ">
-                          <button className="text-sm font-bold active:underline text-amber-950" onClick={() => openAddReply(post)}>Reply</button>
+                          <button className="text-sm font-semibold active:underline text-amber-950" onClick={() => openAddReply(post)}>Reply</button>
                           {/* <button className="text-sm font-bold active:underline text-amber-950" onClick={() => increaseCount(post.id)}>
                             {toggleHeart ? (<FavoriteIcon />) : (<FavoriteBorderIcon />)}{'  '}<span>{post.votes || 0}</span></button> */}
 

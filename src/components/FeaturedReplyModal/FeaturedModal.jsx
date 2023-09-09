@@ -8,6 +8,7 @@ function FeaturedModal({
   isDarkMode,
   setViewPostOpen,
   selectedPostId,
+  postInfo
 }) {
   if (!viewPostOpen) {
     return null;
@@ -31,7 +32,8 @@ function FeaturedModal({
     );
     return post.reply_id === selectedPostId;
   });
-
+  
+  console.log(postInfo, "post");
   console.log(nodeResponses, "nodeResponses");
   console.log(selectedPostId, "postID selected");
 
@@ -47,8 +49,12 @@ function FeaturedModal({
       <div className="flex flex-col items-center justify-center reply-box">
         {/* Title */}
         <h2 className="mt-6 mb-4 mr-4 text-xl font-bold text-amber-950">
-        
+        {postInfo.content}
         </h2>
+        <span className="text-sm text-end">
+                    {" "}
+                    {moment(postInfo?.post_time).fromNow()}
+                  </span>
         <div className="overflow-y-auto scrollable-container text-amber-950">
           {reverseResponses.map((response) => {
             // Find the corresponding node in nodeData

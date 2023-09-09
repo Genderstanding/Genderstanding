@@ -87,16 +87,18 @@ const AddQuestionModal = ({
         }`}
       >
         {children}
-        <h2 onClick={handleAutofill} className="mb-4 mr-4 text-xl font-bold text-amber-950">Ask a New Question</h2>
+        <h2 onClick={handleAutofill} className="my-2 mr-4 text-xl font-bold text-amber-950">Ask a New Question</h2>
         <textarea 
           rows="4"
-          className="w-full px-4 py-2 text-sm text-gray-900 bg-white border-0 question-textarea dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
+          // className="w-full px-4 py-2 text-sm text-gray-900 bg-white border-0 question-textarea dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
+          className={`shadow-lg w-5/6 rounded-xl md:w-auto px-4 py-4 mt-4 mb-4 text-sm bg-bkg border-1 text-text reply-textarea focus:ring-0 placeholder-text font-normal${isDarkMode ? "light" : "dark"}`}
+                  
           placeholder="Write a question..."
           onChange={(event) => setQuestionInput(event.target.value)}
           value={questionInput || autofill}
           required
         ></textarea>
-        <div className="mt-6 buttons-container">
+        <div className="buttons-container">
           <button className="mx-5 font-bold active:underline text-amber-950" onClick={handleSubmitQuestion}>
             Confirm
           </button>

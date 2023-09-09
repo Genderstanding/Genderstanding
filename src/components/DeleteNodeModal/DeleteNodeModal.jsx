@@ -34,7 +34,7 @@ export default function DeleteNodeModal() {
       dispatch({ type: "DELETE_NODE", payload: nodeID});
     } catch (error) {
       console.log("error deleting nodes", error);
-      toast.error("Failed to delete node", {
+      toast.error("Failed to delete community", {
         position: "bottom-left",
         autoClose: 1500,
         hideProgressBar: true,
@@ -73,7 +73,8 @@ export default function DeleteNodeModal() {
       >
         {/* NODES */}
         <Box className="overflow-y-auto text-center text-amber-950" sx={style}>
-          <h2 className="fixed text-xl font-bold text-center">Your Communities</h2>
+          <h2 className="text-xl font-bold text-center ">Your Communities</h2>
+          <div className=""  style={{minHeight:"240px"}}>
           {allNodes.map((node) => {
             if (user?.id == node?.user_id) {
               
@@ -82,10 +83,12 @@ export default function DeleteNodeModal() {
               return (
                 <div
                   className="my-5 font-semibold text-center text-md "
+      
                   key={node.id}
                 >
                   <Card
-                    className=" border-r-12"
+                    className="text-center border-r-12"
+                    
                     sx={{ minWidth: 50, maxWidth: 200, minHeight: 30 }}
                   >
                     <CardActionArea
@@ -100,7 +103,7 @@ export default function DeleteNodeModal() {
                             Delete
                           </button>
                         ) : (
-                          <div className="font-semibold border-r-12">
+                          <div className="w-32 ml-10 font-semibold truncate border-r-12">
                             {node?.node_name}
                           </div>
                         )}
@@ -112,7 +115,8 @@ export default function DeleteNodeModal() {
             }
             return null; // if condition doesn't match
           })}
-          <div  className="mt-12 text-center">
+          </div>
+          <div  className="my-10 text-center ">
           <button className="font-bold active:underline" onClick={() => handleClose(false)}>
             Close
           </button>
@@ -171,7 +175,7 @@ const StyledBackdrop = styled(Backdrop)`
 
 const style = (theme) => ({
   width: 270,
-  height: 400,
+  minHeight: 400,
   maxHeight: 400,
   borderRadius: "12px",
   padding: "16px 32px 24px 32px",

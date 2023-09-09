@@ -16,6 +16,7 @@ function FeaturedPage({ isDarkMode }) {
   const history = useHistory();
 
   const [publicPost, setPublicPost] = useState("");
+  const [postInfos, setPostInfo] = useState("");
   const [viewPostOpen, setViewPostOpen] = useState(false);
 
   const publicPosts = useSelector(
@@ -39,6 +40,7 @@ function FeaturedPage({ isDarkMode }) {
 
   // Function to like a post
   const increaseCount = (postId) => {
+    console.log("clicked")
     const isLikedByUser = likePosts.some((like) => like.post_id === postId && like.user_id === user.id);
     if (!isLikedByUser) {
       dispatch({
@@ -53,11 +55,12 @@ function FeaturedPage({ isDarkMode }) {
   }
 
   // Function to open selected post
-  const openPublicPost = (selectedPostId) => {
-    
+  const openPublicPost = (selectedPostId, postInfo) => {
+ 
     try {
 
       setPublicPost(selectedPostId);
+      setPostInfo(postInfo)
       setViewPostOpen(true);
 
     } catch (error) {
@@ -74,9 +77,9 @@ function FeaturedPage({ isDarkMode }) {
       <div className="flex flex-col App">
         <HeaderBar />
         <div className="mt-4 featured-container">
-          <h1 className="mb-1 ml-5 text-2xl font-bold font-mulish">Featured</h1>
-          <h4>View featured posts </h4>
-          <div className="mt-2 ml-8 featured-buttons"></div>
+          <h1 className="mb-1 ml-8 text-2xl font-bold font-mulish">Featured</h1>
+          <h4 className="mb-1 ml-8 font-mulish">View featured posts </h4>
+    
           <div className="flex flex-col items-center justify-center pb-24 thread-container ">
             {publicPosts.map((post) => {
               if (post?.reply_id == null) {
@@ -86,12 +89,12 @@ function FeaturedPage({ isDarkMode }) {
                       className="pt-2 pb-2 mt-4 mb-2 font-medium shadow-md text-amber-950 bg-userContent featured-box "
                       key={post?.id}
                     > 
-                      <div className="flex items-end justify-between px-4 py-2">
-                        <span className="text-sm">
+                      <div className="flex items-end px-4 py-2">
+                        <div className="text-sm">
                           {moment(post?.post_time).fromNow()}
-                        </span>
-                        <span className="text-sm text-end">
-                        </span>
+                        </div>
+                    
+                       
                       </div>
                       <div className="flex flex-col items-center justify-center m-5 text-lg font-bold featured-text bg-userContent text-amber-950">
                          {/* Display the user's question */}
@@ -99,13 +102,13 @@ function FeaturedPage({ isDarkMode }) {
                       </div>
                       <div className="flex items-end justify-between px-4 py-2 ">
                         <button
-                          className="text-sm font-bold active:underline text-amber-950"
-                          onClick={() => openPublicPost(post.id)}
+                          className="font-bold text-semibold active:underline text-amber-950"
+                          onClick={() => openPublicPost(post.id, post)}
                         >
                           Open
                         </button>
                         <button
-                          className="text-sm font-bold active:underline text-amber-950"
+                          className="font-semibold text-md active:underline text-amber-950"
                           onClick={() => increaseCount(post.id)}
                         >
                           {likePosts.some((like) => like.post_id === post.id && like.user_id === user.id) ? (
@@ -128,6 +131,7 @@ function FeaturedPage({ isDarkMode }) {
           viewPostOpen={viewPostOpen}
           setViewPostOpen={setViewPostOpen}
           selectedPostId={publicPost}
+          postInfo={postInfos}
         />
       </div>
     </>

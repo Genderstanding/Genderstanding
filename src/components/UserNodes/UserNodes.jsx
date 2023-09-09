@@ -70,7 +70,7 @@ const UserNodes = ({ isDarkMode }) => {
 
   return (
     <>
-      <div className="flex flex-col h-screen App">
+      <div className="flex flex-col App">
         <HeaderUserBar />
         <div className="flex flex-col items-center justify-center pb-24 thread-container ">
           {nodePosts.map((post) => {
@@ -90,10 +90,10 @@ const UserNodes = ({ isDarkMode }) => {
                         </span>
                       </div>
                       {/* this should display the latest question/reply in this thread */}
-                      <div className={`flex flex-col items-center justify-center m-5 text-lg font-bold question-text bg-userContent text-amber-950 ${isDarkMode ? "light" : "dark"}`}>{post?.content}</div>
+                      <div className={`  flex flex-col items-center justify-center m-5 text-lg font-bold question-text bg-userContent text-amber-950 ${isDarkMode ? "light" : "dark"}`}>{post?.content}</div>
                       <div className="flex items-end justify-between px-4 py-2 ">
                         <button
-                          className="text-sm font-bold active:underline text-amber-950"
+                          className="font-semibold text-md active:underline text-amber-950"
                           onClick={() => openAddReply(post)}
                         >
                           Open
