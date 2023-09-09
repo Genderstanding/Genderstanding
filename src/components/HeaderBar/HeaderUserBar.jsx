@@ -52,12 +52,15 @@ export default function HeaderUserBar({isDarkMode}) {
 <div className={`fixed top-0 left-0 right-0 flex items-center header-container text-text bg-bkg ${isDarkMode ? "light" : "dark"}`}>
    
       <button onClick={() => history.goBack()}>
-        <MdChevronLeft size={25} className="ml-2" />
+      <MdChevronLeft
+                size={35}
+                className={`ml-2 text-secondary  ${isDarkMode ? "light" : "dark"}`}
+              />
       </button>
       {/* Display joined node name */}
-{/* <div style={{ margin: "25px" }}>
-<Typography> Joined Community: <br/>{newNode?.[0]?.node_name || newNode?.node_name}</Typography>
-      </div> */}
+      <p className="mb-1 ml-5 text-2xl font-bold capitalize truncate text-secondary font-mulish w-52">
+  {newNode?.[0]?.node_name || newNode?.node_name}
+            </p>
       {/* this flex-grow div is tailwind way to spread out the back and add buttons*/}
       <div className="flex-grow"></div>
       <button className="mr-4 text-2xl" onClick={()=>openAddQuestion(newNode?.id)}>

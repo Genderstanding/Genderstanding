@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import "./UserPage.css";
 import HeaderBar from "../HeaderBar/HeaderBar";
 import { useEffect } from "react";
+import OwnerNodes from "../OwnerNodes/OwnerNodes";
 
 function UserPage({ isDarkMode }) {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
@@ -18,7 +19,6 @@ function UserPage({ isDarkMode }) {
   );
   // sourcing use selector to hold all node store information
   let allNodes = useSelector((store) => store.nodeReducer.nodeDatabaseResponse);
-
 
   const openAddNode = () => {
     setaddNodeOpen(true);
@@ -46,7 +46,10 @@ function UserPage({ isDarkMode }) {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       history.push("/owner");
     } catch (error) {
-      console.log("Error in obtaining community information on userPage: ", error);
+      console.log(
+        "Error in obtaining community information on userPage: ",
+        error
+      );
     }
   };
 
@@ -66,7 +69,7 @@ function UserPage({ isDarkMode }) {
 
   useEffect(() => {
     dispatch({ type: "FETCH_NODE" });
-    dispatch({ type: "FETCH_POST"})
+    dispatch({ type: "FETCH_POST" });
   }, []);
 
   return (
@@ -90,8 +93,10 @@ function UserPage({ isDarkMode }) {
                       }`}
                       onClick={(event) => goToOwnerNodes(event, node)}
                     >
-                      <div className="m-4 text-xl font-bold text-center truncate w-52 text-amber-950 owned-community-names">
-                        {node?.node_name}
+                      <div className="m-4 text-xl font-bold text-center capitalize truncate w-52 text-amber-950 owned-community-names">
+                        <span className="text-2xl font-bold truncate w-52 owned-community-names">
+                          {node?.node_name}
+                        </span>
                       </div>
                     </div>
                   );
@@ -100,8 +105,8 @@ function UserPage({ isDarkMode }) {
             </div>
 
             <h1 className="mt-4 mb-1 ml-5 text-xl font-bold font-mulish">
-            {/* { (newNode.user_id !== user.id) && newNode.length > 0 ? "Communities you're a part of" : ""}  */}
-            Communities you're a part of
+              {/* { (newNode.user_id !== user.id) && newNode.length > 0 ? "Communities you're a part of" : ""}  */}
+              Communities you're a part of
             </h1>
             <div className="flex flex-col items-center justify-center mb-4 part-of-box">
               {/* map communities you particpate in in this div*/}
@@ -110,13 +115,20 @@ function UserPage({ isDarkMode }) {
                   return (
                     <div
                       key={node?.id}
-                      className={`m-4 user-container flex flex-col justify-center items-center overflow-y-scroll ... bg-userContent text-amber-950 ${
+                      className={`capitalize m-4 user-container flex flex-col justify-center items-center overflow-y-scroll ... bg-userContent text-amber-950 ${
                         isDarkMode ? "light" : "dark"
                       }`}
                       onClick={(event) => goToUserNodes(event, node)}
                     >
-                      <div className="m-4 text-xl font-bold text-center truncate w-52 owned-community-names">
-                        {node?.node_name}
+                      <div className="text-2xl font-bold text-center truncate w-52 owned-community-names">
+                        <span>{node?.node_name}</span>
+                        <div className="ml-2">
+                          {/* <img
+                            style={{ width: "30px" }}
+                            src="./bell.gif"
+                            alt="Bell"
+                          /> */}
+                        </div>
                       </div>
                     </div>
                   );
