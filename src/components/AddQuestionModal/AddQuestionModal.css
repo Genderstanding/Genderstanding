@@ -12,7 +12,7 @@
   }
 
   .ask-question-box {
-    border-radius: 10px;
+    border-radius: 16px;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
     text-align: center;
     width: 85vw;
@@ -20,7 +20,7 @@
     background-color: white;
   }
   .question-textarea {
-    border-radius: 10px;
+    border-radius: 24px;
     width: 80vw;
     border: 1px solid black;
   }

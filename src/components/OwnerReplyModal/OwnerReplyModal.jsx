@@ -141,7 +141,7 @@ const OwnerReplyModal = ({
 
   const handleAutofill = (e)=> {
     e.preventDefault()
-    setAutofill("After realizing that I didn't personally see myself as anything but a man anymore, I felt the only steps that made sense to be happy again was to transition. I think it offers me the chance to express how I really feel about myself and I'm happy when others see me as a man, and I think others do too!")
+    setAutofill("When I was struggling with mental health, I sought out the help of a therapist. After working past a lot of difficult questions and answers, I found that I was really unhappy with how I was presented before. I think it offers me the chance to express how I really feel about myself and I'm happy when others see me as a man, and I think others do too!")
   }
 
   return (
@@ -200,7 +200,7 @@ const OwnerReplyModal = ({
         </div>
         <textarea
           rows="4"
-          className={`shadow-lg w-5/6 rounded-xl md:w-auto px-4 py-4 mt-4 mb-4 text-sm bg-bkg border-1 text-text reply-textarea focus:ring-0 placeholder-text font-normal${
+          className={`border-1 border-b border-primary shadow-lg w-5/6 rounded-xl md:w-auto px-4 py-4 mt-4 mb-4 text-md bg-bkg border-1 text-text reply-textarea focus:ring-0 placeholder-text font-normal${
             isDarkMode ? "light" : "dark"
           }`}
           placeholder="Write a Reply..."
