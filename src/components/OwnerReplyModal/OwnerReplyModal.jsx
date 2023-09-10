@@ -200,7 +200,7 @@ const OwnerReplyModal = ({
         </div>
         <textarea
           rows="4"
-          className={`shadow-lg w-5/6 rounded-xl md:w-auto px-4 py-4 mt-4 mb-4 text-sm bg-bkg border-1 text-text reply-textarea focus:ring-0 placeholder-text font-normal${
+          className={`border-1 border-b border-primary shadow-lg w-5/6 rounded-xl md:w-auto px-4 py-4 mt-4 mb-4 text-md bg-bkg border-1 text-text reply-textarea focus:ring-0 placeholder-text font-normal${
             isDarkMode ? "light" : "dark"
           }`}
           placeholder="Write a Reply..."

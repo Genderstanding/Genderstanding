@@ -41,7 +41,7 @@ export default function HeaderOwnerBar({ isDarkMode }) {
               />
       </button>
       {/* Display created node name */}
-      <p className="mb-1 ml-5 text-2xl font-bold capitalize truncate text-secondary font-mulish w-52">
+      <p className="mb-1 ml-5 text-2xl font-bold capitalize truncate text-text font-mulish w-52">
   {newNode?.[0]?.node_name || newNode?.node_name}
             </p>
       {/* this flex-grow div is tailwind way to spread out the back and add buttons*/}

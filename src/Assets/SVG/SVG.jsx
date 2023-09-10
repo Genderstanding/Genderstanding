@@ -5,7 +5,7 @@ export default function SvgIcon({ width, height, viewBox, pathData, isDarkMode ,
     style={{
       width: "40px",
       height: "40px",
-      boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.16)",
+      boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
       borderRadius: 12,
       display: "flex",
       justifyContent: "center",

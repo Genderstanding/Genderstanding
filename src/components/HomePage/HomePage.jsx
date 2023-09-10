@@ -29,10 +29,10 @@ export default function HomePage({ isDarkMode }) {
   let yourContent;
   const checkUserId = (node) => {
     if (node.user_id == user.id) {
-       yourContent = <AccountCircleIcon sx={{marginTop:1, marginBottom:"10px", marginRight:"5px", color:"#451b03" ,fontSize:"30px"}}/>
+       yourContent = <AccountCircleIcon sx={{marginTop:1, marginBottom:"10px", marginRight:"5px", color:"#434242" ,fontSize:"30px"}}/>
       // <img style={{  marginBottom:"10px" , padding:0 ,width: "27px" }} src="./brand.png" /> 
     } else if (node.user_id !== user.id) {
-      yourContent = <SupervisedUserCircleRoundedIcon sx={{marginTop:1, marginBottom:"10px", marginRight:"10px", color:"#451b03", fontSize:"32px"}}/>
+      yourContent = <SupervisedUserCircleRoundedIcon sx={{marginTop:1, marginBottom:"10px", marginRight:"10px", color:"#434242", fontSize:"32px"}}/>
       // <img style={{  marginBottom:"10px", padding:0 ,width: "30px" }} src="./storytelling.png" /> 
     }
     return yourContent;
@@ -96,7 +96,7 @@ export default function HomePage({ isDarkMode }) {
                       key={node.id}
                     >
                    
-                    <span className="font-bold capitalize truncate w-52">  {checkUserId(node)}{node.node_name}</span>
+                    <span className="font-bold text-black capitalize truncate w-52">  {checkUserId(node)}{node.node_name}</span>
                       <div className="pt-2 text-xs font-bold text-primary active:underline">
                         View Community{" "}
                   
@@ -157,10 +157,10 @@ export default function HomePage({ isDarkMode }) {
                           isDarkMode ? "light" : "dark"
                         }`}
                       >
-                        <p className="text-xl font-bold capitalize truncate text-amber-950 font-mulish w-52 ">
+                        <p className="text-xl font-bold text-black capitalize truncate font-mulish w-52 ">
                           {post.node_name}{" "}
                         </p>
-                        <p className="pt-1 font-semibold normal-case truncate text-md w-52 font-body">
+                        <p className="pt-1 font-semibold normal-case truncate text-gray text-md w-52 font-body">
                           {post.content}
                         </p>
 
