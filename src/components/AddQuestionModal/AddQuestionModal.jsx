@@ -91,7 +91,7 @@ const AddQuestionModal = ({
         <textarea 
           rows="3"
           // className="w-full px-4 py-2 text-sm text-gray-900 bg-white border-0 question-textarea dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
-          className={`shadow-lg w-5/6 rounded-xl md:w-auto px-4 py-4 mt-4 mb-4 text-md bg-textarea border-1 border-b border-primary text-gray reply-textarea focus:ring-0 placeholder-gray font-semibold${isDarkMode ? "light" : "dark"}`}
+          className={`shadow-lg w-5/6 rounded-xl md:w-auto px-4 py-4 mt-4 mb-4 text-md bg-textarea border-1 border-b border-primary text-text reply-textarea focus:ring-0 placeholder-gray font-semibold ${isDarkMode ? "light" : "dark"}`}
                   
           placeholder="Write a question..."
           onChange={(event) => setQuestionInput(event.target.value)}
