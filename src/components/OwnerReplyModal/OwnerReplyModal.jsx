@@ -154,7 +154,7 @@ const OwnerReplyModal = ({
     <div className="flex items-center justify-center modal-overlay">
       <div className="flex flex-col items-center justify-center reply-box">
         {/* {children} */}
-        <h2 onClick={handleAutofill} className="mt-6 mb-4 mr-4 text-xl font-bold text-amber-950">
+        <h2 onClick={handleAutofill} className="mt-6 mb-4 mr-4 text-xl font-bold text-center text-amber-950">
           {questionObject.content}
         </h2>
         <span className="text-sm font-semibold text-amber-950">

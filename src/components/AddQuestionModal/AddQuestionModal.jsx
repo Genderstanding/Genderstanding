@@ -33,6 +33,8 @@ const AddQuestionModal = ({
 
   const handleSubmitQuestion = (event) => {
     event.preventDefault();
+    setAutofill('')
+    setQuestionInput("");
     try {
       dispatch({
         type: "CREATE_POST",
@@ -42,8 +44,6 @@ const AddQuestionModal = ({
           orig_post: false,
         },
       });
-      setAutofill('')
-      setQuestionInput("");
       closeAddQuestion();
       toast.success("Question submitted", {
         position: "bottom-left",
