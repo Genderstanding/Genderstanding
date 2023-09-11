@@ -29,10 +29,10 @@ export default function HomePage({ isDarkMode }) {
   let yourContent;
   const checkUserId = (node) => {
     if (node.user_id == user.id) {
-       yourContent = <AccountCircleIcon sx={{marginTop:1, marginBottom:"10px", marginRight:"5px", color:"#434242" ,fontSize:"30px"}}/>
+       yourContent = <AccountCircleIcon sx={{marginLeft: "-5px", marginTop:1, marginBottom:"12px", marginRight:"2px", color:"#434242" ,fontSize:"30px"}}/>
       // <img style={{  marginBottom:"10px" , padding:0 ,width: "27px" }} src="./brand.png" /> 
     } else if (node.user_id !== user.id) {
-      yourContent = <SupervisedUserCircleRoundedIcon sx={{marginTop:1, marginBottom:"10px", marginRight:"10px", color:"#434242", fontSize:"32px"}}/>
+      yourContent = <SupervisedUserCircleRoundedIcon sx={{marginLeft: "-5px", marginTop:1, marginBottom:"10px", marginRight:"2px", color:"#434242", fontSize:"32px"}}/>
       // <img style={{  marginBottom:"10px", padding:0 ,width: "30px" }} src="./storytelling.png" /> 
     }
     return yourContent;
@@ -96,7 +96,7 @@ export default function HomePage({ isDarkMode }) {
                       key={node.id}
                     >
                    
-                    <span className="font-bold text-black capitalize truncate w-52">  {checkUserId(node)}{node.node_name}</span>
+                    <span className="w-32 font-bold text-black capitalize truncate">  {checkUserId(node)}{node.node_name}</span>
                       <div className="pt-2 text-xs font-bold text-primary active:underline">
                         View Community{" "}
                   
