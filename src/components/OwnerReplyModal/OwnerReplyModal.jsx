@@ -95,7 +95,9 @@ const OwnerReplyModal = ({
         type: "DELETE_POST",
         payload: postId,
       });
-      toast.success("Comment deleted", {
+
+      if (dispatch) {
+         toast.success("Comment deleted", {
         position: "bottom-left",
         autoClose: 1500,
         hideProgressBar: true,
@@ -105,17 +107,21 @@ const OwnerReplyModal = ({
         progress: undefined,
         theme: "light",
       });
+      } else {
+        toast.error("Failed to delete comment", {
+          position: "bottom-left",
+          autoClose: 1500,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
+     
     } catch (error) {
-      toast.error("Failed to delete comment", {
-        position: "bottom-left",
-        autoClose: 1500,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+     console.log("error deleting", error);
     }
   };
 

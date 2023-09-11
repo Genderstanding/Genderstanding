@@ -1,122 +1,178 @@
+<div align="center">
+  <a href="https://github.com/Genderstanding/Genderstanding">
+   <h3 align="center"> <img alt="logo" width="200" height="250" src="public/icon.png"/><br/>Genderstanding</h3>
+  </a>
+ <a href="/">View Demo</a>
+  <p align="center">
+          An invite-only social media platform that provides a safe community space, allowing users to invite friends and family to ask questions anonymously.
+    <br />
+    <br />
+  </p>
+</div>
 
-# Prime Solo Project Starting Repo
-This version uses React, Redux, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).
 
-We **STRONGLY** recommend following these instructions carefully. It's a lot, and will take some time to set up, but your life will be much easier this way in the long run.
+<!-- TABLE OF CONTENTS
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ol>
+</details> -->
 
-## Use the Template for This Repository (Don't Clone)
+### **Built With**
+<br/>
+<p>
+ <img
+    src="https://img.shields.io/badge/JavaScript-282C34?style=for-the-badge&logo=javascript&logoColor=F7DF1E"
+    alt="JavaScript logo"
+    title="JavaScript"
+    height="25"
+  />
+  &nbsp;
+  <img
+    src="https://img.shields.io/badge/-React-282C34?style=for-the-badge&logo=react&logoColor=61DAFB"
+    alt="React logo"
+    title="React"
+    height="25"
+  />
+  &nbsp;
+  <img
+    src="https://img.shields.io/badge/-Nodejs-282C34?style=for-the-badge&logo=Node.js&logoColor=339933"
+    alt="Node.js logo"
+    title="Node.js"
+    height="25"
+  />
+   &nbsp;
+    <img
+    src="https://img.shields.io/badge/Express.js-282C34?style=for-the-badge&logo=Express&logoColor=F7DF1E"
+    alt="Express logo"
+    title="Express.js"
+    height="25"
+  />
+  &nbsp;
+   <img
+    src="https://img.shields.io/badge/postgres-282C34.svg?style=for-the-badge&logo=postgresql&logoColor=61DAFB"
+    alt="Redux-Saga logo"
+    title="Redux-Saga"
+    height="25"
+  />
+   &nbsp;
+  <img
+    src="https://img.shields.io/badge/Redux_Saga-282C34?style=for-the-badge&logo=Redux-Saga&logoColor=999999"
+    alt="PostgreSQL logo"
+    title="PostgreSQL"
+    height="25"
+  />
+   &nbsp;
+   <img
+    src="https://img.shields.io/badge/Tailwind_CSS-282C34?style=for-the-badge&logo=tailwind-css&logoColor=38B2AC"
+    alt="Tailwind logo"
+    title="Tailwind"
+    height="25"
+  />
+  &nbsp;
+   <img
+    src="https://img.shields.io/badge/MUI-282C34.svg?style=for-the-badge&logo=mui&logoColor=0081CB"
+    alt="MUI logo"
+    title="MUI"
+    height="25"
+  />
+   <img
+    src="https://img.shields.io/badge/Figma-282C34?style=for-the-badge&logo=figma&logoColor=F24E1E"
+    alt="Figma logo"
+    title="Figma"
+    height="25"
+  />
+  &nbsp;
+</p>
 
-- Don't Fork or Clone. Instead, click the `Use this Template` button, and make a copy to your personal account. Make the project `PUBLIC`!
+### **Prerequisites**
+
+* [Node.js](https://nodejs.org/en/)
+* [PostrgeSQL](https://www.postgresql.org/)
+* [Nodemon](https://nodemon.io/)
 
 
-## Prerequisites
+### **Installation**
 
-Before you get started, make sure you have the following software installed on your computer:
+1. Clone the repository to your local computer
+1. Start postgres if not running already by using `brew services start postgresql`
+1. Create a database named `playwme`
+1. Run `database.sql` file
+1. Open two terminal windows
+1. Run `npm run server`
+1. Run `npm run client`
+1. Navigate to `localhost:3000`
 
-- [Node.js](https://nodejs.org/en/)
-- [PostrgeSQL](https://www.postgresql.org/)
-- [Nodemon](https://nodemon.io/)
+### **Screenshot**
+<br/>
 
-## Create database and table
+![Screenshot](public/Juniper.png)
+![Screenshot](public/dark.png)
+![Screenshot](public/light.png)
+![Screenshot](public/demo.gif)
 
-Create a new database called `prime_app` and create a `user` table:
+### **Contact**
 
-```SQL
-CREATE TABLE "user" (
-    "id" SERIAL PRIMARY KEY,
-    "username" VARCHAR (80) UNIQUE NOT NULL,
-    "password" VARCHAR (1000) NOT NULL
-);
-```
+* **Quynh Dao** - 
+<a target="_blank" href="https://www.linkedin.com/in/daoquynh29">![Linkedin][linkedin]</a>
+<a target="_blank" href="https://github.com/quynhngandao">![github][Github]</a>
 
-If you would like to name your database something else, you will need to change `prime_app` to the name of your new database name in `server/modules/pool.js`
+* **Aubrey Graves** - 
+<a target="_blank" href="https://www.linkedin.com/in/aubrey-graves">![linkedin][Linkedin]</a>
+<a target="_blank" href="https://github.com/grav0165">![github][Github]</a>
 
-## Development Setup Instructions
+* **Justin Larson** - 
+<a target="_blank" href="https://www.linkedin.com/in/justin-lawson-732298281">![linkedin][Linkedin]</a>
+<a target="_blank" href="https://github.com/jstnlawson">![github][Github]</a>
 
-- Run `npm install`
-- Create a `.env` file at the root of the project and paste this line into the file:
-  ```
-  SERVER_SESSION_SECRET=superDuperSecret
-  ```
-  While you're in your new `.env` file, take the time to replace `superDuperSecret` with some long random string like `25POUbVtx6RKVNWszd9ERB9Bb6` to keep your application secure. Here's a site that can help you: [https://passwordsgenerator.net/](https://passwordsgenerator.net/). If you don't do this step, create a secret with less than eight characters, or leave it as `superDuperSecret`, you will get a warning.
-- Start postgres if not running already by using `brew services start postgresql`
-- Run `npm run server`
-- Run `npm run client`
-- Navigate to `localhost:3000`
+<!-- ACKNOWLEDGMENTS -->
 
-## Debugging
+### **Acknowledgments**
 
-To debug, you will need to run the client-side separately from the server. Start the client by running the command `npm run client`. Start the debugging server by selecting the Debug button.
+* Thanks to [Prime Digital Academy](www.primeacademy.io) who equipped and helped me to make this application a reality. 
+<br/> 
+* Thank you to Emma Stout and all the Prime Staff and Instructors!
 
-![VSCode Toolbar](documentation/images/vscode-toolbar.png)
+<p align="right"><a href="#top">back to top</a></p>
 
-Then make sure `Launch Program` is selected from the dropdown, then click the green play arrow.
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-![VSCode Debug Bar](documentation/images/vscode-debug-bar.png)
-
-## Testing Routes with Postman
-
-To use Postman with this repo, you will need to set up requests in Postman to register a user and login a user at a minimum.
-
-Keep in mind that once you using the login route, Postman will manage your session cookie for you just like a browser, ensuring it is sent with each subsequent request. If you delete the `localhost` cookie in Postman, it will effectively log you out.
-
-1. Start the server - `npm run server`
-2. Import the sample routes JSON file [v2](./PostmanPrimeSoloRoutesv2.json) by clicking `Import` in Postman. Select the file.
-3. Click `Collections` and `Send` the following three calls in order:
-   1. `POST /api/user/register` registers a new user, see body to change username/password
-   2. `POST /api/user/login` will login a user, see body to change username/password
-   3. `GET /api/user` will get user information, by default it's not very much
-
-After running the login route above, you can try any other route you've created that requires a logged in user!
-
-## Production Build
-
-Before pushing to Heroku, run `npm run build` in terminal. This will create a build folder that contains the code Heroku will be pointed at. You can test this build by typing `npm start`. Keep in mind that `npm start` will let you preview the production build but will **not** auto update.
-
-- Start postgres if not running already by using `brew services start postgresql`
-- Run `npm start`
-- Navigate to `localhost:5000`
-
-## Lay of the Land
-
-There are a few videos linked below that show a walkthrough the client and sever setup to help acclimatize to the boilerplate. Please take some time to watch the videos in order to get a better understanding of what the boilerplate is like.
-
-- [Initial Set](https://vimeo.com/453297271)
-- [Server Walkthrough](https://vimeo.com/453297212)
-- [Client Walkthrough](https://vimeo.com/453297124)
-
-Directory Structure:
-
-- `src/` contains the React application
-- `public/` contains static assets for the client-side
-- `build/` after you build the project, contains the transpiled code from `src/` and `public/` that will be viewed on the production site
-- `server/` contains the Express App
-
-This code is also heavily commented. We recommend reading through the comments, getting a lay of the land, and becoming comfortable with how the code works before you start making too many changes. If you're wondering where to start, consider reading through component file comments in the following order:
-
-- src/components
-  - App/App
-  - Footer/Footer
-  - Nav/Nav
-  - AboutPage/AboutPage
-  - InfoPage/InfoPage
-  - UserPage/UserPage
-  - LoginPage/LoginPage
-  - RegisterPage/RegisterPage
-  - LogOutButton/LogOutButton
-  - ProtectedRoute/ProtectedRoute
-
-## Deployment
-
-1. Create a new Heroku project
-1. Link the Heroku project to the project GitHub Repo
-1. Create an Heroku Postgres database
-1. Connect to the Heroku Postgres database from Postico
-1. Create the necessary tables
-1. Add an environment variable for `SERVER_SESSION_SECRET` with a nice random string for security
-1. In the deploy section, select manual deploy
-
-## Update Documentation
-
-Customize this ReadMe and the code comments in this project to read less like a starter repo and more like a project. Here is an example: https://gist.github.com/PurpleBooth/109311bb0361f32d87a2
+[linkedin]: https://img.shields.io/badge/-LinkedIn-0077B5?style=for-the-badge&logo=Linkedin&logoColor=white
+[Linkedin]: https://img.shields.io/badge/-LinkedIn-0077B5?style=for-the-badge&logo=Linkedin&logoColor=white
+[react.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[React]: https://reactjs.org/
+[javascript.js]: https://img.shields.io/badge/JavaScript-20232A?style=for-the-badge&logo=JavaScript&logoColor=F7DF1E
+[Javascript]: https://www.javascript.com/
+[node.js]: https://img.shields.io/badge/Node.js-20232A?style=for-the-badge&logo=Node.js&logoColor=339933
+[Node]: https://nodejs.org/en/
+[express.js]: https://img.shields.io/badge/Express.js-20232A?style=for-the-badge&logo=Express&logoColor=F7DF1E
+[Express]: https://expressjs.com/
+[postgresql]: https://img.shields.io/badge/PostgreSQL-20232A?style=for-the-badge&logo=PostgreSQL&logoColor=4169E1
+[PostgreSQL]: https://www.postgresql.org/
+[redux]: https://img.shields.io/badge/Redux-20232A?style=for-the-badge&logo=Redux&logoColor=764ABC
+[Redux]: https://redux.js.org/
+[redux-saga]: https://img.shields.io/badge/Redux_Saga-20232A?style=for-the-badge&logo=Redux-Saga&logoColor=999999
+[Redux-Saga]: https://redux-saga.js.org/
+[mui]: https://img.shields.io/badge/Material_UI-20232A?style=for-the-badge&logo=MUI&logoColor=007FFF
+[MUI]: https://mui.com/
+[Screenshot]: https://github.com/quynhngandao/PLAYwME-solo-project/blob/main/public/images/Screenshot.gif
+[email]: https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white
+[gitHub]: https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white
+[Github]: https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white
 # Genderstanding
