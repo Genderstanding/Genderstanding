@@ -142,7 +142,7 @@ const ReplyModal = ({
         <div className="flex items-center justify-center modal-overlay">
             <div className="flex flex-col items-center justify-center reply-box">
                 {/* {children} */}
-                <h2 className="mt-6 mb-4 mr-4 text-xl font-bold text-amber-950">
+                <h2 className="mt-6 mb-4 mr-4 text-xl font-bold text-center text-amber-950">
                     {questionObject.content}
                 </h2>
                 <div className="flex items-end justify-between px-4 py-2 text-amber-950">
