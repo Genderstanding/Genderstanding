@@ -96,38 +96,46 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
   // Code input
   const handleNodeCodeInput = (event, nodeCodeInput, nodeAssociation, user) => {
     event.preventDefault();
- 
-    const matchingNode = nodeAssociation.find(
-      (node) => node?.auth_code === nodeCodeInput
-    );
 
-    if (
-      !matchingNode ||
-      !matchingNode.auth_code ||
-      nodeCodeInput.length !== 8
-    ) {
-      toast.error("Invalid Code or Community not found", getToastOptions());
-      return;
-    }
+    try {
+      let matchingNode = nodeAssociation.find(
+        (node) => node?.auth_code === nodeCodeInput
+      );
 
-    if (
-      matchingNode.user_id === user.id ||
-      nodeAssociation.some((node) => node.user_id === user.id)
-    ) {
-      toast.error("You're already in the community", getToastOptions());
-    } else if (matchingNode.user_id !== null) {
-      toast.error("Invite code has already been used", getToastOptions());
-    } else {
-      // Dispatch a database update to PUT the user's ID into the database
-      dispatch({
-        type: "USER_NODE_ASSOCIATION",
-        payload: nodeCodeInput,
-      });
+      if (
+        !matchingNode ||
+        !matchingNode.auth_code ||
+        nodeCodeInput.length !== 8
+      ) {
+        toast.error("Invalid Code or Community not found", getToastOptions());
+        return;
+      }
 
-      toast.success("Invite code submitted successfully", getToastOptions());
-      history.push("/home");
+      if (matchingNode.user_id === null) {
+        // Dispatch a database update to PUT the user's ID into the database
+        dispatch({
+          type: "USER_NODE_ASSOCIATION",
+          payload: nodeCodeInput,
+        });
+        toast.success("Invite code submitted successfully", getToastOptions());
+        history.push("/home");
+      } else if (matchingNode.user_id !== null) {
+        // Dispatch a database update to PUT the user's ID into the database
+        if (matchingNode.user_id === user.id) {
+          toast.error("You're already in the community", getToastOptions());
+        } else if (matchingNode.user_id !== user.id) {
+          toast.error("Code has already been used", getToastOptions());
+        }
+      } else {
+        toast.error("error inputting code", getToastOptions());
+      }
+      // clear input
+      setNodeCodeInput("");
+    } catch (error) {
+      console.log("error inputting code", error);
     }
   };
+
 
   // TOASTIFY
   const getToastOptions = () => ({

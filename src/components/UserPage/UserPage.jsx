@@ -93,8 +93,8 @@ function UserPage({ isDarkMode }) {
                       }`}
                       onClick={(event) => goToOwnerNodes(event, node)}
                     >
-                      <div className="m-4 text-xl font-bold text-center capitalize truncate w-52 text-amber-950 owned-community-names">
-                        <span className="text-2xl font-bold truncate w-52 owned-community-names">
+                      <div className="m-4 text-xl font-bold text-center capitalize text-amber-950 owned-community-names">
+                        <span className="text-2xl font-bold owned-community-names">
                           {node?.node_name}
                         </span>
                       </div>

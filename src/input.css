@@ -9,10 +9,13 @@
         --colors-secondary: 207 111 90;
         --colors-accent: 123 62 55;
         --colors-bkg: 251 246 246;
-        --colors-text: 39 6 6;
-        --colors-userContent:  254 242 242;
-        --colors-ownerContent: 254 235 235;
+        --colors-text: 67 64 64;
+        --colors-userContent:  254 244 244;
+        --colors-ownerContent: 254 238 238;
         --colors-hearts: 207 111 90;
+        --colors-textarea: 240 240 240;
+        --colors-gray: 67 66 66;
+        --colors-main: 203 116 87;
     }
 
     :root[class="dark"] {
@@ -24,6 +27,9 @@
         --colors-userContent: 254 246 246;
         --colors-ownerContent: 239 220 220;
         --colors-hearts: 32 32 35;
+        --colors-textarea: 32 32 35;
+        --colors-main: 13 13 13;
+        --colors-gray: 124 124 124;
     }
 }
 
