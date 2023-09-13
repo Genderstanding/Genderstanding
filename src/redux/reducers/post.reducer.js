@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 
-// reducer to hold GET request from database of all posts
+// postDatabaseResponse to hold GET request from database of all posts
 const postDatabaseResponse = ( state = [], action) => {
     switch(action.type) {
         case 'SET_POSTS':
@@ -10,6 +10,7 @@ const postDatabaseResponse = ( state = [], action) => {
     }
 }
 
+// publicDatabaseResponse to hold GET request from database of public posts
 const publicDatabaseResponse = ( state = [], action) => {
     switch(action.type){
         case 'SET_PUBLIC_POSTS':

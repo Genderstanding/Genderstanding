@@ -8,18 +8,19 @@ import "../App/App.css";
 import CustomIcon from "../../Assets/Icon/CustomIcon";
 
 // TOASTIFY
-import { ToastContainer, toast} from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+// This hold login form
 function LoginForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const errors = useSelector((store) => store.errors);
   const dispatch = useDispatch();
 
+  // handle login functionality
   const login = (event) => {
     event.preventDefault();
-
     if (username && password) {
       dispatch({
         type: "LOGIN",
@@ -43,11 +44,6 @@ function LoginForm() {
     }
   }; // end login
 
-  const handleAutofill = ( ) =>{
-    setUsername("Juniper")
-    setPassword('1234')
-  }
-  
   return (
     <form className="formPanel" onSubmit={login}>
       {errors.loginMessage && (
@@ -59,8 +55,7 @@ function LoginForm() {
       {/* INPUT */}
       <div className="label-container">
         <label htmlFor="username" className="label">
-          <Typography 
-           onClick={handleAutofill}
+          <Typography
             variant="h6"
             sx={{
               marginLeft: "35px",
@@ -68,7 +63,7 @@ function LoginForm() {
               fontFamily: "mulish",
               fontWeight: 500,
               color: "#CF6F5A",
-              marginTop:"12px"
+              marginTop: "12px",
             }}
           >
             Username
@@ -95,7 +90,7 @@ function LoginForm() {
               fontFamily: "mulish",
               fontWeight: 500,
               color: "#CF6F5A",
-              marginTop:"12px"
+              marginTop: "12px",
             }}
           >
             Password

@@ -2,68 +2,68 @@ import React, { useState } from "react";
 import "./UserNodes.css";
 import ReplyModal from "../ReplyModal/ReplyModal";
 import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
 import HeaderUserBar from "../HeaderBar/HeaderUserBar";
-import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import AddQuestionModal from "../AddQuestionModal/AddQuestionModal";
 import { useDispatch } from "react-redux";
 import moment from "moment";
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
+// This page holds the nodes that a user is in
 const UserNodes = ({ isDarkMode }) => {
   const [addQuestionOpen, setAddQuestionOpen] = useState(false);
   const [addReplyOpen, setAddReplyOpen] = useState(false);
   const [clickedReplyContent, setClickedReplyContent] = useState("");
 
-  // importing dispatch
   const dispatch = useDispatch();
 
   // Posts being held in store
   let nodePosts = useSelector(
     (store) => store.postReducer.postDatabaseResponse
   );
+  // New nodes being held in store
   let newNode = useSelector(
     (store) => store.newNodeReducer.newNodeDatabaseResponse
   );
 
-  //like store
+  // Likes of a post being held in store
   let likePosts = useSelector(
     (store) => store.likesReducer.likeDatabaseResponse
   );
-  //user store
+  // account of the logged in user being held in store
   const user = useSelector((state) => state.user);
 
   // function to like a post
   const increaseCount = (postId) => {
     console.log("post id is : ", postId);
-      const isLikedByUser = likePosts.some((like) => like.post_id === postId && like.user_id === user.id);
-      console.log('isLikedByUser:', isLikedByUser)
-      if (!isLikedByUser) {
-        dispatch({
-          type: "LIKE_POST",
-          payload: postId,
-        });
+    const isLikedByUser = likePosts.some(
+      (like) => like.post_id === postId && like.user_id === user.id
+    );
+    console.log("isLikedByUser:", isLikedByUser);
+    if (!isLikedByUser) {
       dispatch({
-          type: 'LIKE_POST_USER',
-          payload: { post: postId }
-        })
-      } 
+        type: "LIKE_POST",
+        payload: postId,
+      });
+      dispatch({
+        type: "LIKE_POST_USER",
+        payload: { post: postId },
+      });
+    }
   };
 
+  // function to open and close the add question modal
   const openAddQuestion = () => {
     setAddQuestionOpen(true);
   };
-
   const closeAddQuestion = () => {
     setAddQuestionOpen(false);
   };
-
+  // function to open and close the reply modal
   const openAddReply = (questionObject) => {
     setClickedReplyContent(questionObject);
     setAddReplyOpen(true);
   };
-
   const closeAddReply = () => {
     setAddReplyOpen(false);
   };
@@ -90,7 +90,13 @@ const UserNodes = ({ isDarkMode }) => {
                         </span>
                       </div>
                       {/* this should display the latest question/reply in this thread */}
-                      <div className={`  flex flex-col items-center justify-center m-5 text-lg font-bold question-text bg-userContent text-amber-950 ${isDarkMode ? "light" : "dark"}`}>{post?.content}</div>
+                      <div
+                        className={`  flex flex-col items-center justify-center m-5 text-lg font-bold question-text bg-userContent text-amber-950 ${
+                          isDarkMode ? "light" : "dark"
+                        }`}
+                      >
+                        {post?.content}
+                      </div>
                       <div className="flex items-end justify-between px-4 py-2 ">
                         <button
                           className="font-semibold text-md active:underline text-amber-950"
@@ -98,15 +104,26 @@ const UserNodes = ({ isDarkMode }) => {
                         >
                           Open
                         </button>
-                        <button
-                          onClick={() => increaseCount(post.id)}
-                        >
-                          {likePosts.some((like) => like.post_id === post.id && like.user_id === user.id) ? (
-                              <FavoriteIcon className={`text-hearts ${isDarkMode ? 'dark' : 'light'}`}/>
-                            ) : (
-                              <FavoriteBorderIcon className={`text-hearts ${isDarkMode ? 'dark' : 'light'}`}/>
-                            )}
-                          {'  '}<span>{post.votes || 0}</span>
+                        <button onClick={() => increaseCount(post.id)}>
+                          {likePosts.some(
+                            (like) =>
+                              like.post_id === post.id &&
+                              like.user_id === user.id
+                          ) ? (
+                            <FavoriteIcon
+                              className={`text-hearts ${
+                                isDarkMode ? "dark" : "light"
+                              }`}
+                            />
+                          ) : (
+                            <FavoriteBorderIcon
+                              className={`text-hearts ${
+                                isDarkMode ? "dark" : "light"
+                              }`}
+                            />
+                          )}
+                          {"  "}
+                          <span>{post.votes || 0}</span>
                         </button>
                       </div>
                     </div>

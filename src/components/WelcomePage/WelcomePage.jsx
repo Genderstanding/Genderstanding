@@ -5,6 +5,7 @@ import "../CustomButton/CustomButton.css";
 import "../App/App.css";
 import { Typography } from "@mui/material";
 
+// this is the welcome page, the start of the application
 export default function WelcomePage() {
   return (
     <div className="flex flex-col h-screen welcome-container">

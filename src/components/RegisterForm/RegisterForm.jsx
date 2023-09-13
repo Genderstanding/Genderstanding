@@ -1,69 +1,70 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import CustomIcon from '../../Assets/Icon/CustomIcon'
+import CustomIcon from "../../Assets/Icon/CustomIcon";
 import "../App/App.css";
 import { Typography } from "@mui/material";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 // TOASTIFY
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"; 
+import "react-toastify/dist/ReactToastify.css";
 
+// This holds the register form
 function RegisterForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const errors = useSelector((store) => store.errors);
-  const user = useSelector(store => store.user)
+  const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const history = useHistory();
 
+  // function to handle registration 
   const registerUser = (event) => {
     event.preventDefault();
-try {
-   dispatch({
-      type: "REGISTER",
-      payload: {
-        username: username,
-        password: password,
-      },
-    });
-    history.push("/action")
-} catch (error) {
-  toast.error("Registration failed", {
-    position: "bottom-left",
-    autoClose: 1500,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "light",
-  });
-}
-   
+    try {
+      dispatch({
+        type: "REGISTER",
+        payload: {
+          username: username,
+          password: password,
+        },
+      });
+      history.push("/action");
+    } catch (error) {
+      toast.error("Registration failed", {
+        position: "bottom-left",
+        autoClose: 1500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+  }; // end registerUser
 
-  }; // end registerUser 
-  
-const handleAutofill = ( ) =>{
-  setUsername("Daniella")
-  setPassword('123')
-  
-}
+  // function to handle autofill 
+  const handleAutofill = () => {
+    setUsername("Daniella");
+    setPassword("123");
+  };
 
   return (
     <form className="formPanel" onSubmit={registerUser}>
+      {/* handle registration error */}
       {errors.registrationMessage && (
         <h3 className="alert" role="alert">
           {errors.registrationMessage}
         </h3>
       )}
       <CustomIcon />
-        {/* INPUT */}
+      {/* INPUT */}
       <div className="label-container">
         <label htmlFor="username" className="label">
           <Typography
-          onClick={handleAutofill}
+            onClick={handleAutofill}
             variant="h6"
             sx={{
               marginLeft: "35px",
@@ -71,7 +72,7 @@ const handleAutofill = ( ) =>{
               fontFamily: "mulish",
               fontWeight: 500,
               color: "#CF6F5A",
-              marginTop:"12px"
+              marginTop: "12px",
             }}
           >
             Username
@@ -99,7 +100,7 @@ const handleAutofill = ( ) =>{
               fontFamily: "mulish",
               fontWeight: 500,
               color: "#CF6F5A",
-              marginTop:"12px"
+              marginTop: "12px",
             }}
           >
             Password
@@ -117,7 +118,7 @@ const handleAutofill = ( ) =>{
         </label>
       </div>
       <div>
-           {/* LOGIN */}
+        {/* LOGIN */}
         <div
           className="already-registered"
           style={{
@@ -136,14 +137,10 @@ const handleAutofill = ( ) =>{
           <Link exact to="/login">
             Already Registered?
           </Link>
-          
-         
         </div>
 
-      
-        
         <input className="btn" type="submit" name="submit" value="Register" />
-    </div>
+      </div>
     </form>
   );
 }

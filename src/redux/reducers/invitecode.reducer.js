@@ -1,3 +1,4 @@
+// invitecode holds the generated invite codes  
 const inviteCode = (state = {}, action) => {
   switch (action.type) {
     case "CLEAR_GENERATE_INVITE_CODE":

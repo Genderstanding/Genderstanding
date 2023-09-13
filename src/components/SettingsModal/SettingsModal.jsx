@@ -12,6 +12,7 @@ import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+// This hold setting modal
 const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
   // importing dispatch
   const dispatch = useDispatch();

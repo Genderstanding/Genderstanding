@@ -5,13 +5,14 @@ import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import { useSelector } from "react-redux";
 import SVG from "../../Assets/SVG/SVG";
 import { useHistory } from "react-router-dom";
-import { Typography } from "@mui/material";
 
-export default function HeaderBar({isDarkMode}) {
+// This holds general header bar
+export default function HeaderBar({ isDarkMode }) {
   const history = useHistory();
   const [addNodeOpen, setaddNodeOpen] = useState(false);
-   const user = useSelector(store => store.user)
+  const user = useSelector((store) => store.user);
 
+  // open and close create node
   const openAddNode = () => {
     setaddNodeOpen(true);
   };
@@ -27,20 +28,17 @@ export default function HeaderBar({isDarkMode}) {
   ];
 
   return (
-  
-     <div className={`fixed top-0 left-0 right-0 flex bg-bkg items-center header-container text-text ${isDarkMode ? "light" : "dark"}`}>
-      
+    <div
+      className={`fixed top-0 left-0 right-0 flex bg-bkg items-center header-container text-text ${
+        isDarkMode ? "light" : "dark"
+      }`}
+    >
       <button onClick={() => history.goBack()}>
-      <MdChevronLeft
-                size={35}
-                className={`ml-2 text-secondary  ${isDarkMode ? "light" : "dark"}`}
-              />
-
+        <MdChevronLeft
+          size={35}
+          className={`ml-2 text-secondary  ${isDarkMode ? "light" : "dark"}`}
+        />
       </button>
-{/* Display new user name */}
-{/* <div style={{ margin: "25px" }}>
-        <Typography>Hello {user.username}</Typography>
-      </div> */}
       {/* this flex-grow div is tailwind way to spread out the back and add buttons*/}
       <div className="flex-grow"> </div>
       <button className="mr-4 text-2xl" onClick={openAddNode}>
@@ -56,4 +54,3 @@ export default function HeaderBar({isDarkMode}) {
     </div>
   );
 }
-

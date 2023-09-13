@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+// This holds modal to create invite code 
 export const InviteNodeModal = ({
   InviteCodeOpen,
   InviteCodeClose,
@@ -25,6 +26,7 @@ export const InviteNodeModal = ({
   );
  const dispatch = useDispatch();
  
+ // handle code copying 
   const copyCode = async () => {
     try {
       await navigator.clipboard.writeText(inviteCode);
@@ -63,8 +65,7 @@ export const InviteNodeModal = ({
       });
     }
   };
-
-
+  
   return (
     <div className="flex items-center justify-center modal-overlay">
       <div className="flex flex-col items-center justify-center invite-code-modal">

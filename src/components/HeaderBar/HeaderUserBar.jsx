@@ -3,41 +3,24 @@ import "../HomePage/HomePage.css";
 import AddQuestionModal from "../AddQuestionModal/AddQuestionModal";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import { useSelector } from "react-redux";
-import SVG from '../../Assets/SVG/SVG'
+import SVG from "../../Assets/SVG/SVG";
 import { useHistory } from "react-router-dom";
-import { Typography } from "@mui/material";
 
-export default function HeaderUserBar({isDarkMode}) {
-  const [clickedReplyContent, setClickedReplyContent] = useState("");
+// this holds node user header 
+export default function HeaderUserBar({ isDarkMode }) {
   const [addQuestionOpen, setAddQuestionOpen] = useState(false);
-  const [addReplyOpen, setAddReplyOpen] = useState(false);
-  // const [settingsOpen, setSettingsOpen] = useState(false);
   const history = useHistory();
-
-  // Posts being held in store
   let nodePosts = useSelector(
     (store) => store.postReducer.postDatabaseResponse
   );
   let newNode = useSelector(
     (store) => store.newNodeReducer.newNodeDatabaseResponse
   );
-  let user = useSelector(
-    (store) => store.user
-  );
-  
-  // //  SETTING MODAL
-  // const openSettings = () => {
-  //   setSettingsOpen(true);
-  // };
-  // const closeSettings = () => {
-  //   setSettingsOpen(false);
-  // };
-
-  // QUESTION MODAL
+  let user = useSelector((store) => store.user);
+  // open and close add question modal
   const openAddQuestion = () => {
     setAddQuestionOpen(true);
   };
-
   const closeAddQuestion = () => {
     setAddQuestionOpen(false);
   };
@@ -49,21 +32,27 @@ export default function HeaderUserBar({isDarkMode}) {
   ];
 
   return (
-<div className={`fixed top-0 left-0 right-0 flex items-center header-container text-text bg-bkg ${isDarkMode ? "light" : "dark"}`}>
-   
+    <div
+      className={`fixed top-0 left-0 right-0 flex items-center header-container text-text bg-bkg ${
+        isDarkMode ? "light" : "dark"
+      }`}
+    >
       <button onClick={() => history.goBack()}>
-      <MdChevronLeft
-                size={35}
-                className={`ml-2 text-secondary  ${isDarkMode ? "light" : "dark"}`}
-              />
+        <MdChevronLeft
+          size={35}
+          className={`ml-2 text-secondary  ${isDarkMode ? "light" : "dark"}`}
+        />
       </button>
       {/* Display joined node name */}
       <p className="mb-1 ml-5 text-2xl font-bold capitalize truncate text-text font-mulish w-52">
-  {newNode?.[0]?.node_name || newNode?.node_name}
-            </p>
+        {newNode?.[0]?.node_name || newNode?.node_name}
+      </p>
       {/* this flex-grow div is tailwind way to spread out the back and add buttons*/}
       <div className="flex-grow"></div>
-      <button className="mr-4 text-2xl" onClick={()=>openAddQuestion(newNode?.id)}>
+      <button
+        className="mr-4 text-2xl"
+        onClick={() => openAddQuestion(newNode?.id)}
+      >
         <SVG
           width={24}
           height={24}
@@ -80,11 +69,6 @@ export default function HeaderUserBar({isDarkMode}) {
         addQuestionOpen={addQuestionOpen}
         closeAddQuestion={closeAddQuestion}
       />
-      {/* SETTING */}
-      {/* <SettingsModal
-        settingsOpen={settingsOpen}
-        closeSettings={closeSettings}
-      /> */}
     </div>
   );
 }

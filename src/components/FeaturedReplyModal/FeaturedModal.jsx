@@ -3,6 +3,7 @@ import "./FeaturedModal.css";
 import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
 
+// this holds featured page's modal (public posts)
 function FeaturedModal({
   viewPostOpen,
   isDarkMode,

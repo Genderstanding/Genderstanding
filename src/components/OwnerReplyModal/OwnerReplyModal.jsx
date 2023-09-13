@@ -8,6 +8,7 @@ import ElipsisModal from "../ElipsisModal/ElipsisModal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+// This holds reply modal ofr OWNER
 const OwnerReplyModal = ({
   addReplyOpen,
   closeAddReply,
@@ -23,22 +24,17 @@ const OwnerReplyModal = ({
   );
   let nodeData = useSelector((store) => store.nodeReducer.nodeDatabaseResponse);
 
-  console.log("nodePosts:", nodePosts);
-  console.log("nodeData:", nodeData);
-
   const reversePosts = nodePosts.slice().reverse();
 
-  // Creating a state to hold text inputed
+  // Creating a state to hold text input
   const [replyInput, setReplyInput] = useState("");
-  // const [editedContent, setEditedContent] = useState('');
   const [elipsisOpen, setElipsisOpen] = useState(false);
   const [contentToEdit, setContentToEdit] = useState("");
   const [postIdProp, setPostIdProp] = useState(null);
   const [userIdProp, setUserIdProp] = useState(null);
   const [nodeOwnerIdProp, setNodeOwnerIdProp] = useState(null);
 
-  const [autofill, setAutofill] = useState("");
-
+  // open and close ellipsis
   const openElipsis = (content, postId, userId, nodeOwnerId) => {
     setElipsisOpen(true);
     setContentToEdit(content);
@@ -46,15 +42,13 @@ const OwnerReplyModal = ({
     setUserIdProp(userId);
     setNodeOwnerIdProp(nodeOwnerId);
   };
-
   const closeElipsis = () => {
     setElipsisOpen(false);
   };
 
+  // function to handle reply
   const handleReply = (event, questionObject) => {
     event.preventDefault();
-    setReplyInput("");
-    setAutofill('')
     try {
       dispatch({
         type: "CREATE_POST",
@@ -75,6 +69,7 @@ const OwnerReplyModal = ({
         progress: undefined,
         theme: "light",
       });
+      setReplyInput("");
     } catch (error) {
       toast.error("Failed to reply to user", {
         position: "bottom-left",
@@ -89,6 +84,7 @@ const OwnerReplyModal = ({
     }
   };
 
+  // function to handle delete post
   const handleDeleteButton = (postId) => {
     try {
       dispatch({
@@ -97,16 +93,16 @@ const OwnerReplyModal = ({
       });
 
       if (dispatch) {
-         toast.success("Comment deleted", {
-        position: "bottom-left",
-        autoClose: 1500,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+        toast.success("Comment deleted", {
+          position: "bottom-left",
+          autoClose: 1500,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       } else {
         toast.error("Failed to delete comment", {
           position: "bottom-left",
@@ -119,12 +115,12 @@ const OwnerReplyModal = ({
           theme: "light",
         });
       }
-     
     } catch (error) {
-     console.log("error deleting", error);
+      console.log("error deleting", error);
     }
   };
 
+  // function to handle report 
   const handleReportButton = (postId) => {
     try {
       dispatch({
@@ -145,16 +141,13 @@ const OwnerReplyModal = ({
     }
   };
 
-  const handleAutofill = (e)=> {
-    e.preventDefault()
-    setAutofill("When I was struggling with mental health, I sought out the help of a therapist. After working past a lot of difficult questions and answers, I found that I was really unhappy with how I was presented before. I think it offers me the chance to express how I really feel about myself and I'm happy when others see me as a man, and I think others do too!")
-  }
-
   return (
     <div className="flex items-center justify-center modal-overlay">
       <div className="flex flex-col items-center justify-center reply-box">
         {/* {children} */}
-        <h2 onClick={handleAutofill} className="mt-6 mb-4 mr-4 text-xl font-bold text-center text-amber-950">
+        <h2
+          className="mt-6 mb-4 mr-4 text-xl font-bold text-center text-amber-950"
+        >
           {questionObject.content}
         </h2>
         <span className="text-sm font-semibold text-amber-950">
@@ -211,7 +204,7 @@ const OwnerReplyModal = ({
           }`}
           placeholder="Write a Reply..."
           onChange={(event) => setReplyInput(event.target.value)}
-          value={replyInput || autofill}
+          value={replyInput}
           required
         />
         <div className=" buttons-container">

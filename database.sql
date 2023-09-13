@@ -39,7 +39,6 @@ CREATE TABLE "posts" (
 	"replied" BOOLEAN DEFAULT false
 );
 
-
 CREATE TABLE "likes" (
 	"id" SERIAL PRIMARY KEY,
 	"post_id" INTEGER REFERENCES "posts" (id),

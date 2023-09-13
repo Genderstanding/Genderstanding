@@ -2,8 +2,7 @@ import React from "react";
 import "./QuestionTitleEllipsis.css";
 import { useDispatch } from "react-redux";
 
-
-
+// This holds the user's ellipsis 
 const QuestionTitleEllipsis = ({
   elipsisOpen,
   elipsisClose,
