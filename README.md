@@ -11,27 +11,17 @@
 </div>
 
 
-<!-- TABLE OF CONTENTS
+### **Table Of Content**
 <details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
+  <summary></summary>
+  <ul>
         <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
-</details> -->
+         <li><a href="#screenshot">Screenshot</a></li>
+          <li><a href="#usage">Usage</a></li>
+  </ul>
+</details>
 
 ### **Built With**
 <br/>
@@ -91,27 +81,22 @@
     title="MUI"
     height="25"
   />
-   <img
-    src="https://img.shields.io/badge/Figma-282C34?style=for-the-badge&logo=figma&logoColor=F24E1E"
-    alt="Figma logo"
-    title="Figma"
-    height="25"
-  />
-  &nbsp;
 </p>
 
 ### **Prerequisites**
-
+Before you get started, make sure you have the following software installed on your computer:
 * [Node.js](https://nodejs.org/en/)
-* [PostrgeSQL](https://www.postgresql.org/)
-* [Nodemon](https://nodemon.io/)
-
 
 ### **Installation**
-
-1. Clone the repository to your local computer
-1. Start postgres if not running already by using `brew services start postgresql`
-1. Create a database named `playwme`
+1. Fork and Clone the repository to your local computer using SSH key
+1. In the terminal of your editor run `npm install` to install all dependencies
+1.  Create a `.env` file at the root of the project and paste this line into the file:
+- replace `superDuperSecret` with some long random string like `25POUbVtx6RKVNWszd9ERB9Bb6`. Here's a site that can help you: [https://passwordsgenerator.net/](https://passwordsgenerator.net/)
+```
+  SERVER_SESSION_SECRET=superDuperSecret
+```
+4. Start postgres if not running already by using `brew services start postgresql`
+1. Create a database named `genderstanding`
 1. Run `database.sql` file
 1. Open two terminal windows
 1. Run `npm run server`
@@ -124,55 +109,16 @@
 ![Screenshot](public/Juniper.png)
 ![Screenshot](public/dark.png)
 ![Screenshot](public/light.png)
-![Screenshot](public/demo.gif)
+<!-- ![Screenshot](public/demo.gif) -->
 
-### **Contact**
+## Usage
 
-* **Quynh Dao** - 
-<a target="_blank" href="https://www.linkedin.com/in/daoquynh29">![Linkedin][linkedin]</a>
-<a target="_blank" href="https://github.com/quynhngandao">![github][Github]</a>
-
-* **Aubrey Graves** - 
-<a target="_blank" href="https://www.linkedin.com/in/aubrey-graves">![linkedin][Linkedin]</a>
-<a target="_blank" href="https://github.com/grav0165">![github][Github]</a>
-
-* **Justin Larson** - 
-<a target="_blank" href="https://www.linkedin.com/in/justin-lawson-732298281">![linkedin][Linkedin]</a>
-<a target="_blank" href="https://github.com/jstnlawson">![github][Github]</a>
-
-<!-- ACKNOWLEDGMENTS -->
-
-### **Acknowledgments**
-
-* Thanks to [Prime Digital Academy](www.primeacademy.io) who equipped and helped me to make this application a reality. 
-<br/> 
-* Thank you to Emma Stout and all the Prime Staff and Instructors!
+Video walkthrough of application usage: 
 
 <p align="right"><a href="#top">back to top</a></p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[linkedin]: https://img.shields.io/badge/-LinkedIn-0077B5?style=for-the-badge&logo=Linkedin&logoColor=white
-[Linkedin]: https://img.shields.io/badge/-LinkedIn-0077B5?style=for-the-badge&logo=Linkedin&logoColor=white
-[react.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
-[React]: https://reactjs.org/
-[javascript.js]: https://img.shields.io/badge/JavaScript-20232A?style=for-the-badge&logo=JavaScript&logoColor=F7DF1E
-[Javascript]: https://www.javascript.com/
-[node.js]: https://img.shields.io/badge/Node.js-20232A?style=for-the-badge&logo=Node.js&logoColor=339933
-[Node]: https://nodejs.org/en/
-[express.js]: https://img.shields.io/badge/Express.js-20232A?style=for-the-badge&logo=Express&logoColor=F7DF1E
-[Express]: https://expressjs.com/
-[postgresql]: https://img.shields.io/badge/PostgreSQL-20232A?style=for-the-badge&logo=PostgreSQL&logoColor=4169E1
-[PostgreSQL]: https://www.postgresql.org/
-[redux]: https://img.shields.io/badge/Redux-20232A?style=for-the-badge&logo=Redux&logoColor=764ABC
-[Redux]: https://redux.js.org/
-[redux-saga]: https://img.shields.io/badge/Redux_Saga-20232A?style=for-the-badge&logo=Redux-Saga&logoColor=999999
-[Redux-Saga]: https://redux-saga.js.org/
-[mui]: https://img.shields.io/badge/Material_UI-20232A?style=for-the-badge&logo=MUI&logoColor=007FFF
-[MUI]: https://mui.com/
-[Screenshot]: https://github.com/quynhngandao/PLAYwME-solo-project/blob/main/public/images/Screenshot.gif
-[email]: https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white
-[gitHub]: https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white
-[Github]: https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white
 # Genderstanding
+
