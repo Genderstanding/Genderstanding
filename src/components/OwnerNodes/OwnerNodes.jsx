@@ -165,6 +165,7 @@ const OwnerNodes = ({ isDarkMode }) => {
   useEffect(() => {
     dispatch({ type: "FETCH_POST" });
     dispatch({ type: "FETCH_NODE" });
+    dispatch({ type: 'FETCH_LIKES'});
   }, []);
 
   return (
