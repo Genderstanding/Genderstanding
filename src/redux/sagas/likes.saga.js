@@ -14,6 +14,7 @@ function* likePost(action){
     try{
         yield axios.post('/likes', action.payload)
         yield put({ type: 'FETCH_LIKES' })
+        yield put({ type: 'FETCH_PUBLIC_POSTS'})
     } catch (error) {
         console.log('Error in SAGA POST for like: ', error)
     }
