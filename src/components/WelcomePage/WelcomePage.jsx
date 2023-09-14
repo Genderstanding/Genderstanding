@@ -8,11 +8,11 @@ import { Typography } from "@mui/material";
 // this is the welcome page, the start of the application
 export default function WelcomePage() {
   return (
-    <div className="flex flex-col h-screen welcome-container">
+    <div className="flex flex-col welcome-container">
     <div className="flex items-center logo-container "> <Typography
           variant="h3"
           sx={{
-            fontSize: "40px",
+            fontSize: "36px",
             fontWeight: 900,
             fontFamily:"ADLaM Display",
             color: "#fff",
@@ -28,9 +28,9 @@ export default function WelcomePage() {
         className="welcome-paragraph"
         style={{
           width: 300,
-          height: 450,
+          height: 400,
           color: "#CF6F5A",
-          fontSize: 30,
+          fontSize: 28,
           fontFamily: "Roboto Slab",
           fontWeight: "700",
           wordWrap: "break-word",

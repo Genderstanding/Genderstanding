@@ -45,12 +45,6 @@ function RegisterForm() {
     }
   }; // end registerUser
 
-  // function to handle autofill 
-  const handleAutofill = () => {
-    setUsername("Daniella");
-    setPassword("123");
-  };
-
   return (
     <form className="formPanel" onSubmit={registerUser}>
       {/* handle registration error */}
@@ -64,7 +58,6 @@ function RegisterForm() {
       <div className="label-container">
         <label htmlFor="username" className="label">
           <Typography
-            onClick={handleAutofill}
             variant="h6"
             sx={{
               marginLeft: "35px",

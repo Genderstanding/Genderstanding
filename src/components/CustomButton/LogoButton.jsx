@@ -27,7 +27,7 @@ function LogoButton() {
             letterSpacing:"3px"
           }}
         >
-          GenderStanding
+          Genderstanding
         </Typography>
       </button>
     </div>
