@@ -23,7 +23,6 @@ nodeRouter.get("/", rejectUnauthenticated, (req, res) => {
   pool
     .query(sqlQuery, [sqlValue])
     .then((result) => {
-      console.log("Obtaining all nodes from database: ", result.rows);
       res.send(result.rows);
     })
     .catch((error) => {
@@ -48,7 +47,6 @@ nodeRouter.get("/new", rejectUnauthenticated, (req, res) => {
   pool
     .query(sqlQuery, [sqlValue])
     .then((result) => {
-      console.log("Obtaining all nodes from database: ", result.rows);
       res.send(result.rows);
     })
     .catch((error) => {
@@ -60,7 +58,6 @@ nodeRouter.get("/new", rejectUnauthenticated, (req, res) => {
 nodeRouter.get("/new/:id", rejectUnauthenticated, (req, res) => {
   // Currently researching SQL query terms needed
   let sqlValue = req.params.id;
-  console.log("req params are: ", req.params);
   let sqlQuery = `
     SELECT "node"."id", "node"."node_name", "node_association"."user_id" AS "node_association_id", "node"."user_id" AS "user_id"
     FROM "node"
@@ -72,7 +69,6 @@ nodeRouter.get("/new/:id", rejectUnauthenticated, (req, res) => {
   pool
     .query(sqlQuery, [sqlValue])
     .then((result) => {
-      console.log("Obtaining all nodes from database: ", result.rows);
       res.send(result.rows);
     })
     .catch((error) => {
@@ -111,7 +107,6 @@ nodeRouter.post("/", rejectUnauthenticated, async (req, res) => {
     await connection.query("COMMIT"); // Commit the transaction to execute
 
     /***** SUCCESS *****/
-    console.log("POST request to add node in database successful");
     res.sendStatus(200);
   } catch (error) {
     console.error("Error in node adding to database: ", error);
@@ -137,7 +132,6 @@ nodeRouter.put("/:id", rejectUnauthenticated, (req, res) => {
   pool
     .query(sqlQuery, [sqlId, sqlUser, sqlName])
     .then((result) => {
-      console.log("Updated node name in database: ", result);
       res.sendStatus(201);
     })
     .catch((result) => {
@@ -180,7 +174,6 @@ nodeRouter.delete("/:id", rejectUnauthenticated, async (req, res) => {
     /***** COMMIT SQL transaction *****/
     await connection.query("COMMIT"); // Commit the transaction to execute
     /***** SUCCESS *****/
-    console.log("Delete node from database: ");
     res.sendStatus(201);
     /***** ERROR *****/
   } catch (error) {

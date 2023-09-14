@@ -21,8 +21,8 @@ const rootReducer = combineReducers({
   postReducer, // holds all posts in all nodes
   nodeAssociationReducer, // holds all of the node association information
   newNodeReducer, // holds the newest node created
-  inviteCodeReducer,
-  likesReducer,
+  inviteCodeReducer, // holds invite codes
+  likesReducer, // holds likes 
 });
 
 export default rootReducer;

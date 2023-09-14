@@ -13,15 +13,15 @@ import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import PeopleOutlineSharpIcon from '@mui/icons-material/PeopleOutlineSharp';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 
+// This holds the Nav toolbar 
 export default function Nav({isDarkMode}) {
   const user = useSelector((store) => store.user);
-
   const [settingsOpen, setSettingsOpen] = useState(false);
-
+  
+  // open and close setting 
   const openSettings = () => {
     setSettingsOpen(true);
   };
-
   const closeSettings = () => {
     setSettingsOpen(false);
   };
@@ -30,7 +30,6 @@ export default function Nav({isDarkMode}) {
     <div className="nav">
     <div className="flex nav-container ">
       <Link to="/home">
-        {/* <h2 className="nav-title">Prime Solo Project</h2> */}
       </Link>
       <div>
         {/* If no user is logged in, show these links */}
@@ -49,7 +48,6 @@ export default function Nav({isDarkMode}) {
             {/* Link this to home page */}
             <button className="flex flex-col items-center justify-center flex-grow px-4 py-2">
             <HomeOutlinedIcon sx={{fontSize:"32px"}}/>
-
               <span>Home</span>
             </button>
           </Link>
@@ -62,35 +60,28 @@ export default function Nav({isDarkMode}) {
             </button>
           </Link>
 
-          {/* Link this to the Featured page */}
+          {/* Link this to the FeaturedPage */}
           <Link className="navLink" to="/featured">
             <button className="flex flex-col items-center justify-center flex-grow px-4 py-2 ">
             <PeopleOutlineSharpIcon sx={{fontSize:"32px"}}/>
               <span>Featured</span>
             </button>
           </Link>
-
           {/* Settings Modal */}
             <button
            style={{color: "#7C7C7C"}}
               className="flex flex-col items-center justify-center flex-grow px-4 py-2 navLinkSetting"
               onClick={openSettings}
             >
-              <SettingsOutlinedIcon className="navLinkSetting mt-1" style={{fontSize: "32px"}}/>
-              <span className="settings-span no-underline ">Settings</span>
+              <SettingsOutlinedIcon className="mt-1 navLinkSetting" style={{fontSize: "32px"}}/>
+              <span className="no-underline settings-span ">Settings</span>
             </button>
             <SettingsModal
               settingsOpen={settingsOpen}
               closeSettings={closeSettings}
             />
-
-          {/* <LogOutButton className="navLink" /> */}
         </div>
       )}
-
-      {/* <Link className="navLink" to="/about">
-        About
-      </Link> */}
     </div>
     </div>
   );

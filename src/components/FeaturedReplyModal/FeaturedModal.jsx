@@ -3,6 +3,7 @@ import "./FeaturedModal.css";
 import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
 
+// this holds featured page's modal (public posts)
 function FeaturedModal({
   viewPostOpen,
   isDarkMode,
@@ -24,18 +25,8 @@ function FeaturedModal({
 
   // filter
   const nodeResponses = publicPosts.filter((post) => {
-    console.log(
-      "Comparing post.reply_id:",
-      post.reply_id,
-      "with selectedPostId:",
-      selectedPostId
-    );
     return post.reply_id === selectedPostId;
   });
-  
-  console.log(postInfo, "post");
-  console.log(nodeResponses, "nodeResponses");
-  console.log(selectedPostId, "postID selected");
 
   // Reverse the order of responses
   const reverseResponses = [...nodeResponses].reverse();

@@ -94,7 +94,6 @@ postRouter.post('/', rejectUnauthenticated, (req, res) => {
     `;
     pool.query(sqlQuery, [sqlUserId, sqlParams.content, sqlParams.node_id, sqlParams.orig_post, sqlParams.reply_id])
         .then(result => {
-            console.log('Created a new post in database: ', result);
             res.sendStatus(201);
         })
         .catch( error => {
@@ -113,7 +112,6 @@ postRouter.put('/:id', rejectUnauthenticated, (req, res) => {
 
     pool.query(sqlQuery, [req.body.content, req.params.id])
         .then(result => {
-            console.log('Updated post content information in database: ', result);
             res.sendStatus(201)
         })
         .catch(error => {
@@ -125,7 +123,6 @@ postRouter.put('/:id', rejectUnauthenticated, (req, res) => {
 // PUT route if the user likes a post
 postRouter.put('/like/:id', rejectUnauthenticated, (req, res) => {
     let sqlValues = req.params.id;
-    console.log('sql Values are: ', sqlValues)
     let sqlQuery =`
     UPDATE "posts"
     SET "votes" = "votes" + 1
@@ -133,7 +130,6 @@ postRouter.put('/like/:id', rejectUnauthenticated, (req, res) => {
     `;
     pool.query(sqlQuery, [sqlValues])
         .then(result => {
-            console.log('Updated post like information in database: ', result);
             res.sendStatus(201);
         })
         .catch(error => {
@@ -145,7 +141,6 @@ postRouter.put('/like/:id', rejectUnauthenticated, (req, res) => {
 // PUT route if the user likes a post
 postRouter.put('/accept/:id', rejectUnauthenticated, (req, res) => {
     let sqlValues = req.params.id;
-    console.log('sql Values are: ', sqlValues)
     let sqlQuery =`
     UPDATE "posts"
     SET "replied" = true
@@ -153,7 +148,6 @@ postRouter.put('/accept/:id', rejectUnauthenticated, (req, res) => {
     `;
     pool.query(sqlQuery, [sqlValues])
         .then(result => {
-            console.log('Updated post replied information in database: ', result);
             res.sendStatus(201);
         })
         .catch(error => {
@@ -172,7 +166,6 @@ postRouter.put('/reported/:id', rejectUnauthenticated, (req, res) => {
     `;
     pool.query(sqlQuery, [sqlValues])
         .then(result => {
-            console.log('Updated post like information in database: ', result);
             res.sendStatus(201);
         })
         .catch(error => {
@@ -191,7 +184,6 @@ postRouter.put('/promote/:id', rejectUnauthenticated, (req, res) => {
     `;
     pool.query(sqlQuery, [sqlValues])
         .then(result => {
-            console.log('Updated post like information in database: ', result);
             res.sendStatus(201);
         })
         .catch(error => {
@@ -209,7 +201,6 @@ postRouter.delete('/:id', rejectUnauthenticated, (req, res) => {
     `;
     pool.query(sqlQuery, [sqlId])
         .then( result => {
-            console.log('Delete post from database: ', result);
             res.sendStatus(201);
         })
         .catch(error => {
@@ -229,7 +220,6 @@ postRouter.delete('/banned/:node/:id', rejectUnauthenticated, (req, res) => {
     `;
     pool.query(sqlQuery, [sqlId, sqlNode])
         .then( result => {
-            console.log('Delete post from database: ', result);
             res.sendStatus(201);
         })
         .catch(error => {

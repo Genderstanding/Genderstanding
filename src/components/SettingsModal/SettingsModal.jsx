@@ -12,6 +12,7 @@ import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+// This hold setting modal
 const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
   // importing dispatch
   const dispatch = useDispatch();
@@ -89,7 +90,6 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
       dispatch({ type: "DELETE_USER" });
       history.push("/login");
     } catch (error) {
-      console.log("Error in deleting account", error);
     }
   };
 
@@ -132,7 +132,6 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
       // clear input
       setNodeCodeInput("");
     } catch (error) {
-      console.log("error inputting code", error);
     }
   };
 

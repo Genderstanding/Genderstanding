@@ -3,6 +3,7 @@ import LoginForm from "../LoginForm/LoginForm";
 import "../App/App.css";
 import LogoButton from "../CustomButton/LogoButton";
 
+// This holds Login Page
 export default function LoginPage() {
   return (
     <div className="flex flex-col h-screen login-container">

@@ -46,10 +46,6 @@ function UserPage({ isDarkMode }) {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       history.push("/owner");
     } catch (error) {
-      console.log(
-        "Error in obtaining community information on userPage: ",
-        error
-      );
     }
   };
 
@@ -63,7 +59,6 @@ function UserPage({ isDarkMode }) {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       history.push("/usernodes");
     } catch (error) {
-      console.log("Error in going to user node page: ", error);
     }
   };
 
@@ -83,7 +78,7 @@ function UserPage({ isDarkMode }) {
               Communities you've created
             </h1>
             <div className="flex flex-col items-center justify-center mb-4 owner-box ">
-              {/* map communities you moderate inside these divs*/}
+              {/* map communities you created inside this div*/}
               {allNodes.map((node) => {
                 if (user.id == node?.user_id) {
                   return (
@@ -106,11 +101,10 @@ function UserPage({ isDarkMode }) {
             </div>
 
             <h1 className="mt-4 mb-1 ml-5 text-xl font-bold font-mulish">
-              {/* { (newNode.user_id !== user.id) && newNode.length > 0 ? "Communities you're a part of" : ""}  */}
               Communities you're a part of
             </h1>
             <div className="flex flex-col items-center justify-center mb-4 part-of-box">
-              {/* map communities you particpate in in this div*/}
+              {/* map communities you participate inside this div*/}
               {allNodes.map((node) => {
                 if (user?.id !== node?.user_id) {
                   return (
@@ -123,13 +117,7 @@ function UserPage({ isDarkMode }) {
                     >
                       <div className="text-2xl font-bold text-center truncate w-52 owned-community-names">
                         <span>{node?.node_name}</span>
-                        <div className="ml-2">
-                          {/* <img
-                            style={{ width: "30px" }}
-                            src="./bell.gif"
-                            alt="Bell"
-                          /> */}
-                        </div>
+                        <div className="ml-2"></div>
                       </div>
                     </div>
                   );

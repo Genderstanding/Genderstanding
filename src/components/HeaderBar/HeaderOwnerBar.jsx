@@ -5,10 +5,9 @@ import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import { useSelector, useDispatch } from "react-redux";
 import SVG from "../../Assets/SVG/SVG";
 import { useHistory } from "react-router-dom";
-import { Typography } from "@mui/material";
 
+// This holds header bar of node owner
 export default function HeaderOwnerBar({ isDarkMode }) {
-  const dispatch = useDispatch();
   const history = useHistory();
   const [InviteCodeOpen, setOpenInviteCode] = useState(false);
   const [nodeId, setNodeId] = useState();
@@ -19,7 +18,7 @@ export default function HeaderOwnerBar({ isDarkMode }) {
     (store) => store.newNodeReducer.newNodeDatabaseResponse
   );
 
-  //  INVITE CODE MODAL
+  // open and close invite code modal
   const openInviteCode = (nodeID) => {
     setOpenInviteCode(true);
   };
@@ -33,17 +32,21 @@ export default function HeaderOwnerBar({ isDarkMode }) {
   ];
 
   return (
-    <div className={`fixed top-0 left-0 right-0 flex m-auto items-center header-container text-text bg-bkg ${isDarkMode ? "light" : "dark"}`}>
+    <div
+      className={`fixed top-0 left-0 right-0 flex m-auto items-center header-container text-text bg-bkg ${
+        isDarkMode ? "light" : "dark"
+      }`}
+    >
       <button onClick={() => history.goBack()}>
-      <MdChevronLeft
-                size={35}
-                className={`ml-2 text-secondary  ${isDarkMode ? "light" : "dark"}`}
-              />
+        <MdChevronLeft
+          size={35}
+          className={`ml-2 text-secondary  ${isDarkMode ? "light" : "dark"}`}
+        />
       </button>
       {/* Display created node name */}
       <p className="mb-1 ml-5 text-2xl font-bold capitalize truncate text-text font-mulish w-52">
-  {newNode?.[0]?.node_name || newNode?.node_name}
-            </p>
+        {newNode?.[0]?.node_name || newNode?.node_name}
+      </p>
       {/* this flex-grow div is tailwind way to spread out the back and add buttons*/}
       <div className="flex-grow"></div>
       <button

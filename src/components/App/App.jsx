@@ -25,9 +25,8 @@ import UserNodes from "../UserNodes/UserNodes";
 import FeaturedModal from "../FeaturedReplyModal/FeaturedModal";
 
 // TOASTIFY
-import { ToastContainer , toast} from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 
 function App() {
   const dispatch = useDispatch();
@@ -43,7 +42,7 @@ function App() {
   const closeSettings = () => {
     setSettingsOpen(false);
   };
-    
+
   // DISPLAY
   useEffect(() => {
     dispatch({ type: "FETCH_USER" });
@@ -54,8 +53,8 @@ function App() {
     dispatch({ type: "FETCH_POST" });
     dispatch({ type: "FETCH_NODE_ASSOCIATION" });
     dispatch({ type: "FETCH_CURRENT_NODE" });
-    dispatch({ type: 'FETCH_PUBLIC_POSTS'});
-    dispatch({ type: 'FETCH_LIKES'})
+    dispatch({ type: "FETCH_PUBLIC_POSTS" });
+    dispatch({ type: "FETCH_LIKES" });
   }, []);
 
   return (
@@ -74,8 +73,10 @@ function App() {
           pauseOnHover={false}
           limit={1}
         />
-        {/* Nav */}
-        <Nav />
+
+{/* Nav */}
+        {user.id && <Nav />}
+
         {/* Setting */}
         <SettingsModal
           openSettings={openSettings}

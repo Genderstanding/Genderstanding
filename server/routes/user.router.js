@@ -40,7 +40,6 @@ router.delete('/', rejectUnauthenticated, (req, res) => {
   ;`;
   pool.query(sqlQuery, [sqlValue])
     .then(result => {
-      console.log('Result back from database: ', result);
       res.sendStatus(201);
     })
     .catch(error => {

@@ -33,11 +33,6 @@ router.post("/", rejectUnauthenticated, async (req, res) => {
     ]);
 
     /***** SUCCESS *****/
-    console.log(
-      "POST invite code in '/code' to database successful: ",
-      inviteCodeGenerator
-    );
-
     res.status(200).send(inviteCodeGenerator);
 
     /***** ERROR *****/

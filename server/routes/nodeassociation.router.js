@@ -12,7 +12,6 @@ nodeAssocRouter.get('/', rejectUnauthenticated, (req, res) => {
     `;
     pool.query(sqlQuery)
         .then( result => {
-            console.log('Obtaining all node associations from database: ', result.rows);
             res.send(result.rows);
         })
         .catch(error => {
@@ -29,7 +28,6 @@ nodeAssocRouter.post('/', rejectUnauthenticated, (req, res) => {
     VALUES ($1, $2)`
     pool.query(sqlQuery, [sqlNodeId, sqlUserId])
     .then(result => {
-        console.log('Added new node association into database: ', result.rows);
         res.send(result.rows)
     })
 })
@@ -44,7 +42,6 @@ nodeAssocRouter.put('/:id', rejectUnauthenticated, (req, res) => {
     `;
     pool.query(sqlQuery, [sqlId, sqlParams])
         .then(result => {
-            console.log('Added a new user to the node: ', result);
             res.sendStatus(201);
         })
         .catch(error => {
@@ -62,7 +59,6 @@ nodeAssocRouter.delete('/single/:node/:user', rejectUnauthenticated, (req, res) 
     WHERE "node_id"=$1 AND "user_id"=$2;`;
     pool.query(sqlQuery, [sqlParams, sqlValue])
         .then( result => {
-            console.log('Delete node association from database: ', result);
             res.sendStatus(201);
         })
         .catch(error => {
@@ -73,14 +69,12 @@ nodeAssocRouter.delete('/single/:node/:user', rejectUnauthenticated, (req, res) 
 
 nodeAssocRouter.delete('/nodeplus/:id', rejectUnauthenticated, (req, res) => {
     let sqlParams = req.params.id
-    console.log('Req.params in node assoc delete: ', sqlParams)
     sqlQuery = `
     DELETE FROM "node_association"
     WHERE "node_id"=$1;
     `;
     pool.query(sqlQuery, [sqlParams])
     .then (result => {
-        console.log('Delete in node association from database: ', result);
         res.sendStatus(201);
     })
     .catch(error => {

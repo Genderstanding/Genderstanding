@@ -2,15 +2,18 @@ import React, { useEffect, useState } from "react";
 import "./HomePage.css";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { CardActionArea, IconButton, Typography } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import QuestionMarkRoundedIcon from '@mui/icons-material/QuestionMarkRounded';
-import SupervisedUserCircleRoundedIcon from '@mui/icons-material/SupervisedUserCircleRounded';
-
+import QuestionMarkRoundedIcon from "@mui/icons-material/QuestionMarkRounded";
+import SupervisedUserCircleRoundedIcon from "@mui/icons-material/SupervisedUserCircleRounded";
 import HeaderBar from "../HeaderBar/HeaderBar";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
+// This holds home page
 export default function HomePage({ isDarkMode }) {
+  const [nodeId, setNodeId] = useState();
+  const dispatch = useDispatch();
+  const history = useHistory();
+
   // store user infos
   const user = useSelector((store) => store.user);
   // store public posts
@@ -22,22 +25,40 @@ export default function HomePage({ isDarkMode }) {
     (store) => store.nodeReducer.nodeDatabaseResponse
   );
 
-  const [nodeId, setNodeId] = useState();
-  const dispatch = useDispatch();
-  const history = useHistory();
-
+  // Display of account logo
   let yourContent;
   const checkUserId = (node) => {
     if (node.user_id == user.id) {
-       yourContent = <AccountCircleIcon sx={{marginLeft: "-5px", marginTop:1, marginBottom:"12px", marginRight:"2px", color:"#434242" ,fontSize:"30px"}}/>
-      // <img style={{  marginBottom:"10px" , padding:0 ,width: "27px" }} src="./brand.png" /> 
+      yourContent = (
+        <AccountCircleIcon
+          sx={{
+            marginLeft: "-5px",
+            marginTop: 1,
+            marginBottom: "12px",
+            marginRight: "2px",
+            color: "#434242",
+            fontSize: "30px",
+          }}
+        />
+      );
     } else if (node.user_id !== user.id) {
-      yourContent = <SupervisedUserCircleRoundedIcon sx={{marginLeft: "-5px", marginTop:1, marginBottom:"10px", marginRight:"2px", color:"#434242", fontSize:"32px"}}/>
-      // <img style={{  marginBottom:"10px", padding:0 ,width: "30px" }} src="./storytelling.png" /> 
+      yourContent = (
+        <SupervisedUserCircleRoundedIcon
+          sx={{
+            marginLeft: "-5px",
+            marginTop: 1,
+            marginBottom: "10px",
+            marginRight: "2px",
+            color: "#434242",
+            fontSize: "32px",
+          }}
+        />
+      );
     }
     return yourContent;
   };
 
+  // handles navigation to node
   const handleGoToNode = (node) => {
     setNodeId(node.id);
     if (node.user_id === user.id) {
@@ -55,6 +76,12 @@ export default function HomePage({ isDarkMode }) {
     }
   };
 
+  // handles navigation to featured page
+  const handleGoToFeatured = () => {
+    history.push("/featured");
+  };
+
+  // Display nodes, posts, public posts
   useEffect(() => {
     dispatch({ type: "FETCH_NODE" });
     dispatch({ type: "FETCH_POST" });
@@ -62,10 +89,6 @@ export default function HomePage({ isDarkMode }) {
     dispatch({ type: "FETCH_CURRENT_NODE" });
     dispatch({ type: "FETCH_PUBLIC_POSTS" });
   }, []);
-
-  const handleGoToFeatured = () => {
-    history.push("/featured");
-  };
 
   return (
     <>
@@ -76,7 +99,6 @@ export default function HomePage({ isDarkMode }) {
             <h1 className="text-2xl font-bold mx-7 font-mulish">Communities</h1>
             <h3 className="mx-7">View your communities</h3>
             <div className="flex items-center">
-              {/* useHistory back button */}
               <MdChevronLeft
                 size={35}
                 className={`text-secondary  ${isDarkMode ? "light" : "dark"}`}
@@ -95,11 +117,13 @@ export default function HomePage({ isDarkMode }) {
                       }`}
                       key={node.id}
                     >
-                   
-                    <span className="w-32 font-bold text-black capitalize truncate">  {checkUserId(node)}{node.node_name}</span>
+                      <span className="w-32 font-bold text-black capitalize truncate">
+                        {" "}
+                        {checkUserId(node)}
+                        {node.node_name}
+                      </span>
                       <div className="pt-2 text-xs font-bold text-primary active:underline">
                         View Community{" "}
-                  
                       </div>
                     </div>
                   );
@@ -111,7 +135,7 @@ export default function HomePage({ isDarkMode }) {
               />
             </div>
           </div>
-
+          {/* FEATURED */}
           <div className="mt-4 featured-container">
             <h1 className="text-2xl font-bold mx-7 font-mulish">Featured</h1>
             <h3 className="mx-7"> View featured posts</h3>
@@ -138,6 +162,7 @@ export default function HomePage({ isDarkMode }) {
                 Popular
               </button>
             </div>
+            {/* FEATURED POST */}
             <div
               className="flex flex-col items-center featured-nodes-homepage"
               onClick={handleGoToFeatured}
@@ -163,17 +188,12 @@ export default function HomePage({ isDarkMode }) {
                         <p className="pt-1 font-semibold normal-case truncate text-gray text-md w-52 font-body">
                           {post.content}
                         </p>
-
-                        {/* <p className="pt-4 text-xl font-bold truncate w-52 font-title">
-                          {post.content}
-                        </p> */}
                         <div className="pt-5 text-sm font-bold normal-case text-primary active:underline">
                           View Question{" "}
-                          <span
-                            className=" text-primary"
-                          >
-                            {/* <KeyboardDoubleArrowRightRoundedIcon /> */}
-                           <QuestionMarkRoundedIcon style={{fontSize:"16px"}}/>
+                          <span className=" text-primary">
+                            <QuestionMarkRoundedIcon
+                              style={{ fontSize: "16px" }}
+                            />
                           </span>
                         </div>
                       </div>

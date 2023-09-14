@@ -1,4 +1,5 @@
 export default function SvgIcon({ width, height, viewBox, pathData, isDarkMode , ...props }) {
+  // This is reusable SVG component 
   return (
     <div
     className={`Rectangle18 bg-bkg ${isDarkMode ? 'dark' : 'light'}`}
