@@ -1,8 +1,8 @@
 <div align="center">
-  <a href="https://github.com/Genderstanding/Genderstanding">
+  <a href="https://genderstanding-116c2268e46c.herokuapp.com/#/welcome">
    <h3 align="center"> <img alt="logo" width="200" height="250" src="public/icon.png"/><br/>Genderstanding</h3>
   </a>
- <a href="https://github.com/Genderstanding/Genderstanding">View Demo</a>
+ <a href="https://genderstanding-116c2268e46c.herokuapp.com/#/welcome">View Demo</a>
   <p align="center">
           An invite-only social media platform that provides a safe community space, allowing users to invite friends and family to ask questions anonymously.
     <br />
