@@ -70,7 +70,6 @@ export const CodeInputModal = ({
       // clear input
       setNodeCodeInput("");
     } catch (error) {
-      console.log("error inputting code", error);
     }
   };
 

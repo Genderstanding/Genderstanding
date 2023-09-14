@@ -35,11 +35,9 @@ const UserNodes = ({ isDarkMode }) => {
 
   // function to like a post
   const increaseCount = (postId) => {
-    console.log("post id is : ", postId);
     const isLikedByUser = likePosts.some(
       (like) => like.post_id === postId && like.user_id === user.id
     );
-    console.log("isLikedByUser:", isLikedByUser);
     if (!isLikedByUser) {
       dispatch({
         type: "LIKE_POST",

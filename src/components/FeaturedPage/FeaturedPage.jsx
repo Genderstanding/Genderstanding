@@ -36,7 +36,6 @@ function FeaturedPage({ isDarkMode }) {
 
   // Function to like a post
   const increaseCount = (postId) => {
-    console.log("clicked");
     const isLikedByUser = likePosts.some(
       (like) => like.post_id === postId && like.user_id === user.id
     );
@@ -59,10 +58,6 @@ function FeaturedPage({ isDarkMode }) {
       setPostInfo(postInfo);
       setViewPostOpen(true);
     } catch (error) {
-      console.log(
-        "Error in obtaining postId information on FeaturedPage: ",
-        error
-      );
     }
   };
 

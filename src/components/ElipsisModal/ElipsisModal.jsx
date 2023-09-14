@@ -24,7 +24,6 @@ const ElipsisModal = ({
   const postDate = moment(contentToEdit.post_time);
   const currentDate = moment();
   const minutesElapsed = currentDate.diff(postDate, 'minutes');
-  console.log('The number of minutes between the two is: ', minutesElapsed)
 
   const dispatch = useDispatch();
  
@@ -37,8 +36,6 @@ const ElipsisModal = ({
       setEditedContent(contentToEdit);
     }
   };
-
-  console.log("post idProp is going to be: ", postIdProp);
 
   // Function to edit a comment and update the inputed information
   const handleSaveEdit = (event) => {
@@ -87,7 +84,6 @@ const ElipsisModal = ({
 
   // function to remove a user from the give node
   const handleRemoveUser = (contentToEdit) => {
-    console.log('Yeah the content is: ', editedContent)
     dispatch({
         type: 'REMOVE_NODE_ASSOCIATION',
         payload: {

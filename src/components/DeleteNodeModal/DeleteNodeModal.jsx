@@ -29,11 +29,9 @@ export default function DeleteNodeModal() {
   const user = useSelector((store) => store.user);
 
   const handleDeleteNode = (nodeID) => {
-    console.log('Node id is: ', nodeID)
     try {
       dispatch({ type: "DELETE_NODE", payload: nodeID});
     } catch (error) {
-      console.log("error deleting nodes", error);
       toast.error("Failed to delete community", {
         position: "bottom-left",
         autoClose: 1500,

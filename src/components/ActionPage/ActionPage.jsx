@@ -4,7 +4,6 @@ import "../App/App.css";
 import { Typography } from "@mui/material";
 import LogoButton from "../CustomButton/LogoButton";
 import { ActionButton } from "../CustomButton/ActionButton";
-import { CustomButton } from "../CustomButton/CustomButton";
 import { useDispatch, useSelector } from "react-redux";
 import AddNodeModal from "../AddNodeModal/AddNodeModal";
 import { CodeInputModal } from "../CodeInputModal/CodeInputModal";
@@ -39,7 +38,6 @@ export default function ActionPage() {
   };
   
   const handleAlert = (username) => {
-    console.log(username, "username")
     toast.info(`Hello ${username}, Welcome to GenderStanding`, {
       position: "top-center",
       autoClose: 2500,

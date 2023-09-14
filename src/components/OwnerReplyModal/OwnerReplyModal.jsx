@@ -116,7 +116,6 @@ const OwnerReplyModal = ({
         });
       }
     } catch (error) {
-      console.log("error deleting", error);
     }
   };
 

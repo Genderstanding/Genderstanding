@@ -46,10 +46,6 @@ function UserPage({ isDarkMode }) {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       history.push("/owner");
     } catch (error) {
-      console.log(
-        "Error in obtaining community information on userPage: ",
-        error
-      );
     }
   };
 
@@ -63,7 +59,6 @@ function UserPage({ isDarkMode }) {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       history.push("/usernodes");
     } catch (error) {
-      console.log("Error in going to user node page: ", error);
     }
   };
 

@@ -90,7 +90,6 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
       dispatch({ type: "DELETE_USER" });
       history.push("/login");
     } catch (error) {
-      console.log("Error in deleting account", error);
     }
   };
 
@@ -133,7 +132,6 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
       // clear input
       setNodeCodeInput("");
     } catch (error) {
-      console.log("error inputting code", error);
     }
   };
 

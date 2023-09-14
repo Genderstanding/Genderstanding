@@ -20,8 +20,6 @@ const AddQuestionModal = ({
   // State to hold text input
   const [questionInput, setQuestionInput] = useState("");
 
-  const [autofill, setAutofill] = useState("");
-
   // Sourcing dispatch
   const dispatch = useDispatch();
 
@@ -29,12 +27,9 @@ const AddQuestionModal = ({
     (store) => store.newNodeReducer.newNodeDatabaseResponse
   );
 
-  console.log("Current node contents is: ", currentNode);
 
   const handleSubmitQuestion = (event) => {
     event.preventDefault();
-    setAutofill('')
-    setQuestionInput("");
     try {
       dispatch({
         type: "CREATE_POST",
@@ -44,7 +39,6 @@ const AddQuestionModal = ({
           orig_post: false,
         },
       });
-      closeAddQuestion();
       toast.success("Question submitted", {
         position: "bottom-left",
         autoClose: 1500,
@@ -55,8 +49,9 @@ const AddQuestionModal = ({
         progress: undefined,
         theme: "light",
       });
+      setQuestionInput("");
+      closeAddQuestion();
     } catch (error) {
-      console.log("Error in submitting a question: ", error);
       toast.error("Error submitting a question", {
         position: "bottom-left",
         autoClose: 1500,
@@ -71,9 +66,6 @@ const AddQuestionModal = ({
   
   };
 
-  const handleAutofill = () => {
-    setAutofill('Why did you choose now to come out as a man?')
-  }
 
   return (
     <div
@@ -87,7 +79,7 @@ const AddQuestionModal = ({
         }`}
       >
         {children}
-        <h2 onClick={handleAutofill} className="pt-3 my-2 mr-2 text-xl font-bold text-main">Ask a New Question</h2>
+        <h2 className="pt-3 my-2 mr-2 text-xl font-bold text-main">Ask a New Question</h2>
         <textarea 
           rows="3"
           // className="w-full px-4 py-2 text-sm text-gray-900 bg-white border-0 question-textarea dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
@@ -95,7 +87,7 @@ const AddQuestionModal = ({
                   
           placeholder="Write a question..."
           onChange={(event) => setQuestionInput(event.target.value)}
-          value={questionInput || autofill}
+          value={questionInput}
           required
         ></textarea>
         <div className="pb-2 my-2 buttons-container">
