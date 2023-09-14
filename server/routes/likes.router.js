@@ -28,14 +28,12 @@ likesRouter.get('/', rejectUnauthenticated, (req, res) => {
 likesRouter.post('/', rejectUnauthenticated, (req, res) => {
     let sqlUserId = req.user.id;
     let sqlPostId = req.body.post;
-    console.log('the req.body is: ', sqlPostId)
     let sqlQuery = `
     INSERT INTO "likes" ("user_id", "post_id")
     VALUES ($1, $2);
     `;
     pool.query(sqlQuery, [sqlUserId, sqlPostId])
     .then(result => {
-        console.log('Created a new like in database: ', result);
         res.sendStatus(201);
     })
     .catch(error => {
@@ -46,13 +44,11 @@ likesRouter.post('/', rejectUnauthenticated, (req, res) => {
 
 likesRouter.delete('/:id', rejectUnauthenticated, (req, res) => {
     let sqlValue = req.params.id
-    console.log('req.params in like router delete is: ', sqlValue);
     let sqlQuery = `
     DELETE FROM "likes"
     WHERE "post_id" = $1`;
     pool.query(sqlQuery, [sqlValue])
     .then(result => {
-        console.log('Deleted a like entry, ', result);
         res.sendStatus(201);
     })
     .catch(error => {
