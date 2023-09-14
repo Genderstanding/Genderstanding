@@ -2,7 +2,7 @@
   <a href="https://github.com/Genderstanding/Genderstanding">
    <h3 align="center"> <img alt="logo" width="200" height="250" src="public/icon.png"/><br/>Genderstanding</h3>
   </a>
- <a href="/">View Demo</a>
+ <a href="https://github.com/Genderstanding/Genderstanding">View Demo</a>
   <p align="center">
           An invite-only social media platform that provides a safe community space, allowing users to invite friends and family to ask questions anonymously.
     <br />
