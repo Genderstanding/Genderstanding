@@ -114,6 +114,7 @@ Before you get started, make sure you have the following software installed on y
 ## Usage
 
 Video walkthrough of application usage: 
+https://youtu.be/LGrJV-pvxr4
 
 <p align="right"><a href="#top">back to top</a></p>
 
