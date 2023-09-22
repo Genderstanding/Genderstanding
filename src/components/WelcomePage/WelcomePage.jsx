@@ -9,7 +9,7 @@ import { Typography } from "@mui/material";
 export default function WelcomePage() {
   return (
     <div className="flex flex-col welcome-container">
-    <div className="flex items-center logo-container "> <Typography
+    <div className="flex items-center text-center logo-container"> <Typography
           variant="h3"
           sx={{
             fontSize: "36px",
