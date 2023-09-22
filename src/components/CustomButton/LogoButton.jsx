@@ -20,11 +20,11 @@ function LogoButton() {
           sx={{
             fontSize: "40px",
             fontWeight: 900,
-            fontFamily:"ADLaM Display",
+            fontFamily: "ADLaM Display",
             color: "#fff",
             margin: "auto",
-            textShadow: "0px 2px 4px rgba(0, 0, 0, 1)",
-            letterSpacing:"3px"
+            textShadow: "0px 1px 2px rgba(0, 0, 0, .3)",
+            letterSpacing: "3px",
           }}
         >
           Genderstanding

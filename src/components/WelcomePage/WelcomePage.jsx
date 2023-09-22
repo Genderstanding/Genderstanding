@@ -9,32 +9,35 @@ import { Typography } from "@mui/material";
 export default function WelcomePage() {
   return (
     <div className="flex flex-col welcome-container">
-    <div className="flex items-center text-center logo-container"> <Typography
+      <div className="flex items-center logo-container">
+        <Typography
           variant="h3"
           sx={{
-            fontSize: "36px",
+            fontSize: "40px",
             fontWeight: 900,
-            fontFamily:"ADLaM Display",
+            fontFamily: "ADLaM Display",
             color: "#fff",
             margin: "auto",
-            textShadow: "0px 2px 4px rgba(0, 0, 0, 1)",
-            letterSpacing:"3px"
+            textShadow: "0px 1px 2px rgba(0, 0, 0, .3)",
+            letterSpacing: "3px",
           }}
         >
-          GenderStanding
-        </Typography></div>
-   
+          Genderstanding
+        </Typography>
+      </div>
       <div
         className="welcome-paragraph"
         style={{
           width: 300,
           height: 400,
           color: "#CF6F5A",
-          fontSize: 28,
+          fontSize: 30,
           fontFamily: "Roboto Slab",
           fontWeight: "700",
           wordWrap: "break-word",
-          margin: "32px 45px ",
+          margin: "auto",
+          marginTop: "3%",
+          marginBottom: "25%",
         }}
       >
         Welcome,
@@ -46,7 +49,7 @@ export default function WelcomePage() {
 
       <div className="centered-container" style={{ marginTop: "45px" }}>
         <CustomButton className="btn-btn" path="/registration">
-          Get Started 
+          Get Started
         </CustomButton>
       </div>
     </div>
