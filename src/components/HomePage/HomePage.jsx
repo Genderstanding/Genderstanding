@@ -92,7 +92,7 @@ export default function HomePage({ isDarkMode }) {
 
   return (
     <>
-      <div className="flex flex-col App font-mulish">
+      <div className="flex flex-col md:h-screen App font-mulish">
         <HeaderBar />
         <div className="flex-grow content-container">
           <div className="mt-4 communities-container">

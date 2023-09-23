@@ -96,7 +96,8 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
   // Code input
   const handleNodeCodeInput = (event, nodeCodeInput, nodeAssociation, user) => {
     event.preventDefault();
-
+// clear input
+setNodeCodeInput("");
     try {
       let matchingNode = nodeAssociation.find(
         (node) => node?.auth_code === nodeCodeInput
@@ -129,8 +130,6 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
       } else {
         toast.error("error inputting code", getToastOptions());
       }
-      // clear input
-      setNodeCodeInput("");
     } catch (error) {
     }
   };
@@ -183,6 +182,7 @@ const SettingsModal = ({ settingsOpen, closeSettings, children }) => {
                 isDarkMode ? "dark" : "light"
               }`}
               onChange={(event) => setNodeCodeInput(event.target.value)}
+              value={nodeCodeInput}
             />
             <button
               className="text-green-800 "

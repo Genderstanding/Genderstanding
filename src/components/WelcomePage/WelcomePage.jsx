@@ -28,16 +28,15 @@ export default function WelcomePage() {
       <div
         className="welcome-paragraph"
         style={{
-          width: 300,
-          height: 400,
+          width: 310,
           color: "#CF6F5A",
           fontSize: 30,
           fontFamily: "Roboto Slab",
           fontWeight: "700",
           wordWrap: "break-word",
           margin: "auto",
-          marginTop: "3%",
-          marginBottom: "25%",
+          marginTop: 0,
+          marginBottom:0,
         }}
       >
         Welcome,

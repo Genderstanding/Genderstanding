@@ -15,7 +15,7 @@ function LogoButton() {
           history.push("/welcome");
         }}
       >
-        <Typography
+       <Typography
           variant="h3"
           sx={{
             fontSize: "40px",

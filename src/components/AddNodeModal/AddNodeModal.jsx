@@ -28,30 +28,45 @@ const AddNodeModal = ({ addNodeOpen, addNodeClose, children }) => {
     event.preventDefault();
 
     try {
-      dispatch({ type: "CREATE_NODE", payload: { name: nodeInput } });
-      toast.success("Node created successfully", {
-        position: "bottom-left",
-        autoClose: 1500,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-
-      // Check the referrer and redirect accordingly
-      if (
-        location.state &&
-        (location.state.referrer === "/action" ||
-          location.state.referrer === "/home")
-      ) {
-        // If the user is coming from the action page, redirect to /home
-        history.push("/home");
+      if (!nodeInput) {
+        toast.error("Please create a name", {
+          position: "bottom-left",
+          autoClose: 1500,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       } else {
-        // If the user is coming from any other route, redirect to /user
-        history.push("/user");
+        dispatch({ type: "CREATE_NODE", payload: { name: nodeInput } });
+
+        // Check the referrer and redirect accordingly
+        if (
+          location.state &&
+          (location.state.referrer === "/action" ||
+            location.state.referrer === "/home")
+        ) {
+          // If the user is coming from the action page, redirect to /home
+          history.push("/home");
+        } else {
+          // If the user is coming from any other route, redirect to /user
+          history.push("/user");
+        }
+
+        toast.success("Node created successfully", {
+          position: "bottom-left",
+          autoClose: 1500,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       }
+      
     } catch (error) {
       toast.error("Failed to created new community", {
         position: "bottom-left",
@@ -70,7 +85,9 @@ const AddNodeModal = ({ addNodeOpen, addNodeClose, children }) => {
     <div className="flex items-center justify-center modal-overlay">
       <div className="flex flex-col items-center justify-center add-node-modal">
         {children}
-        <h2 className="mb-4 mr-4 text-xl font-bold text-amber-950">Create Community</h2>
+        <h2 className="mb-4 mr-4 text-xl font-bold text-amber-950">
+          Create Community
+        </h2>
         <input
           type="text"
           placeholder="Enter a name ..."

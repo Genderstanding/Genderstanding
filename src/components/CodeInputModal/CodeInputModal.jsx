@@ -34,7 +34,8 @@ export const CodeInputModal = ({
   // Code input
   const handleNodeCodeInput = (event, nodeCodeInput, nodeAssociation, user) => {
     event.preventDefault();
-
+    // clear input
+    setNodeCodeInput("");
     try {
       let matchingNode = nodeAssociation.find(
         (node) => node?.auth_code === nodeCodeInput
@@ -67,10 +68,7 @@ export const CodeInputModal = ({
       } else {
         toast.error("error inputting code", getToastOptions());
       }
-      // clear input
-      setNodeCodeInput("");
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 
   // TOASTIFY

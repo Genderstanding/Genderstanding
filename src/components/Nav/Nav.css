@@ -17,7 +17,8 @@
   background-color: #FFFEFC;
   overflow: hidden;
   border: .5px solid #7C7C7C;
-  width: 390px;
+  min-width: 390px;
+  max-width: 391px;
  margin: 0;
  padding: 0;
 }

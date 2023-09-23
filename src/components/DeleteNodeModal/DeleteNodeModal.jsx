@@ -25,12 +25,17 @@ export default function DeleteNodeModal() {
   };
 
   // all nodes from a user
-  const allNodes = useSelector((store) => store.nodeReducer.nodeDatabaseResponse);
+  const allNodes = useSelector(
+    (store) => store.nodeReducer.nodeDatabaseResponse
+  );
   const user = useSelector((store) => store.user);
 
   const handleDeleteNode = (nodeID) => {
     try {
-      dispatch({ type: "DELETE_NODE", payload: nodeID});
+      dispatch({ type: "DELETE_NODE", payload: nodeID });
+      setShowDeleteButtons((prevState) =>
+        prevState.filter((id) => id !== nodeID)
+      );
     } catch (error) {
       toast.error("Failed to delete community", {
         position: "bottom-left",
@@ -44,7 +49,7 @@ export default function DeleteNodeModal() {
       });
     }
   };
-
+  
   const toggleShowDeleteButton = (nodeId) => {
     setShowDeleteButtons((prevState) =>
       prevState.includes(nodeId)
@@ -52,6 +57,7 @@ export default function DeleteNodeModal() {
         : [...prevState, nodeId]
     );
   };
+  
 
   return (
     <div className="text-amber-950">
@@ -72,53 +78,55 @@ export default function DeleteNodeModal() {
         {/* NODES */}
         <Box className="overflow-y-auto text-center text-amber-950" sx={style}>
           <h2 className="text-xl font-bold text-center ">Your Communities</h2>
-          <div className=""  style={{minHeight:"240px"}}>
-          {allNodes.map((node) => {
-            if (user?.id == node?.user_id) {
-              
-              const isDeleteButtonVisible = showDeleteButtons.includes(node?.id);
+          <div className="" style={{ minHeight: "240px" }}>
+            {allNodes.map((node) => {
+              if (user?.id == node?.user_id) {
+                const isDeleteButtonVisible = showDeleteButtons.includes(
+                  node?.id
+                );
 
-              return (
-                <div
-                  className="my-5 font-semibold text-center text-md "
-      
-                  key={node.id}
-                >
-                  <Card
-                    className="text-center border-r-12"
-                    
-                    sx={{ minWidth: 50, maxWidth: 200, minHeight: 30 }}
+                return (
+                  <div
+                    className="my-5 font-semibold text-center text-md "
+                    key={node.id}
                   >
-                    <CardActionArea
-                      onClick={() => toggleShowDeleteButton(node?.id)}
+                    <Card
+                      className="text-center border-r-12"
+                      sx={{ minWidth: 50, maxWidth: 200, minHeight: 30 }}
                     >
-                      <Typography>
-                        {isDeleteButtonVisible ? (
-                          <button
-                            className="font-bold border-r-12"
-                            onClick={() => handleDeleteNode(node?.id)}
-                          >
-                            Delete
-                          </button>
-                        ) : (
-                          <div className="w-32 ml-10 font-semibold truncate border-r-12">
-                            {node?.node_name}
-                          </div>
-                        )}
-                      </Typography>
-                    </CardActionArea>
-                  </Card>
-                </div>
-              );
-            }
-            return null; // if condition doesn't match
-          })}
+                      <CardActionArea
+                        onClick={() => toggleShowDeleteButton(node?.id)}
+                      >
+                        <Typography>
+                          {isDeleteButtonVisible ? (
+                            <button
+                              className="font-bold border-r-12"
+                              onClick={() => handleDeleteNode(node?.id)}
+                            >
+                              Delete
+                            </button>
+                          ) : (
+                            <div className="w-32 ml-10 font-semibold truncate border-r-12">
+                              {node?.node_name}
+                            </div>
+                          )}
+                        </Typography>
+                      </CardActionArea>
+                    </Card>
+                  </div>
+                );
+              }
+              return null; // if condition doesn't match
+            })}
           </div>
-          <div  className="my-10 text-center ">
-          <button className="font-bold active:underline" onClick={() => handleClose(false)}>
-            Close
-          </button>
-        </div>
+          <div className="my-10 text-center ">
+            <button
+              className="font-bold active:underline"
+              onClick={() => handleClose(false)}
+            >
+              Close
+            </button>
+          </div>
         </Box>
       </StyledModal>
     </div>
