@@ -5,6 +5,7 @@
   align-items: center;
   margin: 0 0 0;
   overflow: hidden; 
+  
 }
 
 .nav-container {
@@ -16,7 +17,7 @@
   background-color: #FFFEFC;
   overflow: hidden;
   border: .5px solid #7C7C7C;
-  width: 100%;
+  width: 390px;
  margin: 0;
  padding: 0;
 }

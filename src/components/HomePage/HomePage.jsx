@@ -164,7 +164,7 @@ export default function HomePage({ isDarkMode }) {
             </div>
             {/* FEATURED POST */}
             <div
-              className="flex flex-col items-center featured-nodes-homepage"
+              className="flex flex-col featured-nodes-homepage"
               onClick={handleGoToFeatured}
             >
               {publicPosts

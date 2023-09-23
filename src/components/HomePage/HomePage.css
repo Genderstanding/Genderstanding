@@ -5,8 +5,8 @@
   
   .side-scroll-box {
     display: inline-block;
-    height: 15vh;
-    width: 45vw;
+    height: 15%;
+    width: 55%;
     margin: 15px 25px 0 0;
     padding: 1.5rem;
     cursor: pointer;
@@ -26,8 +26,9 @@
   }
   
   .featured-top, .featured-bottom {
-    height: 15vh;
-    width: 85vw;
+    height: 15%;
+    max-width: 85%;
+    margin: auto;
     border-left: solid .5px #999495;
     border-right: solid .5px #999495;
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);

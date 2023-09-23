@@ -36,13 +36,14 @@ function FeaturedModal({
   };
 
   return (
-    <div className="flex items-center justify-center modal-overlay">
-      <div className="flex flex-col items-center justify-center reply-box">
+    <div className="flex items-center justify-center featured-modal-overlay">
+          {/* removed items-center */}
+      <div className="flex flex-col justify-center reply-box">
         {/* Title */}
         <h2 className="mt-6 mb-4 mr-4 text-xl font-bold text-center text-amber-950">
         {postInfo.content}
         </h2>
-        <span className="text-sm text-end">
+        <span className="text-sm text-center text-amber-950">
                     {" "}
                     {moment(postInfo?.post_time).fromNow()}
                   </span>
@@ -63,8 +64,8 @@ function FeaturedModal({
                 key={response.id}
                 className={`mt-4 ${
                   isNodeOwner
-                    ? "owner-text-bubble mb-2"
-                    : "user-text-bubble ml-5 mb-2"
+                    ? "featured-owner-text-bubble mb-2"
+                    : "featured-user-text-bubble ml-5 mb-2"
                 }`}
               >
                 <div className="flex items-end justify-between px-4 py-2">

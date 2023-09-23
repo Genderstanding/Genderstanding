@@ -77,8 +77,8 @@ function FeaturedPage({ isDarkMode }) {
                       className="pt-2 pb-2 mt-4 mb-2 font-medium shadow-md text-amber-950 bg-userContent featured-box "
                       key={post?.id}
                     >
-                      <div className="flex items-end px-4 py-2">
-                        <div className="text-sm">
+                      <div className="flex items-end px-4 py-2 ">
+                        <div className="text-sm ">
                           {moment(post?.post_time).fromNow()}
                         </div>
                       </div>

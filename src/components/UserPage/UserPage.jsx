@@ -72,10 +72,11 @@ function UserPage({ isDarkMode }) {
     <>
       <div className="flex flex-col App">
         <HeaderBar />
+        {/* items-center removed */}
         <div className="flex flex-col items-center justify-center userpage-container">
           <div className="mb-24 communities-container">
-            <h1 className="mt-4 mb-1 ml-5 text-xl font-bold font-mulish">
-              Communities you've created
+            <h1 className="mt-4 mb-1 ml-10 text-2xl font-bold font-mulish">
+              Created Communities
             </h1>
             <div className="flex flex-col items-center justify-center mb-4 owner-box ">
               {/* map communities you created inside this div*/}
@@ -90,7 +91,7 @@ function UserPage({ isDarkMode }) {
                       onClick={(event) => goToOwnerNodes(event, node)}
                     >
                       <div className="m-4 text-xl font-bold text-center capitalize text-amber-950 owned-community-names">
-                        <span className="text-2xl font-bold owned-community-names">
+                        <span className="text-xl font-bold owned-community-names">
                           {node?.node_name}
                         </span>
                       </div>
@@ -100,8 +101,8 @@ function UserPage({ isDarkMode }) {
               })}
             </div>
 
-            <h1 className="mt-4 mb-1 ml-5 text-xl font-bold font-mulish">
-              Communities you're a part of
+            <h1 className="mt-4 mb-1 ml-10 text-2xl font-bold font-mulish">
+              Joined Communities 
             </h1>
             <div className="flex flex-col items-center justify-center mb-4 part-of-box">
               {/* map communities you participate inside this div*/}
@@ -115,7 +116,7 @@ function UserPage({ isDarkMode }) {
                       }`}
                       onClick={(event) => goToUserNodes(event, node)}
                     >
-                      <div className="text-2xl font-bold text-center truncate w-52 owned-community-names">
+                      <div className="text-xl font-bold text-center truncate w-52 owned-community-names">
                         <span>{node?.node_name}</span>
                         <div className="ml-2"></div>
                       </div>
