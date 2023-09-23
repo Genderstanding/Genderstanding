@@ -136,18 +136,19 @@ const ReplyModal = ({
   }, [user.id, questionObject.user_id]);
 
   return (
-    <div className="flex items-center justify-center modal-overlay">
-      <div className="flex flex-col items-center justify-center reply-box">
+    <div className="flex items-center justify-center user-modal-overlay">
+      {/* removed items-center */}
+      <div className="flex flex-col justify-center user-reply-box">
         {/* {children} */}
         <h2 className="mt-6 mb-4 mr-4 text-xl font-bold text-center text-amber-950">
           {questionObject.content}
         </h2>
-        <div className="flex items-end justify-between px-4 py-2 text-amber-950">
+        <div className="flex items-end justify-center px-4 py-2 text-amber-950">
           <span className="text-sm font-semibold text-amber-950">
             {moment(questionObject?.post_time).fromNow()}
           </span>
         </div>
-        <div className="overflow-y-auto scrollable-container text-amber-950">
+        <div className="overflow-y-auto user-scrollable-container text-amber-950">
             {/* Post display here */}
           {reversePosts.map((post) => {
             if (post?.reply_id == questionObject.id) {
@@ -162,8 +163,8 @@ const ReplyModal = ({
                   key={post.id}
                   className={`mt-4 ${
                     isNodeOwner
-                      ? "owner-text-bubble mb-2"
-                      : "user-text-bubble ml-5 mb-2"
+                      ? "user-owner-text-bubble mb-2"
+                      : "user-user-text-bubble ml-5 mb-2"
                   }`}
                 >
                   <div className="flex items-end justify-between px-4 py-2">
@@ -198,7 +199,7 @@ const ReplyModal = ({
           <>
             <textarea
               rows="4"
-              className={`shadow-lg w-5/6 rounded-xl md:w-auto px-4 py-4 mt-4 mb-4 text-sm bg-bkg border-1 reply-textarea focus:ring-0 text-text placeholder-text font-normal ${
+              className={`shadow-lg w-5/6 rounded-xl md:w-auto px-4 py-4 mt-4 mb-4 text-sm bg-bkg border-1 user-reply-textarea focus:ring-0 text-text placeholder-text font-normal ${
                 isDarkMode ? "dark" : "light"
               }`}
               placeholder="Write a Reply..."
@@ -206,7 +207,7 @@ const ReplyModal = ({
               value={replyInput}
               required
             />
-            <div className="text-center align-middle buttons-container">
+            <div className="mx-auto buttons-container">
               <button
                 className={`mx-5 font-bold active:underline  text-amber-950 ${
                   isDarkMode ? "dark" : "light"
@@ -226,7 +227,7 @@ const ReplyModal = ({
             </div>
           </>
         ) : (
-          <div className="pb-4 text-center align-middle buttons-container">
+             <div className="mx-auto buttons-container">
             <button
               className={`mx-5 my-5 font-bold active:underline  text-amber-950 ${
                 isDarkMode ? "dark" : "light"

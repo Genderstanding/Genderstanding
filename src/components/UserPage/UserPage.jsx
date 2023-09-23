@@ -73,7 +73,7 @@ function UserPage({ isDarkMode }) {
       <div className="flex flex-col App">
         <HeaderBar />
         {/* items-center removed */}
-        <div className="flex flex-col items-center justify-center userpage-container">
+        <div className="flex flex-col justify-center userpage-container">
           <div className="mb-24 communities-container">
             <h1 className="mt-4 mb-1 ml-10 text-2xl font-bold font-mulish">
               Created Communities
