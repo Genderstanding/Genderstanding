@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function CustomIcon() {
   return (
-    <div className='h-1/4'><img src="./icon.png"/></div>
+    <div style={{width:"14rem"}}><img src="./icon.png"/></div>
   )
 }
 

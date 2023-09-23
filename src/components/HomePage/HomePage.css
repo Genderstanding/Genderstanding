@@ -48,3 +48,7 @@
     border-bottom-left-radius: 16px;
     border-bottom-right-radius: 16px;
   }
+
+  .content-container {
+    height: 100vh
+  }

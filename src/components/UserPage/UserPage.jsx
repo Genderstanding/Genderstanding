@@ -70,7 +70,7 @@ function UserPage({ isDarkMode }) {
 
   return (
     <>
-      <div className="flex flex-col App">
+      <div className="flex flex-col h-screen App">
         <HeaderBar />
         {/* items-center removed */}
         <div className="flex flex-col justify-center userpage-container">
