@@ -10,3 +10,7 @@
 .featured-text {
     width: 85%;
 }
+
+.featured-container {
+    height:100vh;
+}
